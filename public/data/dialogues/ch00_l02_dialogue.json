@@ -1,0 +1,48 @@
+{
+  "scene_title_ko": "카페에서 모음 공부",
+  "scene_title_ja": "カフェで母音の勉強",
+  "lines": [
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "자, 오늘은 모음을 배워 보자!",
+      "text_ja": "さあ、今日は母音を学んでみよう！",
+      "pronunciation": "[자 오늘은 모으믈 배워 보자]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "기본 모음이 10개라고? ㅏ, ㅑ, ㅓ, ㅕ...",
+      "text_ja": "基本母音が10個？ㅏ、ㅑ、ㅓ、ㅕ...",
+      "pronunciation": "[기본 모으미 열 개라고? 아 야 어 여]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "nervous",
+      "text_ko": "ㅓ랑 ㅗ가 헷갈려... 둘 다 '오' 아니야?",
+      "text_ja": "ㅓとㅗがこんがらがる...どっちも「オ」じゃない？",
+      "pronunciation": "[어랑 오가 헫갈려 둘 다 오 아니야?]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "happy",
+      "text_ko": "ㅓ는 입을 작게 열고, ㅗ는 입을 둥글게! 다르지?",
+      "text_ja": "ㅓは口を小さく開けて、ㅗは口を丸く！違うでしょ？",
+      "pronunciation": "[어는 이블 작게 열고 오는 이블 둥글게 다르지?]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "surprised",
+      "text_ko": "진짜다! ㅡ(으)도 일본어에 없는 소리네.",
+      "text_ja": "本当だ！ㅡ(ウ)も日本語にない音だね。",
+      "pronunciation": "[진짜다! 으도 일보너에 엄는 소리네]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "happy",
+      "text_ko": "어렵지만 재미있어! 계속 연습하자!",
+      "text_ja": "難しいけど面白い！練習続けよう！",
+      "pronunciation": "[어렵찌만 재미이써! 계속 연습하자!]"
+    }
+  ]
+}

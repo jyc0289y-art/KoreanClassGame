@@ -1,0 +1,103 @@
+[
+  {
+    "id": "m_gp_ch00_l05_001",
+    "type": "grammar_point",
+    "grammar_ko": "받침(종성) = 음절 아래에 오는 자음",
+    "grammar_ja": "パッチム(終声) = 音節の下に来る子音",
+    "explanation_ko": "받침이 있으면 한글이 3층 구조가 됩니다:\n초성 + 중성 + 종성\n예: 간 = ㄱ + ㅏ + ㄴ",
+    "explanation_ja": "パッチムがあるとハングルが3段構造になります：\n初声 + 中声 + 終声\n例：간 = ㄱ + ㅏ + ㄴ",
+    "examples": [
+      { "ko": "가 → 간 (받침 ㄴ 추가)", "pronunciation": "[간] kan", "ja": "パッチムㄴを追加" },
+      { "ko": "바 → 밥 (받침 ㅂ 추가)", "pronunciation": "[밥] bap", "ja": "パッチムㅂを追加" },
+      { "ko": "사 → 산 (받침 ㄴ 추가)", "pronunciation": "[산] san", "ja": "パッチムㄴを追加" }
+    ],
+    "exercise": {
+      "sentence_ko": "'강'의 구조는?",
+      "sentence_ja": "「강」の構造は？",
+      "choices": ["ㄱ + ㅏ + ㅇ", "ㄱ + ㅏ + ㄴ", "ㄱ + ㅓ + ㅇ", "ㅋ + ㅏ + ㅇ"],
+      "answer": "ㄱ + ㅏ + ㅇ"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l05_001",
+    "type": "multiple_choice",
+    "question_ko": "다음 중 받침 7종 대표음이 아닌 것은?",
+    "question_ja": "次のうちパッチム7種代表音ではないのは？",
+    "choices": ["[ㅅ]", "[ㄱ]", "[ㄴ]", "[ㅁ]"],
+    "correct": 0,
+    "explanation_ko": "받침은 7가지 소리만 발음됩니다: [ㄱ], [ㄴ], [ㄷ], [ㄹ], [ㅁ], [ㅂ], [ㅇ]. ㅅ은 받침에서 [ㄷ]으로 중화됩니다.",
+    "explanation_ja": "パッチムは7種の音だけ発音されます：[ㄱ][ㄴ][ㄷ][ㄹ][ㅁ][ㅂ][ㅇ]。ㅅはパッチムで[ㄷ]に中和されます。",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_pron_ch00_l05_001",
+    "type": "pronunciation_check",
+    "rule": "받침 중화",
+    "rule_ja": "パッチム中和",
+    "question_ko": "'낮'의 받침 발음은?",
+    "question_ja": "「낮」のパッチムの発音は？",
+    "word": "낮",
+    "choices": ["[낟] (ㄷ으로 중화)", "[낮] (그대로)", "[낫] (ㅅ으로)", "[나] (받침 없음)"],
+    "correct": 0,
+    "explanation_ko": "ㅅ 받침은 [ㄷ]으로 중화됩니다. 낮 → [낟]",
+    "explanation_ja": "ㅅパッチムは[ㄷ]に中和されます。낮 → [낟]",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch00_l05_001",
+    "type": "word_match",
+    "question_ko": "단어와 받침 대표음을 맞춰 보세요!",
+    "question_ja": "単語とパッチム代表音をマッチングしてください！",
+    "pairs": [
+      { "korean": "국 (スープ)", "japanese": "받침 [ㄱ]" },
+      { "korean": "산 (山)", "japanese": "받침 [ㄴ]" },
+      { "korean": "말 (馬)", "japanese": "받침 [ㄹ]" },
+      { "korean": "봄 (春)", "japanese": "받침 [ㅁ]" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_mc_ch00_l05_002",
+    "type": "multiple_choice",
+    "question_ko": "ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎ는 받침에서 어떤 소리?",
+    "question_ja": "ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎはパッチムでどんな音？",
+    "choices": ["모두 [ㄷ]으로 중화", "모두 [ㄱ]으로 중화", "모두 [ㅂ]으로 중화", "각각 다른 소리"],
+    "correct": 0,
+    "explanation_ko": "ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎ는 받침에서 모두 [ㄷ]으로 중화됩니다.",
+    "explanation_ja": "ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎはパッチムで全て[ㄷ]に中和されます。",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_pron_ch00_l05_002",
+    "type": "pronunciation_check",
+    "rule": "받침 발음",
+    "rule_ja": "パッチム発音",
+    "question_ko": "'밥'의 받침 발음은?",
+    "question_ja": "「밥」のパッチムの発音は？",
+    "word": "밥",
+    "choices": ["[밥] (ㅂ 발음)", "[밥] (ㅍ 발음)", "[반] (ㄴ 발음)", "[말] (ㄹ 발음)"],
+    "correct": 0,
+    "explanation_ko": "ㅂ 받침은 [ㅂ]으로 발음됩니다. ㅍ도 받침에서는 [ㅂ]으로 중화돼요.",
+    "explanation_ja": "ㅂパッチムは[ㅂ]と発音されます。ㅍもパッチムでは[ㅂ]に中和されます。",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_fb_ch00_l05_001",
+    "type": "fill_blank",
+    "question_ko": "'간'의 구조: ㄱ + ㅏ + __",
+    "question_ja": "「간」の構造：ㄱ + ㅏ + __",
+    "answer": "ㄴ",
+    "choices": ["ㄴ", "ㅁ", "ㄹ", "ㅂ"],
+    "hint_ko": "간 = [간], 받침은 'ㄴ' 소리",
+    "hint_ja": "간 = [カン]、パッチムは「ㄴ」の音",
+    "xp": 15,
+    "coin": 3
+  }
+]

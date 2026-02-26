@@ -1,0 +1,76 @@
+[
+  {
+    "id": "m_fb_ch00_l04_001",
+    "type": "fill_blank",
+    "question_ko": "ㄱ + ㅏ = __",
+    "question_ja": "ㄱ + ㅏ = __",
+    "answer": "가",
+    "choices": ["가", "나", "다", "마"],
+    "hint_ko": "자음 ㄱ(기역)과 모음 ㅏ(아)를 합치면?",
+    "hint_ja": "子音ㄱ(キヨク)と母音ㅏ(ア)を合わせると？",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_fb_ch00_l04_002",
+    "type": "fill_blank",
+    "question_ko": "ㄴ + ㅣ = __",
+    "question_ja": "ㄴ + ㅣ = __",
+    "answer": "니",
+    "choices": ["니", "나", "누", "노"],
+    "hint_ko": "자음 ㄴ(니은)과 모음 ㅣ(이)를 합치면?",
+    "hint_ja": "子音ㄴ(ニウン)と母音ㅣ(イ)を合わせると？",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l04_001",
+    "type": "multiple_choice",
+    "question_ko": "'셔'를 구성하는 요소는?",
+    "question_ja": "「셔」を構成する要素は？",
+    "choices": ["ㅅ + ㅕ", "ㅅ + ㅓ", "ㅅ + ㅗ", "ㅅ + ㅛ"],
+    "correct": 0,
+    "explanation_ko": "셔 = ㅅ(시옷) + ㅕ(여)",
+    "explanation_ja": "셔 = ㅅ(シオッ) + ㅕ(ヨ深い)",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_wm_ch00_l04_001",
+    "type": "word_match",
+    "question_ko": "음절과 로마자 읽기를 맞춰 보세요!",
+    "question_ja": "音節とローマ字読みをマッチングしてください！",
+    "pairs": [
+      { "korean": "모", "japanese": "mo" },
+      { "korean": "누", "japanese": "nu" },
+      { "korean": "디", "japanese": "di" },
+      { "korean": "루", "japanese": "ru" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_fb_ch00_l04_003",
+    "type": "fill_blank",
+    "question_ko": "'유코'를 음절로 나누면: __ + __",
+    "question_ja": "「ユコ」を音節で分けると：__ ＋ __",
+    "answer": "유, 코",
+    "choices": ["유, 코", "우, 고", "유, 고", "우, 코"],
+    "hint_ko": "유 = ㅇ+ㅠ, 코 = ㅋ+ㅗ",
+    "hint_ja": "유 = ㅇ+ㅠ、코 = ㅋ+ㅗ",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l04_002",
+    "type": "multiple_choice",
+    "question_ko": "'ㅂ + ㅕ'의 결과는?",
+    "question_ja": "「ㅂ + ㅕ」の結果は？",
+    "choices": ["벼", "버", "보", "부"],
+    "correct": 0,
+    "explanation_ko": "ㅂ(비읍) + ㅕ(여) = 벼",
+    "explanation_ja": "ㅂ(ビウプ) + ㅕ(ヨ) = 벼",
+    "xp": 10,
+    "coin": 2
+  }
+]

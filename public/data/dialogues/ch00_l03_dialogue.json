@@ -1,0 +1,48 @@
+{
+  "scene_title_ko": "공원에서 자음 공부",
+  "scene_title_ja": "公園で子音の勉強",
+  "lines": [
+    {
+      "speaker": "rui",
+      "emotion": "excited",
+      "text_ko": "오늘은 자음 14개를 공부하자!",
+      "text_ja": "今日は子音14個を勉強しよう！",
+      "pronunciation": "[오느른 자음 열네 개를 공부하자!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "nervous",
+      "text_ko": "ㄱ, ㅋ, ㄲ... 이 세 개가 뭐가 달라?",
+      "text_ja": "ㄱ、ㅋ、ㄲ...この3つ何が違うの？",
+      "pronunciation": "[기역 키읔 쌍기역 이 세 개가 뭐가 달라?]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "happy",
+      "text_ko": "입 앞에 휴지를 대 봐! ㅋ 할 때 휴지가 날아가!",
+      "text_ja": "口の前にティッシュ当ててみて！ㅋの時ティッシュが飛ぶよ！",
+      "pronunciation": "[입 아페 휴지를 대 봐! 키읔 할 때 휴지가 나라가!]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "ㄱ은 평음, ㅋ은 격음, ㄲ은 경음이구나.",
+      "text_ja": "ㄱは平音、ㅋは激音、ㄲは硬音なんだね。",
+      "pronunciation": "[기역은 평음 키읔은 격음 쌍기역은 경으미구나]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "surprised",
+      "text_ko": "와! ㅋ 하니까 진짜 휴지가 날아갔어!",
+      "text_ja": "わぁ！ㅋしたら本当にティッシュが飛んだ！",
+      "pronunciation": "[와! 키읔 하니까 진짜 휴지가 나라가써!]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "이제 평음, 격음, 경음 구분할 수 있지?",
+      "text_ja": "これで平音、激音、硬音区別できるでしょ？",
+      "pronunciation": "[이제 평음 격음 경음 구분할 수 읻찌?]"
+    }
+  ]
+}

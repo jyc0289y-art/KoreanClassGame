@@ -1,0 +1,48 @@
+{
+  "scene_title_ko": "편의점에서 받침 발견",
+  "scene_title_ja": "コンビニでパッチム発見",
+  "lines": [
+    {
+      "speaker": "ami",
+      "emotion": "surprised",
+      "text_ko": "한국 과자 이름에 받침이 많다! '국', '밥', '봄'...",
+      "text_ja": "韓国のお菓子の名前にパッチムが多い！「국」「밥」「봄」...",
+      "pronunciation": "[한국 과자 이르메 받치미 만타! 국 밥 봄]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "nervous",
+      "text_ko": "받침이 뭐였지? 아, 글자 아래에 오는 자음!",
+      "text_ja": "パッチムって何だっけ？あ、文字の下に来る子音！",
+      "pronunciation": "[받치미 뭐여찌? 아 글짜 아래에 오는 자음!]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "맞아. '밥'은 ㅂ+ㅏ+ㅂ, 3층 구조야!",
+      "text_ja": "そう。「밥」は ㅂ+ㅏ+ㅂ、3段構造だよ！",
+      "pronunciation": "[마자 바븐 비읍 아 비읍 삼층 구조야!]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "happy",
+      "text_ko": "'봄'이랑 '밥' 받침 소리가 다르지?",
+      "text_ja": "「봄」と「밥」のパッチムの音が違うでしょ？",
+      "pronunciation": "[보미랑 밥 받침 소리가 다르지?]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "surprised",
+      "text_ko": "'봄'은 [ㅁ]이고, '밥'은 [ㅂ]이구나! 7종류밖에 없다고?",
+      "text_ja": "「봄」は[ㅁ]で、「밥」は[ㅂ]なんだ！7種類しかないの？",
+      "pronunciation": "[보믄 미으미고 바븐 비으비구나! 일곱 종류바께 업따고?]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "excited",
+      "text_ko": "그래! 받침은 7가지 소리만 기억하면 돼!",
+      "text_ja": "そう！パッチムは7つの音だけ覚えればOK！",
+      "pronunciation": "[그래! 받치믄 일곱 가지 소리만 기어카면 돼!]"
+    }
+  ]
+}

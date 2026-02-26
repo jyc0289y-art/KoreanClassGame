@@ -1,0 +1,102 @@
+[
+  {
+    "id": "m_gp_ch00_l02_001",
+    "type": "grammar_point",
+    "grammar_ko": "한글 모음의 원리",
+    "grammar_ja": "ハングル母音の原理",
+    "explanation_ko": "한글 모음은 세 가지 요소로 만들어졌어요:\n• (하늘) → 점\nㅡ (땅) → 가로선\nㅣ (사람) → 세로선",
+    "explanation_ja": "ハングルの母音は3つの要素で作られています：\n•（天）→ 点\nㅡ（地）→ 横線\nㅣ（人）→ 縦線",
+    "examples": [
+      { "ko": "ㅏ = ㅣ+ •", "pronunciation": "[아] a", "ja": "アと同じ" },
+      { "ko": "ㅗ = ㅡ + •", "pronunciation": "[오] o", "ja": "オ（丸い）" },
+      { "ko": "ㅡ (단독)", "pronunciation": "[으] eu", "ja": "日本語にない音" }
+    ],
+    "exercise": {
+      "sentence_ko": "ㅓ와 ㅗ의 차이는?",
+      "sentence_ja": "ㅓとㅗの違いは？",
+      "choices": ["입 모양이 다르다", "같은 소리다", "둘 다 '아'다", "둘 다 '우'다"],
+      "answer": "입 모양이 다르다"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch00_l02_001",
+    "type": "word_match",
+    "question_ko": "모음과 일본어 발음을 맞춰 보세요!",
+    "question_ja": "母音と日本語の発音をマッチングしてください！",
+    "pairs": [
+      { "korean": "ㅏ", "japanese": "ア (a)" },
+      { "korean": "ㅓ", "japanese": "オ・深い (eo)" },
+      { "korean": "ㅗ", "japanese": "オ・丸い (o)" },
+      { "korean": "ㅜ", "japanese": "ウ (u)" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_mc_ch00_l02_001",
+    "type": "multiple_choice",
+    "question_ko": "ㅓ(어)와 ㅗ(오)의 차이는?",
+    "question_ja": "ㅓ(オ深い)とㅗ(オ丸い)の違いは？",
+    "choices": ["ㅓ는 입을 작게, ㅗ는 입을 둥글게", "같은 소리다", "ㅓ는 입을 둥글게, ㅗ는 입을 작게", "ㅓ는 '우', ㅗ는 '아'"],
+    "correct": 0,
+    "explanation_ko": "ㅓ는 입을 작게 열고, ㅗ는 입을 둥글게 합니다. 일본어에서는 둘 다 'オ'지만 한국어에서는 다릅니다!",
+    "explanation_ja": "ㅓは口を小さく開け、ㅗは口を丸くします。日本語では両方「オ」ですが韓国語では違います！",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_pron_ch00_l02_001",
+    "type": "pronunciation_check",
+    "rule": "모음 구분",
+    "rule_ja": "母音の区別",
+    "question_ko": "'어머니'의 첫 모음 'ㅓ'의 발음 설명으로 맞는 것은?",
+    "question_ja": "「어머니」の最初の母音「ㅓ」の発音説明で正しいのは？",
+    "word": "어",
+    "choices": ["입을 작게 열고 발음", "입을 둥글게 하고 발음", "입을 옆으로 벌리고 발음", "입을 내밀며 발음"],
+    "correct": 0,
+    "explanation_ko": "ㅓ는 입을 작게 열고 발음합니다. 일본어의 'オ'보다 입을 덜 벌립니다.",
+    "explanation_ja": "ㅓは口を小さく開けて発音します。日本語の「オ」より口を開けません。",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l02_002",
+    "type": "multiple_choice",
+    "question_ko": "'ㅡ(으)'의 발음 설명으로 맞는 것은?",
+    "question_ja": "「ㅡ(ウ平ら)」の発音説明で正しいのは？",
+    "choices": ["입을 옆으로 벌린다", "입을 둥글게 한다", "입을 크게 벌린다", "입을 내민다"],
+    "correct": 0,
+    "explanation_ko": "ㅡ는 입을 옆으로 벌리고 발음합니다. 일본어에 없는 소리예요!",
+    "explanation_ja": "ㅡは口を横に開いて発音します。日本語にない音です！",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_wm_ch00_l02_002",
+    "type": "word_match",
+    "question_ko": "기본 모음과 y음 모음을 맞춰 보세요!",
+    "question_ja": "基本母音とy音母音をマッチングしてください！",
+    "pairs": [
+      { "korean": "ㅏ → y음", "japanese": "ㅑ (ya)" },
+      { "korean": "ㅓ → y음", "japanese": "ㅕ (yeo)" },
+      { "korean": "ㅗ → y음", "japanese": "ㅛ (yo)" },
+      { "korean": "ㅜ → y음", "japanese": "ㅠ (yu)" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_fb_ch00_l02_001",
+    "type": "fill_blank",
+    "question_ko": "'아이'(子供)를 모음으로 나누면: __ + __",
+    "question_ja": "「아이」(子供)を母音で分けると：__ ＋ __",
+    "answer": "ㅏ, ㅣ",
+    "choices": ["ㅏ, ㅣ", "ㅓ, ㅣ", "ㅏ, ㅡ", "ㅗ, ㅣ"],
+    "hint_ko": "아 = ㅇ+ㅏ, 이 = ㅇ+ㅣ",
+    "hint_ja": "아 = ㅇ+ㅏ、이 = ㅇ+ㅣ",
+    "xp": 15,
+    "coin": 3
+  }
+]

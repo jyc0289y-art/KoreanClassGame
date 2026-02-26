@@ -1,0 +1,106 @@
+[
+  {
+    "id": "m_gp_ch00_l08_001",
+    "type": "grammar_point",
+    "grammar_ko": "~이에요/예요 (~です)",
+    "grammar_ja": "~イエヨ/イェヨ（~です）",
+    "explanation_ko": "받침 있는 명사 + 이에요\n받침 없는 명사 + 예요\n예: 학생이에요 / 유코예요",
+    "explanation_ja": "パッチムありの名詞 + 이에요\nパッチムなしの名詞 + 예요\n例：학생이에요 / 유코예요",
+    "examples": [
+      { "ko": "저는 유코예요.", "pronunciation": "[저는 유코예요]", "ja": "私はユコです。(받침 없음→예요)" },
+      { "ko": "학생이에요.", "pronunciation": "[학쌩이에요]", "ja": "学生です。(받침 있음→이에요)" },
+      { "ko": "한국 사람이에요.", "pronunciation": "[한국 사라미에요]", "ja": "韓国人です。(연음화+이에요)" }
+    ],
+    "exercise": {
+      "sentence_ko": "'일본 사람'에 붙이면?",
+      "sentence_ja": "「日本人」に付けると？",
+      "choices": ["일본 사람이에요", "일본 사람예요", "일본 사람에요", "일본 사람이요"],
+      "answer": "일본 사람이에요"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_fb_ch00_l08_001",
+    "type": "fill_blank",
+    "question_ko": "저는 유코__.",
+    "question_ja": "私はユコ__。",
+    "answer": "예요",
+    "choices": ["예요", "이에요", "에요", "요"],
+    "hint_ko": "'유코'에는 받침이 없어요!",
+    "hint_ja": "「유코」にはパッチムがありません！",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_fb_ch00_l08_002",
+    "type": "fill_blank",
+    "question_ko": "학생__.",
+    "question_ja": "学生__。",
+    "answer": "이에요",
+    "choices": ["이에요", "예요", "에요", "이요"],
+    "hint_ko": "'학생'의 마지막 글자 '생'에는 받침 ㅇ이 있어요!",
+    "hint_ja": "「학생」の最後の文字「생」にはパッチムㅇがあります！",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_gp_ch00_l08_002",
+    "type": "grammar_point",
+    "grammar_ko": "있어요/없어요 (あります/ありません)",
+    "grammar_ja": "イッソヨ/オプソヨ（あります/ありません）",
+    "explanation_ko": "있다 → 있어요 [이써요] = 있습니다\n없다 → 없어요 [업써요] = 없습니다\n사물·사람 모두에 사용 가능",
+    "explanation_ja": "있다 → 있어요 [イッソヨ] = あります/います\n없다 → 없어요 [オプソヨ] = ありません/いません\n物・人どちらにも使用可能",
+    "examples": [
+      { "ko": "시간이 있어요.", "pronunciation": "[시가니 이써요]", "ja": "時間があります。" },
+      { "ko": "친구가 있어요.", "pronunciation": "[친구가 이써요]", "ja": "友達がいます。" },
+      { "ko": "돈이 없어요.", "pronunciation": "[도니 업써요]", "ja": "お金がありません。" }
+    ],
+    "exercise": {
+      "sentence_ko": "'문제없어요!'의 뜻은?",
+      "sentence_ja": "「문제없어요！」の意味は？",
+      "choices": ["問題ないです！", "問題があります！", "問題です！", "問題が多いです！"],
+      "answer": "問題ないです！"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l08_001",
+    "type": "multiple_choice",
+    "question_ko": "'시간이 있어요'의 발음은?",
+    "question_ja": "「시간이 있어요」の発音は？",
+    "choices": ["[시가니 이써요]", "[시간이 있어요]", "[시간니 이써요]", "[시가니 잇써요]"],
+    "correct": 0,
+    "explanation_ko": "연음화: 간+이 → [가니], 있+어 → [이써]",
+    "explanation_ja": "連音化：간+이 → [가니]、있+어 → [이써]",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_do_ch00_l08_001",
+    "type": "dialogue_order",
+    "question_ko": "자기소개의 올바른 순서를 맞춰 보세요!",
+    "question_ja": "自己紹介の正しい順序を合わせてください！",
+    "lines": [
+      { "speaker": "yuko", "text_ko": "안녕하세요!", "text_ja": "こんにちは！", "correctIndex": 0 },
+      { "speaker": "yuko", "text_ko": "저는 유코예요.", "text_ja": "私はユコです。", "correctIndex": 1 },
+      { "speaker": "yuko", "text_ko": "일본 사람이에요.", "text_ja": "日本人です。", "correctIndex": 2 },
+      { "speaker": "yuko", "text_ko": "잘 부탁드립니다!", "text_ja": "よろしくお願いします！", "correctIndex": 3 }
+    ],
+    "xp": 25,
+    "coin": 5
+  },
+  {
+    "id": "m_fb_ch00_l08_003",
+    "type": "fill_blank",
+    "question_ko": "돈이 __어요.",
+    "question_ja": "お金が__です。（ありません）",
+    "answer": "없",
+    "choices": ["없", "있", "넣", "옮"],
+    "hint_ko": "'없다'는 'ない/いない'의 뜻이에요",
+    "hint_ja": "「없다」は「ない/いない」の意味です",
+    "xp": 15,
+    "coin": 3
+  }
+]

@@ -83,14 +83,15 @@ class DataLoaderClass {
   // 부팅 시 필수 데이터 프리로드
   async preloadEssentials() {
     const chapters = await this.loadChapters();
+    const ch00Lessons = ['l01','l02','l03','l04','l05','l06','l07','l08'];
     await Promise.all([
       this.loadVocabulary('ch00'),
-      this.loadMissions('ch00', 'l01'),
-      this.loadDialogue('ch00', 'l01'),
       this.loadVocabulary('ch01'),
+      this.loadShopProducts(),
+      ...ch00Lessons.map(l => this.loadMissions('ch00', l)),
+      ...ch00Lessons.map(l => this.loadDialogue('ch00', l)),
       this.loadMissions('ch01', 'l01'),
-      this.loadDialogue('ch01', 'l01'),
-      this.loadShopProducts()
+      this.loadDialogue('ch01', 'l01')
     ]);
     return chapters;
   }

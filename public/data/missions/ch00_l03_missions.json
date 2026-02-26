@@ -1,0 +1,98 @@
+[
+  {
+    "id": "m_gp_ch00_l03_001",
+    "type": "grammar_point",
+    "grammar_ko": "자음의 3가지 종류: 평음 / 격음 / 경음",
+    "grammar_ja": "子音の3種類：平音 / 激音 / 硬音",
+    "explanation_ko": "• 평음: 부드럽게 발음 (ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ)\n• 격음: 세게 숨을 내쉬며 (ㅋ ㅌ ㅍ ㅊ ㅎ)\n• 경음: 목을 긴장하며 (ㄲ ㄸ ㅃ ㅆ ㅉ)",
+    "explanation_ja": "• 平音：息が弱い (ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ)\n• 激音：息が強い (ㅋ ㅌ ㅍ ㅊ ㅎ)\n• 硬音：喉を緊張 (ㄲ ㄸ ㅃ ㅆ ㅉ)",
+    "examples": [
+      { "ko": "ㄱ(평) → ㅋ(격) → ㄲ(경)", "pronunciation": "[가 → 카 → 까]", "ja": "同じ口の形で強さが違う" },
+      { "ko": "ㄷ(평) → ㅌ(격) → ㄸ(경)", "pronunciation": "[다 → 타 → 따]", "ja": "ダ → タ(強) → ッタ" }
+    ],
+    "exercise": {
+      "sentence_ko": "격음의 특징은?",
+      "sentence_ja": "激音の特徴は？",
+      "choices": ["세게 숨을 내쉰다", "부드럽게 발음한다", "목을 긴장한다", "코로 발음한다"],
+      "answer": "세게 숨을 내쉰다"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch00_l03_001",
+    "type": "word_match",
+    "question_ko": "자음과 이름을 맞춰 보세요!",
+    "question_ja": "子音と名前をマッチングしてください！",
+    "pairs": [
+      { "korean": "ㄱ", "japanese": "기역 (キヨク)" },
+      { "korean": "ㄴ", "japanese": "니은 (ニウン)" },
+      { "korean": "ㄷ", "japanese": "디귿 (ティグッ)" },
+      { "korean": "ㄹ", "japanese": "리을 (リウル)" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_mc_ch00_l03_001",
+    "type": "multiple_choice",
+    "question_ko": "다음 중 격음(숨을 세게 내쉬는 소리)은?",
+    "question_ja": "次のうち激音（息を強く吐く音）は？",
+    "choices": ["ㅋ", "ㄱ", "ㄲ", "ㄴ"],
+    "correct": 0,
+    "explanation_ko": "ㅋ은 ㄱ의 격음입니다. 입 앞에 휴지를 대면 숨이 세게 나갑니다!",
+    "explanation_ja": "ㅋはㄱの激音です。口の前にティッシュを当てると息が強く出ます！",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_mc_ch00_l03_002",
+    "type": "multiple_choice",
+    "question_ko": "'ㅂ'의 이름은?",
+    "question_ja": "「ㅂ」の名前は？",
+    "choices": ["비읍", "미음", "피읖", "시옷"],
+    "correct": 0,
+    "explanation_ko": "ㅂ은 '비읍'이라고 읽습니다. 일본어 パ행보다 부드러운 소리예요.",
+    "explanation_ja": "ㅂは「ビウプ」と読みます。日本語のパ行より柔らかい音です。",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_fb_ch00_l03_001",
+    "type": "fill_blank",
+    "question_ko": "ㄱ의 이름: __역",
+    "question_ja": "ㄱの名前：__ヨク",
+    "answer": "기",
+    "choices": ["기", "니", "디", "리"],
+    "hint_ko": "ㄱ + ㅣ = ?",
+    "hint_ja": "ㄱ + ㅣ = ?",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch00_l03_002",
+    "type": "word_match",
+    "question_ko": "평음과 격음 쌍을 맞춰 보세요!",
+    "question_ja": "平音と激音のペアをマッチングしてください！",
+    "pairs": [
+      { "korean": "ㄱ (평음)", "japanese": "ㅋ (격음)" },
+      { "korean": "ㄷ (평음)", "japanese": "ㅌ (격음)" },
+      { "korean": "ㅂ (평음)", "japanese": "ㅍ (격음)" },
+      { "korean": "ㅈ (평음)", "japanese": "ㅊ (격음)" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_mc_ch00_l03_003",
+    "type": "multiple_choice",
+    "question_ko": "'ㅇ'이 초성(글자 앞)에 올 때 발음은?",
+    "question_ja": "「ㅇ」が初声（文字の前）に来るとき発音は？",
+    "choices": ["소리 없음 (무음)", "[ng] 소리", "[n] 소리", "[m] 소리"],
+    "correct": 0,
+    "explanation_ko": "ㅇ은 초성에서는 소리가 없고, 받침에서만 [ng] 소리가 납니다.",
+    "explanation_ja": "ㅇは初声では音がなく、パッチムでのみ[ng]の音がします。",
+    "xp": 10,
+    "coin": 2
+  }
+]

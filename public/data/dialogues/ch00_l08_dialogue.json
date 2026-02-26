@@ -1,0 +1,62 @@
+{
+  "scene_title_ko": "한국 여행 준비",
+  "scene_title_ja": "韓国旅行の準備",
+  "lines": [
+    {
+      "speaker": "yuko",
+      "emotion": "excited",
+      "text_ko": "드디어 한글 공부 완료! 한국에 갈 준비 됐어!",
+      "text_ja": "ついにハングル勉強完了！韓国に行く準備できた！",
+      "pronunciation": "[드디어 한글 공부 완료! 한구게 갈 준비 됐어!]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "happy",
+      "text_ko": "그럼 자기소개 연습해 보자! 안녕하세요!",
+      "text_ja": "じゃあ自己紹介練習してみよう！アンニョンハセヨ！",
+      "pronunciation": "[그럼 자기소개 연습해 보자! 안녕하세요!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "calm",
+      "text_ko": "안녕하세요. 저는 유코예요. 일본 사람이에요.",
+      "text_ja": "こんにちは。私はユコです。日本人です。",
+      "pronunciation": "[안녕하세요 저는 유코예요 일본 사라미에요]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "happy",
+      "text_ko": "나는... 저는 루이예요. 후쿠오카에서 왔어요!",
+      "text_ja": "僕は...저는 루이예요。福岡から来ました！",
+      "pronunciation": "[저는 루이예요 후쿠오카에서 와써요!]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "저는 아미예요! K-뷰티를 좋아해요!",
+      "text_ja": "私はアミです！K-ビューティーが好きです！",
+      "pronunciation": "[저는 아미예요! 케이뷰티를 조아해요!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "happy",
+      "text_ko": "잘 부탁드립니다! 완벽해!",
+      "text_ja": "よろしくお願いします！完璧！",
+      "pronunciation": "[잘 부탁드림니다! 완벽해!]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "인천공항에서 진짜 한국어를 써 보자!",
+      "text_ja": "仁川空港で本当の韓国語を使ってみよう！",
+      "pronunciation": "[인천공항에서 진짜 한구거를 써 보자!]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "한국, 기다려! 우리가 간다!",
+      "text_ja": "韓国、待ってて！私たちが行くよ！",
+      "pronunciation": "[한국 기다려! 우리가 간다!]"
+    }
+  ]
+}

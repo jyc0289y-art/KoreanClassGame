@@ -1,0 +1,101 @@
+[
+  {
+    "id": "m_wm_ch00_l07_001",
+    "type": "word_match",
+    "question_ko": "한국어 인사와 일본어를 맞춰 보세요!",
+    "question_ja": "韓国語の挨拶と日本語をマッチングしてください！",
+    "pairs": [
+      { "korean": "안녕하세요", "japanese": "こんにちは" },
+      { "korean": "감사합니다", "japanese": "ありがとうございます" },
+      { "korean": "죄송합니다", "japanese": "すみません" },
+      { "korean": "괜찮아요", "japanese": "大丈夫です" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_do_ch00_l07_001",
+    "type": "dialogue_order",
+    "question_ko": "인사 대화의 올바른 순서를 맞춰 보세요!",
+    "question_ja": "挨拶の会話の正しい順序を合わせてください！",
+    "lines": [
+      { "speaker": "hyunjeong", "text_ko": "안녕하세요! 저는 현정이에요.", "text_ja": "こんにちは！私はヒョンジョンです。", "correctIndex": 0 },
+      { "speaker": "yuko", "text_ko": "안녕하세요! 저는 유코예요.", "text_ja": "こんにちは！私はユコです。", "correctIndex": 1 },
+      { "speaker": "hyunjeong", "text_ko": "반갑습니다! 한국어 공부 화이팅!", "text_ja": "はじめまして！韓国語の勉強ファイティン！", "correctIndex": 2 },
+      { "speaker": "yuko", "text_ko": "네, 감사합니다!", "text_ja": "はい、ありがとうございます！", "correctIndex": 3 }
+    ],
+    "xp": 25,
+    "coin": 5
+  },
+  {
+    "id": "m_mc_ch00_l07_001",
+    "type": "multiple_choice",
+    "question_ko": "'감사합니다'의 실제 발음은?",
+    "question_ja": "「감사합니다」の実際の発音は？",
+    "choices": ["[감사함니다]", "[감사합니다]", "[감사함미다]", "[감사합미다]"],
+    "correct": 0,
+    "explanation_ko": "비음화: ㅂ + ㄴ → ㅁ + ㄴ → 합니다 → [함니다]",
+    "explanation_ja": "鼻音化：ㅂ + ㄴ → ㅁ + ㄴ → 합니다 → [함니다]",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_gp_ch00_l07_001",
+    "type": "grammar_point",
+    "grammar_ko": "숫자: 한자어 vs 고유어",
+    "grammar_ja": "数字：漢字語 vs 固有語",
+    "explanation_ko": "한국어에는 두 가지 숫자 체계가 있어요:\n• 한자어: 일, 이, 삼... (날짜, 가격, 전화번호)\n• 고유어: 하나, 둘, 셋... (나이, 개수, 시간의 '시')",
+    "explanation_ja": "韓国語には2種類の数字体系があります：\n• 漢字語：일, 이, 삼... (日付、価格、電話番号)\n• 固有語：하나, 둘, 셋... (年齢、個数、時間の「時」)",
+    "examples": [
+      { "ko": "3월 5일 (날짜)", "pronunciation": "삼월 오일", "ja": "3月5日（漢字語）" },
+      { "ko": "두 시 삼십 분 (시간)", "pronunciation": "두 시 삼십 분", "ja": "2時30分（時は固有語、分は漢字語）" },
+      { "ko": "세 개 (개수)", "pronunciation": "세 개", "ja": "3つ（固有語＋助数詞）" }
+    ],
+    "exercise": {
+      "sentence_ko": "나이를 말할 때 사용하는 숫자는?",
+      "sentence_ja": "年齢を言うとき使う数字は？",
+      "choices": ["고유어 (하나, 둘, 셋...)", "한자어 (일, 이, 삼...)", "둘 다 가능", "영어 숫자"],
+      "answer": "고유어 (하나, 둘, 셋...)"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch00_l07_002",
+    "type": "word_match",
+    "question_ko": "고유어 숫자와 아라비아 숫자를 맞춰 보세요!",
+    "question_ja": "固有語の数字とアラビア数字をマッチングしてください！",
+    "pairs": [
+      { "korean": "하나", "japanese": "1" },
+      { "korean": "둘", "japanese": "2" },
+      { "korean": "셋", "japanese": "3" },
+      { "korean": "넷", "japanese": "4" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_fb_ch00_l07_001",
+    "type": "fill_blank",
+    "question_ko": "3월 5일 = __월 __일 (한자어 숫자로)",
+    "question_ja": "3月5日 = __月 __日（漢字語の数字で）",
+    "answer": "삼, 오",
+    "choices": ["삼, 오", "셋, 다섯", "삼, 다섯", "셋, 오"],
+    "hint_ko": "날짜는 한자어 숫자를 사용해요!",
+    "hint_ja": "日付は漢字語の数字を使います！",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l07_002",
+    "type": "multiple_choice",
+    "question_ko": "나이를 말할 때 사용하는 숫자는?",
+    "question_ja": "年齢を言うとき使う数字は？",
+    "choices": ["고유어 (하나, 둘, 셋...)", "한자어 (일, 이, 삼...)", "둘 다 같이", "숫자는 한 종류만"],
+    "correct": 0,
+    "explanation_ko": "나이(살), 개수(개, 명, 마리), 시간(시)에는 고유어 숫자를 사용합니다.",
+    "explanation_ja": "年齢(살)、個数(개, 명, 마리)、時間(시)には固有語の数字を使います。",
+    "xp": 10,
+    "coin": 2
+  }
+]

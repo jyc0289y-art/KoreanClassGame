@@ -1,10 +1,85 @@
 [
-  { "id": "m_mc_ch00_001", "type": "multiple_choice", "question_ko": "'ㄱ'의 이름은?", "question_ja": "「ㄱ」の名前は？", "choices": ["기역", "니은", "디귿", "리을"], "correct": 0, "explanation_ko": "ㄱ은 '기역'이라고 읽습니다.", "explanation_ja": "ㄱは「キヨク」と読みます。", "xp": 10, "coin": 2 },
-  { "id": "m_mc_ch00_002", "type": "multiple_choice", "question_ko": "'가'는 어떤 자음과 모음의 조합이에요?", "question_ja": "「가」はどの子音と母音の組み合わせ？", "choices": ["ㄱ + ㅏ", "ㄴ + ㅏ", "ㄱ + ㅓ", "ㄷ + ㅏ"], "correct": 0, "explanation_ko": "가 = ㄱ(기역) + ㅏ(아)", "explanation_ja": "가 = ㄱ(キヨク) + ㅏ(ア)", "xp": 10, "coin": 2 },
-  { "id": "m_wm_ch00_001", "type": "word_match", "question_ko": "자음과 이름을 맞춰 보세요!", "question_ja": "子音と名前をマッチングしてください！", "pairs": [ { "korean": "ㄱ", "japanese": "기역(キヨク)" }, { "korean": "ㄴ", "japanese": "니은(ニウン)" }, { "korean": "ㄷ", "japanese": "디귿(ティグッ)" }, { "korean": "ㄹ", "japanese": "리을(リウル)" } ], "xp": 20, "coin": 4 },
-  { "id": "m_fb_ch00_001", "type": "fill_blank", "question_ko": "안녕___세요!", "question_ja": "アンニョン___セヨ！（こんにちは）", "answer": "하", "choices": ["하", "히", "호", "헤"], "hint_ko": "'ㅎ' + 'ㅏ' = ?", "hint_ja": "「ㅎ」+「ㅏ」= ?", "xp": 15, "coin": 3 },
-  { "id": "m_pron_ch00_001", "type": "pronunciation_check", "rule": "연음화", "rule_ja": "連音化", "question_ko": "'먹어요'의 실제 발음은?", "question_ja": "「먹어요」の実際の発音は？", "word": "먹어요", "choices": ["[머거요]", "[먹어요]", "[먹거요]", "[머어요]"], "correct": 0, "explanation_ko": "받침 ㄱ이 뒤 모음 '어'로 이동 → [머거요]", "explanation_ja": "パッチムㄱが後ろの母音「어」に移動 → [머거요]", "xp": 15, "coin": 3 },
-  { "id": "m_pron_ch00_002", "type": "pronunciation_check", "rule": "격음화", "rule_ja": "激音化", "question_ko": "'좋다'의 실제 발음은?", "question_ja": "「좋다」の実際の発音は？", "word": "좋다", "choices": ["[조타]", "[좋다]", "[조다]", "[족다]"], "correct": 0, "explanation_ko": "ㅎ + ㄷ → 격음화 [ㅌ] → [조타]", "explanation_ja": "ㅎ + ㄷ → 激音化 [ㅌ] → [조타]", "xp": 15, "coin": 3 },
-  { "id": "m_pron_ch00_003", "type": "pronunciation_check", "rule": "경음화", "rule_ja": "濃音化", "question_ko": "'학교'의 실제 발음은?", "question_ja": "「학교」の実際の発音は？", "word": "학교", "choices": ["[학꾜]", "[학교]", "[하교]", "[학쿄]"], "correct": 0, "explanation_ko": "받침 ㄱ 뒤 평음 ㄱ → 경음 ㄲ → [학꾜]", "explanation_ja": "パッチムㄱの後の平音ㄱ → 濃音ㄲ → [학꾜]", "xp": 15, "coin": 3 },
-  { "id": "m_mc_ch00_003", "type": "multiple_choice", "question_ko": "받침이 없는 글자는?", "question_ja": "パッチムがない文字は？", "choices": ["가", "강", "감", "갈"], "correct": 0, "explanation_ko": "'가'는 자음 ㄱ + 모음 ㅏ만 있고 받침이 없습니다.", "explanation_ja": "「가」は子音ㄱ+母音ㅏだけで、パッチムがありません。", "xp": 10, "coin": 2 }
+  {
+    "id": "m_gp_ch00_l01_001",
+    "type": "grammar_point",
+    "grammar_ko": "한글의 구조: 자음 + 모음 = 음절",
+    "grammar_ja": "ハングルの構造：子音＋母音＝音節",
+    "explanation_ko": "한글은 블록처럼 자음과 모음을 조합해서 한 글자를 만듭니다. 예: ㄱ(자음) + ㅏ(모음) = 가",
+    "explanation_ja": "ハングルはブロックのように子音と母音を組み合わせて1文字を作ります。例：ㄱ(子音) + ㅏ(母音) = 가",
+    "examples": [
+      { "ko": "ㄱ + ㅏ = 가", "pronunciation": "[가] ga", "ja": "カ行のガ" },
+      { "ko": "ㄴ + ㅏ = 나", "pronunciation": "[나] na", "ja": "ナ行のナ" },
+      { "ko": "ㅁ + ㅏ = 마", "pronunciation": "[마] ma", "ja": "マ行のマ" }
+    ],
+    "exercise": {
+      "sentence_ko": "ㄷ + ㅏ = ?",
+      "sentence_ja": "ㄷ + ㅏ = ?",
+      "choices": ["다", "나", "가", "라"],
+      "answer": "다"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l01_001",
+    "type": "multiple_choice",
+    "question_ko": "모음을 단독으로 쓸 때 앞에 붙이는 자음은?",
+    "question_ja": "母音を単独で書くとき前に付ける子音は？",
+    "choices": ["ㅇ (이응)", "ㄱ (기역)", "ㄴ (니은)", "ㅎ (히읗)"],
+    "correct": 0,
+    "explanation_ko": "모음은 항상 자음과 함께 써야 해요. 자음 없이 쓸 때는 'ㅇ(이응)'을 초성에 넣습니다.",
+    "explanation_ja": "母音は常に子音と一緒に書きます。子音なしで書くときは「ㅇ（イウン）」を初声に入れます。",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_mc_ch00_l01_002",
+    "type": "multiple_choice",
+    "question_ko": "'가'를 구성하는 요소는?",
+    "question_ja": "「가」を構成する要素は？",
+    "choices": ["ㄱ + ㅏ", "ㄴ + ㅏ", "ㄱ + ㅓ", "ㅁ + ㅏ"],
+    "correct": 0,
+    "explanation_ko": "가 = ㄱ(기역/자음) + ㅏ(아/모음)",
+    "explanation_ja": "가 = ㄱ(キヨク/子音) + ㅏ(ア/母音)",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_fb_ch00_l01_001",
+    "type": "fill_blank",
+    "question_ko": "'아'를 한글로 쓸 때: __ㅏ",
+    "question_ja": "「ア」をハングルで書くとき：__ㅏ",
+    "answer": "ㅇ",
+    "choices": ["ㅇ", "ㄱ", "ㄴ", "ㅎ"],
+    "hint_ko": "모음만 쓸 때 앞에 오는 무음 자음은?",
+    "hint_ja": "母音だけ書くとき前に来る無音の子音は？",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch00_l01_001",
+    "type": "word_match",
+    "question_ko": "음절과 구성 요소를 맞춰 보세요!",
+    "question_ja": "音節と構成要素をマッチングしてください！",
+    "pairs": [
+      { "korean": "가", "japanese": "ㄱ + ㅏ" },
+      { "korean": "나", "japanese": "ㄴ + ㅏ" },
+      { "korean": "다", "japanese": "ㄷ + ㅏ" },
+      { "korean": "라", "japanese": "ㄹ + ㅏ" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_mc_ch00_l01_003",
+    "type": "multiple_choice",
+    "question_ko": "다음 중 받침(종성)이 있는 글자는?",
+    "question_ja": "次のうちパッチム（終声）がある文字は？",
+    "choices": ["강", "가", "나", "마"],
+    "correct": 0,
+    "explanation_ko": "'강'은 ㄱ(초성) + ㅏ(중성) + ㅇ(종성/받침)의 3층 구조입니다.",
+    "explanation_ja": "「강」はㄱ(初声) + ㅏ(中声) + ㅇ(終声/パッチム)の3段構造です。",
+    "xp": 10,
+    "coin": 2
+  }
 ]

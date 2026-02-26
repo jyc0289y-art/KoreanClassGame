@@ -1,0 +1,128 @@
+[
+  {
+    "id": "m_gp_ch00_l06_001",
+    "type": "grammar_point",
+    "grammar_ko": "연음화 (連音化)",
+    "grammar_ja": "連音化",
+    "explanation_ko": "받침 + 모음으로 시작하는 음절 → 받침이 다음 음절 초성으로 이동\n예: 먹+어요 → [머거요]",
+    "explanation_ja": "パッチム + 母音で始まる音節 → パッチムが次の音節の初声に移動\n例：먹+어요 → [머거요]",
+    "examples": [
+      { "ko": "먹어요 → [머거요]", "pronunciation": "[머거요]", "ja": "食べます" },
+      { "ko": "한국어 → [한구거]", "pronunciation": "[한구거]", "ja": "韓国語" },
+      { "ko": "일본어 → [일보너]", "pronunciation": "[일보너]", "ja": "日本語" }
+    ],
+    "exercise": {
+      "sentence_ko": "'있어요'의 발음은?",
+      "sentence_ja": "「있어요」の発音は？",
+      "choices": ["[이써요]", "[있어요]", "[잇어요]", "[이서요]"],
+      "answer": "[이써요]"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_pron_ch00_l06_001",
+    "type": "pronunciation_check",
+    "rule": "연음화",
+    "rule_ja": "連音化",
+    "question_ko": "'먹어요'의 실제 발음은?",
+    "question_ja": "「먹어요」の実際の発音は？",
+    "word": "먹어요",
+    "choices": ["[머거요]", "[먹어요]", "[먹거요]", "[머어요]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄱ이 뒤 모음 '어'로 이동 → [머거요]",
+    "explanation_ja": "パッチムㄱが後ろの母音「어」に移動 → [머거요]",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_pron_ch00_l06_002",
+    "type": "pronunciation_check",
+    "rule": "경음화",
+    "rule_ja": "濃音化",
+    "question_ko": "'학교'의 실제 발음은?",
+    "question_ja": "「학교」の実際の発音は？",
+    "word": "학교",
+    "choices": ["[학꾜]", "[학교]", "[하교]", "[학쿄]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄱ 뒤 평음 ㄱ → 경음 ㄲ → [학꾜]",
+    "explanation_ja": "パッチムㄱの後の平音ㄱ → 濃音ㄲ → [학꾜]",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_gp_ch00_l06_002",
+    "type": "grammar_point",
+    "grammar_ko": "경음화 (濃音化)",
+    "grammar_ja": "濃音化",
+    "explanation_ko": "받침 ㄱ·ㄷ·ㅂ 뒤의 평음 → 경음(쌍자음)으로 변화\n예: 학교→[학꾜], 식당→[식땅]",
+    "explanation_ja": "パッチム ㄱ·ㄷ·ㅂ の後の平音 → 濃音（双子音）に変化\n例：학교→[학꾜]、식당→[식땅]",
+    "examples": [
+      { "ko": "학교 → [학꾜]", "pronunciation": "[학꾜]", "ja": "学校" },
+      { "ko": "식당 → [식땅]", "pronunciation": "[식땅]", "ja": "食堂" },
+      { "ko": "있다 → [잇따]", "pronunciation": "[잇따]", "ja": "ある" }
+    ],
+    "exercise": {
+      "sentence_ko": "'몇 분'의 발음은?",
+      "sentence_ja": "「몇 분」の発音は？",
+      "choices": ["[멷뿐]", "[몇 분]", "[며분]", "[멷분]"],
+      "answer": "[멷뿐]"
+    },
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_pron_ch00_l06_003",
+    "type": "pronunciation_check",
+    "rule": "비음화",
+    "rule_ja": "鼻音化",
+    "question_ko": "'국물'의 실제 발음은?",
+    "question_ja": "「국물」の実際の発音は？",
+    "word": "국물",
+    "choices": ["[궁물]", "[국물]", "[군물]", "[꿍물]"],
+    "correct": 0,
+    "explanation_ko": "ㄱ + ㅁ → ㅇ + ㅁ (비음화) → [궁물]",
+    "explanation_ja": "ㄱ + ㅁ → ㅇ + ㅁ (鼻音化) → [궁물]",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_pron_ch00_l06_004",
+    "type": "pronunciation_check",
+    "rule": "격음화",
+    "rule_ja": "激音化",
+    "question_ko": "'좋다'의 실제 발음은?",
+    "question_ja": "「좋다」の実際の発音は？",
+    "word": "좋다",
+    "choices": ["[조타]", "[좋다]", "[조다]", "[족다]"],
+    "correct": 0,
+    "explanation_ko": "ㅎ + ㄷ → 격음화 [ㅌ] → [조타]",
+    "explanation_ja": "ㅎ + ㄷ → 激音化 [ㅌ] → [조타]",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_mc_ch00_l06_001",
+    "type": "multiple_choice",
+    "question_ko": "다음 중 비음화가 적용되는 단어는?",
+    "question_ja": "次のうち鼻音化が適用される単語は？",
+    "choices": ["한국말 [한궁말]", "한국어 [한구거]", "좋다 [조타]", "학교 [학꾜]"],
+    "correct": 0,
+    "explanation_ko": "한국말: ㄱ + ㅁ → ㅇ + ㅁ (비음화) → [한궁말]",
+    "explanation_ja": "한국말：ㄱ + ㅁ → ㅇ + ㅁ (鼻音化) → [한궁말]",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_mc_ch00_l06_002",
+    "type": "multiple_choice",
+    "question_ko": "'못해요'의 실제 발음은?",
+    "question_ja": "「못해요」の実際の発音は？",
+    "choices": ["[모태요]", "[못해요]", "[못헤요]", "[모해요]"],
+    "correct": 0,
+    "explanation_ko": "ㄷ + ㅎ → 격음화 [ㅌ] → 못해요 → [모태요]",
+    "explanation_ja": "ㄷ + ㅎ → 激音化 [ㅌ] → 못해요 → [모태요]",
+    "xp": 10,
+    "coin": 2
+  }
+]

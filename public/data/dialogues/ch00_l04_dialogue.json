@@ -1,0 +1,48 @@
+{
+  "scene_title_ko": "이자카야에서 음절 연습",
+  "scene_title_ja": "居酒屋で音節の練習",
+  "lines": [
+    {
+      "speaker": "rui",
+      "emotion": "excited",
+      "text_ko": "여기 메뉴판에 한글이 있어! 읽어 보자!",
+      "text_ja": "ここのメニューにハングルがある！読んでみよう！",
+      "pronunciation": "[여기 메뉴파네 한그리 이써! 일거 보자!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "nervous",
+      "text_ko": "비... 비빔밥? ㅂ+ㅣ=비, ㅂ+ㅣ=비, ㅁ+ㅏ=마... 맞아?",
+      "text_ja": "ビ...ビビンバ？ㅂ+ㅣ=비、ㅂ+ㅣ=비、ㅁ+ㅏ=마...合ってる？",
+      "pronunciation": "[비비빔밥? 비읍 이 비 비읍 이 비 미음 아 마 마자?]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "happy",
+      "text_ko": "맞아! 잘했어! 이제 우리 이름도 한글로 써 보자!",
+      "text_ja": "合ってる！よくできた！じゃあ名前もハングルで書いてみよう！",
+      "pronunciation": "[마자! 잘해써! 이제 우리 이름도 한글로 써 보자!]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "루이는 ㄹ+ㅜ=루, ㅇ+ㅣ=이. 루이!",
+      "text_ja": "ルイは ㄹ+ㅜ=루、ㅇ+ㅣ=이。루이！",
+      "pronunciation": "[루이는 리을 우 루 이응 이 이 루이!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "happy",
+      "text_ko": "유코는... ㅇ+ㅠ=유, ㅋ+ㅗ=코! 유코!",
+      "text_ja": "ユコは...ㅇ+ㅠ=유、ㅋ+ㅗ=코！유코！",
+      "pronunciation": "[유코는 이응 유 유 키읔 오 코 유코!]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "아미는 ㅇ+ㅏ=아, ㅁ+ㅣ=미! 쉽다!",
+      "text_ja": "アミは ㅇ+ㅏ=아、ㅁ+ㅣ=미！簡単！",
+      "pronunciation": "[아미는 이응 아 아 미음 이 미 쉽따!]"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "scene_title_ko": "노래방에서 발음 규칙",
+  "scene_title_ja": "カラオケで発音規則",
+  "lines": [
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "K-POP 노래 부르면서 발음 연습하자!",
+      "text_ja": "K-POPの歌を歌いながら発音練習しよう！",
+      "pronunciation": "[케이팝 노래 부르면서 바름 연습하자!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "nervous",
+      "text_ko": "'먹어요'가 왜 [머거요]야? 글자 그대로 아니야?",
+      "text_ja": "「먹어요」がなぜ[머거요]なの？文字通りじゃないの？",
+      "pronunciation": "[머거요가 왜 머거요야? 글짜 그대로 아니야?]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "연음화라고 해. 받침이 다음 모음으로 이동하는 거야.",
+      "text_ja": "連音化っていうんだ。パッチムが次の母音に移動するんだよ。",
+      "pronunciation": "[여느마라고 해 받치미 다음 모으므로 이동하는 거야]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "happy",
+      "text_ko": "'학교'도 [학꾜]라고 발음해! 이건 경음화!",
+      "text_ja": "「학교」も[학꾜]って発音するよ！これは濃音化！",
+      "pronunciation": "[학꾜도 학꾜라고 바르매! 이건 경음화!]"
+    },
+    {
+      "speaker": "yuko",
+      "emotion": "surprised",
+      "text_ko": "규칙이 이렇게 많아? 비음화, 격음화도 있다고?",
+      "text_ja": "規則がこんなに多いの？鼻音化、激音化もあるの？",
+      "pronunciation": "[규치기 이러케 마나? 비음화 격음화도 읻따고?]"
+    },
+    {
+      "speaker": "rui",
+      "emotion": "calm",
+      "text_ko": "'좋다'가 [조타]인 건 격음화, '감사합니다'가 [감사함니다]인 건 비음화야.",
+      "text_ja": "「좋다」が[조타]なのは激音化、「감사합니다」が[감사함니다]なのは鼻音化だよ。",
+      "pronunciation": "[조타가 조타인 건 격음화 감사함니다가 감사함니다인 건 비음화야]"
+    },
+    {
+      "speaker": "ami",
+      "emotion": "excited",
+      "text_ko": "노래 부르면서 자연스럽게 익히면 돼! 화이팅!",
+      "text_ja": "歌いながら自然に覚えればいい！ファイティン！",
+      "pronunciation": "[노래 부르면서 자연스럽게 이키면 돼! 화이팅!]"
+    }
+  ]
+}
