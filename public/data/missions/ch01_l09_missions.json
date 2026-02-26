@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l09_001",
+    "type": "grammar_point",
+    "grammar_ko": "~고 싶다",
+    "grammar_ja": "〜したい（希望表現）",
+    "explanation_ko": "하고 싶은 것을 말할 때 사용합니다. 동사 어간 + '~고 싶다/싶어요'로 희망을 표현합니다.",
+    "explanation_ja": "やりたいことを言うときに使います。動詞の語幹 + 「~고 싶다/싶어요」で希望を表現します。",
+    "examples": [
+      { "ko": "야경을 보고 싶어요.", "pronunciation": "[야경을 보고 시퍼요]", "ja": "夜景を見たいです。" },
+      { "ko": "한국에 또 오고 싶어요.", "pronunciation": "[한구게 또 오고 시퍼요]", "ja": "韓国にまた来たいです。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "야경을 보___싶어요.",
+      "sentence_ja": "夜景を見___たいです。",
+      "answer": "고",
+      "choices": ["고", "어", "게", "며"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l09_001",
+    "type": "multiple_choice",
+    "question_ko": "남산 N서울타워에서 많이 하는 것은?",
+    "question_ja": "南山Nソウルタワーでよくすることは？",
+    "choices": ["야경 보기와 사랑의 자물쇠", "수영하기", "스키 타기", "축구 보기"],
+    "correct": 0,
+    "explanation_ko": "N서울타워는 서울 야경 명소이며, 사랑의 자물쇠를 거는 것으로 유명합니다.",
+    "explanation_ja": "Nソウルタワーはソウルの夜景名所で、愛の南京錠をかけることで有名です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l09_001",
+    "type": "fill_blank",
+    "question_ko": "꼭 다시 ___게요.",
+    "question_ja": "必ずまた___ますね。",
+    "answer": "올",
+    "choices": ["올", "갈", "볼", "할"],
+    "hint_ko": "다시 방문하겠다는 약속의 표현입니다.",
+    "hint_ja": "また訪問するという約束の表現です。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l09_001",
+    "type": "word_match",
+    "question_ko": "관광 단어를 맞춰 보세요!",
+    "question_ja": "観光の単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "자물쇠", "japanese": "南京錠" },
+      { "korean": "소원", "japanese": "願い" },
+      { "korean": "야경", "japanese": "夜景" },
+      { "korean": "전망대", "japanese": "展望台" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l09_001",
+    "type": "pronunciation_check",
+    "rule": "표준 발음", "rule_ja": "標準発音",
+    "word": "케이블카",
+    "question_ko": "'케이블카'의 실제 발음은?",
+    "question_ja": "「케이블카」の実際の発音は？",
+    "choices": ["[케이블카]", "[게이블카]", "[케이블까]", "[캐이블카]"],
+    "correct": 0,
+    "explanation_ko": "'케이블카'는 외래어로 표기 그대로 발음합니다 → [케이블카]",
+    "explanation_ja": "「케이블카」は外来語で表記通りに発音します → [케이블카]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l09_002",
+    "type": "multiple_choice",
+    "question_ko": "'추억'의 일본어 뜻은?",
+    "question_ja": "「추억」の日本語の意味は？",
+    "choices": ["思い出", "約束", "友達", "旅行"],
+    "correct": 0,
+    "explanation_ko": "'추억'은 지나간 시간의 아름다운 기억을 의미합니다.",
+    "explanation_ja": "「추억」は過ぎた時間の美しい記憶を意味します。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l09_001",
+    "type": "dialogue_order",
+    "question_ko": "자물쇠에 소원 쓰기 대화를 순서대로 배열하세요!",
+    "question_ja": "南京錠に願いを書く会話を順番に並べてください！",
+    "lines": [
+      { "speaker": "yuko", "text_ko": "와, 야경이 너무 예쁘다!", "text_ja": "わぁ、夜景がとてもきれい！" },
+      { "speaker": "ami", "text_ko": "자물쇠에 소원을 쓰자!", "text_ja": "南京錠に願いを書こう！" },
+      { "speaker": "rui", "text_ko": "나는 '꼭 다시 올게요'라고 썼어.", "text_ja": "僕は「必ずまた来ます」と書いたよ。" },
+      { "speaker": "yuko", "text_ko": "좋은 추억이 됐어! 고마워, 서울!", "text_ja": "いい思い出になった！ありがとう、ソウル！" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

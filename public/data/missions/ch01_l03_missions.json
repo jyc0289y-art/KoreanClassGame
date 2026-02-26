@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l03_001",
+    "type": "grammar_point",
+    "grammar_ko": "~아/어 주실 수 있어요?",
+    "grammar_ja": "〜していただけますか？",
+    "explanation_ko": "상대방에게 정중하게 부탁할 때 사용합니다. '~아/어 주다'에 가능 표현 '~(으)ㄹ 수 있다'를 합친 형태입니다.",
+    "explanation_ja": "相手に丁寧にお願いするときに使います。「~아/어 주다」に可能表現「~(으)ㄹ 수 있다」を合わせた形です。",
+    "examples": [
+      { "ko": "사진 찍어 주실 수 있어요?", "pronunciation": "[사진 찌거 주실 수 이써요?]", "ja": "写真を撮っていただけますか？" },
+      { "ko": "도와주실 수 있어요?", "pronunciation": "[도와주실 수 이써요?]", "ja": "手伝っていただけますか？" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "사진 찍어 주실 수 ___?",
+      "sentence_ja": "写真を撮っていただけますか？",
+      "answer": "있어요",
+      "choices": ["있어요", "없어요", "돼요", "해요"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l03_001",
+    "type": "multiple_choice",
+    "question_ko": "하이커 그라운드의 입장료가 얼마예요?",
+    "question_ja": "ハイカーグラウンドの入場料はいくらですか？",
+    "choices": ["무료예요", "5,000원이에요", "10,000원이에요", "3,000원이에요"],
+    "correct": 0,
+    "explanation_ko": "하이커 그라운드는 무료로 관람할 수 있는 한국 관광 체험 공간입니다.",
+    "explanation_ja": "ハイカーグラウンドは無料で観覧できる韓国観光体験スペースです。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l03_001",
+    "type": "fill_blank",
+    "question_ko": "사진 찍___도 돼요?",
+    "question_ja": "写真を撮っ___もいいですか？",
+    "answer": "어",
+    "choices": ["어", "아", "고", "으"],
+    "hint_ko": "'찍다'는 모음이 ㅣ이므로 '어'가 붙습니다.",
+    "hint_ja": "「찍다」は母音がㅣなので「어」が付きます。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l03_001",
+    "type": "word_match",
+    "question_ko": "관광 표현을 맞춰 보세요!",
+    "question_ja": "観光表現をマッチングしてください！",
+    "pairs": [
+      { "korean": "입장료", "japanese": "入場料" },
+      { "korean": "관람하다", "japanese": "観覧する" },
+      { "korean": "기념품", "japanese": "記念品" },
+      { "korean": "엄청", "japanese": "めちゃくちゃ" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l03_001",
+    "type": "pronunciation_check",
+    "rule": "연음화", "rule_ja": "連音化",
+    "word": "물론이죠",
+    "question_ko": "'물론이죠'의 실제 발음은?",
+    "question_ja": "「물론이죠」の実際の発音は？",
+    "choices": ["[물로니죠]", "[물론이죠]", "[물로리죠]", "[무론이죠]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄴ이 다음 음절 모음 앞에서 연음화 → [물로니죠]",
+    "explanation_ja": "パッチムㄴが次の音節の母音の前で連音化 → [물로니죠]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l03_002",
+    "type": "multiple_choice",
+    "question_ko": "'대박!'은 어떤 의미예요?",
+    "question_ja": "「대박！」はどういう意味ですか？",
+    "choices": ["すごい！", "大変！", "残念！", "ありがとう！"],
+    "correct": 0,
+    "explanation_ko": "'대박'은 놀라거나 감탄할 때 사용하는 감탄사입니다.",
+    "explanation_ja": "「대박」は驚いたり感心したりするときに使う感嘆詞です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l03_001",
+    "type": "dialogue_order",
+    "question_ko": "사진 부탁 대화를 올바른 순서로 배열하세요!",
+    "question_ja": "写真のお願いの会話を正しい順番に並べてください！",
+    "lines": [
+      { "speaker": "yuko", "text_ko": "저기요, 사진 찍어 주실 수 있어요?", "text_ja": "すみません、写真を撮っていただけますか？" },
+      { "speaker": "hyunjeong", "text_ko": "물론이죠! 준비되셨어요?", "text_ja": "もちろんです！準備はいいですか？" },
+      { "speaker": "hyunjeong", "text_ko": "하나, 둘, 셋! 찍었어요.", "text_ja": "いち、に、さん！撮りましたよ。" },
+      { "speaker": "ami", "text_ko": "감사합니다! 잘 나왔어요!", "text_ja": "ありがとうございます！よく撮れました！" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "scene_title_ko": "명동 올리브영 쇼핑",
+  "scene_title_ja": "明洞オリーブヤングでショッピング",
+  "lines": [
+    { "speaker": "ami", "emotion": "excited", "text_ko": "올리브영이다! K-뷰티 쇼핑하자!", "text_ja": "オリーブヤングだ！K-ビューティーショッピングしよう！", "pronunciation": "[올리브영이다! 케이뷰티 쇼핑하자!]" },
+    { "speaker": "yuko", "emotion": "curious", "text_ko": "저기요, 수분크림 추천해 주세요.", "text_ja": "すみません、保湿クリームのおすすめを教えてください。", "pronunciation": "[저기요, 수분크림 추천해 주세요]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "피부 타입이 어떻게 되세요? 건성이에요, 지성이에요?", "text_ja": "お肌のタイプはどうですか？乾燥肌ですか、脂性肌ですか？", "pronunciation": "[피부 타이비 어떠케 되세요? 건성이에요, 지성이에요?]" },
+    { "speaker": "yuko", "emotion": "calm", "text_ko": "복합성이에요. 테스터 써봐도 돼요?", "text_ja": "混合肌です。テスターを使ってみてもいいですか？", "pronunciation": "[보캅썽이에요. 테스터 써봐도 돼요?]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "네, 물론이죠! 이거 지금 세일 중이에요. 38,000원이에요.", "text_ja": "はい、もちろんです！これは今セール中です。38,000ウォンです。", "pronunciation": "[네, 물로니죠! 이거 지금 세일 중이에요. 삼만 팔천 워니에요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "이거랑 세럼이랑 같이 주세요. 봉투도 주세요!", "text_ja": "これとセラムを一緒にください。袋もください！", "pronunciation": "[이거랑 세러미랑 가치 주세요. 봉투도 주세요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "좀 싸게 해줄 수 있어요?", "text_ja": "少し安くしてもらえますか？", "pronunciation": "[좀 싸게 해줄 수 이써요?]" }
+  ]
+}

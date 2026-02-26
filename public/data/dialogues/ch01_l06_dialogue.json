@@ -1,0 +1,13 @@
+{
+  "scene_title_ko": "BTS 성지순례: 유정식당·카페",
+  "scene_title_ja": "BTS聖地巡礼：ユジョン食堂・カフェ",
+  "lines": [
+    { "speaker": "ami", "emotion": "excited", "text_ko": "여기가 유정식당이야! BTS가 왔던 곳!", "text_ja": "ここがユジョン食堂！BTSが来たところ！", "pronunciation": "[여기가 유정시당이야! 비티에스가 왓떤 곧!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "예약은 못 했는데 자리 있어요?", "text_ja": "予約してないですが席ありますか？", "pronunciation": "[예야근 모 탠는데 자리 이써요?]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "네, 이쪽으로 앉으세요. 이 집 대표 메뉴가 불고기예요.", "text_ja": "はい、こちらにどうぞ。この店のおすすめメニューはプルコギです。", "pronunciation": "[네, 이쪼그로 안즈세요. 이 집 대표 메뉴가 불고기예요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "그럼 불고기 2인분 주세요.", "text_ja": "じゃあプルコギ2人前ください。", "pronunciation": "[그럼 불고기 이인분 주세요]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "다음은 카페 가자! 아아 마시고 싶어!", "text_ja": "次はカフェに行こう！アイスアメリカーノ飲みたい！", "pronunciation": "[다으면 카페 가자! 아아 마시고 시퍼!]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "매장에서 드실 거예요, 가져가실 거예요?", "text_ja": "店内でお召し上がりですか、お持ち帰りですか？", "pronunciation": "[매장에서 드실 거예요, 가져가실 거예요?]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "매장이요! 여기서 쉬면서 마실래요.", "text_ja": "店内で！ここで休みながら飲みたいです。", "pronunciation": "[매장이요! 여기서 쉬면서 마실래요]" }
+  ]
+}

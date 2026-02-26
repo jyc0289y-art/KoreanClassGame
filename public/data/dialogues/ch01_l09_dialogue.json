@@ -1,0 +1,13 @@
+{
+  "scene_title_ko": "N서울타워 야경",
+  "scene_title_ja": "Nソウルタワーの夜景",
+  "lines": [
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "케이블카 타고 올라가자!", "text_ja": "ケーブルカーに乗って上がろう！", "pronunciation": "[케이블카 타고 올라가자!]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "전망대에서 야경 보고 싶어.", "text_ja": "展望台で夜景を見たい。", "pronunciation": "[전망대에서 야경 보고 시퍼]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "와! 야경이 너무 예쁘다! 서울 대박!", "text_ja": "わぁ！夜景がとてもきれい！ソウルすごい！", "pronunciation": "[와! 야경이 너무 예쁘다! 서울 대박!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "자물쇠에 소원을 쓰자!", "text_ja": "南京錠に願いを書こう！", "pronunciation": "[자물쇠에 소워늘 쓰자!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "나는 '한국에 또 오고 싶어요'라고 썼어!", "text_ja": "私は「韓国にまた来たいです」と書いたよ！", "pronunciation": "[나는 한구게 또 오고 시퍼요라고 써써!]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "나는 '꼭 다시 올게요'라고 썼어.", "text_ja": "僕は「必ずまた来ます」と書いたよ。", "pronunciation": "[나는 꼭 다시 올게요라고 써써]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "정말 좋은 추억이 됐어. 고마워, 서울!", "text_ja": "本当にいい思い出になった。ありがとう、ソウル！", "pronunciation": "[정말 조은 추어기 됐어. 고마워, 서울!]" }
+  ]
+}

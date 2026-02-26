@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l07_001",
+    "type": "grammar_point",
+    "grammar_ko": "~(이)랑 같이",
+    "grammar_ja": "〜と一緒に",
+    "explanation_ko": "누군가와 함께 행동할 때 사용합니다. 받침이 없으면 '~랑', 받침이 있으면 '~이랑'을 씁니다.",
+    "explanation_ja": "誰かと一緒に行動するときに使います。パッチムがなければ「~랑」、パッチムがあれば「~이랑」を使います。",
+    "examples": [
+      { "ko": "친구랑 같이 가요.", "pronunciation": "[친구랑 가치 가요]", "ja": "友達と一緒に行きます。" },
+      { "ko": "언니랑 같이 쇼핑해요.", "pronunciation": "[언니랑 가치 쇼핑해요]", "ja": "お姉さんと一緒にショッピングします。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "친구___같이 가요.",
+      "sentence_ja": "友達___一緒に行きます。",
+      "answer": "랑",
+      "choices": ["랑", "이랑", "하고", "와"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l07_001",
+    "type": "multiple_choice",
+    "question_ko": "'인증샷'이란 무엇이에요?",
+    "question_ja": "「인증샷」とは何ですか？",
+    "choices": ["認証ショット(記念撮影)", "身分証の写真", "パスポート写真", "卒業写真"],
+    "correct": 0,
+    "explanation_ko": "'인증샷'은 어떤 장소에 갔다는 것을 증명하는 사진, 즉 SNS에 올리는 기념 사진입니다.",
+    "explanation_ja": "「인증샷」はある場所に行ったことを証明する写真、つまりSNSにアップする記念写真です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l07_001",
+    "type": "fill_blank",
+    "question_ko": "사진 같이 ___을까요?",
+    "question_ja": "写真一緒に___ましょうか？",
+    "answer": "찍",
+    "choices": ["찍", "봐", "해", "가"],
+    "hint_ko": "카메라로 사진을 촬영하는 동사입니다.",
+    "hint_ja": "カメラで写真を撮影する動詞です。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l07_001",
+    "type": "word_match",
+    "question_ko": "문화 단어를 맞춰 보세요!",
+    "question_ja": "文化の単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "인증샷", "japanese": "認証ショット" },
+      { "korean": "셀카", "japanese": "セルフィー" },
+      { "korean": "포토존", "japanese": "フォトゾーン" },
+      { "korean": "구경하다", "japanese": "見物する" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l07_001",
+    "type": "pronunciation_check",
+    "rule": "표준 발음", "rule_ja": "標準発音",
+    "word": "별마당",
+    "question_ko": "'별마당'의 실제 발음은?",
+    "question_ja": "「별마당」の実際の発音は？",
+    "choices": ["[별마당]", "[벼마당]", "[별마단]", "[벼르마당]"],
+    "correct": 0,
+    "explanation_ko": "'별마당'은 받침 ㄹ 다음에 ㅁ이 와서 그대로 발음 → [별마당]",
+    "explanation_ja": "「별마당」はパッチムㄹの次にㅁが来てそのまま発音 → [별마당]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l07_002",
+    "type": "multiple_choice",
+    "question_ko": "한국 친구에게 SNS 연락처를 물어보는 표현은?",
+    "question_ja": "韓国の友達にSNSの連絡先を聞く表現は？",
+    "choices": ["인스타 아이디가 뭐예요?", "전화번호가 뭐예요?", "이메일이 뭐예요?", "주소가 어디예요?"],
+    "correct": 0,
+    "explanation_ko": "한국에서는 인스타그램 아이디를 물어보는 것이 자연스러운 연락처 교환 방법입니다.",
+    "explanation_ja": "韓国ではインスタグラムのIDを聞くのが自然な連絡先交換の方法です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l07_001",
+    "type": "dialogue_order",
+    "question_ko": "한국 친구와 인증샷 대화를 순서대로 배열하세요!",
+    "question_ja": "韓国の友達との認証ショットの会話を順番に並べてください！",
+    "lines": [
+      { "speaker": "yuko", "text_ko": "여기 K-Star ROAD다! 인증샷 찍자!", "text_ja": "ここK-Star ROADだ！認証ショット撮ろう！" },
+      { "speaker": "ami", "text_ko": "같이 찍을까요? 셀카 모드로!", "text_ja": "一緒に撮りましょうか？セルフィーモードで！" },
+      { "speaker": "rui", "text_ko": "잘 나왔다! SNS에 올려도 돼요?", "text_ja": "よく撮れた！SNSにアップしてもいいですか？" },
+      { "speaker": "yuko", "text_ko": "인스타 아이디 교환하자!", "text_ja": "インスタのID交換しよう！" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

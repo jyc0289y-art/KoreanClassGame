@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l05_001",
+    "type": "grammar_point",
+    "grammar_ko": "~인분 주세요",
+    "grammar_ja": "〜人前ください",
+    "explanation_ko": "식당에서 음식을 주문할 때 사용합니다. '인분'은 1인분의 양을 나타내는 단위입니다. 한자어 수사와 함께 씁니다.",
+    "explanation_ja": "食堂で料理を注文するときに使います。「인분」は一人前の量を表す単位です。漢字語数詞と一緒に使います。",
+    "examples": [
+      { "ko": "삼겹살 2인분 주세요.", "pronunciation": "[삼겹쌀 이인분 주세요]", "ja": "サムギョプサル2人前ください。" },
+      { "ko": "불고기 3인분 주세요.", "pronunciation": "[불고기 사민분 주세요]", "ja": "プルコギ3人前ください。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "삼겹살 2___주세요.",
+      "sentence_ja": "サムギョプサル2___ください。",
+      "answer": "인분",
+      "choices": ["인분", "개", "잔", "명"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l05_001",
+    "type": "multiple_choice",
+    "question_ko": "'계산해 주세요'는 어떤 의미예요?",
+    "question_ja": "「계산해 주세요」はどういう意味ですか？",
+    "choices": ["お会計お願いします", "もう一度お願いします", "メニューください", "水をください"],
+    "correct": 0,
+    "explanation_ko": "'계산해 주세요'는 식당에서 돈을 낼 때 사용하는 표현입니다.",
+    "explanation_ja": "「계산해 주세요」は食堂でお金を払うときに使う表現です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l05_001",
+    "type": "fill_blank",
+    "question_ko": "삼겹살 2___주세요.",
+    "question_ja": "サムギョプサル2___ください。",
+    "answer": "인분",
+    "choices": ["인분", "개", "잔", "명"],
+    "hint_ko": "음식의 1인분 양을 세는 단위입니다.",
+    "hint_ja": "料理の一人前の量を数える単位です。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l05_001",
+    "type": "word_match",
+    "question_ko": "식당 단어를 맞춰 보세요!",
+    "question_ja": "食堂の単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "직접", "japanese": "直接" },
+      { "korean": "추가", "japanese": "追加" },
+      { "korean": "냉면", "japanese": "冷麺" },
+      { "korean": "현금", "japanese": "現金" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l05_001",
+    "type": "pronunciation_check",
+    "rule": "비음화", "rule_ja": "鼻音化",
+    "word": "먹는다",
+    "question_ko": "'먹는다'의 실제 발음은?",
+    "question_ja": "「먹는다」の実際の発音は？",
+    "choices": ["[멍는다]", "[먹는다]", "[먹눈다]", "[멍눈다]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄱ + ㄴ → 비음화 [ㅇ+ㄴ] → [멍는다]",
+    "explanation_ja": "パッチムㄱ + ㄴ → 鼻音化 [ㅇ+ㄴ] → [멍는다]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l05_002",
+    "type": "multiple_choice",
+    "question_ko": "'불판 달궈야 해요'는 어떤 뜻이에요?",
+    "question_ja": "「불판 달궈야 해요」はどういう意味ですか？",
+    "choices": ["鉄板を熱くしないと", "鉄板を洗わないと", "鉄板を変えないと", "鉄板を持ってこないと"],
+    "correct": 0,
+    "explanation_ko": "'불판'은 고기를 굽는 철판이고, '달구다'는 열을 가해 뜨겁게 하는 것입니다.",
+    "explanation_ja": "「불판」は肉を焼く鉄板で、「달구다」は熱を加えて熱くすることです。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l05_001",
+    "type": "dialogue_order",
+    "question_ko": "식당 대화를 올바른 순서로 배열하세요!",
+    "question_ja": "食堂の会話を正しい順番に並べてください！",
+    "lines": [
+      { "speaker": "yuko", "text_ko": "여기 삼겹살 맛집이래!", "text_ja": "ここサムギョプサルの名店だって！" },
+      { "speaker": "rui", "text_ko": "삼겹살 3인분이랑 된장찌개 하나 주세요.", "text_ja": "サムギョプサル3人前とテンジャンチゲ1つください。" },
+      { "speaker": "rui", "text_ko": "냉면도 추가해 주세요.", "text_ja": "冷麺も追加してください。" },
+      { "speaker": "ami", "text_ko": "계산해 주세요. 카드 돼요?", "text_ja": "お会計お願いします。カードは使えますか？" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

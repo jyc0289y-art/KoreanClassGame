@@ -1,0 +1,13 @@
+{
+  "scene_title_ko": "택시로 하이커 그라운드",
+  "scene_title_ja": "タクシーでハイカーグラウンドへ",
+  "lines": [
+    { "speaker": "ami", "emotion": "excited", "text_ko": "택시다! 기사님, 하이커 그라운드로 가주세요!", "text_ja": "タクシーだ！運転手さん、ハイカーグラウンドへ行ってください！", "pronunciation": "[택씨다! 기사님, 하이커 그라운드로 가주세요!]" },
+    { "speaker": "yuseok", "emotion": "friendly", "text_ko": "네, 알겠습니다. 거기까지 20분쯤 걸려요.", "text_ja": "はい、わかりました。そこまで20分くらいかかります。", "pronunciation": "[네, 알게씀니다. 거기까지 이심분쯤 걸려요]" },
+    { "speaker": "yuko", "emotion": "curious", "text_ko": "혹시 신용카드도 돼요?", "text_ja": "もしかしてクレジットカードも使えますか？", "pronunciation": "[혹씨 시뇽카드도 돼요?]" },
+    { "speaker": "yuseok", "emotion": "friendly", "text_ko": "네, 카드도 되고 티머니도 돼요.", "text_ja": "はい、カードもT-moneyも使えますよ。", "pronunciation": "[네, 카드도 되고 티머니도 돼요]" },
+    { "speaker": "yuseok", "emotion": "calm", "text_ko": "다 왔습니다. 9,800원이에요.", "text_ja": "着きました。9,800ウォンです。", "pronunciation": "[다 와씀니다. 구천팔배궈니에요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "여기요. 영수증 주세요.", "text_ja": "はい。レシートください。", "pronunciation": "[여기요. 영수증 주세요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "감사합니다! 여기가 하이커 그라운드구나!", "text_ja": "ありがとうございます！ここがハイカーグラウンドなんだ！", "pronunciation": "[감사함니다! 여기가 하이커 그라운드구나!]" }
+  ]
+}

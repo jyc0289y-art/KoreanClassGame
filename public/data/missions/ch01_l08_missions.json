@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l08_001",
+    "type": "grammar_point",
+    "grammar_ko": "~고 있어요",
+    "grammar_ja": "〜しています（進行形）",
+    "explanation_ko": "지금 하고 있는 동작을 표현할 때 사용합니다. 동사 어간 + '~고 있어요'로 진행형을 만듭니다.",
+    "explanation_ja": "今している動作を表現するときに使います。動詞の語幹 + 「~고 있어요」で進行形を作ります。",
+    "examples": [
+      { "ko": "지금 공연을 보고 있어요.", "pronunciation": "[지금 공여늘 보고 이써요]", "ja": "今公演を見ています。" },
+      { "ko": "사진을 찍고 있어요.", "pronunciation": "[사지늘 찍꼬 이써요]", "ja": "写真を撮っています。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "지금 공연을 보___있어요.",
+      "sentence_ja": "今公演を見___います。",
+      "answer": "고",
+      "choices": ["고", "면", "서", "며"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l08_001",
+    "type": "multiple_choice",
+    "question_ko": "'버스킹'이란 무엇이에요?",
+    "question_ja": "「버스킹」とは何ですか？",
+    "choices": ["路上ライブ", "バスツアー", "バス停", "ダンスバトル"],
+    "correct": 0,
+    "explanation_ko": "'버스킹'은 길거리에서 하는 공연, 즉 스트리트 퍼포먼스입니다.",
+    "explanation_ja": "「버스킹」は路上で行う公演、つまりストリートパフォーマンスです。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l08_001",
+    "type": "fill_blank",
+    "question_ko": "지금 공연을 보___ 있어요.",
+    "question_ja": "今公演を見___います。",
+    "answer": "고",
+    "choices": ["고", "면", "서", "어"],
+    "hint_ko": "진행형을 만드는 연결어미입니다.",
+    "hint_ja": "進行形を作る接続語尾です。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l08_001",
+    "type": "word_match",
+    "question_ko": "홍대·성수동 단어를 맞춰 보세요!",
+    "question_ja": "ホンデ・ソンスドンの単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "버스킹", "japanese": "バスキング" },
+      { "korean": "벽화", "japanese": "壁画" },
+      { "korean": "핫플레이스", "japanese": "ホットプレイス" },
+      { "korean": "분위기", "japanese": "雰囲気" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l08_001",
+    "type": "pronunciation_check",
+    "rule": "경음화", "rule_ja": "濃音化",
+    "word": "핫플레이스",
+    "question_ko": "'핫플레이스'의 실제 발음은?",
+    "question_ja": "「핫플레이스」の実際の発音は？",
+    "choices": ["[핟플레이스]", "[핫플레이스]", "[하플레이스]", "[핟프레이스]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㅅ이 [ㄷ]으로 발음되고, 다음 ㅍ 앞에서 → [핟플레이스]",
+    "explanation_ja": "パッチムㅅが[ㄷ]と発音され、次のㅍの前で → [핟플레이스]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l08_002",
+    "type": "multiple_choice",
+    "question_ko": "홍대의 특징으로 맞는 것은?",
+    "question_ja": "ホンデの特徴として正しいのは？",
+    "choices": ["젊은이들의 예술·음악 거리", "전통 한옥 마을", "고급 백화점 거리", "역사 박물관 지역"],
+    "correct": 0,
+    "explanation_ko": "홍대(홍익대학교 앞)는 젊은이들의 예술, 음악, 패션의 거리로 유명합니다.",
+    "explanation_ja": "ホンデ（弘益大学前）は若者の芸術、音楽、ファッションの街として有名です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l08_001",
+    "type": "dialogue_order",
+    "question_ko": "선물 구매 대화를 순서대로 배열하세요!",
+    "question_ja": "プレゼント購入の会話を順番に並べてください！",
+    "lines": [
+      { "speaker": "ami", "text_ko": "일본 친구들한테 선물 사야 해!", "text_ja": "日本の友達にプレゼント買わなきゃ！" },
+      { "speaker": "yuko", "text_ko": "이 팬샵에 예쁜 거 많다!", "text_ja": "このファンショップにかわいいのがたくさんある！" },
+      { "speaker": "rui", "text_ko": "이거 얼마예요?", "text_ja": "これいくらですか？" },
+      { "speaker": "hyunjeong", "text_ko": "15,000원이에요. 선물 포장해 드릴까요?", "text_ja": "15,000ウォンです。プレゼント包装しましょうか？" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

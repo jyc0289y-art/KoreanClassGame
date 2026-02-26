@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l04_001",
+    "type": "grammar_point",
+    "grammar_ko": "숫자와 가격 읽기 (한자어 수사)",
+    "grammar_ja": "数字と価格の読み方（漢字語数詞）",
+    "explanation_ko": "한국어에서 가격을 읽을 때는 한자어 수사를 사용합니다. 만(10,000), 천(1,000), 백(100) 단위로 읽습니다.",
+    "explanation_ja": "韓国語で価格を読むときは漢字語数詞を使います。만(10,000)、천(1,000)、백(100)の単位で読みます。",
+    "examples": [
+      { "ko": "38,000원 = 삼만 팔천 원", "pronunciation": "[삼만 팔천 원]", "ja": "38,000ウォン = 三万八千ウォン" },
+      { "ko": "15,500원 = 만 오천오백 원", "pronunciation": "[만 오천오백 원]", "ja": "15,500ウォン = 一万五千五百ウォン" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "38,000원 = ___ 팔천 원",
+      "sentence_ja": "38,000ウォン = ___八千ウォン",
+      "answer": "삼만",
+      "choices": ["삼만", "삼천", "팔만", "삼백"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l04_001",
+    "type": "multiple_choice",
+    "question_ko": "38,000원을 한국어로 어떻게 읽어요?",
+    "question_ja": "38,000ウォンは韓国語でどう読みますか？",
+    "choices": ["삼만 팔천 원", "삼십팔만 원", "삼천팔백 원", "팔만 삼천 원"],
+    "correct": 0,
+    "explanation_ko": "38,000 = 3만(삼만) + 8천(팔천) → 삼만 팔천 원",
+    "explanation_ja": "38,000 = 3万(삼만) + 8千(팔천) → 삼만 팔천 원",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l04_001",
+    "type": "fill_blank",
+    "question_ko": "이거___저거 주세요.",
+    "question_ja": "これ___あれください。",
+    "answer": "랑",
+    "choices": ["랑", "와", "하고", "이랑"],
+    "hint_ko": "'이거'는 받침이 없으므로 '랑'을 씁니다.",
+    "hint_ja": "「이거」はパッチムがないので「랑」を使います。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l04_001",
+    "type": "word_match",
+    "question_ko": "K-뷰티 단어를 맞춰 보세요!",
+    "question_ja": "K-ビューティー単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "수분크림", "japanese": "保湿クリーム" },
+      { "korean": "세럼", "japanese": "セラム" },
+      { "korean": "테스터", "japanese": "テスター" },
+      { "korean": "봉투", "japanese": "袋" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l04_001",
+    "type": "pronunciation_check",
+    "rule": "경음화", "rule_ja": "濃音化",
+    "word": "복합성",
+    "question_ko": "'복합성'의 실제 발음은?",
+    "question_ja": "「복합성」の実際の発音は？",
+    "choices": ["[보캅썽]", "[복합성]", "[보합성]", "[복캅성]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄱ 뒤에서 ㅎ이 합쳐져 [캅]이 되고, 받침 ㅂ 뒤에서 ㅅ이 경음화 → [보캅썽]",
+    "explanation_ja": "パッチムㄱの後でㅎが合わさり[캅]になり、パッチムㅂの後でㅅが濃音化 → [보캅썽]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l04_002",
+    "type": "multiple_choice",
+    "question_ko": "'좀 싸게 해줄 수 있어요?'는 어떤 상황에서 써요?",
+    "question_ja": "「좀 싸게 해줄 수 있어요？」はどんな場面で使いますか？",
+    "choices": ["흥정할 때 (値段交渉)", "음식 주문할 때", "길을 물을 때", "인사할 때"],
+    "correct": 0,
+    "explanation_ko": "'좀 싸게 해줄 수 있어요?'는 가격을 깎아달라고 부탁하는 흥정 표현입니다.",
+    "explanation_ja": "「좀 싸게 해줄 수 있어요？」は値段を下げてもらうようにお願いする値段交渉の表現です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l04_001",
+    "type": "dialogue_order",
+    "question_ko": "올리브영 쇼핑 대화를 올바른 순서로 배열하세요!",
+    "question_ja": "オリーブヤングの買い物の会話を正しい順番に並べてください！",
+    "lines": [
+      { "speaker": "ami", "text_ko": "저기요, 수분크림 추천해 주세요.", "text_ja": "すみません、保湿クリームのおすすめを教えてください。" },
+      { "speaker": "hyunjeong", "text_ko": "피부 타입이 어떻게 되세요?", "text_ja": "お肌のタイプはどうですか？" },
+      { "speaker": "ami", "text_ko": "건성이에요. 테스터 써봐도 돼요?", "text_ja": "乾燥肌です。テスターを使ってみてもいいですか？" },
+      { "speaker": "hyunjeong", "text_ko": "네, 물론이죠! 이거 인기 많아요.", "text_ja": "はい、もちろんです！これは人気がありますよ。" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

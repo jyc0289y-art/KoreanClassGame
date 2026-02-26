@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l10_001",
+    "type": "grammar_point",
+    "grammar_ko": "~아/어 버렸어요",
+    "grammar_ja": "〜してしまいました（完了・遺憾）",
+    "explanation_ko": "예상치 못한 일이 이미 끝났거나, 아쉬운 마음이 있을 때 사용합니다. 동사 어간 + '~아/어 버리다'로 완료·유감을 표현합니다.",
+    "explanation_ja": "予想外のことがすでに終わったり、残念な気持ちがあるときに使います。動詞の語幹 + 「~아/어 버리다」で完了・遺憾を表現します。",
+    "examples": [
+      { "ko": "지갑을 잃어버렸어요.", "pronunciation": "[지가블 이러버려써요]", "ja": "財布をなくしてしまいました。" },
+      { "ko": "버스가 가 버렸어요.", "pronunciation": "[버스가 가 버려써요]", "ja": "バスが行ってしまいました。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "지갑을 잃어___어요.",
+      "sentence_ja": "財布をなくしてしまいました。",
+      "answer": "버렸",
+      "choices": ["버렸", "봤", "줬", "했"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l10_001",
+    "type": "multiple_choice",
+    "question_ko": "'체크아웃'할 때 먼저 하는 것은?",
+    "question_ja": "チェックアウトするとき最初にすることは？",
+    "choices": ["프런트에 키 반납", "짐을 택시에 싣기", "방 청소하기", "식사하기"],
+    "correct": 0,
+    "explanation_ko": "호텔 체크아웃 시 먼저 프런트 데스크에 키를 반납합니다.",
+    "explanation_ja": "ホテルのチェックアウト時、まずフロントデスクにキーを返却します。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l10_001",
+    "type": "fill_blank",
+    "question_ko": "지갑을 잃어___어요.",
+    "question_ja": "財布をなくして___ました。",
+    "answer": "버렸",
+    "choices": ["버렸", "봤", "줬", "했"],
+    "hint_ko": "예상치 못한 일이 완료된 것을 나타내는 보조동사입니다.",
+    "hint_ja": "予想外のことが完了したことを表す補助動詞です。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l10_001",
+    "type": "word_match",
+    "question_ko": "긴급 상황 단어를 맞춰 보세요!",
+    "question_ja": "緊急状況の単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "분실물 센터", "japanese": "遺失物センター" },
+      { "korean": "경찰서", "japanese": "警察署" },
+      { "korean": "어떡해", "japanese": "どうしよう" },
+      { "korean": "짐", "japanese": "荷物" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l10_001",
+    "type": "pronunciation_check",
+    "rule": "연음화", "rule_ja": "連音化",
+    "word": "잃어버리다",
+    "question_ko": "'잃어버리다'의 실제 발음은?",
+    "question_ja": "「잃어버리다」の実際の発音は？",
+    "choices": ["[이러버리다]", "[잃어버리다]", "[일어버리다]", "[이러부리다]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㅎ 탈락 + 연음화 → [이러버리다]",
+    "explanation_ja": "パッチムㅎ脱落 + 連音化 → [이러버리다]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l10_002",
+    "type": "multiple_choice",
+    "question_ko": "긴급 상황에서 '도와주세요!'의 다른 표현은?",
+    "question_ja": "緊急時の「도와주세요！」の別の表現は？",
+    "choices": ["살려주세요!", "감사합니다!", "안녕하세요!", "잘 먹겠습니다!"],
+    "correct": 0,
+    "explanation_ko": "'살려주세요!'는 매우 위급한 상황에서 도움을 요청하는 표현입니다.",
+    "explanation_ja": "「살려주세요！」は非常に緊急な状況で助けを求める表現です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l10_001",
+    "type": "dialogue_order",
+    "question_ko": "분실물 신고 대화를 순서대로 배열하세요!",
+    "question_ja": "遺失物届けの会話を順番に並べてください！",
+    "lines": [
+      { "speaker": "ami", "text_ko": "어떡해! 지갑을 잃어버렸어!", "text_ja": "どうしよう！財布をなくしちゃった！" },
+      { "speaker": "rui", "text_ko": "침착해. 분실물 센터에 가보자.", "text_ja": "落ち着いて。遺失物センターに行ってみよう。" },
+      { "speaker": "hyunjeong", "text_ko": "혹시 이 지갑이에요? 방금 누가 가져왔어요.", "text_ja": "もしかしてこの財布ですか？さっき誰かが届けてくれました。" },
+      { "speaker": "ami", "text_ko": "맞아요! 감사합니다! 한국 사람들 정말 친절해요!", "text_ja": "そうです！ありがとうございます！韓国の人たちは本当に親切ですね！" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

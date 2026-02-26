@@ -1,0 +1,14 @@
+{
+  "scene_title_ko": "삼겹살 맛집",
+  "scene_title_ja": "サムギョプサルの名店",
+  "lines": [
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "여기가 유명한 삼겹살 맛집이래!", "text_ja": "ここが有名なサムギョプサルの名店だって！", "pronunciation": "[여기가 유명한 삼겹쌀 맏지비래!]" },
+    { "speaker": "cheoiseok", "emotion": "friendly", "text_ko": "어서 오세요! 세 분이세요? 이쪽으로 앉으세요.", "text_ja": "いらっしゃいませ！3名様ですか？こちらにお座りください。", "pronunciation": "[어서 오세요! 세 부니세요? 이쪼그로 안즈세요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "삼겹살 3인분이랑 된장찌개 하나 주세요.", "text_ja": "サムギョプサル3人前とテンジャンチゲ1つください。", "pronunciation": "[삼겹쌀 사민부니랑 된장찌개 하나 주세요]" },
+    { "speaker": "cheoiseok", "emotion": "friendly", "text_ko": "네! 불판 먼저 달궈야 해요. 잠시만요.", "text_ja": "はい！鉄板を先に熱くしますね。少々お待ちください。", "pronunciation": "[네! 불판 먼저 달궈야 해요. 잠시만요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "와, 직접 구워 먹는 거 진짜 맛있다!", "text_ja": "わぁ、自分で焼いて食べるの本当においしい！", "pronunciation": "[와, 직쩝 구워 멍는 거 진짜 마싣따!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "냉면도 추가해 주세요!", "text_ja": "冷麺も追加してください！", "pronunciation": "[냉면도 추가해 주세요!]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "여기요, 계산해 주세요. 카드 돼요?", "text_ja": "すみません、お会計お願いします。カードは使えますか？", "pronunciation": "[여기요, 계산해 주세요. 카드 돼요?]" },
+    { "speaker": "cheoiseok", "emotion": "friendly", "text_ko": "네, 카드도 되고 현금도 돼요!", "text_ja": "はい、カードも現金も使えますよ！", "pronunciation": "[네, 카드도 되고 현금도 돼요!]" }
+  ]
+}

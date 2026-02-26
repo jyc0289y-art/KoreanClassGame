@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch01_l02_001",
+    "type": "grammar_point",
+    "grammar_ko": "~(으)로 가주세요",
+    "grammar_ja": "〜へ行ってください",
+    "explanation_ko": "택시나 버스에서 목적지를 말할 때 사용합니다. 받침이 없거나 ㄹ 받침이면 '~로', 그 외 받침이 있으면 '~으로'를 씁니다.",
+    "explanation_ja": "タクシーやバスで目的地を伝えるときに使います。パッチムがないか、ㄹパッチムなら「~로」、それ以外のパッチムがあれば「~으로」を使います。",
+    "examples": [
+      { "ko": "홍대로 가주세요.", "pronunciation": "[홍대로 가주세요]", "ja": "ホンデへ行ってください。" },
+      { "ko": "명동으로 가주세요.", "pronunciation": "[명동으로 가주세요]", "ja": "ミョンドンへ行ってください。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "홍대___ 가주세요.",
+      "sentence_ja": "ホンデへ行ってください。",
+      "answer": "로",
+      "choices": ["로", "으로", "에", "를"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch01_l02_001",
+    "type": "multiple_choice",
+    "question_ko": "'기사님'은 누구를 부르는 말이에요?",
+    "question_ja": "「기사님」は誰を呼ぶ言葉ですか？",
+    "choices": ["택시/버스 운전기사", "경찰관", "역무원", "안내원"],
+    "correct": 0,
+    "explanation_ko": "'기사님'은 택시나 버스 운전기사를 정중하게 부르는 호칭입니다.",
+    "explanation_ja": "「기사님」はタクシーやバスの運転手を丁寧に呼ぶ呼称です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch01_l02_001",
+    "type": "fill_blank",
+    "question_ko": "홍대___ 가주세요.",
+    "question_ja": "ホンデ___行ってください。",
+    "answer": "로",
+    "choices": ["로", "를", "에", "이"],
+    "hint_ko": "받침이 없는 명사 뒤에는 '로'를 씁니다.",
+    "hint_ja": "パッチムがない名詞の後には「로」を使います。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch01_l02_001",
+    "type": "word_match",
+    "question_ko": "교통 관련 단어를 맞춰 보세요!",
+    "question_ja": "交通関連の単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "정거장", "japanese": "停留所" },
+      { "korean": "내리다", "japanese": "降りる" },
+      { "korean": "환승", "japanese": "乗り換え" },
+      { "korean": "영수증", "japanese": "レシート" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch01_l02_001",
+    "type": "pronunciation_check",
+    "rule": "연음화", "rule_ja": "連音化",
+    "word": "갈아타다",
+    "question_ko": "'갈아타다'의 실제 발음은?",
+    "question_ja": "「갈아타다」の実際の発音は？",
+    "choices": ["[가라타다]", "[갈아타다]", "[갈라타다]", "[가아타다]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄹ이 다음 음절의 초성으로 넘어가서 연음화 → [가라타다]",
+    "explanation_ja": "パッチムㄹが次の音節の初声に移り連音化 → [가라타다]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_mc_ch01_l02_002",
+    "type": "multiple_choice",
+    "question_ko": "서울 버스에서 30분 안에 환승하면 어떻게 돼요?",
+    "question_ja": "ソウルのバスで30分以内に乗り換えるとどうなりますか？",
+    "choices": ["무료 환승", "반값 할인", "추가 요금", "환불 가능"],
+    "correct": 0,
+    "explanation_ko": "서울 버스는 30분 이내에 환승하면 무료입니다.",
+    "explanation_ja": "ソウルのバスは30分以内に乗り換えると無料です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_do_ch01_l02_001",
+    "type": "dialogue_order",
+    "question_ko": "택시 대화를 올바른 순서로 배열하세요!",
+    "question_ja": "タクシーの会話を正しい順番に並べてください！",
+    "lines": [
+      { "speaker": "ami", "text_ko": "기사님, 하이커 그라운드로 가주세요.", "text_ja": "運転手さん、ハイカーグラウンドへ行ってください。" },
+      { "speaker": "yuseok", "text_ko": "네, 알겠습니다. 20분쯤 걸려요.", "text_ja": "はい、わかりました。20分くらいかかります。" },
+      { "speaker": "yuseok", "text_ko": "다 왔습니다. 9,800원이에요.", "text_ja": "着きました。9,800ウォンです。" },
+      { "speaker": "rui", "text_ko": "영수증 주세요.", "text_ja": "レシートください。" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

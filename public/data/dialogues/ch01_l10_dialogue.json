@@ -1,0 +1,14 @@
+{
+  "scene_title_ko": "숙소·공항 귀국",
+  "scene_title_ja": "宿泊先・空港帰国",
+  "lines": [
+    { "speaker": "rui", "emotion": "calm", "text_ko": "오늘 체크아웃이야. 짐 다 챙겼어?", "text_ja": "今日チェックアウトだよ。荷物は全部まとめた？", "pronunciation": "[오늘 체크아우시야. 짐 다 챙겨써?]" },
+    { "speaker": "ami", "emotion": "nervous", "text_ko": "어떡해! 지갑을 잃어버렸어!", "text_ja": "どうしよう！財布をなくしちゃった！", "pronunciation": "[어떠캐! 지가블 이러버려써!]" },
+    { "speaker": "yuko", "emotion": "nervous", "text_ko": "뭐?! 어디서 잃어버린 거야?", "text_ja": "え？！どこでなくしたの？", "pronunciation": "[뭐?! 어디서 이러버린 거야?]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "침착해. 분실물 센터에 가보자.", "text_ja": "落ち着いて。遺失物センターに行ってみよう。", "pronunciation": "[침차캐. 분실물 센터에 가보자]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "혹시 이 지갑이에요? 방금 누가 가져왔어요.", "text_ja": "もしかしてこの財布ですか？さっき誰かが届けてくれました。", "pronunciation": "[혹씨 이 지가비에요? 방금 누가 가져왔써요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "맞아요! 감사합니다! 한국 사람들 정말 친절해요!", "text_ja": "そうです！ありがとうございます！韓国の人たちは本当に親切ですね！", "pronunciation": "[마자요! 감사함니다! 한국 사람들 정말 친절해요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "이제 공항으로 가자. 정말 즐거운 여행이었어!", "text_ja": "さあ空港に行こう。本当に楽しい旅行だった！", "pronunciation": "[이제 공항으로 가자. 정말 즐거운 여행이어써!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "안녕, 서울! 꼭 다시 올게!", "text_ja": "バイバイ、ソウル！必ずまた来るね！", "pronunciation": "[안녕, 서울! 꼭 다시 올게!]" }
+  ]
+}
