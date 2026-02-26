@@ -1,0 +1,393 @@
+import Phaser from 'phaser';
+import { gameState } from '../systems/GameState.js';
+import { dataLoader } from '../systems/DataLoader.js';
+import { CHARACTERS, PLAYER_SPEED } from '../constants.js';
+
+export default class BaseWorldScene extends Phaser.Scene {
+  constructor(key) {
+    super({ key });
+    this.worldWidth = 1600;
+    this.worldHeight = 1200;
+    this.npcs = [];
+    this.interactableNPC = null;
+  }
+
+  createWorld(config) {
+    this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight);
+    this.createTilemap(config.tiles || 'grass');
+
+    const charName = gameState.currentCharacter;
+    this.player = this.physics.add.sprite(config.startX || 400, config.startY || 600, charName);
+    this.player.setCollideWorldBounds(true);
+    this.player.setDepth(10);
+
+    this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
+    this.cameras.main.setBounds(0, 0, this.worldWidth, this.worldHeight);
+    this.cameras.main.setZoom(1.5);
+
+    if (config.npcs) this.createNPCs(config.npcs);
+    if (config.buildings) this.createBuildings(config.buildings);
+
+    this.createUI();
+    this.setupControls();
+
+    this.interactKey = this.input.keyboard.addKey('SPACE');
+    this.interactButton = null;
+    this.createInteractButton();
+  }
+
+  createTilemap(type) {
+    const tileSize = 32;
+    const cols = Math.ceil(this.worldWidth / tileSize);
+    const rows = Math.ceil(this.worldHeight / tileSize);
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        let tile = 'tile_grass';
+        if ((y === Math.floor(rows / 2) || y === Math.floor(rows / 2) + 1) ||
+            (x === Math.floor(cols / 4) && y > rows / 3) ||
+            (x === Math.floor(cols * 3 / 4) && y > rows / 3)) {
+          tile = 'tile_road';
+        }
+        if (type === 'airport' && y < 3) tile = 'tile_water';
+        this.add.image(x * tileSize + 16, y * tileSize + 16, tile).setDepth(0);
+      }
+    }
+  }
+
+  createNPCs(npcList) {
+    npcList.forEach(npcConfig => {
+      const npc = this.physics.add.sprite(npcConfig.x, npcConfig.y, 'npc_' + (npcConfig.texture || 'hyunjeong'));
+      npc.setImmovable(true);
+      npc.setDepth(5);
+      npc.npcData = npcConfig;
+
+      const zone = this.add.zone(npcConfig.x, npcConfig.y, 60, 60);
+      this.physics.add.existing(zone, true);
+
+      this.add.text(npcConfig.x, npcConfig.y - 24, npcConfig.name_ko, {
+        fontSize: '10px', color: '#ffffff', backgroundColor: '#00000088', padding: { x: 4, y: 2 }
+      }).setOrigin(0.5).setDepth(15);
+
+      if (npcConfig.hasMission) {
+        const icon = this.add.image(npcConfig.x, npcConfig.y - 36, 'interact_icon').setDepth(15);
+        this.tweens.add({ targets: icon, y: npcConfig.y - 42, duration: 600, yoyo: true, repeat: -1 });
+        npc.missionIcon = icon;
+      }
+
+      this.physics.add.overlap(this.player, zone, () => {
+        this.interactableNPC = npc;
+      });
+
+      this.tweens.add({
+        targets: npc, y: npcConfig.y - 3, duration: 1500 + Math.random() * 500,
+        yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+      });
+
+      this.npcs.push(npc);
+    });
+  }
+
+  createBuildings(buildings) {
+    buildings.forEach(b => {
+      this.add.image(b.x, b.y, b.texture || 'building_house').setDepth(2);
+      this.add.text(b.x, b.y + 30, b.name_ko, {
+        fontSize: '10px', color: '#ffffff', backgroundColor: '#333333aa', padding: { x: 3, y: 1 }
+      }).setOrigin(0.5).setDepth(3);
+
+      const collider = this.physics.add.staticImage(b.x, b.y, b.texture || 'building_house');
+      this.physics.add.collider(this.player, collider);
+    });
+  }
+
+  createUI() {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    this.add.rectangle(w / 2, 0, w, 50, 0x000000, 0.7).setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
+
+    const charInfo = CHARACTERS[gameState.currentCharacter];
+    this.add.text(10, 5, `${charInfo.name_ko} Lv.${gameState.current.level}`, {
+      fontSize: '12px', color: charInfo.color, fontStyle: 'bold'
+    }).setScrollFactor(0).setDepth(101);
+
+    this.add.rectangle(10, 25, 120, 8, 0x333355).setOrigin(0, 0.5).setScrollFactor(0).setDepth(101);
+    this.expBar = this.add.rectangle(10, 25, 120 * gameState.expProgress, 8, 0x00ff88).setOrigin(0, 0.5).setScrollFactor(0).setDepth(101);
+    this.expText = this.add.text(10, 35, `EXP ${gameState.current.exp}/${gameState.expToNextLevel}`, {
+      fontSize: '9px', color: '#88cc88'
+    }).setScrollFactor(0).setDepth(101);
+
+    this.coinText = this.add.text(w - 10, 8, `💰 ${gameState.current.coins}`, {
+      fontSize: '13px', color: '#ffd700'
+    }).setOrigin(1, 0).setScrollFactor(0).setDepth(101);
+
+    const chapters = dataLoader.cache.chapters || [];
+    const chapter = chapters.find(c => c.id === gameState.currentChapter);
+    if (chapter) {
+      this.add.text(w - 10, 28, `${chapter.name} | ${chapter.cefr}`, {
+        fontSize: '9px', color: '#8888aa'
+      }).setOrigin(1, 0).setScrollFactor(0).setDepth(101);
+    }
+
+    const menuBtn = this.add.text(w / 2, 8, '☰ 메뉴', {
+      fontSize: '12px', color: '#aaaacc', backgroundColor: '#ffffff11', padding: { x: 8, y: 2 }
+    }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(101).setInteractive({ useHandCursor: true });
+    menuBtn.on('pointerdown', () => this.showMenu());
+  }
+
+  createInteractButton() {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    this.interactBtn = this.add.container(w - 50, h - 120);
+    const bg = this.add.circle(0, 0, 24, 0xff69b4, 0.8);
+    const text = this.add.text(0, 0, '💬', { fontSize: '20px' }).setOrigin(0.5);
+    this.interactBtn.add([bg, text]);
+    this.interactBtn.setScrollFactor(0).setDepth(100).setAlpha(0).setSize(48, 48);
+    bg.setInteractive({ useHandCursor: true });
+    bg.on('pointerdown', () => this.handleInteraction());
+  }
+
+  setupControls() {
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.wasd = {
+      up: this.input.keyboard.addKey('W'),
+      down: this.input.keyboard.addKey('S'),
+      left: this.input.keyboard.addKey('A'),
+      right: this.input.keyboard.addKey('D')
+    };
+
+    this.joystickActive = false;
+    this.joystickVelocity = { x: 0, y: 0 };
+    this.createJoystick();
+  }
+
+  createJoystick() {
+    const h = this.cameras.main.height;
+    const jx = 70, jy = h - 70;
+
+    this.joystickBase = this.add.image(jx, jy, 'joystick_base').setScrollFactor(0).setDepth(100).setAlpha(0.5).setScale(1.5);
+    this.joystickThumb = this.add.image(jx, jy, 'joystick_thumb').setScrollFactor(0).setDepth(101).setAlpha(0.7);
+
+    const joystickZone = this.add.rectangle(jx, jy, 100, 100, 0xffffff, 0).setScrollFactor(0).setDepth(102).setInteractive({ draggable: true });
+
+    joystickZone.on('dragstart', () => { this.joystickActive = true; });
+    joystickZone.on('drag', (pointer, dragX, dragY) => {
+      const dx = dragX - jx;
+      const dy = dragY - jy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const maxDist = 35;
+
+      if (dist > maxDist) {
+        this.joystickThumb.x = jx + (dx / dist) * maxDist;
+        this.joystickThumb.y = jy + (dy / dist) * maxDist;
+        this.joystickVelocity = { x: dx / dist, y: dy / dist };
+      } else {
+        this.joystickThumb.x = dragX;
+        this.joystickThumb.y = dragY;
+        this.joystickVelocity = { x: dx / maxDist, y: dy / maxDist };
+      }
+    });
+    joystickZone.on('dragend', () => {
+      this.joystickActive = false;
+      this.joystickThumb.x = jx;
+      this.joystickThumb.y = jy;
+      this.joystickVelocity = { x: 0, y: 0 };
+    });
+  }
+
+  createPortal(x, y, targetScene, requiredLevel, labelText) {
+    const portal = this.add.container(x, y);
+    const glow = this.add.circle(0, 0, 25, 0x00ff88, 0.3);
+    const ring = this.add.circle(0, 0, 22, 0x00ff88, 0).setStrokeStyle(2, 0x00ff88);
+    const label = this.add.text(0, -40, labelText, {
+      fontSize: '10px', color: '#00ff88', align: 'center'
+    }).setOrigin(0.5);
+    portal.add([glow, ring, label]);
+    portal.setDepth(5);
+
+    this.tweens.add({
+      targets: glow, alpha: { from: 0.2, to: 0.6 }, scaleX: { from: 0.9, to: 1.1 }, scaleY: { from: 0.9, to: 1.1 },
+      duration: 1200, yoyo: true, repeat: -1
+    });
+
+    const locked = gameState.current.level < requiredLevel;
+    if (locked) {
+      label.setText(`🔒 Lv.${requiredLevel} 필요\nLv.${requiredLevel} 必要`);
+      glow.setFillStyle(0xff4444, 0.2);
+      ring.setStrokeStyle(2, 0xff4444);
+      label.setColor('#ff4444');
+    }
+
+    const zone = this.add.zone(x, y, 50, 50).setInteractive();
+    zone.on('pointerdown', () => {
+      if (!locked) {
+        this.scene.start(targetScene);
+      } else {
+        const w = this.cameras.main.width;
+        const h = this.cameras.main.height;
+        const msg = this.add.text(w / 2, h / 2, `레벨 ${requiredLevel} 이상 필요!\nレベル${requiredLevel}以上必要！`, {
+          fontSize: '16px', color: '#ff4444', backgroundColor: '#000000cc', padding: { x: 20, y: 10 }
+        }).setOrigin(0.5).setScrollFactor(0).setDepth(500);
+        this.time.delayedCall(1500, () => msg.destroy());
+      }
+    });
+
+    this.portalData = this.portalData || [];
+    this.portalData.push({ x, y, targetScene, requiredLevel, locked });
+  }
+
+  update() {
+    if (!this.player || !this.player.body) return;
+
+    const speed = PLAYER_SPEED;
+    let vx = 0, vy = 0;
+
+    if (this.cursors.left.isDown || this.wasd.left.isDown) vx = -speed;
+    else if (this.cursors.right.isDown || this.wasd.right.isDown) vx = speed;
+    if (this.cursors.up.isDown || this.wasd.up.isDown) vy = -speed;
+    else if (this.cursors.down.isDown || this.wasd.down.isDown) vy = speed;
+
+    if (vx === 0 && vy === 0 && this.joystickActive) {
+      vx = this.joystickVelocity.x * speed;
+      vy = this.joystickVelocity.y * speed;
+    }
+
+    this.player.body.setVelocity(vx, vy);
+    if (vx !== 0 && vy !== 0) {
+      this.player.body.velocity.normalize().scale(speed);
+    }
+
+    if (this.interactableNPC) {
+      const dist = Phaser.Math.Distance.Between(
+        this.player.x, this.player.y,
+        this.interactableNPC.x, this.interactableNPC.y
+      );
+      if (dist < 50) {
+        this.interactBtn.setAlpha(1);
+        if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
+          this.handleInteraction();
+        }
+      } else {
+        this.interactBtn.setAlpha(0);
+        this.interactableNPC = null;
+      }
+    }
+  }
+
+  handleInteraction() {
+    if (!this.interactableNPC) return;
+    const npcData = this.interactableNPC.npcData;
+
+    if (npcData.hasMission) {
+      this.scene.pause();
+      const missions = dataLoader.getCachedMissions(gameState.currentChapter, gameState.currentLesson);
+      this.scene.launch('MissionScene', {
+        missions: missions,
+        returnScene: this.scene.key
+      });
+    } else if (npcData.hasDialogue) {
+      this.scene.pause();
+      const dialogue = dataLoader.getCachedDialogue(gameState.currentChapter, gameState.currentLesson);
+      this.scene.launch('DialogueScene', {
+        dialogue: dialogue,
+        returnScene: this.scene.key
+      });
+    } else {
+      this.showSimpleDialogue(npcData);
+    }
+  }
+
+  showSimpleDialogue(npcData) {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    const overlay = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.5).setScrollFactor(0).setDepth(200);
+    const box = this.add.rectangle(w / 2, h - 80, w - 20, 120, 0x1a1a3e, 0.95)
+      .setStrokeStyle(1, 0xff69b4, 0.5).setScrollFactor(0).setDepth(201);
+    const name = this.add.text(25, h - 130, npcData.name_ko, {
+      fontSize: '14px', color: '#ff69b4', fontStyle: 'bold'
+    }).setScrollFactor(0).setDepth(202);
+    const text = this.add.text(25, h - 108, npcData.greeting_ko || '안녕하세요!', {
+      fontSize: '13px', color: '#ffffff', wordWrap: { width: w - 50 }, lineSpacing: 4
+    }).setScrollFactor(0).setDepth(202);
+    const jaText = this.add.text(25, h - 68, npcData.greeting_ja || 'こんにちは！', {
+      fontSize: '11px', color: '#aaaacc', wordWrap: { width: w - 50 }
+    }).setScrollFactor(0).setDepth(202);
+    const closeHint = this.add.text(w - 25, h - 40, '탭하여 닫기 / タップで閉じる', {
+      fontSize: '10px', color: '#666688'
+    }).setOrigin(1, 0.5).setScrollFactor(0).setDepth(202);
+
+    const closeAll = () => { [overlay, box, name, text, jaText, closeHint].forEach(o => o.destroy()); };
+    overlay.setInteractive().on('pointerdown', closeAll);
+    box.setInteractive().on('pointerdown', closeAll);
+  }
+
+  showMenu() {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    const overlay = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.7).setScrollFactor(0).setDepth(300);
+    const panel = this.add.rectangle(w / 2, h / 2, 280, 370, 0x1a1a3e, 0.95)
+      .setStrokeStyle(1, 0xff69b4, 0.5).setScrollFactor(0).setDepth(301);
+    const title = this.add.text(w / 2, h / 2 - 140, '메뉴 / メニュー', {
+      fontSize: '18px', color: '#ff69b4', fontStyle: 'bold'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(302);
+
+    const menuItems = [
+      { text: '단어장 / 単語帳', action: () => { closeMenu(); this.scene.pause(); this.scene.launch('VocabularyScene', { returnScene: this.scene.key }); } },
+      { text: '미션 / ミッション', action: () => { closeMenu(); this.scene.pause(); const missions = dataLoader.getCachedMissions(gameState.currentChapter, gameState.currentLesson); this.scene.launch('MissionScene', { missions: missions, returnScene: this.scene.key }); } },
+      { text: '상점 / ショップ', action: () => { closeMenu(); this.scene.pause(); this.scene.launch('ShopScene', { returnScene: this.scene.key }); } },
+      { text: '챕터 선택 / チャプター', action: () => { closeMenu(); this.scene.start('ChapterSelectScene'); } },
+      { text: '타이틀로 / タイトルへ', action: () => { closeMenu(); this.scene.start('TitleScene'); } }
+    ];
+
+    const elements = [overlay, panel, title];
+    menuItems.forEach((item, i) => {
+      const btn = this.add.text(w / 2, h / 2 - 70 + i * 50, item.text, {
+        fontSize: '14px', color: '#ffffff', backgroundColor: '#ff69b422', padding: { x: 40, y: 10 }
+      }).setOrigin(0.5).setScrollFactor(0).setDepth(302).setInteractive({ useHandCursor: true });
+      btn.on('pointerover', () => btn.setStyle({ backgroundColor: '#ff69b444' }));
+      btn.on('pointerout', () => btn.setStyle({ backgroundColor: '#ff69b422' }));
+      btn.on('pointerdown', item.action);
+      elements.push(btn);
+    });
+
+    const closeBtn = this.add.text(w / 2, h / 2 + 130, '✕ 닫기', {
+      fontSize: '14px', color: '#888888'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(302).setInteractive({ useHandCursor: true });
+    closeBtn.on('pointerdown', () => closeMenu());
+    elements.push(closeBtn);
+
+    const closeMenu = () => elements.forEach(e => e.destroy());
+    overlay.setInteractive().on('pointerdown', closeMenu);
+  }
+
+  updateUI() {
+    if (this.expBar) this.expBar.width = 120 * gameState.expProgress;
+    if (this.expText) this.expText.setText(`EXP ${gameState.current.exp}/${gameState.expToNextLevel}`);
+    if (this.coinText) this.coinText.setText(`💰 ${gameState.current.coins}`);
+  }
+
+  // 통합된 showSceneTitle (IncheonScene/FukuokaScene 중복 제거)
+  showSceneTitle(titleKo, titleJa, subtitle, accentColor = '#ff69b4') {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    const bg = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.6).setScrollFactor(0).setDepth(500);
+    const tko = this.add.text(w / 2, h / 2 - 30, titleKo, {
+      fontSize: '28px', color: '#ffffff', fontStyle: 'bold'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(501);
+    const tja = this.add.text(w / 2, h / 2 + 10, titleJa, {
+      fontSize: '16px', color: accentColor
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(501);
+    const sub = this.add.text(w / 2, h / 2 + 35, subtitle, {
+      fontSize: '12px', color: '#aaaacc'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(501);
+
+    this.tweens.add({
+      targets: [bg, tko, tja, sub], alpha: 0, delay: 2000, duration: 800,
+      onComplete: () => { [bg, tko, tja, sub].forEach(o => o.destroy()); }
+    });
+  }
+}

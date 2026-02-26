@@ -1,0 +1,17 @@
+{
+  "chapter": "ch00",
+  "words": [
+    { "id": "ch00_w001", "korean": "ㄱ", "pronunciation": "[기역]", "pos": "자음", "japanese": "子音 g/k", "nuance": "한국어 자음 14개 중 첫 번째\n韓国語子音14個の最初", "example_ko": "가나다라", "example_ja": "カナダラ（韓国語の「あいうえお」）", "example_pronunciation": "[가나다라]", "category": "자모", "level": "Pre-A1" },
+    { "id": "ch00_w002", "korean": "ㅏ", "pronunciation": "[아]", "pos": "모음", "japanese": "母音 a", "nuance": "일본어 'ア'와 같은 소리\n日本語の「ア」と同じ音", "example_ko": "아이", "example_ja": "子供", "example_pronunciation": "[아이]", "category": "자모", "level": "Pre-A1" },
+    { "id": "ch00_w003", "korean": "받침", "pronunciation": "[받침]", "pos": "명사", "japanese": "パッチム（終声）", "nuance": "음절 끝에 오는 자음. 한국어 발음의 핵심\n音節の最後に来る子音。韓国語発音の核心", "example_ko": "받침이 있어요.", "example_ja": "パッチムがあります。", "example_pronunciation": "[받치미 이써요]", "category": "문법용어", "level": "Pre-A1" },
+    { "id": "ch00_w004", "korean": "안녕하세요", "pronunciation": "[안녕하세요]", "pos": "인사", "japanese": "こんにちは", "nuance": "가장 기본적인 한국어 인사\n最も基本的な韓国語の挨拶", "example_ko": "안녕하세요! 저는 유코예요.", "example_ja": "こんにちは！私はユコです。", "example_pronunciation": "[안녕하세요 저는 유코예요]", "category": "인사", "level": "Pre-A1" },
+    { "id": "ch00_w005", "korean": "감사합니다", "pronunciation": "[감사함니다]", "pos": "인사", "japanese": "ありがとうございます", "nuance": "격식 있는 감사 표현. 비음화: ㅂ+ㄴ→ㅁ+ㄴ\nフォーマルな感謝表現。鼻音化あり", "example_ko": "감사합니다! 잘 먹겠습니다.", "example_ja": "ありがとうございます！いただきます。", "example_pronunciation": "[감사함니다 잘 먹게씀니다]", "category": "인사", "level": "Pre-A1" },
+    { "id": "ch00_w006", "korean": "한국어", "pronunciation": "[한구거]", "pos": "명사", "japanese": "韓国語", "nuance": "연음화: ㄱ+어→[구거]\n連音化：パッチムが次の音節に移動", "example_ko": "한국어를 공부해요.", "example_ja": "韓国語を勉強します。", "example_pronunciation": "[한구거를 공부해요]", "category": "학습", "level": "Pre-A1" },
+    { "id": "ch00_w007", "korean": "일본어", "pronunciation": "[일보너]", "pos": "명사", "japanese": "日本語", "nuance": "연음화: ㄴ+어→[너]\n連音化：パッチムㄴが次の音節に移動", "example_ko": "일본어로 뭐예요?", "example_ja": "日本語で何ですか？", "example_pronunciation": "[일보너로 뭐예요?]", "category": "학습", "level": "Pre-A1" },
+    { "id": "ch00_w008", "korean": "먹어요", "pronunciation": "[머거요]", "pos": "동사", "japanese": "食べます", "nuance": "연음화 대표 단어. ㄱ받침→다음 음절 초성\n連音化の代表例", "example_ko": "밥을 먹어요.", "example_ja": "ご飯を食べます。", "example_pronunciation": "[바블 머거요]", "category": "동사", "level": "Pre-A1" },
+    { "id": "ch00_w009", "korean": "있어요", "pronunciation": "[이써요]", "pos": "동사", "japanese": "あります・います", "nuance": "ㅆ받침+어→경음화 [써]\n存在を表す基本表現", "example_ko": "서점이 있어요.", "example_ja": "本屋があります。", "example_pronunciation": "[서저미 이써요]", "category": "동사", "level": "Pre-A1" },
+    { "id": "ch00_w010", "korean": "학교", "pronunciation": "[학꾜]", "pos": "명사", "japanese": "学校", "nuance": "경음화: ㄱ받침+ㄱ→[ㄱ꾜]\n濃音化の代表例", "example_ko": "학교에 가요.", "example_ja": "学校に行きます。", "example_pronunciation": "[학꾜에 가요]", "category": "장소", "level": "Pre-A1" },
+    { "id": "ch00_w011", "korean": "좋아요", "pronunciation": "[조아요]", "pos": "형용사", "japanese": "良いです・好きです", "nuance": "ㅎ약화: ㅎ이 모음 사이에서 탈락\nㅎ弱化：母音間でㅎが脱落", "example_ko": "한국이 좋아요!", "example_ja": "韓国が好きです！", "example_pronunciation": "[한구기 조아요]", "category": "형용사", "level": "Pre-A1" },
+    { "id": "ch00_w012", "korean": "좋다", "pronunciation": "[조타]", "pos": "형용사", "japanese": "良い", "nuance": "격음화: ㅎ+ㄷ→[ㅌ]\n激音化の代表例", "example_ko": "날씨가 좋다!", "example_ja": "天気が良い！", "example_pronunciation": "[날씨가 조타]", "category": "형용사", "level": "Pre-A1" }
+  ]
+}

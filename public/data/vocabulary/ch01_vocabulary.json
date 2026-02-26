@@ -1,0 +1,17 @@
+{
+  "chapter": "ch01",
+  "words": [
+    { "id": "ch01_w001", "korean": "입국장", "pronunciation": "[입꾹짱]", "pos": "명사", "japanese": "入国場", "nuance": "공항에서 입국 심사를 하는 곳\n空港で入国審査を行う場所", "example_ko": "입국장이 어디에 있어요?", "example_ja": "入国場はどこにありますか？", "example_pronunciation": "[입꾹짱이 어디에 이써요?]", "category": "공항", "level": "A1" },
+    { "id": "ch01_w002", "korean": "환전", "pronunciation": "[환전]", "pos": "명사", "japanese": "両替", "nuance": "화폐를 다른 나라 돈으로 바꾸는 것\n通貨を他国のお金に換えること", "example_ko": "환전은 어디에서 해요?", "example_ja": "両替はどこでしますか？", "example_pronunciation": "[환저는 어디에서 해요?]", "category": "공항", "level": "A1" },
+    { "id": "ch01_w003", "korean": "여권", "pronunciation": "[여꿘]", "pos": "명사", "japanese": "パスポート", "nuance": "해외여행에 필요한 신분증\n海外旅行に必要な身分証", "example_ko": "여권 좀 보여 주세요.", "example_ja": "パスポートを見せてください。", "example_pronunciation": "[여꿘 좀 보여 주세요]", "category": "공항", "level": "A1" },
+    { "id": "ch01_w004", "korean": "비행기", "pronunciation": "[비행기]", "pos": "명사", "japanese": "飛行機", "nuance": "하늘을 나는 교통수단\n空を飛ぶ交通手段", "example_ko": "비행기가 몇 시에 출발해요?", "example_ja": "飛行機は何時に出発しますか？", "example_pronunciation": "[비행기가 멷 씨에 출발해요?]", "category": "공항", "level": "A1" },
+    { "id": "ch01_w005", "korean": "공항", "pronunciation": "[공항]", "pos": "명사", "japanese": "空港", "nuance": "비행기가 뜨고 내리는 곳\n飛行機が離着陸する場所", "example_ko": "공항까지 어떻게 가요?", "example_ja": "空港までどうやって行きますか？", "example_pronunciation": "[공항까지 어떠케 가요?]", "category": "공항", "level": "A1" },
+    { "id": "ch01_w006", "korean": "택시", "pronunciation": "[택씨]", "pos": "명사", "japanese": "タクシー", "nuance": "한국 택시는 색깔별로 종류가 다름\n韓国のタクシーは色別に種類が異なる", "example_ko": "택시 타고 갈까요?", "example_ja": "タクシーに乗って行きましょうか？", "example_pronunciation": "[택씨 타고 갈까요?]", "category": "교통", "level": "A1" },
+    { "id": "ch01_w007", "korean": "지하철", "pronunciation": "[지하철]", "pos": "명사", "japanese": "地下鉄", "nuance": "서울 지하철은 노선이 많음\nソウルの地下鉄は路線が多い", "example_ko": "지하철역이 어디에 있어요?", "example_ja": "地下鉄の駅はどこにありますか？", "example_pronunciation": "[지하철려기 어디에 이써요?]", "category": "교통", "level": "A1" },
+    { "id": "ch01_w008", "korean": "호텔", "pronunciation": "[호텔]", "pos": "명사", "japanese": "ホテル", "nuance": "숙박시설\n宿泊施設", "example_ko": "호텔이 어디에 있어요?", "example_ja": "ホテルはどこにありますか？", "example_pronunciation": "[호테리 어디에 이써요?]", "category": "숙소", "level": "A1" },
+    { "id": "ch01_w009", "korean": "감사합니다", "pronunciation": "[감사함니다]", "pos": "인사", "japanese": "ありがとうございます", "nuance": "격식 있는 감사 표현\nフォーマルな感謝表現", "example_ko": "도와주셔서 감사합니다.", "example_ja": "助けてくださってありがとうございます。", "example_pronunciation": "[도와주셔서 감사함니다]", "category": "인사", "level": "A1" },
+    { "id": "ch01_w010", "korean": "안녕하세요", "pronunciation": "[안녕하세요]", "pos": "인사", "japanese": "こんにちは", "nuance": "가장 기본적인 인사\n最も基本的な挨拶", "example_ko": "안녕하세요, 처음 뵙겠습니다.", "example_ja": "こんにちは、初めまして。", "example_pronunciation": "[안녕하세요 처음 뵙게씀니다]", "category": "인사", "level": "A1" },
+    { "id": "ch01_w011", "korean": "티머니", "pronunciation": "[티머니]", "pos": "명사", "japanese": "T-money", "nuance": "한국 교통카드 브랜드\n韓国の交通カードブランド", "example_ko": "티머니 카드 하나 주세요.", "example_ja": "T-moneyカード一枚ください。", "example_pronunciation": "[티머니 카드 하나 주세요]", "category": "교통", "level": "A1" },
+    { "id": "ch01_w012", "korean": "얼마예요", "pronunciation": "[얼마예요]", "pos": "표현", "japanese": "いくらですか", "nuance": "가격을 물어볼 때 사용\n値段を聞くときに使用", "example_ko": "이거 얼마예요?", "example_ja": "これ、いくらですか？", "example_pronunciation": "[이거 얼마예요?]", "category": "쇼핑", "level": "A1" }
+  ]
+}

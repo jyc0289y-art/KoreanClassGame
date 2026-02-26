@@ -1,0 +1,32 @@
+{
+  "categories": [
+    { "icon": "📚", "name_ko": "교재", "name_ja": "テキスト" },
+    { "icon": "🎁", "name_ko": "굿즈", "name_ja": "グッズ" },
+    { "icon": "✈️", "name_ko": "여행", "name_ja": "旅行" },
+    { "icon": "🎓", "name_ko": "강의", "name_ja": "講義" },
+    { "icon": "🎮", "name_ko": "아이템", "name_ja": "アイテム" }
+  ],
+  "items": {
+    "0": [
+      { "title": "한글반 교재", "title_ja": "ハングル班テキスト", "price": "¥1,980", "chapter": "ch00", "desc": "Pre-A1 한글 읽기·쓰기" },
+      { "title": "초급 회화반 교재", "title_ja": "初級会話テキスト", "price": "¥2,480", "chapter": "ch01", "desc": "A1-A2 여행 생존 회화" },
+      { "title": "중급1 회화반 교재", "title_ja": "中級1テキスト", "price": "¥2,980", "chapter": "ch02", "desc": "A2-B1 친구 사귀기" },
+      { "title": "중급2 회화반 교재", "title_ja": "中級2テキスト", "price": "¥2,980", "chapter": "ch03", "desc": "B1 생활 한국어" }
+    ],
+    "1": [
+      { "title": "유코 아크릴 스탠드", "title_ja": "ユコアクリルスタンド", "price": "¥1,500", "desc": "높이 10cm" },
+      { "title": "3인 세트 스티커", "title_ja": "3人セットシール", "price": "¥500", "desc": "유코·아미·루이" }
+    ],
+    "2": [
+      { "title": "서울 성지순례 투어", "title_ja": "ソウル聖地巡礼ツアー", "price": "¥89,000~", "desc": "게임 속 장소 실제 방문!" }
+    ],
+    "3": [
+      { "title": "한글반 1과 — 모음 강의", "title_ja": "第1課：母音講義", "price": "무료", "desc": "YouTube 12:34" },
+      { "title": "한글반 2과 — 자음 강의", "title_ja": "第2課：子音講義", "price": "무료", "desc": "YouTube 15:20" }
+    ],
+    "4": [
+      { "title": "캐릭터 스킨: 한복", "title_ja": "キャラスキン：韓服", "price": "500 coin", "desc": "유코 한복 스킨" },
+      { "title": "경험치 2배 부스트", "title_ja": "経験値2倍ブースト", "price": "200 coin", "desc": "30분간 XP 2배" }
+    ]
+  }
+}
