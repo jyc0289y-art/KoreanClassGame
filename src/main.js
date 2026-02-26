@@ -11,6 +11,15 @@ import MissionScene from './scenes/MissionScene.js';
 import VocabularyScene from './scenes/VocabularyScene.js';
 import ShopScene from './scenes/ShopScene.js';
 
+// Destroy previous instance on HMR reload
+if (window.__PHASER_GAME__) {
+  window.__PHASER_GAME__.destroy(true);
+  window.__PHASER_GAME__ = null;
+  // Clear any leftover canvases
+  const container = document.getElementById('game-container');
+  if (container) container.innerHTML = '';
+}
+
 const config = {
   type: Phaser.AUTO,
   width: GAME_WIDTH,
@@ -43,4 +52,17 @@ const config = {
   ]
 };
 
-const game = new Phaser.Game(config);
+window.__PHASER_GAME__ = new Phaser.Game(config);
+
+// Vite HMR cleanup
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    if (window.__PHASER_GAME__) {
+      window.__PHASER_GAME__.destroy(true);
+      window.__PHASER_GAME__ = null;
+      const container = document.getElementById('game-container');
+      if (container) container.innerHTML = '';
+    }
+  });
+  import.meta.hot.accept();
+}

@@ -133,10 +133,10 @@ export default class BootScene extends Phaser.Scene {
   create() {
     gameState.load();
     this.dataLoadPromise.then(() => {
-      this.time.delayedCall(500, () => this.scene.start('TitleScene'));
+      setTimeout(() => this.scene.start('TitleScene'), 500);
     }).catch(err => {
       console.error('Failed to load game data:', err);
-      this.time.delayedCall(500, () => this.scene.start('TitleScene'));
+      setTimeout(() => this.scene.start('TitleScene'), 500);
     });
   }
 }

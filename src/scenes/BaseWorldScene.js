@@ -10,9 +10,35 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.worldHeight = 1200;
     this.npcs = [];
     this.interactableNPC = null;
+    this.portals = [];
+    this.buildingPositions = [];
+    this.isTransitioning = false;
+    this.portalLockMsgShown = false;
+
+    // Minimap state
+    this.minimapScale = 0;
+    this.minimapExpanded = false;
+    this.minimapExpandedZoom = 1;
+    this.minimapMinZoom = 0.5;
+    this.minimapMaxZoom = 3;
+    this.minimapPinchStartDist = 0;
+    this.minimapPinchStartZoom = 1;
+
+    // Camera pinch zoom
+    this.cameraPinchStartDist = 0;
+    this.cameraPinchStartZoom = 1.5;
+    this.currentZoom = 1.5;
+    this.minCameraZoom = 0.7;
+    this.maxCameraZoom = 2.5;
   }
 
   createWorld(config) {
+    this.isTransitioning = false;
+    this.portalLockMsgShown = false;
+    this.portals = [];
+    this.buildingPositions = [];
+    this.npcs = [];
+
     this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight);
     this.createTilemap(config.tiles || 'grass');
 
@@ -23,19 +49,22 @@ export default class BaseWorldScene extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
     this.cameras.main.setBounds(0, 0, this.worldWidth, this.worldHeight);
-    this.cameras.main.setZoom(1.5);
+    this.cameras.main.setZoom(this.currentZoom);
 
     if (config.npcs) this.createNPCs(config.npcs);
     if (config.buildings) this.createBuildings(config.buildings);
 
     this.createUI();
     this.setupControls();
+    this.createInteractButton();
+    this.createCharacterSwitchButton();
+    this.createMinimap();
+    this.setupPinchZoom();
 
     this.interactKey = this.input.keyboard.addKey('SPACE');
-    this.interactButton = null;
-    this.createInteractButton();
   }
 
+  // ── Tilemap ──────────────────────────────────────────
   createTilemap(type) {
     const tileSize = 32;
     const cols = Math.ceil(this.worldWidth / tileSize);
@@ -55,6 +84,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     }
   }
 
+  // ── NPCs ─────────────────────────────────────────────
   createNPCs(npcList) {
     npcList.forEach(npcConfig => {
       const npc = this.physics.add.sprite(npcConfig.x, npcConfig.y, 'npc_' + (npcConfig.texture || 'hyunjeong'));
@@ -88,6 +118,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     });
   }
 
+  // ── Buildings ────────────────────────────────────────
   createBuildings(buildings) {
     buildings.forEach(b => {
       this.add.image(b.x, b.y, b.texture || 'building_house').setDepth(2);
@@ -97,12 +128,14 @@ export default class BaseWorldScene extends Phaser.Scene {
 
       const collider = this.physics.add.staticImage(b.x, b.y, b.texture || 'building_house');
       this.physics.add.collider(this.player, collider);
+
+      this.buildingPositions.push({ x: b.x, y: b.y });
     });
   }
 
+  // ── Top HUD ──────────────────────────────────────────
   createUI() {
     const w = this.cameras.main.width;
-    const h = this.cameras.main.height;
 
     this.add.rectangle(w / 2, 0, w, 50, 0x000000, 0.7).setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
 
@@ -135,19 +168,21 @@ export default class BaseWorldScene extends Phaser.Scene {
     menuBtn.on('pointerdown', () => this.showMenu());
   }
 
+  // ── Interact Button (💬) ─────────────────────────────
   createInteractButton() {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
 
     this.interactBtn = this.add.container(w - 50, h - 120);
-    const bg = this.add.circle(0, 0, 24, 0xff69b4, 0.8);
-    const text = this.add.text(0, 0, '💬', { fontSize: '20px' }).setOrigin(0.5);
+    const bg = this.add.circle(0, 0, 28, 0xff69b4, 0.8);
+    const text = this.add.text(0, 0, '💬', { fontSize: '22px' }).setOrigin(0.5);
     this.interactBtn.add([bg, text]);
-    this.interactBtn.setScrollFactor(0).setDepth(100).setAlpha(0).setSize(48, 48);
+    this.interactBtn.setScrollFactor(0).setDepth(100).setAlpha(0).setSize(56, 56);
     bg.setInteractive({ useHandCursor: true });
     bg.on('pointerdown', () => this.handleInteraction());
   }
 
+  // ── Controls (Keyboard + Joystick) ──────────────────
   setupControls() {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.wasd = {
@@ -164,19 +199,28 @@ export default class BaseWorldScene extends Phaser.Scene {
 
   createJoystick() {
     const h = this.cameras.main.height;
-    const jx = 70, jy = h - 70;
+    const jx = 70, jy = h - 80;
 
-    this.joystickBase = this.add.image(jx, jy, 'joystick_base').setScrollFactor(0).setDepth(100).setAlpha(0.5).setScale(1.5);
-    this.joystickThumb = this.add.image(jx, jy, 'joystick_thumb').setScrollFactor(0).setDepth(101).setAlpha(0.7);
+    // Bigger, more visible joystick
+    this.joystickBase = this.add.image(jx, jy, 'joystick_base')
+      .setScrollFactor(0).setDepth(100).setAlpha(0.6).setScale(2.0);
+    this.joystickThumb = this.add.image(jx, jy, 'joystick_thumb')
+      .setScrollFactor(0).setDepth(101).setAlpha(0.8).setScale(1.2);
 
-    const joystickZone = this.add.rectangle(jx, jy, 100, 100, 0xffffff, 0).setScrollFactor(0).setDepth(102).setInteractive({ draggable: true });
+    // Much larger drag zone for easier mobile use
+    const dragSize = 140;
+    const joystickZone = this.add.rectangle(jx, jy, dragSize, dragSize, 0xffffff, 0)
+      .setScrollFactor(0).setDepth(102).setInteractive({ draggable: true });
 
-    joystickZone.on('dragstart', () => { this.joystickActive = true; });
+    joystickZone.on('dragstart', () => {
+      this.joystickActive = true;
+      this.joystickBase.setAlpha(0.8);
+    });
     joystickZone.on('drag', (pointer, dragX, dragY) => {
       const dx = dragX - jx;
       const dy = dragY - jy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      const maxDist = 35;
+      const maxDist = 40;
 
       if (dist > maxDist) {
         this.joystickThumb.x = jx + (dx / dist) * maxDist;
@@ -185,30 +229,51 @@ export default class BaseWorldScene extends Phaser.Scene {
       } else {
         this.joystickThumb.x = dragX;
         this.joystickThumb.y = dragY;
-        this.joystickVelocity = { x: dx / maxDist, y: dy / maxDist };
+        this.joystickVelocity = dist > 5 ? { x: dx / maxDist, y: dy / maxDist } : { x: 0, y: 0 };
       }
     });
     joystickZone.on('dragend', () => {
       this.joystickActive = false;
+      this.joystickBase.setAlpha(0.6);
       this.joystickThumb.x = jx;
       this.joystickThumb.y = jy;
       this.joystickVelocity = { x: 0, y: 0 };
     });
+
+    // D-pad direction labels around joystick
+    const dirs = [
+      { text: '▲', x: jx, y: jy - 55 },
+      { text: '▼', x: jx, y: jy + 55 },
+      { text: '◀', x: jx - 55, y: jy },
+      { text: '▶', x: jx + 55, y: jy }
+    ];
+    dirs.forEach(d => {
+      this.add.text(d.x, d.y, d.text, {
+        fontSize: '14px', color: '#ff69b4', alpha: 0.3
+      }).setOrigin(0.5).setScrollFactor(0).setDepth(99).setAlpha(0.25);
+    });
   }
 
+  // ── Portals (Auto-teleport + Tap) ───────────────────
   createPortal(x, y, targetScene, requiredLevel, labelText) {
     const portal = this.add.container(x, y);
-    const glow = this.add.circle(0, 0, 25, 0x00ff88, 0.3);
-    const ring = this.add.circle(0, 0, 22, 0x00ff88, 0).setStrokeStyle(2, 0x00ff88);
-    const label = this.add.text(0, -40, labelText, {
-      fontSize: '10px', color: '#00ff88', align: 'center'
+    const glow = this.add.circle(0, 0, 30, 0x00ff88, 0.3);
+    const ring = this.add.circle(0, 0, 26, 0x00ff88, 0).setStrokeStyle(2, 0x00ff88);
+    const innerRing = this.add.circle(0, 0, 18, 0x00ff88, 0).setStrokeStyle(1, 0x00ff88, 0.5);
+    const label = this.add.text(0, -45, labelText, {
+      fontSize: '10px', color: '#00ff88', align: 'center', backgroundColor: '#00000066', padding: { x: 4, y: 2 }
     }).setOrigin(0.5);
-    portal.add([glow, ring, label]);
+    portal.add([glow, ring, innerRing, label]);
     portal.setDepth(5);
 
+    // Pulsing animation
     this.tweens.add({
       targets: glow, alpha: { from: 0.2, to: 0.6 }, scaleX: { from: 0.9, to: 1.1 }, scaleY: { from: 0.9, to: 1.1 },
       duration: 1200, yoyo: true, repeat: -1
+    });
+    this.tweens.add({
+      targets: innerRing, scaleX: { from: 0.6, to: 1.0 }, scaleY: { from: 0.6, to: 1.0 }, alpha: { from: 0.8, to: 0.1 },
+      duration: 1500, repeat: -1
     });
 
     const locked = gameState.current.level < requiredLevel;
@@ -216,27 +281,346 @@ export default class BaseWorldScene extends Phaser.Scene {
       label.setText(`🔒 Lv.${requiredLevel} 필요\nLv.${requiredLevel} 必要`);
       glow.setFillStyle(0xff4444, 0.2);
       ring.setStrokeStyle(2, 0xff4444);
+      innerRing.setStrokeStyle(1, 0xff4444, 0.5);
       label.setColor('#ff4444');
     }
 
-    const zone = this.add.zone(x, y, 50, 50).setInteractive();
-    zone.on('pointerdown', () => {
-      if (!locked) {
-        this.scene.start(targetScene);
-      } else {
-        const w = this.cameras.main.width;
-        const h = this.cameras.main.height;
-        const msg = this.add.text(w / 2, h / 2, `레벨 ${requiredLevel} 이상 필요!\nレベル${requiredLevel}以上必要！`, {
-          fontSize: '16px', color: '#ff4444', backgroundColor: '#000000cc', padding: { x: 20, y: 10 }
-        }).setOrigin(0.5).setScrollFactor(0).setDepth(500);
-        this.time.delayedCall(1500, () => msg.destroy());
+    // Physics overlap zone — auto-teleport when player walks in
+    const portalZone = this.add.zone(x, y, 50, 50);
+    this.physics.add.existing(portalZone, true);
+
+    this.physics.add.overlap(this.player, portalZone, () => {
+      if (!locked && !this.isTransitioning) {
+        this.isTransitioning = true;
+        gameState.save();
+        this.cameras.main.fadeOut(500, 0, 0, 0);
+        setTimeout(() => this.scene.start(targetScene), 500);
+      } else if (locked && !this.portalLockMsgShown) {
+        this.showPortalLockedMsg(requiredLevel);
       }
     });
 
-    this.portalData = this.portalData || [];
-    this.portalData.push({ x, y, targetScene, requiredLevel, locked });
+    // Tap zone (bigger clickable area)
+    const tapZone = this.add.zone(x, y, 80, 80).setInteractive({ useHandCursor: true });
+    tapZone.on('pointerdown', () => {
+      if (!locked && !this.isTransitioning) {
+        this.isTransitioning = true;
+        gameState.save();
+        this.cameras.main.fadeOut(500, 0, 0, 0);
+        setTimeout(() => this.scene.start(targetScene), 500);
+      } else if (locked) {
+        this.showPortalLockedMsg(requiredLevel);
+      }
+    });
+
+    this.portals.push({ x, y, targetScene, requiredLevel, locked });
   }
 
+  showPortalLockedMsg(requiredLevel) {
+    if (this.portalLockMsgShown) return;
+    this.portalLockMsgShown = true;
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+    const msg = this.add.text(w / 2, h / 2, `🔒 레벨 ${requiredLevel} 이상 필요!\nLv.${requiredLevel}以上が必要！`, {
+      fontSize: '16px', color: '#ff4444', backgroundColor: '#000000cc', padding: { x: 20, y: 10 }
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(500);
+    setTimeout(() => { msg.destroy(); this.portalLockMsgShown = false; }, 2000);
+  }
+
+  // ── Character Switch Button ─────────────────────────
+  createCharacterSwitchButton() {
+    const chars = ['yuko', 'ami', 'rui'];
+
+    this.charSwitchContainer = this.add.container(10, 52).setScrollFactor(0).setDepth(100);
+
+    chars.forEach((name, i) => {
+      const cd = CHARACTERS[name];
+      const isActive = name === gameState.currentCharacter;
+      const btnX = i * 34;
+      const color = Phaser.Display.Color.HexStringToColor(cd.color).color;
+
+      const ring = this.add.circle(btnX + 14, 14, 14, color, isActive ? 0.5 : 0.1)
+        .setStrokeStyle(isActive ? 2 : 1, color, isActive ? 1 : 0.3);
+      const sprite = this.add.image(btnX + 14, 14, name).setScale(0.8);
+
+      // Active indicator
+      if (isActive) {
+        const indicator = this.add.circle(btnX + 14, 28, 2, 0x00ff88, 1);
+        this.charSwitchContainer.add(indicator);
+      }
+
+      const hitZone = this.add.rectangle(btnX + 14, 14, 30, 30, 0xffffff, 0)
+        .setInteractive({ useHandCursor: true });
+
+      hitZone.on('pointerdown', () => {
+        if (name !== gameState.currentCharacter) {
+          this.switchCharacter(name);
+        }
+      });
+
+      this.charSwitchContainer.add([ring, sprite, hitZone]);
+    });
+  }
+
+  switchCharacter(newChar) {
+    // Save current position
+    gameState.current.x = this.player.x;
+    gameState.current.y = this.player.y;
+    gameState.save();
+
+    // Switch character
+    gameState.currentCharacter = newChar;
+
+    // Flash and restart
+    this.cameras.main.flash(300, 255, 105, 180, true);
+    setTimeout(() => this.scene.restart(), 300);
+  }
+
+  // ── Minimap ─────────────────────────────────────────
+  createMinimap() {
+    const w = this.cameras.main.width;
+    const mmWidth = 110;
+    const mmHeight = Math.round(mmWidth * (this.worldHeight / this.worldWidth));
+    this.minimapScale = mmWidth / this.worldWidth;
+
+    const mmX = w - mmWidth - 8;
+    const mmY = 54;
+
+    // Container (small mode)
+    this.minimapContainer = this.add.container(mmX, mmY).setScrollFactor(0).setDepth(150);
+
+    // Background
+    const bg = this.add.rectangle(0, 0, mmWidth, mmHeight, 0x0a0a2e, 0.85)
+      .setOrigin(0, 0).setStrokeStyle(1, 0xff69b4, 0.4);
+    this.minimapContainer.add(bg);
+
+    // Label
+    const mapLabel = this.add.text(2, 2, 'MAP', {
+      fontSize: '7px', color: '#ff69b4', fontStyle: 'bold'
+    });
+    this.minimapContainer.add(mapLabel);
+
+    // Buildings (gray squares)
+    this.buildingPositions.forEach(b => {
+      const dot = this.add.rectangle(
+        b.x * this.minimapScale, b.y * this.minimapScale,
+        4, 3, 0x888888, 0.7
+      ).setOrigin(0.5);
+      this.minimapContainer.add(dot);
+    });
+
+    // Portals (green/red circles)
+    this.portals.forEach(p => {
+      const color = p.locked ? 0xff4444 : 0x00ff88;
+      const dot = this.add.circle(
+        p.x * this.minimapScale, p.y * this.minimapScale,
+        3, color, 0.9
+      );
+      this.minimapContainer.add(dot);
+      // Portal pulse
+      this.tweens.add({
+        targets: dot, scaleX: { from: 0.8, to: 1.3 }, scaleY: { from: 0.8, to: 1.3 },
+        alpha: { from: 0.9, to: 0.4 }, duration: 1000, yoyo: true, repeat: -1
+      });
+    });
+
+    // NPC dots (orange)
+    this.minimapNpcDots = [];
+    this.npcs.forEach(npc => {
+      const dot = this.add.circle(
+        npc.x * this.minimapScale, npc.y * this.minimapScale,
+        2, 0xffa500, 0.8
+      );
+      this.minimapContainer.add(dot);
+      this.minimapNpcDots.push({ dot, npc });
+    });
+
+    // Camera viewport rectangle
+    this.minimapViewport = this.add.rectangle(0, 0, 20, 15, 0xffffff, 0.08)
+      .setStrokeStyle(1, 0xffffff, 0.35).setOrigin(0.5);
+    this.minimapContainer.add(this.minimapViewport);
+
+    // Player dot (largest, colored)
+    const playerColor = Phaser.Display.Color.HexStringToColor(
+      CHARACTERS[gameState.currentCharacter].color
+    ).color;
+    this.minimapPlayerDot = this.add.circle(0, 0, 3, playerColor, 1);
+    // Player pulse
+    this.tweens.add({
+      targets: this.minimapPlayerDot,
+      scaleX: { from: 1, to: 1.5 }, scaleY: { from: 1, to: 1.5 },
+      alpha: { from: 1, to: 0.6 }, duration: 800, yoyo: true, repeat: -1
+    });
+    this.minimapContainer.add(this.minimapPlayerDot);
+
+    // Tap minimap to expand
+    const hitZone = this.add.rectangle(0, 0, mmWidth, mmHeight, 0xffffff, 0)
+      .setOrigin(0, 0).setInteractive({ useHandCursor: true });
+    this.minimapContainer.add(hitZone);
+    hitZone.on('pointerdown', () => this.toggleMinimapExpanded());
+
+    // Store original position for toggle
+    this.minimapSmallX = mmX;
+    this.minimapSmallY = mmY;
+    this.minimapSmallW = mmWidth;
+    this.minimapSmallH = mmHeight;
+  }
+
+  updateMinimap() {
+    if (!this.minimapPlayerDot || !this.player) return;
+
+    const scale = this.minimapExpanded
+      ? (this.minimapSmallW * 2.5 / this.worldWidth) * this.minimapExpandedZoom
+      : this.minimapScale;
+
+    // Player position
+    this.minimapPlayerDot.x = this.player.x * scale;
+    this.minimapPlayerDot.y = this.player.y * scale;
+
+    // NPC positions
+    this.minimapNpcDots.forEach(({ dot, npc }) => {
+      dot.x = npc.x * scale;
+      dot.y = npc.y * scale;
+    });
+
+    // Camera viewport
+    const cam = this.cameras.main;
+    const vpW = (cam.width / cam.zoom) * scale;
+    const vpH = (cam.height / cam.zoom) * scale;
+    this.minimapViewport.x = this.minimapPlayerDot.x;
+    this.minimapViewport.y = this.minimapPlayerDot.y;
+    this.minimapViewport.width = vpW;
+    this.minimapViewport.height = vpH;
+  }
+
+  toggleMinimapExpanded() {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+
+    if (!this.minimapExpanded) {
+      // Expand minimap to center
+      this.minimapExpanded = true;
+      this.minimapExpandedZoom = 1;
+
+      // Overlay background
+      this.minimapOverlay = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.6)
+        .setScrollFactor(0).setDepth(149).setInteractive();
+      this.minimapOverlay.on('pointerdown', () => this.toggleMinimapExpanded());
+
+      // Move container to center
+      const expandedW = this.minimapSmallW * 2.5;
+      const expandedH = this.minimapSmallH * 2.5;
+      this.minimapContainer.setPosition(
+        (w - expandedW) / 2,
+        (h - expandedH) / 2
+      );
+      this.minimapContainer.setScale(2.5);
+      this.minimapContainer.setDepth(200);
+
+      // Close button
+      this.minimapCloseBtn = this.add.text(w / 2, h / 2 + expandedH / 2 + 20, '✕ 닫기 / 閉じる  (핀치로 줌 / ピンチでズーム)', {
+        fontSize: '11px', color: '#aaaacc', backgroundColor: '#00000088', padding: { x: 10, y: 4 }
+      }).setOrigin(0.5).setScrollFactor(0).setDepth(201).setInteractive({ useHandCursor: true });
+      this.minimapCloseBtn.on('pointerdown', () => this.toggleMinimapExpanded());
+
+      // Zoom indicator
+      this.minimapZoomText = this.add.text(w / 2, (h - expandedH) / 2 - 15, `🔍 x${this.minimapExpandedZoom.toFixed(1)}`, {
+        fontSize: '11px', color: '#ff69b4'
+      }).setOrigin(0.5).setScrollFactor(0).setDepth(201);
+    } else {
+      // Collapse back to corner
+      this.minimapExpanded = false;
+      this.minimapExpandedZoom = 1;
+
+      if (this.minimapOverlay) { this.minimapOverlay.destroy(); this.minimapOverlay = null; }
+      if (this.minimapCloseBtn) { this.minimapCloseBtn.destroy(); this.minimapCloseBtn = null; }
+      if (this.minimapZoomText) { this.minimapZoomText.destroy(); this.minimapZoomText = null; }
+
+      this.minimapContainer.setPosition(this.minimapSmallX, this.minimapSmallY);
+      this.minimapContainer.setScale(1);
+      this.minimapContainer.setDepth(150);
+    }
+  }
+
+  // ── Pinch Zoom (Camera + Minimap) ──────────────────
+  setupPinchZoom() {
+    this.input.on('pointerdown', () => {
+      const activePointers = this.input.manager.pointers.filter(p => p.isDown);
+      if (activePointers.length >= 2) {
+        const p1 = activePointers[0];
+        const p2 = activePointers[1];
+        const dist = Phaser.Math.Distance.Between(p1.x, p1.y, p2.x, p2.y);
+
+        if (this.minimapExpanded) {
+          this.minimapPinchStartDist = dist;
+          this.minimapPinchStartZoom = this.minimapExpandedZoom;
+        } else {
+          this.cameraPinchStartDist = dist;
+          this.cameraPinchStartZoom = this.cameras.main.zoom;
+        }
+      }
+    });
+
+    this.input.on('pointermove', () => {
+      const activePointers = this.input.manager.pointers.filter(p => p.isDown);
+      if (activePointers.length >= 2) {
+        const p1 = activePointers[0];
+        const p2 = activePointers[1];
+        const currentDist = Phaser.Math.Distance.Between(p1.x, p1.y, p2.x, p2.y);
+
+        if (this.minimapExpanded && this.minimapPinchStartDist > 0) {
+          // Pinch zoom on expanded minimap
+          const ratio = currentDist / this.minimapPinchStartDist;
+          this.minimapExpandedZoom = Phaser.Math.Clamp(
+            this.minimapPinchStartZoom * ratio,
+            this.minimapMinZoom, this.minimapMaxZoom
+          );
+          this.minimapContainer.setScale(2.5 * this.minimapExpandedZoom);
+          if (this.minimapZoomText) {
+            this.minimapZoomText.setText(`🔍 x${this.minimapExpandedZoom.toFixed(1)}`);
+          }
+        } else if (!this.minimapExpanded && this.cameraPinchStartDist > 0) {
+          // Pinch zoom on camera
+          const ratio = currentDist / this.cameraPinchStartDist;
+          this.currentZoom = Phaser.Math.Clamp(
+            this.cameraPinchStartZoom * ratio,
+            this.minCameraZoom, this.maxCameraZoom
+          );
+          this.cameras.main.setZoom(this.currentZoom);
+        }
+      }
+    });
+
+    this.input.on('pointerup', () => {
+      const activePointers = this.input.manager.pointers.filter(p => p.isDown);
+      if (activePointers.length < 2) {
+        this.cameraPinchStartDist = 0;
+        this.minimapPinchStartDist = 0;
+      }
+    });
+
+    // Mouse wheel zoom (for desktop testing)
+    this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY) => {
+      if (this.minimapExpanded) {
+        this.minimapExpandedZoom = Phaser.Math.Clamp(
+          this.minimapExpandedZoom - deltaY * 0.001,
+          this.minimapMinZoom, this.minimapMaxZoom
+        );
+        this.minimapContainer.setScale(2.5 * this.minimapExpandedZoom);
+        if (this.minimapZoomText) {
+          this.minimapZoomText.setText(`🔍 x${this.minimapExpandedZoom.toFixed(1)}`);
+        }
+      } else {
+        this.currentZoom = Phaser.Math.Clamp(
+          this.currentZoom - deltaY * 0.001,
+          this.minCameraZoom, this.maxCameraZoom
+        );
+        this.cameras.main.setZoom(this.currentZoom);
+      }
+    });
+  }
+
+  // ── Update ──────────────────────────────────────────
   update() {
     if (!this.player || !this.player.body) return;
 
@@ -258,6 +642,7 @@ export default class BaseWorldScene extends Phaser.Scene {
       this.player.body.velocity.normalize().scale(speed);
     }
 
+    // NPC interaction check
     if (this.interactableNPC) {
       const dist = Phaser.Math.Distance.Between(
         this.player.x, this.player.y,
@@ -273,8 +658,12 @@ export default class BaseWorldScene extends Phaser.Scene {
         this.interactableNPC = null;
       }
     }
+
+    // Update minimap
+    this.updateMinimap();
   }
 
+  // ── Interaction Handler ─────────────────────────────
   handleInteraction() {
     if (!this.interactableNPC) return;
     const npcData = this.interactableNPC.npcData;
@@ -298,6 +687,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     }
   }
 
+  // ── Simple Dialogue Box ─────────────────────────────
   showSimpleDialogue(npcData) {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
@@ -323,6 +713,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     box.setInteractive().on('pointerdown', closeAll);
   }
 
+  // ── Menu Overlay ────────────────────────────────────
   showMenu() {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
@@ -363,13 +754,14 @@ export default class BaseWorldScene extends Phaser.Scene {
     overlay.setInteractive().on('pointerdown', closeMenu);
   }
 
+  // ── UI Update ───────────────────────────────────────
   updateUI() {
     if (this.expBar) this.expBar.width = 120 * gameState.expProgress;
     if (this.expText) this.expText.setText(`EXP ${gameState.current.exp}/${gameState.expToNextLevel}`);
     if (this.coinText) this.coinText.setText(`💰 ${gameState.current.coins}`);
   }
 
-  // 통합된 showSceneTitle (IncheonScene/FukuokaScene 중복 제거)
+  // ── Scene Title Overlay ─────────────────────────────
   showSceneTitle(titleKo, titleJa, subtitle, accentColor = '#ff69b4') {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;

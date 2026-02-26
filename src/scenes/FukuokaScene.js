@@ -34,8 +34,8 @@ export default class FukuokaScene extends BaseWorldScene {
       ]
     });
 
-    // Portal to Incheon (requires level 2+)
-    this.createPortal(1450, 600, 'IncheonScene', 2, '✈ 인천공항으로!\n仁川空港へ！');
+    // Portal to Incheon (level 1+ = immediately available)
+    this.createPortal(1450, 600, 'IncheonScene', 1, '✈ 인천공항으로!\n仁川空港へ！');
 
     this.showSceneTitle('후쿠오카', '福岡', 'Ch.0 한글반 — ハングル班', '#88ff88');
   }

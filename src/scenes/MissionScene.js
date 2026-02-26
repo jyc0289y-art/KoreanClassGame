@@ -182,12 +182,12 @@ export default class MissionScene extends Phaser.Scene {
               this.matchState.matched++;
 
               if (this.matchState.matched >= this.matchState.total) {
-                this.time.delayedCall(500, () => this.handleAnswer(true, m));
+                setTimeout(() => this.handleAnswer(true, m), 500);
               }
             } else {
               first.setStrokeStyle(2, 0xff0000);
               second.setStrokeStyle(2, 0xff0000);
-              this.time.delayedCall(500, () => {
+              setTimeout(() => {
                 first.setStrokeStyle(1, first.pairData.type === 'ko' ? 0x4488ff : 0xff69b4, 0.5);
                 second.setStrokeStyle(1, second.pairData.type === 'ko' ? 0x4488ff : 0xff69b4, 0.5);
               });

@@ -33,6 +33,9 @@ export default class IncheonScene extends BaseWorldScene {
       ]
     });
 
+    // Portal back to Fukuoka (always available)
+    this.createPortal(100, 1050, 'FukuokaScene', 0, '✈ 후쿠오카로!\n福岡に戻る');
+
     // Scene title overlay
     this.showSceneTitle('인천국제공항', '仁川国際空港', 'Ch.1 초급 회화반', '#ff69b4');
   }

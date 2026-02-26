@@ -98,7 +98,7 @@ export default class TitleScene extends Phaser.Scene {
       hitArea.on('pointerdown', () => {
         gameState.currentCharacter = name;
         this.cameras.main.flash(200, 255, 105, 180, true);
-        this.time.delayedCall(300, () => this.scene.restart());
+        setTimeout(() => this.scene.restart(), 300);
       });
     });
 
@@ -125,7 +125,7 @@ export default class TitleScene extends Phaser.Scene {
       else if (lvl >= 4) targetScene = 'IncheonScene';
       gameState.currentChapter = lvl >= 4 ? 'ch01' : 'ch00';
       gameState.currentLesson = 'l01';
-      this.time.delayedCall(500, () => this.scene.start(targetScene));
+      setTimeout(() => this.scene.start(targetScene), 500);
     });
 
     this.createButton(w / 2, btnY + 50, '챕터 선택 / チャプター選択', '#da70d6', () => {

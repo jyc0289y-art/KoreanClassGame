@@ -49,7 +49,7 @@ export default class ChapterSelectScene extends Phaser.Scene {
           gameState.currentChapter = ch.id;
           gameState.currentLesson = 'l01';
           this.cameras.main.fadeOut(300);
-          this.time.delayedCall(300, () => this.scene.start(ch.scene || 'FukuokaScene'));
+          setTimeout(() => this.scene.start(ch.scene || 'FukuokaScene'), 300);
         });
       }
     });
