@@ -17,8 +17,10 @@ export const NPCS = {
 };
 
 // 게임 설정 상수
-export const GAME_WIDTH = 400;
-export const GAME_HEIGHT = 600;
+export const GAME_WIDTH = 400;      // 참조 해상도 (RESIZE 모드에서는 초기값)
+export const GAME_HEIGHT = 600;     // 참조 해상도
+export const REF_WIDTH = 400;       // UI 스케일링 기준 폭
+export const REF_HEIGHT = 600;      // UI 스케일링 기준 높이
 export const PLAYER_SPEED = 200;
 export const DEFAULT_WORLD_WIDTH = 1600;
 export const DEFAULT_WORLD_HEIGHT = 1200;

@@ -22,8 +22,6 @@ if (window.__PHASER_GAME__) {
 
 const config = {
   type: Phaser.AUTO,
-  width: GAME_WIDTH,
-  height: GAME_HEIGHT,
   parent: 'game-container',
   backgroundColor: '#0a0a2e',
   physics: {
@@ -31,10 +29,8 @@ const config = {
     arcade: { gravity: { y: 0 }, debug: false }
   },
   scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
-    min: { width: 320, height: 480 },
-    max: { width: 600, height: 900 }
+    mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH
   },
   input: {
     activePointers: 3
