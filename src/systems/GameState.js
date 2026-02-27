@@ -13,6 +13,14 @@ export class GameState {
     this.currentChapter = 'ch00';
     this.currentLesson = 'l01';
     this.settings = { language: 'dual', sfx: true, music: true };
+
+    // ── 3계층 맵 시스템 상태 ──
+    this.currentRegion = 'fukuoka';          // 'fukuoka' | 'seoul'
+    this.currentMap = 'FukuokaYakuinScene';  // 현재 위치 씬 키
+    this.lastStation = 'yakuin';             // 마지막 이용 역 (광역맵 복귀 시 표시)
+    this.lastAirport = 'fukuoka_airport';    // 마지막 이용 공항 (국제맵 복귀 시 표시)
+    this.visitedMaps = ['FukuokaYakuinScene']; // 방문한 맵 목록
+    this.unlockedStations = ['yakuin', 'fukuoka_airport']; // 해금된 역 목록
   }
 
   get current() { return this.characters[this.currentCharacter]; }
@@ -38,6 +46,24 @@ export class GameState {
       return true;
     }
     return false;
+  }
+
+  // ── 맵 이동 관련 ──
+  visitMap(sceneKey) {
+    this.currentMap = sceneKey;
+    if (!this.visitedMaps.includes(sceneKey)) {
+      this.visitedMaps.push(sceneKey);
+    }
+  }
+
+  unlockStation(stationId) {
+    if (!this.unlockedStations.includes(stationId)) {
+      this.unlockedStations.push(stationId);
+    }
+  }
+
+  setRegion(region) {
+    this.currentRegion = region;
   }
 
   save() {

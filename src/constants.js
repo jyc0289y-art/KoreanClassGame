@@ -24,3 +24,51 @@ export const REF_HEIGHT = 600;      // UI 스케일링 기준 높이
 export const PLAYER_SPEED = 200;
 export const DEFAULT_WORLD_WIDTH = 1600;
 export const DEFAULT_WORLD_HEIGHT = 1200;
+
+// ── 3계층 맵 시스템 상수 ──
+
+// 지역맵 크기 (워커블 월드)
+export const MAP_SIZES = {
+  YAKUIN:        { w: 2400, h: 1800 },  // 후쿠오카 야쿠인 (확장)
+  AIRPORT:       { w: 1600, h: 1200 },  // 공항 맵
+  INCHEON:       { w: 2000, h: 1200 },  // 인천공항
+  SEOUL_DEFAULT: { w: 1600, h: 1200 },  // 서울 기본 지역맵
+  SEOUL_LARGE:   { w: 2400, h: 1800 },  // 서울 대형 지역맵
+};
+
+// 장소맵 크기 (실내)
+export const PLACE_SIZES = {
+  SMALL:  { w: 800,  h: 600 },   // 집, 식당 등
+  MEDIUM: { w: 1000, h: 600 },   // 서점, 올리브영 등
+  LARGE:  { w: 1000, h: 800 },   // 학원, 하이커그라운드 등
+};
+
+// 지역 상수
+export const REGIONS = {
+  FUKUOKA: 'fukuoka',
+  SEOUL: 'seoul'
+};
+
+// 광역맵 씬 키 매핑
+export const METRO_SCENES = {
+  fukuoka: 'FukuokaMetroScene',
+  seoul: 'SeoulMetroScene'
+};
+
+// 건물 색상 테마
+export const BUILDING_COLORS = {
+  subway:      0x2E8B57,  // 지하철역 입구
+  restaurant:  0xCD5C5C,  // 음식점
+  cafe:        0x8B4513,  // 카페
+  hospital:    0xFFFFFF,  // 병원
+  police:      0x4169E1,  // 경찰서
+  cinema:      0x8B0000,  // 영화관
+  oliveyoung:  0x00A651,  // 올리브영
+  tower:       0xFF4500,  // N서울타워
+  departure:   0x4682B4,  // 국제선 탑승구
+  house:       0xCD853F,  // 일반 집
+  shop:        0xDAA520,  // 상점
+  academy:     0x6A5ACD,  // 학원
+  airport:     0x4A6FA5,  // 공항
+  station:     0x228B22,  // 역
+};

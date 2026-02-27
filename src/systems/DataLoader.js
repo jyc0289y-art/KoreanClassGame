@@ -9,7 +9,9 @@ class DataLoaderClass {
       vocabulary: {},
       missions: {},
       dialogues: {},
-      shopProducts: null
+      shopProducts: null,
+      maps: {},     // 맵 설정 데이터 캐시
+      places: {}    // 장소 설정 데이터 캐시
     };
   }
 
@@ -78,6 +80,44 @@ class DataLoaderClass {
       console.warn('Shop products not found');
       return { categories: [], items: {} };
     }
+  }
+
+  // ── 맵 설정 데이터 로드 (광역맵/지역맵) ──
+  async loadMapConfig(mapId) {
+    if (this.cache.maps[mapId]) return this.cache.maps[mapId];
+    try {
+      const resp = await fetch(`./data/maps/${mapId}.json`);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      this.cache.maps[mapId] = data;
+      return data;
+    } catch (e) {
+      console.warn(`Map config not found: ${mapId}`);
+      return null;
+    }
+  }
+
+  // ── 장소 설정 데이터 로드 (장소맵) ──
+  async loadPlaceConfig(placeId) {
+    if (this.cache.places[placeId]) return this.cache.places[placeId];
+    try {
+      const resp = await fetch(`./data/places/${placeId}.json`);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      this.cache.places[placeId] = data;
+      return data;
+    } catch (e) {
+      console.warn(`Place config not found: ${placeId}`);
+      return null;
+    }
+  }
+
+  getCachedMapConfig(mapId) {
+    return this.cache.maps[mapId] || null;
+  }
+
+  getCachedPlaceConfig(placeId) {
+    return this.cache.places[placeId] || null;
   }
 
   // 부팅 시 필수 데이터 프리로드

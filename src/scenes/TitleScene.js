@@ -120,11 +120,23 @@ export default class TitleScene extends Phaser.Scene {
     this.createButton(w / 2, btnY, '게임 시작 / ゲームスタート', '#ff69b4', () => {
       this.cameras.main.fadeOut(500);
       const lvl = gameState.current.level;
-      let targetScene = 'FukuokaScene';
-      if (lvl >= 7) targetScene = 'SeoulCh2Scene';
-      else if (lvl >= 4) targetScene = 'IncheonScene';
-      gameState.currentChapter = lvl >= 4 ? 'ch01' : 'ch00';
+
+      // ── 3계층 맵 시스템: 현재 맵 기반 진입 ──
+      let targetScene = gameState.currentMap || 'FukuokaYakuinScene';
+
+      // 레벨에 따른 기본 시작 맵 (최초 플레이 시)
+      if (!gameState.visitedMaps || gameState.visitedMaps.length <= 1) {
+        if (lvl >= 4) {
+          targetScene = 'IncheonAirportScene';
+          gameState.currentChapter = 'ch01';
+        } else {
+          targetScene = 'FukuokaYakuinScene';
+          gameState.currentChapter = 'ch00';
+        }
+      }
+
       gameState.currentLesson = 'l01';
+      gameState.save();
       setTimeout(() => this.scene.start(targetScene), 500);
     });
 

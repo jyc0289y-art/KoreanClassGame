@@ -115,7 +115,13 @@ export default class BootScene extends Phaser.Scene {
       { name: 'tile_grass', color: 0x4a8c3f },
       { name: 'tile_road', color: 0x888888 },
       { name: 'tile_water', color: 0x4a8cb8 },
-      { name: 'tile_sand', color: 0xdec67a }
+      { name: 'tile_sand', color: 0xdec67a },
+      // ── 새 타일 (실내/공항/인도) ──
+      { name: 'tile_floor_wood', color: 0x8B6914 },
+      { name: 'tile_floor_tile', color: 0xC8C8C8 },
+      { name: 'tile_airport_floor', color: 0xD4D4D4 },
+      { name: 'tile_wall', color: 0x555555 },
+      { name: 'tile_sidewalk', color: 0xAAAAAA }
     ];
     tiles.forEach(t => {
       g.clear();
@@ -124,19 +130,107 @@ export default class BootScene extends Phaser.Scene {
       g.fillStyle(Phaser.Display.Color.IntegerToColor(t.color).brighten(10).color, 0.3);
       g.fillRect(4, 4, 8, 8);
       g.fillRect(20, 16, 8, 8);
+      // 나무 바닥 추가 디테일
+      if (t.name === 'tile_floor_wood') {
+        g.lineStyle(1, 0x6B4914, 0.3);
+        g.lineBetween(0, 10, 32, 10);
+        g.lineBetween(0, 22, 32, 22);
+      }
+      // 타일 바닥 격자
+      if (t.name === 'tile_floor_tile' || t.name === 'tile_airport_floor') {
+        g.lineStyle(1, 0x999999, 0.2);
+        g.lineBetween(16, 0, 16, 32);
+        g.lineBetween(0, 16, 32, 16);
+      }
+      // 벽 패턴
+      if (t.name === 'tile_wall') {
+        g.fillStyle(0x444444, 1);
+        g.fillRect(0, 0, 32, 4);
+        g.fillRect(0, 28, 32, 4);
+      }
       g.generateTexture(t.name, 32, 32);
     });
+
+    // ── 새 건물 텍스처 ──
+    const newBuildings = [
+      { name: 'building_subway', color: 0x2E8B57, w: 72, h: 56, icon: 'M' },
+      { name: 'building_restaurant', color: 0xCD5C5C, w: 64, h: 48, icon: '🍴' },
+      { name: 'building_cafe', color: 0x8B4513, w: 56, h: 48, icon: '☕' },
+      { name: 'building_oliveyoung', color: 0x00A651, w: 64, h: 48, icon: 'OY' },
+      { name: 'building_departure', color: 0x4682B4, w: 80, h: 56, icon: '✈' },
+      { name: 'building_tower', color: 0xFF4500, w: 48, h: 80, icon: 'T' }
+    ];
+    newBuildings.forEach(b => {
+      g.clear();
+      g.fillStyle(b.color, 1);
+      g.fillRoundedRect(2, 8, b.w - 4, b.h - 10, 6);
+      g.fillStyle(0xdeb887, 1);
+      g.fillTriangle(b.w / 2, 0, 0, 12, b.w, 12);
+      g.fillStyle(0x8B4513, 1);
+      g.fillRect(b.w / 2 - 8, b.h - 20, 16, 20);
+      g.fillStyle(0x87ceeb, 1);
+      for (let i = 0; i < 2; i++) {
+        g.fillRect(b.w * 0.2 + i * b.w * 0.4, 20, 12, 10);
+      }
+      // 지하철역은 녹색 띠
+      if (b.name === 'building_subway') {
+        g.fillStyle(0x00ff88, 0.4);
+        g.fillRect(2, b.h - 8, b.w - 4, 6);
+      }
+      g.generateTexture(b.name, b.w, b.h);
+    });
+
+    // ── UI 아이콘 텍스처 ──
+    // 지하철 아이콘 (초록 원 + M)
+    g.clear();
+    g.fillStyle(0x2E8B57, 1);
+    g.fillCircle(12, 12, 11);
+    g.fillStyle(0xffffff, 1);
+    g.fillRect(5, 6, 3, 12);   // M 좌측
+    g.fillRect(16, 6, 3, 12);  // M 우측
+    g.fillRect(8, 6, 2, 8);    // M 중앙좌
+    g.fillRect(13, 6, 2, 8);   // M 중앙우
+    g.generateTexture('icon_subway', 24, 24);
+
+    // 비행기 아이콘
+    g.clear();
+    g.fillStyle(0x4682B4, 1);
+    g.fillCircle(12, 12, 11);
+    g.fillStyle(0xffffff, 1);
+    g.fillTriangle(12, 3, 6, 18, 18, 18); // 비행기 실루엣
+    g.fillRect(9, 16, 6, 4);
+    g.generateTexture('icon_airplane', 24, 24);
+
+    // 출구 아이콘
+    g.clear();
+    g.fillStyle(0x00ff88, 1);
+    g.fillRect(8, 4, 8, 16);   // 화살표 몸통
+    g.fillTriangle(12, 22, 4, 14, 20, 14); // 화살표 머리
+    g.generateTexture('icon_exit', 24, 24);
 
     g.destroy();
   }
 
   create() {
     gameState.load();
-    this.dataLoadPromise.then(() => {
-      setTimeout(() => this.scene.start('TitleScene'), 500);
-    }).catch(err => {
-      console.error('Failed to load game data:', err);
-      setTimeout(() => this.scene.start('TitleScene'), 500);
-    });
+    const goTitle = () => {
+      if (this.scene.isActive()) {
+        setTimeout(() => this.scene.start('TitleScene'), 500);
+      }
+    };
+    if (this.dataLoadPromise) {
+      this.dataLoadPromise.then(goTitle).catch(err => {
+        console.error('Failed to load game data:', err);
+        goTitle();
+      });
+    } else {
+      // HMR reload — preload wasn't called, load data now
+      dataLoader.preloadEssentials().then(goTitle).catch(err => {
+        console.error('Failed to load game data:', err);
+        goTitle();
+      });
+    }
+    // Safety timeout: always proceed after 5s
+    setTimeout(() => goTitle(), 5000);
   }
 }

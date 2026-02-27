@@ -49,7 +49,15 @@ export default class ChapterSelectScene extends Phaser.Scene {
           gameState.currentChapter = ch.id;
           gameState.currentLesson = 'l01';
           this.cameras.main.fadeOut(300);
-          setTimeout(() => this.scene.start(ch.scene || 'FukuokaScene'), 300);
+          // 3계층 맵 시스템: 챕터별 시작 씬 매핑
+          const chapterSceneMap = {
+            'ch00': 'FukuokaYakuinScene',
+            'ch01': 'IncheonAirportScene',
+            'ch02': 'SeoulMyeongdongScene', // 미래 확장
+            'ch03': 'SeoulMyeongdongScene'  // 미래 확장
+          };
+          const targetScene = chapterSceneMap[ch.id] || ch.scene || 'FukuokaYakuinScene';
+          setTimeout(() => this.scene.start(targetScene), 300);
         });
       }
     });

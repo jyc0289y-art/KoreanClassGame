@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { gameState } from '../systems/GameState.js';
 import { dataLoader } from '../systems/DataLoader.js';
-import { CHARACTERS, PLAYER_SPEED, REF_WIDTH } from '../constants.js';
+import { CHARACTERS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES } from '../constants.js';
 
 export default class BaseWorldScene extends Phaser.Scene {
   constructor(key) {
@@ -36,6 +36,11 @@ export default class BaseWorldScene extends Phaser.Scene {
     this._npcGraceTime = null;
   }
 
+  // ── init: scene.start()에서 전달된 데이터 수신 ──────
+  init(data) {
+    this._initData = data || {};
+  }
+
   // ── Helper: UI scale factor ──────────────────────────
   get uiScale() {
     const w = this.cameras.main.width;
@@ -66,8 +71,15 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight);
     this.createTilemap(config.tiles || 'grass');
 
+    // ── 맵 방문 기록 ──
+    gameState.visitMap(this.scene.key);
+
+    // ── 스폰 위치: init 데이터 또는 config 기본값 ──
+    const spawnX = this._initData?.spawnX || config.startX || 400;
+    const spawnY = this._initData?.spawnY || config.startY || 600;
+
     const charName = gameState.currentCharacter;
-    this.player = this.physics.add.sprite(config.startX || 400, config.startY || 600, charName);
+    this.player = this.physics.add.sprite(spawnX, spawnY, charName);
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(10);
 
@@ -451,6 +463,192 @@ export default class BaseWorldScene extends Phaser.Scene {
       fontSize: `${Math.round(14 * this.uiScale)}px`, color: '#ff4444', backgroundColor: '#000000cc', padding: { x: 20, y: 10 }
     }).setOrigin(0.5).setScrollFactor(0).setDepth(500);
     this.time.delayedCall(2000, () => { msg.destroy(); this.portalLockMsgShown = false; });
+  }
+
+  // ── Subway Entrance (지하철역 입구) ────────────────
+  createSubwayEntrance(x, y, metroSceneKey, stationId, labelKo, labelJa) {
+    // 지하철역 건물 이미지
+    this.add.image(x, y, 'building_subway').setDepth(2);
+
+    // 역 이름 라벨
+    const labelText = labelKo + (labelJa ? '\n' + labelJa : '');
+    this.add.text(x, y + 36, labelText, {
+      fontSize: '9px', color: '#00ff88', align: 'center',
+      backgroundColor: '#00000088', padding: { x: 4, y: 2 }
+    }).setOrigin(0.5, 0).setDepth(3);
+
+    // 지하철 아이콘 + 깜빡임
+    const icon = this.add.image(x, y - 34, 'icon_subway').setDepth(15);
+    this.tweens.add({
+      targets: icon, y: y - 38, duration: 800,
+      yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+    });
+
+    // 물리 충돌체
+    const collider = this.physics.add.staticImage(x, y, 'building_subway');
+    this.physics.add.collider(this.player, collider);
+    this.buildingPositions.push({ x, y });
+
+    // 상호작용 존 (자동 진입)
+    const zone = this.add.zone(x, y + 30, 60, 40);
+    this.physics.add.existing(zone, true);
+    this.physics.add.overlap(this.player, zone, () => {
+      if (!this.isTransitioning) {
+        this.enterSubway(metroSceneKey, stationId);
+      }
+    });
+
+    // 탭 존
+    const tapZone = this.add.zone(x, y, 80, 70)
+      .setInteractive({ useHandCursor: true }).setDepth(6);
+    tapZone.on('pointerdown', () => {
+      if (!this.isTransitioning) {
+        this.enterSubway(metroSceneKey, stationId);
+      }
+    });
+  }
+
+  enterSubway(metroSceneKey, stationId) {
+    this.isTransitioning = true;
+    gameState.lastStation = stationId;
+    gameState.save();
+    this.cameras.main.fadeOut(500, 0, 0, 0);
+    this.time.delayedCall(500, () => {
+      this.scene.start(metroSceneKey, { fromStation: stationId });
+    });
+  }
+
+  // ── Enterable Building (진입 가능한 건물) ──────────
+  createEnterableBuilding(x, y, placeSceneKey, config) {
+    /*
+      config = {
+        texture: 'building_house',
+        name_ko: '유코 집',
+        name_ja: 'ユコの家',
+        requiredLevel: 0,       // 진입에 필요한 레벨 (0 = 항상)
+        spawnX, spawnY           // 장소맵 내 시작 위치 (optional)
+      }
+    */
+    const texture = config.texture || 'building_house';
+
+    // 건물 이미지
+    this.add.image(x, y, texture).setDepth(2);
+
+    // 건물 이름
+    const label = config.name_ko + (config.name_ja ? '\n' + config.name_ja : '');
+    this.add.text(x, y + 30, label, {
+      fontSize: '9px', color: '#ffffff', align: 'center',
+      backgroundColor: '#333333aa', padding: { x: 3, y: 1 }
+    }).setOrigin(0.5, 0).setDepth(3);
+
+    // 진입 가능 표시 (문 아이콘)
+    const doorIcon = this.add.text(x, y - 28, '🚪', {
+      fontSize: '12px'
+    }).setOrigin(0.5).setDepth(15);
+    this.tweens.add({
+      targets: doorIcon, y: y - 32, alpha: { from: 1, to: 0.5 },
+      duration: 1000, yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+    });
+
+    // 물리 충돌
+    const collider = this.physics.add.staticImage(x, y, texture);
+    this.physics.add.collider(this.player, collider);
+    this.buildingPositions.push({ x, y });
+
+    const locked = (config.requiredLevel || 0) > gameState.current.level;
+    if (locked) {
+      doorIcon.setText('🔒');
+    }
+
+    // 상호작용 존
+    const zone = this.add.zone(x, y + 30, 60, 40);
+    this.physics.add.existing(zone, true);
+    this.physics.add.overlap(this.player, zone, () => {
+      if (!this.isTransitioning && !locked) {
+        this.enterBuilding(placeSceneKey, config);
+      }
+    });
+
+    // 탭 존
+    const tapZone = this.add.zone(x, y, 80, 60)
+      .setInteractive({ useHandCursor: true }).setDepth(6);
+    tapZone.on('pointerdown', () => {
+      if (this.isTransitioning) return;
+      if (locked) {
+        this.showPortalLockedMsg(config.requiredLevel);
+      } else {
+        this.enterBuilding(placeSceneKey, config);
+      }
+    });
+  }
+
+  enterBuilding(placeSceneKey, config) {
+    if (this.isTransitioning) return;
+    this.isTransitioning = true;
+    gameState.save();
+    this.cameras.main.fadeOut(400, 0, 0, 0);
+    this.time.delayedCall(400, () => {
+      this.scene.start(placeSceneKey, {
+        returnScene: this.scene.key,
+        spawnX: config.spawnX,
+        spawnY: config.spawnY
+      });
+    });
+  }
+
+  // ── International Departure Gate (국제선 탑승구) ──
+  createDepartureGate(x, y, labelKo, labelJa) {
+    // 탑승구 건물
+    this.add.image(x, y, 'building_departure').setDepth(2);
+
+    const label = labelKo + (labelJa ? '\n' + labelJa : '');
+    this.add.text(x, y + 36, label, {
+      fontSize: '9px', color: '#4682B4', align: 'center',
+      backgroundColor: '#00000088', padding: { x: 4, y: 2 }
+    }).setOrigin(0.5, 0).setDepth(3);
+
+    // 비행기 아이콘
+    const icon = this.add.image(x, y - 34, 'icon_airplane').setDepth(15);
+    this.tweens.add({
+      targets: icon, y: y - 38, duration: 800,
+      yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+    });
+
+    // 물리 충돌
+    const collider = this.physics.add.staticImage(x, y, 'building_departure');
+    this.physics.add.collider(this.player, collider);
+    this.buildingPositions.push({ x, y });
+
+    // 상호작용 존
+    const zone = this.add.zone(x, y + 30, 80, 40);
+    this.physics.add.existing(zone, true);
+    this.physics.add.overlap(this.player, zone, () => {
+      if (!this.isTransitioning) {
+        this.enterInternationalMap();
+      }
+    });
+
+    // 탭 존
+    const tapZone = this.add.zone(x, y, 90, 70)
+      .setInteractive({ useHandCursor: true }).setDepth(6);
+    tapZone.on('pointerdown', () => {
+      if (!this.isTransitioning) {
+        this.enterInternationalMap();
+      }
+    });
+  }
+
+  enterInternationalMap() {
+    if (this.isTransitioning) return;
+    this.isTransitioning = true;
+    gameState.lastAirport = gameState.currentMap;
+    gameState.save();
+    this.cameras.main.fadeOut(500, 0, 0, 0);
+    this.time.delayedCall(500, () => {
+      this.scene.start('InternationalMapScene', {
+        fromAirport: gameState.lastAirport
+      });
+    });
   }
 
   // ── Character Switch Button ─────────────────────────
