@@ -1,0 +1,17 @@
+{
+  "scene_title_ko": "한국 친구와 쇼핑",
+  "scene_title_ja": "韓国の友達とショッピング",
+  "lines": [
+    { "speaker": "minji", "emotion": "excited", "text_ko": "명동에 왔어요! 여기서 뭐든지 살 수 있어요!", "text_ja": "明洞に来ましたよ！ここで何でも買えますよ！", "pronunciation": "[명동에 와써요! 여기서 뭐든지 살 쑤 이써요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "와, 옷 가게가 진짜 많다! 저 가게에 들어갈 수 있어요?", "text_ja": "わぁ、服屋さんが本当に多い！あのお店に入れますか？", "pronunciation": "[와, 옫 가게가 진짜 만타! 저 가게에 드러갈 쑤 이써요?]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "그럼요! 저 가게는 가격을 좀 깎을 수 있어요.", "text_ja": "もちろん！あのお店は値段を少し値切れますよ。", "pronunciation": "[그럼요! 저 가게는 가겨글 좀 까글 쑤 이써요]" },
+    { "speaker": "yuko", "emotion": "nervous", "text_ko": "이 원피스 예쁜데... 이거 입어 볼 수 있어요?", "text_ja": "このワンピースかわいいけど...これ試着できますか？", "pronunciation": "[이 원피스 예쁜데... 이거 이벼 볼 쑤 이써요?]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "네! 탈의실은 저쪽이에요. 다른 색도 고를 수 있어요.", "text_ja": "はい！試着室はあちらです。他の色も選べますよ。", "pronunciation": "[네! 타리시른 저쪼기에요. 다른 색또 고를 쑤 이써요]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "이거 좀 작아요. 큰 사이즈로 바꿀 수 있어요?", "text_ja": "これちょっと小さいです。大きいサイズに替えてもらえますか？", "pronunciation": "[이거 좀 자가요. 큰 사이즈로 바꿀 쑤 이써요?]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "유코야, 나는 올리브숲에 갈래! 화장품 사고 싶어!", "text_ja": "ユコ、私は올리브숲に行きたい！化粧品が買いたい！", "pronunciation": "[유코야, 나는 올리브숩에 갈래! 화장품 사고 시퍼!]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "올리브숲은 바로 옆이에요. 거기서 테스터를 써 볼 수 있어요.", "text_ja": "올리브숲はすぐ隣ですよ。そこでテスターを試すことができますよ。", "pronunciation": "[올리브수픈 바로 여피에요. 거기서 테스터를 써 볼 쑤 이써요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "이 립스틱 색깔이 너무 예뻐요! 카드로 결제할 수 있어요?", "text_ja": "このリップの色がすごくきれい！カードで決済できますか？", "pronunciation": "[이 립스틱 색까리 너무 예뻐요! 카드로 결제할 쑤 이써요?]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "나는 먹방 촬영할 데를 찾을 수 없어... 민지야, 맛집 추천해 줄 수 있어?", "text_ja": "僕はモッパン撮影する場所が見つからない...ミンジ、おすすめの店を教えてくれる？", "pronunciation": "[나는 먹방 촤려할 데를 차즐 쑤 업써... 민지야, 맏찝 추천해 줄 쑤 이써?]" },
+    { "speaker": "minji", "emotion": "excited", "text_ko": "그럼 명동 칼국수 골목으로 가요! 거기서 유명한 칼국수를 먹을 수 있어요!", "text_ja": "じゃあ明洞カルグクス横丁に行きましょう！そこで有名なカルグクスが食べられますよ！", "pronunciation": "[그럼 명동 칼국쑤 골모그로 가요! 거기서 유명한 칼국쑤를 머글 쑤 이써요!]" }
+  ]
+}

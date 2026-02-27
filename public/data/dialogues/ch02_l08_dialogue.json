@@ -1,0 +1,17 @@
+{
+  "scene_title_ko": "SNS에 올리기",
+  "scene_title_ja": "SNSに投稿する",
+  "lines": [
+    { "speaker": "rui", "emotion": "excited", "text_ko": "오늘 찍은 사진 진짜 잘 나온 것 같아!", "text_ja": "今日撮った写真、本当によく撮れたみたい！", "pronunciation": "[오늘 찌근 사진 진짜 잘 나온 것 가타!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "이 사진은 명동에서 찍은 건데, 분위기가 좋은 것 같아.", "text_ja": "この写真は明洞で撮ったんだけど、雰囲気が良さそう。", "pronunciation": "[이 사지는 명동에서 찌근 건데, 부뉘기가 조은 걷 가타]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "이 필터 쓰면 더 예쁜 것 같아! 한번 써 봐.", "text_ja": "このフィルター使うともっときれいなみたい！一回使ってみて。", "pronunciation": "[이 필터 쓰면 더 예쁜 걷 가타! 한번 써 봐]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "해시태그를 뭘로 할까? '서울여행'이 좋은 것 같은데.", "text_ja": "ハッシュタグ何にしようか？「ソウル旅行」が良さそうだけど。", "pronunciation": "[해시태그를 뭘로 할까? 서울려행이 조은 걷 가튼데]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "'맛집추천'이랑 '명동쇼핑'도 넣는 게 좋은 것 같아요.", "text_ja": "「おすすめグルメ」と「明洞ショッピング」も入れた方がいいと思いますよ。", "pronunciation": "[맏찝추처니랑 명동쇼핑도 넌는 게 조은 걷 가타요]" },
+    { "speaker": "yuko", "emotion": "thoughtful", "text_ko": "일본 친구들이 이 사진 보면 부러워할 것 같아.", "text_ja": "日本の友達がこの写真見たら羨ましがりそう。", "pronunciation": "[일본 친구드리 이 사진 보면 부러워할 걷 가타]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "서울 사람들은 정말 패션 감각이 뛰어난 것 같아요!", "text_ja": "ソウルの人たちは本当にファッションセンスが優れているみたいですね！", "pronunciation": "[서울 사람드른 정말 패션 감가기 뛰어난 걷 가타요!]" },
+    { "speaker": "rui", "emotion": "excited", "text_ko": "먹방 영상 편집 끝났어! 조회수가 많이 나올 것 같아.", "text_ja": "モッパン動画の編集終わった！再生回数がたくさん出そう。", "pronunciation": "[먹방 영상 편집 끈나써! 조회수가 마니 나올 걷 가타]" },
+    { "speaker": "jiwon", "emotion": "friendly", "text_ko": "우리 카페 사진도 올려 줘! 외국인 손님이 늘어날 것 같아.", "text_ja": "うちのカフェの写真もアップして！外国人のお客さんが増えそう。", "pronunciation": "[우리 카페 사진도 올려 줘! 외구긴 손니미 느러날 걷 가타]" },
+    { "speaker": "rui", "emotion": "happy", "text_ko": "물론이지! 지원이 카페 분위기가 진짜 좋은 것 같아.", "text_ja": "もちろん！ジウォンのカフェの雰囲気が本当にいいみたい。", "pronunciation": "[물로니지! 지워니 카페 부뉘기가 진짜 조은 걷 가타]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "우리 서울 여행이 정말 좋은 추억인 것 같아요!", "text_ja": "私たちのソウル旅行は本当にいい思い出みたいですね！", "pronunciation": "[우리 서울 여행이 정말 조은 추어긴 걷 가타요!]" }
+  ]
+}

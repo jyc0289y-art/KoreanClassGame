@@ -1,0 +1,17 @@
+{
+  "scene_title_ko": "카페에서 만남",
+  "scene_title_ja": "カフェでの出会い",
+  "lines": [
+    { "speaker": "yuko", "emotion": "calm", "text_ko": "저기요, 아메리카노 한 잔 주세요.", "text_ja": "すみません、アメリカーノ1杯ください。", "pronunciation": "[저기요, 아메리카노 한 잔 주세요]" },
+    { "speaker": "jiwon", "emotion": "friendly", "text_ko": "아이스요, 핫이요? 사이즈는 어떻게 하시겠어요?", "text_ja": "アイスですか、ホットですか？サイズはいかがなさいますか？", "pronunciation": "[아이스요, 하시요? 사이즈는 어떠케 하시게써요?]" },
+    { "speaker": "yuko", "emotion": "calm", "text_ko": "핫으로 주세요. 레귤러 사이즈요.", "text_ja": "ホットでください。レギュラーサイズで。", "pronunciation": "[하스로 주세요. 레귤러 사이즈요]" },
+    { "speaker": "jiwon", "emotion": "friendly", "text_ko": "네! 4,500원이에요. 잠시만 기다릴게요.", "text_ja": "はい！4,500ウォンです。少々お待ちしますね。", "pronunciation": "[네! 사천오백 워니에요. 잠시만 기다릴게요]" },
+    { "speaker": "yuko", "emotion": "nervous", "text_ko": "아, 죄송해요! 괜찮으세요?", "text_ja": "あ、すみません！大丈夫ですか？", "pronunciation": "[아, 죄송해요! 괜찬으세요?]" },
+    { "speaker": "minji", "emotion": "surprised", "text_ko": "아, 괜찮아요! 저도 안 보고 걸었어요.", "text_ja": "あ、大丈夫です！私も見ないで歩いてました。", "pronunciation": "[아, 괜찬아요! 저도 안 보고 거러써요]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "혹시 일본에서 오셨어요? 저는 민지예요.", "text_ja": "もしかして日本から来られましたか？私はミンジです。", "pronunciation": "[혹씨 일보네서 오셔써요? 저는 민지예요]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "네! 저는 유코예요. 후쿠오카에서 왔어요.", "text_ja": "はい！私はユコです。福岡から来ました。", "pronunciation": "[네! 저는 유코예요. 후쿠오카에서 왔써요]" },
+    { "speaker": "minji", "emotion": "excited", "text_ko": "후쿠오카요? 저도 가보고 싶었어요! 같이 앉을게요!", "text_ja": "福岡ですか？私も行ってみたかったです！一緒に座りますね！", "pronunciation": "[후쿠오카요? 저도 가보고 시퍼써요! 가치 안즐게요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "좋아요! 서울에 대해 많이 알려 줄게요?", "text_ja": "いいですよ！ソウルについてたくさん教えてくれますか？", "pronunciation": "[조아요! 서우레 대해 만이 알려 줄게요?]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "그럼요! 제가 맛집도 소개해 줄게요.", "text_ja": "もちろんです！私がおいしい店も紹介しますね。", "pronunciation": "[그럼요! 제가 맏찝또 소개해 줄게요]" }
+  ]
+}

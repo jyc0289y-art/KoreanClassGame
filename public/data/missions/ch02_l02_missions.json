@@ -1,0 +1,121 @@
+[
+  {
+    "id": "m_gp_ch02_l02_001",
+    "type": "grammar_point",
+    "grammar_ko": "~는 것을 좋아하다",
+    "grammar_ja": "〜することが好きだ",
+    "explanation_ko": "동사 뒤에 '~는 것을 좋아하다'를 붙여서 어떤 행동을 좋아한다고 말할 때 사용합니다.",
+    "explanation_ja": "動詞の後に「〜는 것을 좋아하다」を付けて、ある行動が好きだと言うときに使います。",
+    "form_info": {
+      "동사+는 것": "먹는 것, 듣는 것, 보는 것",
+      "줄임말": "~는 걸 좋아하다 (회화에서 자주 사용)"
+    },
+    "examples": [
+      {
+        "ko": "저는 BTX 음악을 듣는 것을 좋아해요.",
+        "pronunciation": "[저는 비티엑스 음아글 든는 거슬 조아해요]",
+        "ja": "私はBTXの音楽を聴くことが好きです。"
+      },
+      {
+        "ko": "한국 패션을 보는 것을 좋아해요.",
+        "pronunciation": "[한국 패셔늘 보는 거슬 조아해요]",
+        "ja": "韓国ファッションを見ることが好きです。"
+      },
+      {
+        "ko": "노래하는 것을 좋아해요.",
+        "pronunciation": "[노래하는 거슬 조아해요]",
+        "ja": "歌うことが好きです。"
+      }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "저는 K-POP ___ 좋아해요.",
+      "sentence_ja": "私はK-POPを聴くことが好きです。",
+      "answer": "듣는 것을",
+      "choices": ["듣는 것을", "듣는 것이", "듣는 것에", "듣는 것은"]
+    },
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_mc_ch02_l02_001",
+    "type": "multiple_choice",
+    "question_ko": "'취미가 뭐예요?'의 일본어 뜻은?",
+    "question_ja": "「취미가 뭐예요?」の日本語の意味は？",
+    "choices": ["趣味は何ですか？", "名前は何ですか？", "仕事は何ですか？", "好きなものは何ですか？"],
+    "correct": 0,
+    "explanation_ko": "취미(趣味) + 가(が) + 뭐예요(何ですか) = 趣味は何ですか？",
+    "explanation_ja": "취미（趣味）＋ 가（が）＋ 뭐예요（何ですか）＝ 趣味は何ですか？",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_mc_ch02_l02_002",
+    "type": "multiple_choice",
+    "question_ko": "다음 중 ARMI에 대한 설명으로 올바른 것은?",
+    "question_ja": "次のうちARMIについての説明で正しいものは？",
+    "choices": ["BTX의 팬덤 이름이에요.", "K-POP 그룹 이름이에요.", "한국 패션 브랜드예요.", "한국 음식 이름이에요."],
+    "correct": 0,
+    "explanation_ko": "ARMI는 BTX의 공식 팬덤 이름입니다.",
+    "explanation_ja": "ARMIはBTXの公式ファンダム名です。",
+    "xp": 10,
+    "coin": 2
+  },
+  {
+    "id": "m_fb_ch02_l02_001",
+    "type": "fill_blank",
+    "question_ko": "저는 한국 드라마를 ___ 좋아해요.",
+    "question_ja": "私は韓国ドラマを___が好きです。（見ること）",
+    "answer": "보는 것을",
+    "choices": ["보는 것을", "보는 것이", "본 것을", "볼 것을"],
+    "hint_ko": "'보다'의 현재형 + 는 것을",
+    "hint_ja": "「보다（見る）」の現在形 ＋ 는 것을",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_wm_ch02_l02_001",
+    "type": "word_match",
+    "question_ko": "취미와 관련된 단어를 맞춰 보세요!",
+    "question_ja": "趣味に関する単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "노래", "japanese": "歌" },
+      { "korean": "춤", "japanese": "ダンス" },
+      { "korean": "쇼핑", "japanese": "ショッピング" },
+      { "korean": "영화 감상", "japanese": "映画鑑賞" },
+      { "korean": "독서", "japanese": "読書" }
+    ],
+    "xp": 20,
+    "coin": 4
+  },
+  {
+    "id": "m_pron_ch02_l02_001",
+    "type": "pronunciation_check",
+    "rule": "격음화",
+    "rule_ja": "激音化",
+    "word": "좋아하다",
+    "question_ko": "'좋아하다'의 실제 발음은?",
+    "question_ja": "「좋아하다」の実際の発音は？",
+    "choices": ["[조아하다]", "[좋아하다]", "[조타하다]", "[졷아하다]"],
+    "correct": 0,
+    "explanation_ko": "ㅎ 받침이 모음 앞에서 탈락하여 [조아하다]로 발음됩니다.",
+    "explanation_ja": "ㅎパッチムが母音の前で脱落して[조아하다]と発音されます。",
+    "xp": 15,
+    "coin": 3
+  },
+  {
+    "id": "m_do_ch02_l02_001",
+    "type": "dialogue_order",
+    "question_ko": "취미에 대한 대화를 올바른 순서로 배열하세요!",
+    "question_ja": "趣味についての会話を正しい順番に並べてください！",
+    "lines": [
+      { "speaker": "현정", "text_ko": "유코 씨, 취미가 뭐예요?", "text_ja": "ユウコさん、趣味は何ですか？" },
+      { "speaker": "유코", "text_ko": "저는 K-POP 듣는 것을 좋아해요.", "text_ja": "私はK-POPを聴くことが好きです。" },
+      { "speaker": "현정", "text_ko": "오! 어떤 가수를 좋아해요?", "text_ja": "おお！どんな歌手が好きですか？" },
+      { "speaker": "유코", "text_ko": "BTX를 가장 좋아해요. ARMI예요!", "text_ja": "BTXが一番好きです。ARMIです！" },
+      { "speaker": "현정", "text_ko": "저도 BTX 좋아해요! 같이 콘서트 갈까요?", "text_ja": "私もBTX好きです！一緒にコンサート行きましょうか？" }
+    ],
+    "xp": 20,
+    "coin": 4
+  }
+]

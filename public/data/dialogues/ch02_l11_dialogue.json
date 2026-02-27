@@ -1,0 +1,18 @@
+{
+  "scene_title_ko": "종합 복습: 또 만나요!",
+  "scene_title_ja": "総合復習：また会いましょう！",
+  "lines": [
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "공항에 도착했어요. 시간이 빠르게 지나갔네요.", "text_ja": "空港に着きました。時間が早く過ぎましたね。", "pronunciation": "[공항에 도차캐써요. 시가니 빠르게 지나간네요]" },
+    { "speaker": "minji", "emotion": "sad", "text_ko": "벌써 가게 돼서 너무 슬퍼요.", "text_ja": "もう帰ることになって本当に悲しいです。", "pronunciation": "[벌써 가게 돼서 너무 슬퍼요]" },
+    { "speaker": "yuko", "emotion": "sad", "text_ko": "민지 씨 덕분에 서울을 좋아하게 됐어요. 정말 고마워요.", "text_ja": "ミンジさんのおかげでソウルが好きになりました。本当にありがとう。", "pronunciation": "[민지 씨 덕뿌네 서우를 조아하게 됐써요. 정말 고마워요]" },
+    { "speaker": "ami", "emotion": "nervous", "text_ko": "다음에 꼭 다시 오려고 해요. 그때 같이 BTX 콘서트 보러 가요!", "text_ja": "次は絶対また来ようと思います。その時一緒にBTXのコンサートを見に行きましょう！", "pronunciation": "[다으메 꼭 다시 오려고 해요. 그때 가치 비티엑스 콘서트 보러 가요!]" },
+    { "speaker": "jiwon", "emotion": "happy", "text_ko": "아미 씨가 카페에 올 때마다 특별한 메뉴를 만들어 줄게요!", "text_ja": "アミさんがカフェに来るたびに特別なメニューを作ってあげますよ！", "pronunciation": "[아미 씨가 카페에 올 때마다 특뼐한 메뉴를 만드러 줄게요!]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "전주 여행도 정말 재미있었어요. 한복 입고 찍은 사진을 보내 줄게요.", "text_ja": "全州旅行も本当に楽しかったです。韓服を着て撮った写真を送りますね。", "pronunciation": "[전주 여행도 정말 재미이써써요. 한복 입꼬 찌근 사지늘 보내 줄게요]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "저도 여름에 일본에 가려고 해요! 후쿠오카에서 만나요!", "text_ja": "私も夏に日本に行こうと思います！福岡で会いましょう！", "pronunciation": "[저도 여르메 일보네 가려고 해요! 후쿠오카에서 만나요!]" },
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "정말요? 제가 맛집을 소개해 줄게요! 꼭 와요!", "text_ja": "本当ですか？私がおいしい店を紹介しますね！必ず来てください！", "pronunciation": "[정말요? 제가 맏찌블 소개해 줄게요! 꼭 와요!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "우리 이제 진짜 친구가 됐잖아요. ARMI끼리 영원히 친구해요!", "text_ja": "私たちもう本当の友達になったじゃないですか。ARMI同士永遠に友達でいましょう！", "pronunciation": "[우리 이제 진짜 친구가 됐자나요. 아르미끼리 영워니 친구해요!]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "다음에 한국에 오게 되면 꼭 연락하세요. 언제든 환영이에요!", "text_ja": "次に韓国に来ることになったら必ず連絡してください。いつでも歓迎ですよ！", "pronunciation": "[다으메 한구게 오게 되면 꼭 연라카세요. 언제든 환영이에요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "안녕히 계세요! 또 만나요, 서울!", "text_ja": "さようなら！また会いましょう、ソウル！", "pronunciation": "[안녕히 계세요! 또 만나요, 서울!]" },
+    { "speaker": "rui", "emotion": "happy", "text_ko": "고마워요, 모두! 우리의 이야기는 여기서 끝이 아니에요!", "text_ja": "ありがとう、みんな！私たちの物語はここで終わりじゃないですよ！", "pronunciation": "[고마워요, 모두! 우리에 이야기는 여기서 끄치 아니에요!]" }
+  ]
+}

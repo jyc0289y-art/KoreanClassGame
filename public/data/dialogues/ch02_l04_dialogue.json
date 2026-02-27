@@ -1,0 +1,18 @@
+{
+  "scene_title_ko": "한국 음식 도전",
+  "scene_title_ja": "韓国料理に挑戦",
+  "lines": [
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "여기 떡볶이가 정말 맛있어요. 먹어 봤어요?", "text_ja": "ここのトッポッキが本当においしいです。食べたことありますか？", "pronunciation": "[여기 떡뽀끼가 정말 마시써요. 머거 봤써요?]" },
+    { "speaker": "yuko", "emotion": "nervous", "text_ko": "아직 안 먹어 봤어요. 많이 매워요?", "text_ja": "まだ食べたことないです。すごく辛いですか？", "pronunciation": "[아직 안 머거 봤써요. 만이 매워요?]" },
+    { "speaker": "minji", "emotion": "calm", "text_ko": "좀 매워요. 하지만 한번 먹어 보세요! 맛있을 거예요.", "text_ja": "ちょっと辛いです。でも一度食べてみてください！おいしいと思いますよ。", "pronunciation": "[좀 매워요. 하지만 한번 머거 보세요! 마실 거예요]" },
+    { "speaker": "rui", "emotion": "excited", "text_ko": "저는 순두부찌개도 먹어 보고 싶어요! 촬영할게요!", "text_ja": "私はスンドゥブチゲも食べてみたいです！撮影しますね！", "pronunciation": "[저는 순두부찌개도 머거 보고 시퍼요! 촬영할게요!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "저도 치즈 떡볶이 한번 먹어 볼게요!", "text_ja": "私もチーズトッポッキ一度食べてみますね！", "pronunciation": "[저도 치즈 떡뽀끼 한번 머거 볼게요!]" },
+    { "speaker": "yuko", "emotion": "surprised", "text_ko": "앗, 매워! 물 좀 주세요!", "text_ja": "あっ、辛い！お水をちょっとください！", "pronunciation": "[앋, 매워! 물 좀 주세요!]" },
+    { "speaker": "minji", "emotion": "happy", "text_ko": "괜찮아요? 이거 먹어 봐요. 단 음식이 매운 맛을 줄여 줘요.", "text_ja": "大丈夫ですか？これ食べてみて。甘い食べ物が辛さを和らげてくれますよ。", "pronunciation": "[괜찬아요? 이거 머거 봐요. 단 음시기 매운 마슬 주려 줘요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "순두부찌개 진짜 맛있다! 일본에서 못 먹어 본 맛이에요.", "text_ja": "スンドゥブチゲ本当においしい！日本で食べたことない味です。", "pronunciation": "[순두부찌개 진짜 마싣따! 일보네서 몯 머거 본 마시에요]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "치즈 떡볶이 먹어 봤는데 진짜 맛있어요!", "text_ja": "チーズトッポッキ食べてみたけど本当においしいです！", "pronunciation": "[치즈 떡뽀끼 머거 봤는데 진짜 마시써요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "매운데 자꾸 먹게 돼요! 신기해요.", "text_ja": "辛いのにどんどん食べちゃいます！不思議ですね。", "pronunciation": "[매운데 자꾸 먹게 돼요! 신기해요]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "다음에는 삼계탕도 먹어 봐요. 한국의 보양식이에요.", "text_ja": "今度はサムゲタンも食べてみてください。韓国の栄養食です。", "pronunciation": "[다으메는 삼게탕도 머거 봐요. 한구게 보양시기에요]" },
+    { "speaker": "rui", "emotion": "happy", "text_ko": "꼭 먹어 볼게요! 오늘 먹방 영상 대박 날 것 같아요!", "text_ja": "絶対食べてみますね！今日のモッパン動画はバズりそう！", "pronunciation": "[꼭 머거 볼게요! 오늘 먹빵 영상 대박 날 걷 가타요!]" }
+  ]
+}

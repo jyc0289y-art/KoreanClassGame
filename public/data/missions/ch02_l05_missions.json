@@ -1,0 +1,94 @@
+[
+  {
+    "id": "m_gp_ch02_l05_001",
+    "type": "grammar_point",
+    "grammar_ko": "~(으)ㄹ 수 있다/없다",
+    "grammar_ja": "〜できる／できない",
+    "explanation_ko": "능력이나 가능성을 나타내는 표현입니다. 받침이 없거나 ㄹ받침이면 '~ㄹ 수 있다', 받침이 있으면 '~을 수 있다'를 씁니다.",
+    "explanation_ja": "能力や可能性を表す表現です。パッチムがないかㄹパッチムなら「~ㄹ 수 있다」、パッチムがあれば「~을 수 있다」を使います。",
+    "examples": [
+      { "ko": "이 옷을 입어 볼 수 있어요?", "pronunciation": "[이 오슬 이버 볼 쑤 이써요?]", "ja": "この服を試着できますか？" },
+      { "ko": "카드로 결제할 수 있어요.", "pronunciation": "[카드로 결쩨할 쑤 이써요]", "ja": "カードで決済できます。" }
+    ],
+    "exercise": {
+      "type": "fill_blank",
+      "sentence_ko": "이 옷을 입어 ___있어요?",
+      "sentence_ja": "この服を試着___ますか？",
+      "answer": "볼 수",
+      "choices": ["볼 수", "보면", "보고", "봐서"]
+    },
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_mc_ch02_l05_001",
+    "type": "multiple_choice",
+    "question_ko": "'좀 깎아 주실 수 있어요?'는 어떤 뜻이에요?",
+    "question_ja": "「좀 깎아 주실 수 있어요？」はどういう意味ですか？",
+    "choices": ["少し値引きしていただけますか", "少し包んでいただけますか", "少し大きいサイズはありますか", "少し待っていただけますか"],
+    "correct": 0,
+    "explanation_ko": "'깎다'는 가격을 낮추다라는 뜻입니다. 시장에서 흥정할 때 자주 쓰는 표현입니다.",
+    "explanation_ja": "「깎다」は価格を下げるという意味です。市場で値引き交渉するときによく使う表現です。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_mc_ch02_l05_002",
+    "type": "multiple_choice",
+    "question_ko": "'프리사이즈'는 어떤 의미예요?",
+    "question_ja": "「프리사이즈」はどういう意味ですか？",
+    "choices": ["フリーサイズ（ワンサイズ）", "小さいサイズ", "大きいサイズ", "無料サイズ"],
+    "correct": 0,
+    "explanation_ko": "'프리사이즈'는 한 가지 사이즈로 누구나 입을 수 있는 옷을 의미합니다. 한국 쇼핑에서 자주 사용됩니다.",
+    "explanation_ja": "「프리사이즈」は一つのサイズで誰でも着られる服を意味します。韓国のショッピングでよく使われます。",
+    "xp": 10, "coin": 2
+  },
+  {
+    "id": "m_fb_ch02_l05_001",
+    "type": "fill_blank",
+    "question_ko": "더 큰 사이즈로 바꿀 수 ___?",
+    "question_ja": "もっと大きいサイズに交換___？",
+    "answer": "있어요",
+    "choices": ["있어요", "없어요", "해요", "봐요"],
+    "hint_ko": "'~(으)ㄹ 수 있다'의 해요체입니다. 가능을 나타냅니다.",
+    "hint_ja": "「~(으)ㄹ 수 있다」のヘヨ体です。可能を表します。",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_wm_ch02_l05_001",
+    "type": "word_match",
+    "question_ko": "쇼핑 단어를 맞춰 보세요!",
+    "question_ja": "ショッピングの単語をマッチングしてください！",
+    "pairs": [
+      { "korean": "교환", "japanese": "交換" },
+      { "korean": "환불", "japanese": "返金" },
+      { "korean": "할인", "japanese": "割引" },
+      { "korean": "영수증", "japanese": "レシート" }
+    ],
+    "xp": 20, "coin": 4
+  },
+  {
+    "id": "m_pron_ch02_l05_001",
+    "type": "pronunciation_check",
+    "rule": "격음화", "rule_ja": "激音化",
+    "word": "깎다",
+    "question_ko": "'깎다'의 실제 발음은?",
+    "question_ja": "「깎다」の実際の発音は？",
+    "choices": ["[깍따]", "[깎다]", "[깍다]", "[까따]"],
+    "correct": 0,
+    "explanation_ko": "받침 ㄲ은 대표음 [ㄱ]으로 발음되고, 뒤의 ㄷ과 결합하여 → [깍따]",
+    "explanation_ja": "パッチムㄲは代表音[ㄱ]で発音され、後ろのㄷと結合して → [깍따]",
+    "xp": 15, "coin": 3
+  },
+  {
+    "id": "m_do_ch02_l05_001",
+    "type": "dialogue_order",
+    "question_ko": "시장 쇼핑 대화를 올바른 순서로 배열하세요!",
+    "question_ja": "市場でのショッピング会話を正しい順番に並べてください！",
+    "lines": [
+      { "speaker": "yuko", "text_ko": "이 가방 얼마예요?", "text_ja": "このカバンいくらですか？" },
+      { "speaker": "shopkeeper", "text_ko": "삼만 원이에요.", "text_ja": "3万ウォンです。" },
+      { "speaker": "yuko", "text_ko": "좀 깎아 주실 수 있어요? 이만오천 원은 안 돼요?", "text_ja": "少し値引きしてもらえますか？2万5千ウォンはだめですか？" },
+      { "speaker": "shopkeeper", "text_ko": "좋아요, 이만오천 원에 드릴게요!", "text_ja": "いいですよ、2万5千ウォンにしてあげます！" }
+    ],
+    "xp": 20, "coin": 4
+  }
+]

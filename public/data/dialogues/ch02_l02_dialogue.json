@@ -1,0 +1,18 @@
+{
+  "scene_title_ko": "취미가 뭐예요?",
+  "scene_title_ja": "趣味は何ですか？",
+  "lines": [
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "유코 씨는 취미가 뭐예요?", "text_ja": "ユコさんは趣味は何ですか？", "pronunciation": "[유코 씨는 취미가 뭐예요?]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "저는 패션 잡지 보는 것을 좋아해요.", "text_ja": "私はファッション雑誌を見るのが好きです。", "pronunciation": "[저는 패션 잡찌 보는 거슬 조아해요]" },
+    { "speaker": "yuko", "emotion": "calm", "text_ko": "한국 패션에도 관심이 많아요.", "text_ja": "韓国のファッションにも興味がたくさんあります。", "pronunciation": "[한국 패셔네도 관시미 마나요]" },
+    { "speaker": "minji", "emotion": "excited", "text_ko": "진짜요? 저도 옷 입는 것을 좋아해요!", "text_ja": "本当ですか？私も服を着るのが好きです！", "pronunciation": "[진짜요? 저도 온 님는 거슬 조아해요!]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "안녕하세요! 저는 아미예요. 저는 K-POP 듣는 것을 좋아해요!", "text_ja": "こんにちは！私はアミです。私はK-POPを聴くのが好きです！", "pronunciation": "[안녕하세요! 저는 아미예요. 저는 케이팝 든는 거슬 조아해요!]" },
+    { "speaker": "minji", "emotion": "surprised", "text_ko": "K-POP이요? 혹시 BTX 좋아해요?", "text_ja": "K-POPですか？もしかしてBTX好きですか？", "pronunciation": "[케이파비요? 혹씨 비티엑스 조아해요?]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "네! 저 ARMI예요! 노래 듣는 것도 좋아하고 춤 추는 것도 좋아해요!", "text_ja": "はい！私ARMIです！歌を聴くのも好きだし、踊るのも好きです！", "pronunciation": "[네! 저 아르미예요! 노래 든는 것또 조아하고 춤 추는 것또 조아해요!]" },
+    { "speaker": "minji", "emotion": "happy", "text_ko": "저도 ARMI예요! 우리 잘 맞겠다!", "text_ja": "私もARMIです！私たち気が合いそう！", "pronunciation": "[저도 아르미예요! 우리 잘 맏게따!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "우리 친구 루이는 먹방 촬영하는 것을 좋아해요.", "text_ja": "私たちの友達ルイはモッパン撮影するのが好きです。", "pronunciation": "[우리 친구 루이는 먹빵 촬영하는 거슬 조아해요]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "먹방이요? 재미있겠다! 셋 다 취미가 다르네요.", "text_ja": "モッパンですか？面白そう！3人とも趣味が違いますね。", "pronunciation": "[먹빵이요? 재미읻게따! 셋 다 취미가 다르네요]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "민지 씨, 요즘 BTX 새 앨범 들어 봤어요?", "text_ja": "ミンジさん、最近BTXの新しいアルバム聴きましたか？", "pronunciation": "[민지 씨, 요즘 비티엑스 새 앨범 드러 봤써요?]" },
+    { "speaker": "minji", "emotion": "excited", "text_ko": "당연하죠! 같이 이야기하는 것도 좋아요!", "text_ja": "もちろんです！一緒に話すのも楽しいですよ！", "pronunciation": "[당연하죠! 가치 이야기하는 것또 조아요!]" }
+  ]
+}

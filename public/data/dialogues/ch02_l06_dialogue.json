@@ -1,0 +1,18 @@
+{
+  "scene_title_ko": "아프면 어떡해?",
+  "scene_title_ja": "具合が悪い時どうする？",
+  "lines": [
+    { "speaker": "rui", "emotion": "sad", "text_ko": "으... 배가 너무 아파요...", "text_ja": "うう...お腹がすごく痛い...", "pronunciation": "[으... 배가 너무 아파요...]" },
+    { "speaker": "yuko", "emotion": "nervous", "text_ko": "루이, 괜찮아? 어제 매운 떡볶이 많이 먹었잖아.", "text_ja": "ルイ、大丈夫？昨日辛いトッポッキたくさん食べたでしょ。", "pronunciation": "[루이, 괜차나? 어제 매운 떡보끼 마니 머것짜나]" },
+    { "speaker": "hyunjeong", "emotion": "calm", "text_ko": "약국에 가야 해요. 근처에 약국이 있어요.", "text_ja": "薬局に行かなきゃ。近くに薬局がありますよ。", "pronunciation": "[약꾸게 가야 해요. 근처에 약꾸기 이써요]" },
+    { "speaker": "rui", "emotion": "sad", "text_ko": "약사님, 배가 아프고 속이 메스꺼워요.", "text_ja": "薬剤師さん、お腹が痛くて気持ち悪いです。", "pronunciation": "[약싸님, 배가 아프고 소기 메스꺼워요]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "언제부터 아팠어요? 약사님한테 잘 말해야 해요.", "text_ja": "いつから痛かったですか？薬剤師さんにちゃんと説明しなきゃ。", "pronunciation": "[언제부터 아파써요? 약싸님한테 잘 말해야 해요]" },
+    { "speaker": "rui", "emotion": "sad", "text_ko": "오늘 아침부터요. 설사도 해요...", "text_ja": "今朝からです。下痢もします...", "pronunciation": "[오늘 아침부터요. 설사도 해요...]" },
+    { "speaker": "ami", "emotion": "nervous", "text_ko": "루이, 물을 많이 마셔야 해. 탈수 조심해야 해.", "text_ja": "ルイ、水をたくさん飲まなきゃ。脱水に気をつけなきゃ。", "pronunciation": "[루이, 무를 마니 마셔야 해. 탈쑤 조심해야 해]" },
+    { "speaker": "hyunjeong", "emotion": "calm", "text_ko": "이 약을 식후에 먹어야 해요. 하루에 세 번이에요.", "text_ja": "この薬を食後に飲まなきゃいけません。1日3回です。", "pronunciation": "[이 야글 시쿠에 머거야 해요. 하루에 세 버니에요]" },
+    { "speaker": "rui", "emotion": "thoughtful", "text_ko": "매운 음식은 당분간 참아야 해요?", "text_ja": "辛い食べ物はしばらく我慢しなきゃいけないですか？", "pronunciation": "[매운 음시근 당분간 차마야 해요?]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "네, 오늘은 죽이나 따뜻한 국물을 먹어야 해요.", "text_ja": "はい、今日はお粥や温かいスープを食べなきゃいけません。", "pronunciation": "[네, 오느른 주기나 따뜨탄 궁무를 머거야 해요]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "루이, 빨리 나아야 해! 내일 요리 교실 가야 하잖아!", "text_ja": "ルイ、早く良くならなきゃ！明日料理教室に行かなきゃでしょ！", "pronunciation": "[루이, 빨리 나아야 해! 내일 요리 교실 가야 하자나!]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "알겠어... 오늘은 푹 쉬어야 하겠다.", "text_ja": "わかった...今日はゆっくり休まなきゃ。", "pronunciation": "[알게써... 오느른 푹 쉬어야 하겟따]" }
+  ]
+}

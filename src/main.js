@@ -10,10 +10,6 @@ import MissionScene from './scenes/MissionScene.js';
 import VocabularyScene from './scenes/VocabularyScene.js';
 import ShopScene from './scenes/ShopScene.js';
 
-// ── 기존 씬 (하위호환 유지) ──
-import FukuokaScene from './scenes/FukuokaScene.js';
-import IncheonScene from './scenes/IncheonScene.js';
-
 // ── Layer 1: 국제맵 ──
 import InternationalMapScene from './scenes/InternationalMapScene.js';
 
@@ -76,10 +72,6 @@ const config = {
     BootScene,
     TitleScene,
     ChapterSelectScene,
-
-    // ── 기존 씬 (하위호환) ──
-    FukuokaScene,
-    IncheonScene,
 
     // ── Layer 1: 국제맵 ──
     InternationalMapScene,

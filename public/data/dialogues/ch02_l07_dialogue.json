@@ -1,0 +1,17 @@
+{
+  "scene_title_ko": "요리 교실",
+  "scene_title_ja": "料理教室",
+  "lines": [
+    { "speaker": "hyunjeong", "emotion": "excited", "text_ko": "오늘은 김치찌개랑 떡볶이를 만들 거예요!", "text_ja": "今日はキムチチゲとトッポッキを作りますよ！", "pronunciation": "[오느른 김치찌개랑 떡보끼를 만들 거예요!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "먼저 뭐부터 해요? 재료를 보면서 설명해 주세요!", "text_ja": "まず何からしますか？材料を見ながら説明してください！", "pronunciation": "[먼저 뭐부터 해요? 재료를 보면서 설명해 주세요!]" },
+    { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "배추를 씻으면서 소금을 준비하세요.", "text_ja": "白菜を洗いながら塩を準備してください。", "pronunciation": "[배추를 씨스면서 소그믈 준비하세요]" },
+    { "speaker": "ami", "emotion": "nervous", "text_ko": "고춧가루를 넣으면서 양을 조절해야 해요?", "text_ja": "唐辛子粉を入れながら量を調節しなきゃいけないですか？", "pronunciation": "[고춧까루를 너으면서 양을 조절해야 해요?]" },
+    { "speaker": "hyunjeong", "emotion": "calm", "text_ko": "네, 맛을 보면서 조금씩 넣으세요.", "text_ja": "はい、味を見ながら少しずつ入れてくださいね。", "pronunciation": "[네, 마슬 보면서 조금씩 너으세요]" },
+    { "speaker": "rui", "emotion": "excited", "text_ko": "저는 떡볶이 만들면서 영상 찍어도 돼요?", "text_ja": "僕はトッポッキ作りながら動画撮ってもいいですか？", "pronunciation": "[저는 떡보끼 만들면서 영상 찌거도 돼요?]" },
+    { "speaker": "hyunjeong", "emotion": "happy", "text_ko": "그럼요! 떡을 볶으면서 설명하면 좋은 콘텐츠가 될 거예요.", "text_ja": "もちろん！お餅を炒めながら説明したらいいコンテンツになりますよ。", "pronunciation": "[그럼요! 떠글 보그면서 설명하면 조은 콘텐츠가 될 거예요]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "와, 김치찌개가 끓으면서 좋은 냄새가 나요!", "text_ja": "わぁ、キムチチゲが煮えながらいい匂いがする！", "pronunciation": "[와, 김치찌개가 끄르면서 조은 냄새가 나요!]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "잘하고 있어요! 저어주면서 불을 줄이세요.", "text_ja": "上手ですよ！かき混ぜながら火を弱めてくださいね。", "pronunciation": "[잘하고 이써요! 저어주면서 부를 주리세요]" },
+    { "speaker": "ami", "emotion": "surprised", "text_ko": "노래를 부르면서 요리하니까 더 재밌어요!", "text_ja": "歌を歌いながら料理すると、もっと楽しい！", "pronunciation": "[노래를 부르면서 요리하니까 더 재미써요!]" },
+    { "speaker": "rui", "emotion": "happy", "text_ko": "다 같이 먹으면서 이야기하자! 잘 먹겠습니다!", "text_ja": "みんなで食べながらおしゃべりしよう！いただきます！", "pronunciation": "[다 가치 머그면서 이야기하자! 잘 먹겟씀니다!]" }
+  ]
+}

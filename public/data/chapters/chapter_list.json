@@ -1,6 +1,6 @@
 [
   { "id": "ch00", "name": "한글반", "name_ja": "ハングル班", "cefr": "Pre-A1", "scene": "FukuokaScene", "lessons": 8, "unlock_level": 1, "objective": "한글 읽기·쓰기", "objective_ja": "ハングル読み書き", "status": "available" },
   { "id": "ch01", "name": "초급 회화반", "name_ja": "初級会話班", "cefr": "A1-A2", "scene": "IncheonScene", "lessons": 10, "unlock_level": 4, "objective": "여행 생존 회화", "objective_ja": "旅行サバイバル会話", "status": "available" },
-  { "id": "ch02", "name": "중급1 회화반", "name_ja": "中級1会話班", "cefr": "A2-B1", "scene": "SeoulCh2Scene", "lessons": 11, "unlock_level": 7, "objective": "친구 사귀기·감정 표현", "objective_ja": "友達作り・感情表現", "status": "locked" },
+  { "id": "ch02", "name": "중급1 회화반", "name_ja": "中級1会話班", "cefr": "A2-B1", "scene": "SeoulCh2Scene", "lessons": 11, "unlock_level": 7, "objective": "친구 사귀기·감정 표현", "objective_ja": "友達作り・感情表現", "status": "available" },
   { "id": "ch03", "name": "중급2 회화반", "name_ja": "中級2会話班", "cefr": "B1", "scene": "SeoulCh3Scene", "lessons": 11, "unlock_level": 10, "objective": "생활 한국어·행정", "objective_ja": "生活韓国語・行政", "status": "locked" }
 ]

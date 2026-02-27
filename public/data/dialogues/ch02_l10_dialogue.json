@@ -1,0 +1,16 @@
+{
+  "scene_title_ko": "감정 표현하기",
+  "scene_title_ja": "感情を表現する",
+  "lines": [
+    { "speaker": "yuko", "emotion": "thoughtful", "text_ko": "서울에 와서 한국어를 좋아하게 됐어요.", "text_ja": "ソウルに来て韓国語が好きになりました。", "pronunciation": "[서우레 와서 한구거를 조아하게 됐써요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "저는 BTX 덕분에 한국에 오게 됐어요. 근데 친구까지 사귀게 됐어요!", "text_ja": "私はBTXのおかげで韓国に来ることになりました。でも友達まで作ることになりました！", "pronunciation": "[저는 비티엑스 덕뿌네 한구게 오게 됐써요. 근데 친구까지 사귀게 됐써요!]" },
+    { "speaker": "minji", "emotion": "happy", "text_ko": "저도 유코 씨를 만나게 돼서 정말 기뻐요.", "text_ja": "私もユコさんに会うことになって本当にうれしいです。", "pronunciation": "[저도 유코 씨를 만나게 돼서 정말 기뻐요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "한국 음식을 직접 먹어 보게 돼서 요리에 관심이 생겼어요.", "text_ja": "韓国料理を実際に食べてみることになって、料理に興味が湧きました。", "pronunciation": "[한국 음시글 직쩝 머거 보게 돼서 요리에 관시미 생겨써요]" },
+    { "speaker": "jiwon", "emotion": "friendly", "text_ko": "루이 씨 덕분에 일본 먹방 문화를 알게 됐어요.", "text_ja": "ルイさんのおかげで日本のモッパン文化を知ることになりました。", "pronunciation": "[루이 씨 덕뿌네 일본 먹방 문화를 알게 됐써요]" },
+    { "speaker": "yuko", "emotion": "sad", "text_ko": "곧 돌아가게 되니까 벌써 슬퍼요.", "text_ja": "もうすぐ帰ることになるから、もう悲しいです。", "pronunciation": "[곧 도라가게 되니까 벌써 슬퍼요]" },
+    { "speaker": "ami", "emotion": "sad", "text_ko": "민지 씨, 지원 씨를 못 만나게 되면 너무 보고 싶을 거예요.", "text_ja": "ミンジさん、ジウォンさんに会えなくなったらすごく寂しくなると思います。", "pronunciation": "[민지 씨, 지원 씨를 몬 만나게 되면 너무 보고 시플 거예요]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "울지 마요! 우리 SNS로 매일 연락하게 될 거예요.", "text_ja": "泣かないで！私たちSNSで毎日連絡することになりますよ。", "pronunciation": "[울지 마요! 우리 에스엔에스로 매일 연라카게 될 거예요]" },
+    { "speaker": "rui", "emotion": "thoughtful", "text_ko": "이번 여행으로 정말 많이 변하게 됐어요. 고마워요, 다들.", "text_ja": "今回の旅行で本当にたくさん変わることになりました。ありがとう、みんな。", "pronunciation": "[이번 여행으로 정말 만이 변하게 됐써요. 고마워요, 다들]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "우리가 만나게 된 건 정말 운명인 것 같아요!", "text_ja": "私たちが出会うことになったのは本当に運命だと思います！", "pronunciation": "[우리가 만나게 된 건 정말 운명인 걷 가타요!]" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "scene_title_ko": "서울 구경 약속",
+  "scene_title_ja": "ソウル見物の約束",
+  "lines": [
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "내일 시간 있으면 같이 서울 구경할래요?", "text_ja": "明日時間があれば、一緒にソウル見物しませんか？", "pronunciation": "[내일 시가니 이쓰면 가치 서울 구경할래요?]" },
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "좋아요! 어디로 가면 좋을까요?", "text_ja": "いいですね！どこに行けばいいですかね？", "pronunciation": "[조아요! 어디로 가면 조을까요?]" },
+    { "speaker": "minji", "emotion": "calm", "text_ko": "명동에 가면 쇼핑할 수 있고, 홍대에 가면 재미있는 가게가 많아요.", "text_ja": "明洞に行けばショッピングできるし、弘大に行けば面白いお店が多いです。", "pronunciation": "[명동에 가면 쇼핑할 수 읻꼬, 홍대에 가면 재미인는 가게가 마나요]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "강남에 가면 BTX 관련 장소도 있어요?", "text_ja": "江南に行けばBTX関連の場所もありますか？", "pronunciation": "[강나메 가면 비티엑스 괄련 장소도 이써요?]" },
+    { "speaker": "minji", "emotion": "happy", "text_ko": "그럼요! 고엑스에 가면 달마당 도서관도 볼 수 있어요.", "text_ja": "もちろん！コエクスに行けばタルマダン図書館も見られますよ。", "pronunciation": "[그럼요! 고엑스에 가면 달마당 도서관도 볼 수 이써요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "지하철로 가면 빨라요? T-Pass 있으면 편해요?", "text_ja": "地下鉄で行けば速いですか？T-Passがあれば便利ですか？", "pronunciation": "[지하처로 가면 빨라요? 티패스 이쓰면 편해요?]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "네, 지하철이 제일 편해요. T-Pass 있으면 버스도 탈 수 있어요.", "text_ja": "はい、地下鉄が一番便利です。T-Passがあればバスにも乗れますよ。", "pronunciation": "[네, 지하처리 제일 편해요. 티패스 이쓰면 버스도 탈 수 이써요]" },
+    { "speaker": "yuko", "emotion": "thoughtful", "text_ko": "날씨가 좋으면 북촌 한옥마을도 가고 싶어요.", "text_ja": "天気が良ければ北村韓屋村にも行きたいです。", "pronunciation": "[날씨가 조으면 북쫀 하농마을도 가고 시퍼요]" },
+    { "speaker": "minji", "emotion": "happy", "text_ko": "좋은 생각이에요! 한복 입으면 사진도 예쁘게 나와요.", "text_ja": "いい考えですね！韓服を着れば写真もきれいに撮れますよ。", "pronunciation": "[조은 생가기에요! 한복 이브면 사진도 예쁘게 나와요]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "한복 입어 보고 싶었어요! 재미있겠다!", "text_ja": "韓服着てみたかったです！楽しそう！", "pronunciation": "[한복 이버 보고 시퍼써요! 재미읻게따!]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "그러면 내일 아침 10시에 홍대입구역에서 만나면 돼요.", "text_ja": "それなら明日の朝10時に弘大入口駅で会えば大丈夫ですよ。", "pronunciation": "[그러면 내일 아침 열 시에 홍대입꾸여게서 만나면 돼요]" },
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "좋아요! 내일 보면 반갑겠어요! 기대돼요!", "text_ja": "いいですね！明日会えたらうれしいです！楽しみです！", "pronunciation": "[조아요! 내일 보면 반갑게써요! 기대돼요!]" }
+  ]
+}

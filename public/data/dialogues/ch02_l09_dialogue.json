@@ -1,0 +1,17 @@
+{
+  "scene_title_ko": "주말 여행 계획",
+  "scene_title_ja": "週末旅行の計画",
+  "lines": [
+    { "speaker": "minji", "emotion": "excited", "text_ko": "이번 주말에 전주에 가려고 해요! 같이 갈래요?", "text_ja": "今週末に全州に行こうと思ってます！一緒に行きませんか？", "pronunciation": "[이번 주마레 전주에 가려고 해요! 가치 갈래요?]" },
+    { "speaker": "yuko", "emotion": "surprised", "text_ko": "전주요? 한옥마을이 유명하다고 들었어요!", "text_ja": "全州ですか？韓屋村が有名だと聞きました！", "pronunciation": "[전주요? 한옹마을리 유명하다고 드러써요!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "저도 가고 싶어요! 전주 비빔밥을 먹으려고 했어요.", "text_ja": "私も行きたいです！全州ビビンバを食べようと思ってました。", "pronunciation": "[저도 가고 시퍼요! 전주 비빔바블 머그려고 해써요]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "교통편은 어떻게 하려고 해요? KTX로 가려고요?", "text_ja": "交通手段はどうするつもりですか？KTXで行くつもり？", "pronunciation": "[교통편은 어떠케 하려고 해요? 케이티엑스로 가려고요?]" },
+    { "speaker": "minji", "emotion": "friendly", "text_ko": "네, KTX로 가려고 해요. 서울역에서 두 시간이면 돼요.", "text_ja": "はい、KTXで行こうと思います。ソウル駅から2時間で着きますよ。", "pronunciation": "[네, 케이티엑스로 가려고 해요. 서울려게서 두 시간이면 돼요]" },
+    { "speaker": "jiwon", "emotion": "friendly", "text_ko": "저도 같이 가려고 해요! 제가 맛집 리스트를 만들려고 해요.", "text_ja": "私も一緒に行こうと思います！おいしい店リストを作ろうと思います。", "pronunciation": "[저도 가치 가려고 해요! 제가 맏찝 리스트를 만들려고 해요]" },
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "한복을 입고 한옥마을을 구경하려고 해요!", "text_ja": "韓服を着て韓屋村を見て回ろうと思います！", "pronunciation": "[한보글 입꼬 한옹마을을 구경하려고 해요!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "좋아요! 인생샷을 찍으려고 카메라도 챙겨야겠다.", "text_ja": "いいですね！最高の写真を撮ろうとカメラも持っていかなきゃ。", "pronunciation": "[조아요! 인생샤슬 찌그려고 카메라도 챙겨야게따]" },
+    { "speaker": "rui", "emotion": "calm", "text_ko": "전주에서 초코파이도 사려고 해요. 유명하잖아요.", "text_ja": "全州でチョコパイも買おうと思います。有名じゃないですか。", "pronunciation": "[전주에서 초코파이도 사려고 해요. 유명하자나요]" },
+    { "speaker": "minji", "emotion": "excited", "text_ko": "그럼 토요일 아침에 서울역에서 만나려고 해요. 9시 괜찮아요?", "text_ja": "じゃあ土曜の朝にソウル駅で会おうと思います。9時で大丈夫？", "pronunciation": "[그럼 토요일 아치메 서울려게서 만나려고 해요. 아홉씨 괜찬아요?]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "좋아요! 다 같이 여행하니까 정말 신나요!", "text_ja": "いいですよ！みんなで旅行するから本当にワクワクします！", "pronunciation": "[조아요! 다 가치 여행하니까 정말 신나요!]" }
+  ]
+}
