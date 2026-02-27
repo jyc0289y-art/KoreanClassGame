@@ -19,9 +19,9 @@ export default class SeoulMyeongdongScene extends BaseWorldScene {
       myeongdong: { x: 800, y: 1050 }
     };
     this.placeSpawnPoints = {
-      OliveYoungScene: { x: 800, y: 500 },
-      HiKRGroundScene: { x: 600, y: 350 },
-      HotelScene: { x: 1300, y: 750 }
+      OliveYoungScene: { x: 800, y: 550 },
+      HiKRGroundScene: { x: 600, y: 400 },
+      HotelScene: { x: 1300, y: 800 }
     };
 
     this.createWorld({

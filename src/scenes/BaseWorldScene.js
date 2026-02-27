@@ -85,11 +85,12 @@ export default class BaseWorldScene extends Phaser.Scene {
       spawnY = this.stationSpawnPoints[fromStation].y;
     }
 
-    // 장소맵에서 나왔을 때 → 해당 건물 근처에 스폰
+    // 장소맵에서 나왔을 때 → 해당 건물 근처에 스폰 + 재진입 방지 면역
     const fromPlace = this._initData?.fromPlace;
     if (fromPlace && this.placeSpawnPoints?.[fromPlace]) {
       spawnX = this.placeSpawnPoints[fromPlace].x;
       spawnY = this.placeSpawnPoints[fromPlace].y;
+      this._placeExitImmunityUntil = Date.now() + 500; // 500ms 재진입 방지
     }
 
     const charName = gameState.currentCharacter;
@@ -579,6 +580,8 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.physics.add.existing(zone, true);
     this.physics.add.overlap(this.player, zone, () => {
       if (!this.isTransitioning && !locked) {
+        // 장소맵에서 방금 나온 경우 500ms 면역 (즉시 재진입 방지)
+        if (this._placeExitImmunityUntil && Date.now() < this._placeExitImmunityUntil) return;
         this.enterBuilding(placeSceneKey, config);
       }
     });

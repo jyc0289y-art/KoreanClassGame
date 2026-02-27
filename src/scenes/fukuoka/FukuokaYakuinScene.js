@@ -26,11 +26,11 @@ export default class FukuokaYakuinScene extends BaseWorldScene {
       yakuin: { x: 1900, y: 1250 }
     };
     this.placeSpawnPoints = {
-      YukoHouseScene: { x: 400, y: 1450 },
-      AmiHouseScene: { x: 700, y: 1350 },
-      RuiHouseScene: { x: 1000, y: 1450 },
-      BookstoreScene: { x: 1600, y: 650 },
-      KoreanAcademyScene: { x: 500, y: 750 }
+      YukoHouseScene: { x: 400, y: 1500 },
+      AmiHouseScene: { x: 700, y: 1400 },
+      RuiHouseScene: { x: 1000, y: 1500 },
+      BookstoreScene: { x: 1600, y: 700 },
+      KoreanAcademyScene: { x: 500, y: 800 }
     };
 
     this.createWorld({

@@ -19,7 +19,7 @@ export default class SeoulGangnamScene extends BaseWorldScene {
       gangnam: { x: 800, y: 1050 }
     };
     this.placeSpawnPoints = {
-      RestaurantScene: { x: 1200, y: 550 }
+      RestaurantScene: { x: 1200, y: 600 }
     };
 
     this.createWorld({
