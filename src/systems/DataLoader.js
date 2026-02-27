@@ -17,9 +17,16 @@ class DataLoaderClass {
 
   async loadChapters() {
     if (this.cache.chapters) return this.cache.chapters;
-    const resp = await fetch('./data/chapters/chapter_list.json');
-    this.cache.chapters = await resp.json();
-    return this.cache.chapters;
+    try {
+      const resp = await fetch('./data/chapters/chapter_list.json');
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      this.cache.chapters = await resp.json();
+      return this.cache.chapters;
+    } catch (e) {
+      console.warn('Chapter list not found, using defaults:', e.message);
+      this.cache.chapters = [];
+      return this.cache.chapters;
+    }
   }
 
   async loadVocabulary(chapterId) {

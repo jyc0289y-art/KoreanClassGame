@@ -74,9 +74,23 @@ export default class BaseWorldScene extends Phaser.Scene {
     // ── 맵 방문 기록 ──
     gameState.visitMap(this.scene.key);
 
-    // ── 스폰 위치: init 데이터 또는 config 기본값 ──
-    const spawnX = this._initData?.spawnX || config.startX || 400;
-    const spawnY = this._initData?.spawnY || config.startY || 600;
+    // ── 스폰 위치: fromStation/fromPlace 기반 또는 기본값 ──
+    let spawnX = this._initData?.spawnX || config.startX || 400;
+    let spawnY = this._initData?.spawnY || config.startY || 600;
+
+    // 지하철역에서 돌아왔을 때 → 해당 역 근처에 스폰
+    const fromStation = this._initData?.fromStation;
+    if (fromStation && this.stationSpawnPoints?.[fromStation]) {
+      spawnX = this.stationSpawnPoints[fromStation].x;
+      spawnY = this.stationSpawnPoints[fromStation].y;
+    }
+
+    // 장소맵에서 나왔을 때 → 해당 건물 근처에 스폰
+    const fromPlace = this._initData?.fromPlace;
+    if (fromPlace && this.placeSpawnPoints?.[fromPlace]) {
+      spawnX = this.placeSpawnPoints[fromPlace].x;
+      spawnY = this.placeSpawnPoints[fromPlace].y;
+    }
 
     const charName = gameState.currentCharacter;
     this.player = this.physics.add.sprite(spawnX, spawnY, charName);
@@ -724,7 +738,13 @@ export default class BaseWorldScene extends Phaser.Scene {
     // Use Phaser timer instead of setTimeout — auto-destroyed on scene shutdown
     this._switchDelayedCall = this.time.delayedCall(300, () => {
       this._switchDelayedCall = null;
-      this.scene.restart();
+      // 장소맵(BasePlaceScene)에서 캐릭터 전환 시 → 지역맵으로 복귀
+      // (다른 캐릭터는 해당 장소에 간 적이 없으므로)
+      if (this.returnScene) {
+        this.scene.start(this.returnScene);
+      } else {
+        this.scene.restart();
+      }
     });
   }
 

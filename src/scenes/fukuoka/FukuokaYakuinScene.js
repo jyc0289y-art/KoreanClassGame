@@ -21,6 +21,18 @@ export default class FukuokaYakuinScene extends BaseWorldScene {
 
     gameState.setRegion('fukuoka');
 
+    // ── 스폰 포인트: 지하철역/장소맵에서 복귀 시 해당 위치 근처 스폰 ──
+    this.stationSpawnPoints = {
+      yakuin: { x: 1900, y: 1250 }
+    };
+    this.placeSpawnPoints = {
+      YukoHouseScene: { x: 400, y: 1450 },
+      AmiHouseScene: { x: 700, y: 1350 },
+      RuiHouseScene: { x: 1000, y: 1450 },
+      BookstoreScene: { x: 1600, y: 650 },
+      KoreanAcademyScene: { x: 500, y: 750 }
+    };
+
     this.createWorld({
       startX: 1200, startY: 1000,
       tiles: 'grass',

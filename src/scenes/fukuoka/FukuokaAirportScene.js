@@ -24,6 +24,11 @@ export default class FukuokaAirportScene extends BaseWorldScene {
 
     gameState.setRegion('fukuoka');
 
+    // ── 스폰 포인트: 지하철역에서 복귀 시 역 근처 스폰 ──
+    this.stationSpawnPoints = {
+      fukuoka_airport: { x: 800, y: 1050 }
+    };
+
     this.createWorld({
       startX: 800, startY: 500,
       tiles: 'airport',

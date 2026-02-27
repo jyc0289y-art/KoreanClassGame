@@ -14,6 +14,14 @@ export default class SeoulGangnamScene extends BaseWorldScene {
     this.worldHeight = 1200;
     gameState.setRegion('seoul');
 
+    // ── 스폰 포인트: 지하철역/장소맵에서 복귀 시 해당 위치 근처 스폰 ──
+    this.stationSpawnPoints = {
+      gangnam: { x: 800, y: 1050 }
+    };
+    this.placeSpawnPoints = {
+      RestaurantScene: { x: 1200, y: 550 }
+    };
+
     this.createWorld({
       startX: 800, startY: 1000,
       tiles: 'grass',

@@ -14,6 +14,16 @@ export default class SeoulMyeongdongScene extends BaseWorldScene {
     this.worldHeight = 1200;
     gameState.setRegion('seoul');
 
+    // ── 스폰 포인트: 지하철역/장소맵에서 복귀 시 해당 위치 근처 스폰 ──
+    this.stationSpawnPoints = {
+      myeongdong: { x: 800, y: 1050 }
+    };
+    this.placeSpawnPoints = {
+      OliveYoungScene: { x: 800, y: 500 },
+      HiKRGroundScene: { x: 600, y: 350 },
+      HotelScene: { x: 1300, y: 750 }
+    };
+
     this.createWorld({
       startX: 800, startY: 1000,
       tiles: 'grass',
@@ -34,6 +44,16 @@ export default class SeoulMyeongdongScene extends BaseWorldScene {
     // 올리브영 (진입 가능)
     this.createEnterableBuilding(800, 450, 'OliveYoungScene', {
       texture: 'building_oliveyoung', name_ko: '올리브영', name_ja: 'OLIVE YOUNG'
+    });
+
+    // 하이커 그라운드 (진입 가능)
+    this.createEnterableBuilding(600, 300, 'HiKRGroundScene', {
+      texture: 'building_shop', name_ko: '하이커그라운드', name_ja: 'HiKR Ground'
+    });
+
+    // 게스트하우스 (진입 가능)
+    this.createEnterableBuilding(1300, 700, 'HotelScene', {
+      texture: 'building_house', name_ko: '게스트하우스', name_ja: 'ゲストハウス'
     });
 
     // 일반 건물

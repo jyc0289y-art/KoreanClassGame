@@ -27,6 +27,11 @@ export default class IncheonAirportScene extends BaseWorldScene {
 
     gameState.setRegion('seoul');
 
+    // ── 스폰 포인트: 공항철도역에서 복귀 시 역 근처 스폰 ──
+    this.stationSpawnPoints = {
+      incheon_airport: { x: 1000, y: 1050 }
+    };
+
     this.createWorld({
       startX: 1000, startY: 800,
       tiles: 'airport',

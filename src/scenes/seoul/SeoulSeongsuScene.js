@@ -14,6 +14,11 @@ export default class SeoulSeongsuScene extends BaseWorldScene {
     this.worldHeight = 1200;
     gameState.setRegion('seoul');
 
+    // ── 스폰 포인트: 지하철역에서 복귀 시 역 근처 스폰 ──
+    this.stationSpawnPoints = {
+      seongsu: { x: 800, y: 1050 }
+    };
+
     this.createWorld({
       startX: 800, startY: 1000,
       tiles: 'grass',
