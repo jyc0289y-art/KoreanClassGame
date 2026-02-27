@@ -53,6 +53,13 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.buildingPositions = [];
     this.npcs = [];
 
+    // Reset state that persists across scene.restart() (constructor NOT called again)
+    this._interactBtnVisible = false;
+    this._npcHighlight = null;
+    this._npcGraceTime = null;
+    this._isSwitchingCharacter = false;
+    this._switchDelayedCall = null;
+
     // Allow multiple overlapping interactives to receive input
     this.input.topOnly = false;
 
@@ -414,7 +421,7 @@ export default class BaseWorldScene extends Phaser.Scene {
         this.isTransitioning = true;
         gameState.save();
         this.cameras.main.fadeOut(500, 0, 0, 0);
-        setTimeout(() => this.scene.start(targetScene), 500);
+        this.time.delayedCall(500, () => this.scene.start(targetScene));
       } else if (locked && !this.portalLockMsgShown) {
         this.showPortalLockedMsg(requiredLevel);
       }
@@ -426,7 +433,7 @@ export default class BaseWorldScene extends Phaser.Scene {
         this.isTransitioning = true;
         gameState.save();
         this.cameras.main.fadeOut(500, 0, 0, 0);
-        setTimeout(() => this.scene.start(targetScene), 500);
+        this.time.delayedCall(500, () => this.scene.start(targetScene));
       } else if (locked) {
         this.showPortalLockedMsg(requiredLevel);
       }
@@ -443,7 +450,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     const msg = this.add.text(w / 2, h / 2, `🔒 레벨 ${requiredLevel} 이상 필요!\nLv.${requiredLevel}以上が必要！`, {
       fontSize: `${Math.round(14 * this.uiScale)}px`, color: '#ff4444', backgroundColor: '#000000cc', padding: { x: 20, y: 10 }
     }).setOrigin(0.5).setScrollFactor(0).setDepth(500);
-    setTimeout(() => { msg.destroy(); this.portalLockMsgShown = false; }, 2000);
+    this.time.delayedCall(2000, () => { msg.destroy(); this.portalLockMsgShown = false; });
   }
 
   // ── Character Switch Button ─────────────────────────
@@ -451,44 +458,76 @@ export default class BaseWorldScene extends Phaser.Scene {
     const s = this.uiScale;
     const hh = this.hudHeight;
     const chars = ['yuko', 'ami', 'rui'];
-    const btnSize = Math.round(13 * s);
-    const spacing = Math.round(30 * s);
+    const btnSize = Math.max(16, Math.round(13 * s)); // Minimum 16px for mobile
+    const spacing = Math.max(36, Math.round(30 * s)); // Minimum 36px spacing
 
-    this.charSwitchContainer = this.add.container(8 * s, hh + 4).setScrollFactor(0).setDepth(100);
+    // Use individual scrollFactor=0 objects instead of container
+    // to avoid Phaser 3's known hit-testing bug with interactive children
+    // inside scrollFactor=0 containers after camera scroll
+    this._charSwitchElements = [];
+
+    const baseX = 8 * s;
+    const baseY = hh + 4;
 
     chars.forEach((name, i) => {
       const cd = CHARACTERS[name];
       const isActive = name === gameState.currentCharacter;
-      const btnX = i * spacing;
+      const cx = baseX + i * spacing + btnSize;
+      const cy = baseY + btnSize;
       const color = Phaser.Display.Color.HexStringToColor(cd.color).color;
 
-      const ring = this.add.circle(btnX + btnSize, btnSize, btnSize, color, isActive ? 0.5 : 0.1)
-        .setStrokeStyle(isActive ? 2 : 1, color, isActive ? 1 : 0.3);
-      const sprite = this.add.image(btnX + btnSize, btnSize, name).setScale(0.7 * s);
+      const ring = this.add.circle(cx, cy, btnSize, color, isActive ? 0.5 : 0.1)
+        .setStrokeStyle(isActive ? 2 : 1, color, isActive ? 1 : 0.3)
+        .setScrollFactor(0).setDepth(100);
+      const sprite = this.add.image(cx, cy, name).setScale(0.7 * s)
+        .setScrollFactor(0).setDepth(101);
+
+      this._charSwitchElements.push(ring, sprite);
 
       if (isActive) {
-        const indicator = this.add.circle(btnX + btnSize, btnSize * 2 + 2, 2, 0x00ff88, 1);
-        this.charSwitchContainer.add(indicator);
+        const indicator = this.add.circle(cx, cy + btnSize + 2, 2, 0x00ff88, 1)
+          .setScrollFactor(0).setDepth(100);
+        this._charSwitchElements.push(indicator);
       }
 
-      const hitZone = this.add.rectangle(btnX + btnSize, btnSize, btnSize * 2, btnSize * 2, 0xffffff, 0)
+      // Hit zone — minimum 32×32 for mobile tap, each is a direct scene object
+      const hitSize = Math.max(32, btnSize * 2);
+      const hitZone = this.add.rectangle(cx, cy, hitSize, hitSize, 0xffffff, 0)
+        .setScrollFactor(0).setDepth(102)
         .setInteractive({ useHandCursor: true });
 
       hitZone.on('pointerdown', () => {
-        if (name !== gameState.currentCharacter) this.switchCharacter(name);
+        if (name !== gameState.currentCharacter && !this._isSwitchingCharacter) {
+          this.switchCharacter(name);
+        }
       });
 
-      this.charSwitchContainer.add([ring, sprite, hitZone]);
+      this._charSwitchElements.push(hitZone);
     });
   }
 
   switchCharacter(newChar) {
+    // Guard: prevent double-tap causing multiple restarts
+    if (this._isSwitchingCharacter) return;
+    this._isSwitchingCharacter = true;
+
+    // Cancel any pending switch
+    if (this._switchDelayedCall) {
+      this._switchDelayedCall.destroy();
+      this._switchDelayedCall = null;
+    }
+
     gameState.current.x = this.player.x;
     gameState.current.y = this.player.y;
     gameState.save();
     gameState.currentCharacter = newChar;
     this.cameras.main.flash(300, 255, 105, 180, true);
-    setTimeout(() => this.scene.restart(), 300);
+
+    // Use Phaser timer instead of setTimeout — auto-destroyed on scene shutdown
+    this._switchDelayedCall = this.time.delayedCall(300, () => {
+      this._switchDelayedCall = null;
+      this.scene.restart();
+    });
   }
 
   // ── Minimap ─────────────────────────────────────────
@@ -755,10 +794,7 @@ export default class BaseWorldScene extends Phaser.Scene {
       }
     }
 
-    // ── Character switch ──
-    if (this.charSwitchContainer) {
-      this.charSwitchContainer.setPosition(8 * s, hh + 4);
-    }
+    // ── Character switch ── (no action needed — individual scrollFactor=0 objects auto-position)
   }
 
   // ── Update ──────────────────────────────────────────
