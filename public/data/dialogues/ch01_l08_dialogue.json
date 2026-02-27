@@ -2,7 +2,7 @@
   "scene_title_ko": "성수동·홍대 버스킹",
   "scene_title_ja": "ソンスドン・ホンデのバスキング",
   "lines": [
-    { "speaker": "ami", "emotion": "excited", "text_ko": "여기가 성수동이야! NCT가 왔던 카페가 여기래!", "text_ja": "ここがソンスドンだ！NCTが来たカフェがここだって！", "pronunciation": "[여기가 성수동이야! 엔시티가 왓떤 카페가 여기래!]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "여기가 성수동이야! MCT가 왔던 카페가 여기래!", "text_ja": "ここがソンスドンだ！MCTが来たカフェがここだって！", "pronunciation": "[여기가 성수동이야! 엠시티가 왓떤 카페가 여기래!]" },
     { "speaker": "yuko", "emotion": "happy", "text_ko": "와, 벽화 거리 분위기 엄청 좋다!", "text_ja": "わぁ、壁画通りの雰囲気がめちゃくちゃいい！", "pronunciation": "[와, 벽콰 거리 부뉘기 엄청 조타!]" },
     { "speaker": "rui", "emotion": "calm", "text_ko": "홍대로 가자. 버스킹 보고 싶어.", "text_ja": "ホンデに行こう。バスキングが見たい。", "pronunciation": "[홍대로 가자. 버스킹 보고 시퍼]" },
     { "speaker": "yuko", "emotion": "excited", "text_ko": "지금 버스킹을 보고 있어요! 노래 진짜 잘한다!", "text_ja": "今バスキングを見ています！歌が本当にうまい！", "pronunciation": "[지금 버스킹을 보고 이써요! 노래 진짜 잘한다!]" },

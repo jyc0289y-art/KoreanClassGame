@@ -1,9 +1,9 @@
 import BasePlaceScene from '../BasePlaceScene.js';
 
 // ============================================================
-// KoreanAcademyScene — K Village Tokyo 텐진교 (1000×800)
+// KoreanAcademyScene — K Campus Tokyo 텐진교 (1000×800)
 //
-//  실제 배치 참조: K Village (韓国語レッスン)
+//  실제 배치 참조: K Campus (韓国語レッスン)
 //  ─ 상업 빌딩 8F 한 층 전체
 //  ─ 엘리베이터 홀 → 리셉션 (입구)
 //  ─ 복도를 따라 5~8개 교실 (컬러별 이름)
@@ -21,7 +21,7 @@ export default class KoreanAcademyScene extends BasePlaceScene {
       startX: 500, startY: 730,
       tiles: 'floor_tile',
       returnScene: 'FukuokaYakuinScene',
-      title_ko: '한국어 학원', title_ja: 'K Village 天神校',
+      title_ko: '한국어 학원', title_ja: 'K Campus 天神校',
       subtitle: '8F 한국어 교실',
       npcs: [
         // 한국어 선생님 (메인 교실)
@@ -30,8 +30,8 @@ export default class KoreanAcademyScene extends BasePlaceScene {
           greeting_ja: 'こんにちは！今日はハングルの子音と母音を学んでみましょうか？\nカ、ナ、タ、ラ…一つずつ繰り返してみましょう！' },
         // 리셉션 직원
         { x: 250, y: 650, texture: 'shop', name_ko: '리셉션', name_ja: 'レセプション',
-          greeting_ko: 'K Village 텐진교에 오신 걸 환영합니다!\n수업 예약은 되어 있으세요?',
-          greeting_ja: 'K Village天神校へようこそ！\nレッスンのご予約はされていますか？' }
+          greeting_ko: 'K Campus 텐진교에 오신 걸 환영합니다!\n수업 예약은 되어 있으세요?',
+          greeting_ja: 'K Campus天神校へようこそ！\nレッスンのご予約はされていますか？' }
       ],
       buildings: []
     });
@@ -69,8 +69,8 @@ export default class KoreanAcademyScene extends BasePlaceScene {
       backgroundColor: '#00000044', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(2);
 
-    // K Village 로고
-    this.add.text(245, 660, 'K Village', {
+    // K Campus 로고
+    this.add.text(245, 660, 'K Campus', {
       fontSize: '10px', color: '#FF69B4', fontStyle: 'bold'
     }).setOrigin(0.5).setDepth(2);
 

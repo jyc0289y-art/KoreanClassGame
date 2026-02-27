@@ -17,9 +17,9 @@ export default class IncheonScene extends BaseWorldScene {
         { x: 800, y: 350, texture: 'shop', name_ko: '환전소', name_ja: '両替所',
           greeting_ko: '환전소입니다. 엔화를 원화로 바꿔 드립니다.',
           greeting_ja: '両替所です。円をウォンに換えます。' },
-        { x: 1200, y: 500, texture: 'mission_npc', name_ko: 'T-money 판매', name_ja: 'T-money販売', hasMission: true,
-          greeting_ko: '티머니 카드 사시겠어요?\n교통카드가 있으면 편해요!',
-          greeting_ja: 'T-moneyカードを買いますか？\n交通カードがあると便利ですよ！' },
+        { x: 1200, y: 500, texture: 'mission_npc', name_ko: 'T-Pass 판매', name_ja: 'T-Pass販売', hasMission: true,
+          greeting_ko: '티패스 카드 사시겠어요?\n교통카드가 있으면 편해요!',
+          greeting_ja: 'T-Passカードを買いますか？\n交通カードがあると便利ですよ！' },
         { x: 600, y: 800, texture: 'yuseok', name_ko: '김유석', name_ja: 'ユソク',
           greeting_ko: '어, 일본에서 오셨어요? 혹시 길 잃으셨어요?\n서울까지 같이 가실래요?',
           greeting_ja: 'あ、日本から来たんですか？もしかして道に迷いましたか？\nソウルまで一緒に行きませんか？' }

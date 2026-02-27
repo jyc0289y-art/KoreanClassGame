@@ -1,8 +1,8 @@
 {
-  "scene_title_ko": "명동 올리브영 쇼핑",
-  "scene_title_ja": "明洞オリーブヤングでショッピング",
+  "scene_title_ko": "명동 올리브숲 쇼핑",
+  "scene_title_ja": "明洞オリーブブルームでショッピング",
   "lines": [
-    { "speaker": "ami", "emotion": "excited", "text_ko": "올리브영이다! K-뷰티 쇼핑하자!", "text_ja": "オリーブヤングだ！K-ビューティーショッピングしよう！", "pronunciation": "[올리브영이다! 케이뷰티 쇼핑하자!]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "올리브숲이다! K-뷰티 쇼핑하자!", "text_ja": "オリーブブルームだ！K-ビューティーショッピングしよう！", "pronunciation": "[올리브숲이다! 케이뷰티 쇼핑하자!]" },
     { "speaker": "yuko", "emotion": "curious", "text_ko": "저기요, 수분크림 추천해 주세요.", "text_ja": "すみません、保湿クリームのおすすめを教えてください。", "pronunciation": "[저기요, 수분크림 추천해 주세요]" },
     { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "피부 타입이 어떻게 되세요? 건성이에요, 지성이에요?", "text_ja": "お肌のタイプはどうですか？乾燥肌ですか、脂性肌ですか？", "pronunciation": "[피부 타이비 어떠케 되세요? 건성이에요, 지성이에요?]" },
     { "speaker": "yuko", "emotion": "calm", "text_ko": "복합성이에요. 테스터 써봐도 돼요?", "text_ja": "混合肌です。テスターを使ってみてもいいですか？", "pronunciation": "[보캅썽이에요. 테스터 써봐도 돼요?]" },

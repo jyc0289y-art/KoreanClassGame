@@ -4,11 +4,11 @@ import BasePlaceScene from '../BasePlaceScene.js';
 // RuiHouseScene — 루이의 집 (야쿠인 1K 아파트) (800×600)
 //
 //  실제 일본 1K 아파트 레이아웃 (유코/아미와 동일 구조)
-//  루이 캐릭터 테마: YouTuber, 한국 음식 마니아, 카메라 장비
+//  루이 캐릭터 테마: 크리에이터, 한국 음식 마니아, 카메라 장비
 //  ─ 시안(cyan) + 화이트 컬러 테마
 //  ─ 촬영 장비 (카메라, 조명, 삼각대)
 //  ─ 한국 음식 포스터 / 먹방 관련
-//  ─ 올리브영 쇼핑백
+//  ─ 올리브숲 쇼핑백
 // ============================================================
 
 export default class RuiHouseScene extends BasePlaceScene {
@@ -21,7 +21,7 @@ export default class RuiHouseScene extends BasePlaceScene {
       tiles: 'floor_wood',
       returnScene: 'FukuokaYakuinScene',
       title_ko: '루이의 방', title_ja: 'ルイの部屋',
-      subtitle: 'YouTuber Studio & K-Food ファン',
+      subtitle: '크리에이터 Studio & K-Food ファン',
       npcs: [],
       buildings: []
     });
@@ -43,9 +43,9 @@ export default class RuiHouseScene extends BasePlaceScene {
     g.fillStyle(0x654321, 0.6);
     g.fillRoundedRect(350, 520, 40, 35, 3);
     this.add.text(370, 515, '👟', { fontSize: '10px' }).setOrigin(0.5).setDepth(2);
-    // 올리브영 쇼핑백
+    // 올리브숲 쇼핑백
     this.add.text(430, 525, '🛍️', { fontSize: '10px' }).setOrigin(0.5).setDepth(2);
-    this.add.text(430, 545, 'OY', {
+    this.add.text(430, 545, 'OB', {
       fontSize: '5px', color: '#00A651'
     }).setOrigin(0.5).setDepth(2);
 

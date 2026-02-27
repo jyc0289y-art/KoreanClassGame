@@ -1,14 +1,14 @@
 import BasePlaceScene from '../BasePlaceScene.js';
 
 // ============================================================
-// OliveYoungScene — 올리브영 명동 플래그십 (1000×800)
+// OliveYoungScene — 올리브숲 명동 플래그십 (1000×800)
 //
-//  실제 배치 참조: OLIVE YOUNG 명동 플래그십 스토어
+//  실제 배치 참조: OLIVE BLOOM 명동 플래그십 스토어
 //  ─ 2층 구조 (게임에서는 한 맵에 상하 구분)
 //  ─ 1F (하단): 스킨케어, 선크림, 클렌저, 마스크팩 + 계산대
 //  ─ 2F (상단): 메이크업, 향수, K-뷰티 서비스 라운지
 //  ─ 중앙: 계단/에스컬레이터
-//  ─ 올리브영 브랜드 컬러: #00A651 (녹색)
+//  ─ 올리브숲 브랜드 컬러: #00A651 (녹색)
 //  ─ 명동점 특징: 관광객 특화, 면세 가능, 다국어 직원
 // ============================================================
 
@@ -21,13 +21,13 @@ export default class OliveYoungScene extends BasePlaceScene {
       startX: 500, startY: 730,
       tiles: 'floor_tile',
       returnScene: 'SeoulMyeongdongScene',
-      title_ko: '올리브영', title_ja: 'OLIVE YOUNG',
+      title_ko: '올리브숲', title_ja: 'OLIVE BLOOM',
       subtitle: '명동 플래그십 스토어',
       npcs: [
         // 1F 직원
-        { x: 350, y: 650, texture: 'mission_npc', name_ko: '올리브영 직원', name_ja: 'OY店員', hasMission: true,
-          greeting_ko: '올리브영에 오신 걸 환영합니다!\n오늘의 추천 상품을 소개해 드릴게요!\n마스크팩 1+1 행사 중이에요~',
-          greeting_ja: 'OLIVE YOUNGへようこそ！\n今日のおすすめ商品をご紹介します！\nマスクパック1+1セール中です～' },
+        { x: 350, y: 650, texture: 'mission_npc', name_ko: '올리브숲 직원', name_ja: 'OB店員', hasMission: true,
+          greeting_ko: '올리브숲에 오신 걸 환영합니다!\n오늘의 추천 상품을 소개해 드릴게요!\n마스크팩 1+1 행사 중이에요~',
+          greeting_ja: 'OLIVE BLOOMへようこそ！\n今日のおすすめ商品をご紹介します！\nマスクパック1+1セール中です～' },
         // 2F 뷰티 컨설턴트
         { x: 700, y: 200, texture: 'shop', name_ko: '뷰티 컨설턴트', name_ja: 'ビューティーコンサルタント',
           greeting_ko: '피부 타입에 맞는 화장품 추천해 드릴게요!\n어떤 피부 고민이 있으세요?',
@@ -177,8 +177,8 @@ export default class OliveYoungScene extends BasePlaceScene {
       backgroundColor: '#00000044', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(2);
 
-    // OLIVE YOUNG 로고
-    this.add.text(500, 755, 'OLIVE YOUNG ★ Flagship Store', {
+    // OLIVE BLOOM 로고
+    this.add.text(500, 755, 'OLIVE BLOOM ★ Flagship Store', {
       fontSize: '8px', color: '#00A651', fontStyle: 'bold',
       backgroundColor: '#00000066', padding: { x: 10, y: 3 }
     }).setOrigin(0.5).setDepth(2);

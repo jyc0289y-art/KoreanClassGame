@@ -7,7 +7,7 @@ import { gameState } from '../../systems/GameState.js';
 //  - 북쪽: 텐진 방면 도로
 //  - 남쪽: 주택가 (유코·아미·루이 집)
 //  - 중앙: 상업지역 (편의점)
-//  - 북동쪽: 서점 (키노쿠니야)
+//  - 북동쪽: 서점 (키노마루)
 //  - 서쪽: 한국어 학원
 //  - 동남쪽: 야쿠인역 (지하철 진입점)
 // ============================================================
@@ -39,8 +39,8 @@ export default class FukuokaYakuinScene extends BaseWorldScene {
       npcs: [
         // 아미 (야쿠인 주택가)
         { x: 750, y: 1350, texture: 'ami', name_ko: '아미', name_ja: 'アミ', hasDialogue: true,
-          greeting_ko: '유코야! 한글 공부 시작하자!\nBTS 가사 읽고 싶지 않아?',
-          greeting_ja: 'ユコ！ハングル勉強始めよう！\nBTSの歌詞読みたくない？' },
+          greeting_ko: '유코야! 한글 공부 시작하자!\nBTX 가사 읽고 싶지 않아?',
+          greeting_ja: 'ユコ！ハングル勉強始めよう！\nBTXの歌詞読みたくない？' },
         // 루이 (야쿠인 주택가)
         { x: 1050, y: 1450, texture: 'rui', name_ko: '루이', name_ja: 'ルイ', hasDialogue: true,
           greeting_ko: '한국어 교재 샀어!\n같이 공부할까?',
@@ -74,9 +74,9 @@ export default class FukuokaYakuinScene extends BaseWorldScene {
     this.createEnterableBuilding(1000, 1400, 'RuiHouseScene', {
       texture: 'building_house', name_ko: '루이 집', name_ja: 'ルイの家'
     });
-    // 서점 (키노쿠니야)
+    // 서점 (키노마루)
     this.createEnterableBuilding(1600, 600, 'BookstoreScene', {
-      texture: 'building_shop', name_ko: '서점', name_ja: '書店（紀伊國屋）'
+      texture: 'building_shop', name_ko: '서점', name_ja: '書店（紀野丸）'
     });
     // 한국어 학원
     this.createEnterableBuilding(500, 700, 'KoreanAcademyScene', {

@@ -1,15 +1,15 @@
 import BasePlaceScene from '../BasePlaceScene.js';
 
 // ============================================================
-// BookstoreScene — 키노쿠니야 하카타점 (1000×700)
+// BookstoreScene — 키노마루 하카타점 (1000×700)
 //
-//  실제 배치 참조: 紀伊國屋書店 博多店 (JR博多シティ 6F)
+//  실제 배치 참조: 紀野丸書店 博多店 (JR博多シティ 6F)
 //  ─ 매장 면적: 약 3,300㎡ (1,000평)
 //  ─ 입구 근처: 잡지 코너 + 신간 디스플레이
 //  ─ 중앙: 장르별 서가 (소설, 실용서, 만화 등)
 //  ─ 안쪽: 외국어 학습 코너 (한국어 교재 집중 배치)
 //  ─ 우측 안쪽: 문구/스테이셔너리 코너
-//  ─ 입구 옆: Cafe de Crie (카페)
+//  ─ 입구 옆: Cafe de Ciel (카페)
 //  ─ 계산대: 입구 근처 중앙
 // ============================================================
 
@@ -22,7 +22,7 @@ export default class BookstoreScene extends BasePlaceScene {
       startX: 500, startY: 620,
       tiles: 'floor_tile',
       returnScene: 'FukuokaYakuinScene',
-      title_ko: '키노쿠니야 서점', title_ja: '紀伊國屋書店 博多店',
+      title_ko: '키노마루 서점', title_ja: '紀野丸書店 博多店',
       subtitle: 'JR博多シティ 6F',
       npcs: [
         // 한국어 코너 직원
@@ -30,9 +30,9 @@ export default class BookstoreScene extends BasePlaceScene {
           greeting_ko: '한국어 교재 코너에 오신 걸 환영합니다!\n초급용 교재부터 TOPIK 대비 교재까지\n다양하게 준비되어 있어요.',
           greeting_ja: '韓国語テキストコーナーへようこそ！\n初級テキストからTOPIK対策まで\n幅広くご用意しています。' },
         // 카페 직원
-        { x: 200, y: 550, texture: 'shop', name_ko: 'Cafe de Crie', name_ja: 'カフェ・ド・クリエ',
-          greeting_ko: '카페 드 크리에입니다!\n커피 마시면서 책 읽으세요~',
-          greeting_ja: 'カフェ・ド・クリエです！\nコーヒーを飲みながら読書をどうぞ～' }
+        { x: 200, y: 550, texture: 'shop', name_ko: 'Cafe de Ciel', name_ja: 'カフェ・ド・シエル',
+          greeting_ko: '카페 드 시엘입니다!\n커피 마시면서 책 읽으세요~',
+          greeting_ja: 'カフェ・ド・シエルです！\nコーヒーを飲みながら読書をどうぞ～' }
       ],
       buildings: []
     });
@@ -183,7 +183,7 @@ export default class BookstoreScene extends BasePlaceScene {
     g.fillRect(760, 540, 160, 12);
 
     // ══════════════════════════════════════
-    // Cafe de Crie (입구 옆 좌측)
+    // Cafe de Ciel (입구 옆 좌측)
     // ══════════════════════════════════════
     g.fillStyle(0x8B4513, 0.15);
     g.fillRoundedRect(70, 480, 200, 120, 8);
@@ -202,7 +202,7 @@ export default class BookstoreScene extends BasePlaceScene {
     g.fillCircle(190, 555, 8);
     g.fillCircle(230, 555, 8);
 
-    this.add.text(170, 475, '☕ Cafe de Crie', {
+    this.add.text(170, 475, '☕ Cafe de Ciel', {
       fontSize: '8px', color: '#8B4513', fontStyle: 'bold',
       backgroundColor: '#00000044', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(2);

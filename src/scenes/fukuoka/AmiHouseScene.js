@@ -4,11 +4,11 @@ import BasePlaceScene from '../BasePlaceScene.js';
 // AmiHouseScene — 아미의 집 (야쿠인 1K 아파트) (800×600)
 //
 //  실제 일본 1K 아파트 레이아웃 (유코와 동일 구조)
-//  아미 캐릭터 테마: BTS 열성팬(ARMY), K-Beauty 오타쿠
+//  아미 캐릭터 테마: BTX 열성팬(ARMI), K-Beauty 오타쿠
 //  ─ 보라색 + 핑크 컬러 테마
-//  ─ BTS 포스터/굿즈 다수
+//  ─ BTX 포스터/굿즈 다수
 //  ─ 화장대 + 한국 화장품 컬렉션
-//  ─ 아미밤(ARMY Bomb), 포토카드 컬렉션
+//  ─ 아미봉(ARMI Bomb), 포토카드 컬렉션
 // ============================================================
 
 export default class AmiHouseScene extends BasePlaceScene {
@@ -21,7 +21,7 @@ export default class AmiHouseScene extends BasePlaceScene {
       tiles: 'floor_wood',
       returnScene: 'FukuokaYakuinScene',
       title_ko: '아미의 방', title_ja: 'アミの部屋',
-      subtitle: 'K-Beauty & BTS Collection',
+      subtitle: 'K-Beauty & BTX Collection',
       npcs: [],
       buildings: []
     });
@@ -43,7 +43,7 @@ export default class AmiHouseScene extends BasePlaceScene {
     g.fillStyle(0x654321, 0.6);
     g.fillRoundedRect(350, 520, 40, 35, 3);
     this.add.text(370, 515, '👠', { fontSize: '10px' }).setOrigin(0.5).setDepth(2);
-    // BTS 굿즈 쇼핑백
+    // BTX 굿즈 쇼핑백
     this.add.text(435, 530, '🛍️', { fontSize: '10px' }).setOrigin(0.5).setDepth(2);
 
     // ══════════════════════════════════════
@@ -91,7 +91,7 @@ export default class AmiHouseScene extends BasePlaceScene {
     }).setOrigin(0.5).setDepth(2);
 
     // ══════════════════════════════════════
-    // 메인 방 (6畳) — BTS + K-Beauty 테마
+    // 메인 방 (6畳) — BTX + K-Beauty 테마
     // ══════════════════════════════════════
     g.fillStyle(0xDEB887, 0.08);
     g.fillRect(100, 60, 600, 280);
@@ -101,7 +101,7 @@ export default class AmiHouseScene extends BasePlaceScene {
     g.fillRoundedRect(110, 80, 130, 90, 8);
     g.fillStyle(0xDA70D6, 0.5);
     g.fillRoundedRect(115, 85, 50, 35, 6);  // 보라 베개
-    // BTS 이불
+    // BTX 이불
     this.add.text(175, 115, '💜', {
       fontSize: '14px', alpha: 0.4
     }).setOrigin(0.5).setDepth(2);
@@ -128,13 +128,13 @@ export default class AmiHouseScene extends BasePlaceScene {
     g.fillStyle(0xDA70D6, 0.3);
     g.fillCircle(610, 195, 15);
 
-    // ── BTS 포스터 (벽면) ──
-    // 대형 BTS 포스터
+    // ── BTX 포스터 (벽면) ──
+    // 대형 BTX 포스터
     g.fillStyle(0x9370DB, 0.4);
     g.fillRect(270, 42, 90, 70);
     g.lineStyle(2, 0xDA70D6, 0.5);
     g.strokeRect(270, 42, 90, 70);
-    this.add.text(315, 70, '💜 BTS\nBeyond\nThe Scene', {
+    this.add.text(315, 70, '💜 BTX\nBeyond\nThe Star', {
       fontSize: '7px', color: '#ffffff', align: 'center', lineSpacing: 1
     }).setOrigin(0.5).setDepth(2);
 
@@ -152,17 +152,17 @@ export default class AmiHouseScene extends BasePlaceScene {
       fontSize: '6px', color: '#ffffff'
     }).setOrigin(0.5).setDepth(2);
 
-    // ── BTS 굿즈 선반 (좌측 벽) ──
+    // ── BTX 굿즈 선반 (좌측 벽) ──
     g.fillStyle(0x4a4a4a, 0.5);
     g.fillRect(110, 200, 100, 15);
     g.fillRect(110, 225, 100, 15);
     g.fillRect(110, 250, 100, 15);
 
-    // 아미밤
+    // 아미봉
     this.add.text(130, 195, '💡', { fontSize: '10px' }).setOrigin(0.5).setDepth(2);
     // 포토카드
     this.add.text(170, 195, '🃏', { fontSize: '8px' }).setOrigin(0.5).setDepth(2);
-    this.add.text(150, 220, '💜 ARMY Goods', {
+    this.add.text(150, 220, '💜 ARMI Goods', {
       fontSize: '6px', color: '#9370DB'
     }).setOrigin(0.5).setDepth(2);
     // CD 컬렉션
@@ -178,7 +178,7 @@ export default class AmiHouseScene extends BasePlaceScene {
     g.fillStyle(0xDA70D6, 0.2);
     g.fillCircle(410, 280, 12);  // 핑크 쿠션
 
-    // 한국 과자 + 아미밤
+    // 한국 과자 + 아미봉
     this.add.text(365, 215, '🍪', { fontSize: '8px' }).setOrigin(0.5).setDepth(2);
     this.add.text(400, 215, '📱', { fontSize: '8px' }).setOrigin(0.5).setDepth(2);
 

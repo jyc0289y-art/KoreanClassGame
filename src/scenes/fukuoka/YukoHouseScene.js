@@ -141,7 +141,7 @@ export default class YukoHouseScene extends BasePlaceScene {
 
     // ── K-POP 포스터들 (벽면 상단) ──
     const posterColors = [0xFF69B4, 0x9370DB, 0xDA70D6];
-    const posterLabels = ['♪ K-POP', '💜 아이돌', '🎵 BTS'];
+    const posterLabels = ['♪ K-POP', '💜 아이돌', '🎵 BTX'];
     posterColors.forEach((color, i) => {
       g.fillStyle(color, 0.35);
       g.fillRect(270 + i * 90, 45, 70, 50);

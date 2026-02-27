@@ -3,7 +3,7 @@
   "scene_title_ja": "仁川空港到着",
   "lines": [
     { "speaker": "yuko", "emotion": "excited", "text_ko": "와! 드디어 한국이다!", "text_ja": "わぁ！ついに韓国だ！", "pronunciation": "[와! 드디어 한구기다!]" },
-    { "speaker": "ami", "emotion": "happy", "text_ko": "유코야, 빨리 가자! BTS 성지순례!", "text_ja": "ユコ、早く行こう！BTS聖地巡礼！", "pronunciation": "[유코야 빨리 가자! 비티에스 성지술례!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "유코야, 빨리 가자! BTX 성지순례!", "text_ja": "ユコ、早く行こう！BTX聖地巡礼！", "pronunciation": "[유코야 빨리 가자! 비티엑스 성지술례!]" },
     { "speaker": "rui", "emotion": "calm", "text_ko": "먼저 입국장부터 가야지.", "text_ja": "まず入国場から行かないと。", "pronunciation": "[먼저 입꾹짱부터 가야지]" },
     { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "안녕하세요! 한국에 오신 걸 환영합니다!", "text_ja": "こんにちは！韓国へようこそ！", "pronunciation": "[안녕하세요! 한구게 오신 걸 환영함니다!]" },
     { "speaker": "yuko", "emotion": "nervous", "text_ko": "안녕하세요... 저는 유코입니다.", "text_ja": "こんにちは...私はユコです。", "pronunciation": "[안녕하세요... 저는 유코임니다]" },

@@ -1,8 +1,8 @@
 {
-  "scene_title_ko": "BTS 성지순례: 유정식당·카페",
-  "scene_title_ja": "BTS聖地巡礼：ユジョン食堂・カフェ",
+  "scene_title_ko": "BTX 성지순례: 유전식당·카페",
+  "scene_title_ja": "BTX聖地巡礼：ユジョン食堂・カフェ",
   "lines": [
-    { "speaker": "ami", "emotion": "excited", "text_ko": "여기가 유정식당이야! BTS가 왔던 곳!", "text_ja": "ここがユジョン食堂！BTSが来たところ！", "pronunciation": "[여기가 유정시당이야! 비티에스가 왓떤 곧!]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "여기가 유전식당이야! BTX가 왔던 곳!", "text_ja": "ここがユジョン食堂！BTXが来たところ！", "pronunciation": "[여기가 유정시당이야! 비티엑스가 왓떤 곧!]" },
     { "speaker": "yuko", "emotion": "happy", "text_ko": "예약은 못 했는데 자리 있어요?", "text_ja": "予約してないですが席ありますか？", "pronunciation": "[예야근 모 탠는데 자리 이써요?]" },
     { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "네, 이쪽으로 앉으세요. 이 집 대표 메뉴가 불고기예요.", "text_ja": "はい、こちらにどうぞ。この店のおすすめメニューはプルコギです。", "pronunciation": "[네, 이쪼그로 안즈세요. 이 집 대표 메뉴가 불고기예요]" },
     { "speaker": "rui", "emotion": "calm", "text_ko": "그럼 불고기 2인분 주세요.", "text_ja": "じゃあプルコギ2人前ください。", "pronunciation": "[그럼 불고기 이인분 주세요]" },

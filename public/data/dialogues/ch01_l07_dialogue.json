@@ -1,13 +1,13 @@
 {
-  "scene_title_ko": "강남 K-Star ROAD·코엑스",
-  "scene_title_ja": "カンナム K-Star ROAD・COEX",
+  "scene_title_ko": "강남 K-Idol ROAD·고엑스",
+  "scene_title_ja": "カンナム K-Idol ROAD・GOEX",
   "lines": [
-    { "speaker": "yuko", "emotion": "excited", "text_ko": "여기 K-Star ROAD다! 아이돌 곰 인형이 있어!", "text_ja": "ここK-Star ROADだ！アイドルのクマの人形がある！", "pronunciation": "[여기 케이스타 로드다! 아이돌 곰 인형이 이써!]" },
-    { "speaker": "ami", "emotion": "happy", "text_ko": "BTS 곰이다! 인증샷 찍자!", "text_ja": "BTSのクマだ！認証ショット撮ろう！", "pronunciation": "[비티에스 고미다! 인증샷 찍짜!]" },
+    { "speaker": "yuko", "emotion": "excited", "text_ko": "여기 K-Idol ROAD다! 아이돌 곰 인형이 있어!", "text_ja": "ここK-Idol ROADだ！アイドルのクマの人形がある！", "pronunciation": "[여기 케이아이돌 로드다! 아이돌 곰 인형이 이써!]" },
+    { "speaker": "ami", "emotion": "happy", "text_ko": "BTX 곰이다! 인증샷 찍자!", "text_ja": "BTXのクマだ！認証ショット撮ろう！", "pronunciation": "[비티엑스 고미다! 인증샷 찍짜!]" },
     { "speaker": "rui", "emotion": "calm", "text_ko": "셀카 모드로 같이 찍을까?", "text_ja": "セルフィーモードで一緒に撮ろうか？", "pronunciation": "[셀카 모드로 가치 찌글까?]" },
-    { "speaker": "yuko", "emotion": "happy", "text_ko": "코엑스 별마당 도서관도 가보자!", "text_ja": "COEXのピョルマダン図書館も行ってみよう！", "pronunciation": "[코엑스 별마당 도서관도 가보자!]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "고엑스 달마당 도서관도 가보자!", "text_ja": "GOEXのタルマダン図書館も行ってみよう！", "pronunciation": "[고엑스 달마당 도서관도 가보자!]" },
     { "speaker": "ami", "emotion": "excited", "text_ko": "와, 엄청 크다! 여기 포토존이 대박이야!", "text_ja": "わぁ、めちゃくちゃ大きい！ここのフォトゾーンがすごい！", "pronunciation": "[와, 엄청 크다! 여기 포토조니 대바기야!]" },
     { "speaker": "rui", "emotion": "friendly", "text_ko": "저기 한국 친구들이 말 걸어왔어.", "text_ja": "あそこの韓国の友達が声をかけてきたよ。", "pronunciation": "[저기 한국 친구드리 말 거러왔써]" },
-    { "speaker": "yuko", "emotion": "happy", "text_ko": "인스타 아이디 교환하자! 한국 친구 생겼다!", "text_ja": "インスタのID交換しよう！韓国の友達ができた！", "pronunciation": "[인스타 아이디 교환하자! 한국 친구 생겨따!]" }
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "SNS 아이디 교환하자! 한국 친구 생겼다!", "text_ja": "SNSのID交換しよう！韓国の友達ができた！", "pronunciation": "[SNS 아이디 교환하자! 한국 친구 생겨따!]" }
   ]
 }

@@ -12,8 +12,8 @@ export default class FukuokaScene extends BaseWorldScene {
       tiles: 'grass',
       npcs: [
         { x: 400, y: 400, texture: 'ami', name_ko: '아미', name_ja: 'アミ', hasDialogue: true,
-          greeting_ko: '유코야! 한글 공부 시작하자!\nBTS 가사 읽고 싶지 않아?',
-          greeting_ja: 'ユコ！ハングル勉強始めよう！\nBTSの歌詞読みたくない？' },
+          greeting_ko: '유코야! 한글 공부 시작하자!\nBTX 가사 읽고 싶지 않아?',
+          greeting_ja: 'ユコ！ハングル勉強始めよう！\nBTXの歌詞読みたくない？' },
         { x: 600, y: 300, texture: 'rui', name_ko: '루이', name_ja: 'ルイ', hasDialogue: true,
           greeting_ko: '한국어 교재 샀어!\n같이 공부할까?',
           greeting_ja: '韓国語テキスト買ったよ！\n一緒に勉強する？' },

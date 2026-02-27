@@ -11,7 +11,7 @@ import { gameState } from '../../systems/GameState.js';
 //  ─ 수하물 수취대 → 세관 → 도착 로비(중앙~하단)
 //  ─ 환전소: 출구 4번(Gate C~D 사이), 6번, 9번, 11번
 //  ─ 로밍센터/USIM: Gate F 근처 서쪽
-//  ─ CU 편의점: Gate B~C 사이, Gate E~F 사이
+//  ─ BU 편의점: Gate B~C 사이, Gate E~F 사이
 //  ─ 안내데스크: Gate C, D 부근 중앙
 //  ─ 버스매표소: 출구 4번, 9번 부근
 //  ─ B1F 교통센터(공항철도 AREX): 하단 중앙
@@ -46,10 +46,10 @@ export default class IncheonAirportScene extends BaseWorldScene {
           greeting_ko: '환전소입니다. 엔화를 원화로 바꿔 드립니다.\n오늘 환율은 100엔 = 900원입니다.\n공항 환율이니 시내가 더 유리해요!',
           greeting_ja: '両替所です。円をウォンに換えます。\n本日のレートは100円＝900ウォンです。\n空港レートなので市内の方がお得ですよ！' },
 
-        // ── B1F 교통센터 부근: T-money 판매 ──
-        { x: 1000, y: 1000, texture: 'mission_npc', name_ko: 'T-money 판매', name_ja: 'T-money販売', hasMission: true,
-          greeting_ko: '티머니 카드 사시겠어요?\n교통카드가 있으면 지하철, 버스 다 쓸 수 있어요!\n카드 가격은 4,000원이에요.',
-          greeting_ja: 'T-moneyカードを買いますか？\n交通カードがあれば地下鉄もバスも使えますよ！\nカード代は4,000ウォンです。' },
+        // ── B1F 교통센터 부근: T-Pass 판매 ──
+        { x: 1000, y: 1000, texture: 'mission_npc', name_ko: 'T-Pass 판매', name_ja: 'T-Pass販売', hasMission: true,
+          greeting_ko: '티패스 카드 사시겠어요?\n교통카드가 있으면 지하철, 버스 다 쓸 수 있어요!\n카드 가격은 4,000원이에요.',
+          greeting_ja: 'T-Passカードを買いますか？\n交通カードがあれば地下鉄もバスも使えますよ！\nカード代は4,000ウォンです。' },
 
         // ── 도착 로비 중앙: 김유석 ──
         { x: 700, y: 750, texture: 'yuseok', name_ko: '김유석', name_ja: 'ユソク',
@@ -66,10 +66,10 @@ export default class IncheonAirportScene extends BaseWorldScene {
           greeting_ko: '인천공항 안내데스크입니다.\n무엇을 도와드릴까요?\n서울 가는 교통편을 안내해 드릴게요.',
           greeting_ja: '仁川空港案内デスクです。\n何かお手伝いしましょうか？\nソウルへの交通手段をご案内します。' },
 
-        // ── Gate B~C 사이: CU 편의점 ──
-        { x: 1400, y: 600, texture: 'shop', name_ko: 'CU 편의점', name_ja: 'CU コンビニ',
-          greeting_ko: '어서오세요! CU입니다.\n삼각김밥, 음료수 다 있어요~\n한국 과자도 있어요!',
-          greeting_ja: 'いらっしゃいませ！CUです。\nおにぎり、飲み物何でもありますよ〜\n韓国のお菓子もありますよ！' },
+        // ── Gate B~C 사이: BU 편의점 ──
+        { x: 1400, y: 600, texture: 'shop', name_ko: 'BU 편의점', name_ja: 'BU コンビニ',
+          greeting_ko: '어서오세요! BU입니다.\n삼각김밥, 음료수 다 있어요~\n한국 과자도 있어요!',
+          greeting_ja: 'いらっしゃいませ！BUです。\nおにぎり、飲み物何でもありますよ〜\n韓国のお菓子もありますよ！' },
 
         // ── 버스매표소 (출구 9번 부근) ──
         { x: 500, y: 800, texture: 'shop', name_ko: '버스매표소', name_ja: 'バス券売所',
@@ -217,8 +217,8 @@ export default class IncheonAirportScene extends BaseWorldScene {
     this.add.text(200, 950, '🚌 버스정류장', labelStyle('#00A651')).setOrigin(0.5).setDepth(2);
     this.add.text(1700, 950, '🚕 택시승강장', labelStyle('#FFD700')).setOrigin(0.5).setDepth(2);
 
-    // CU 편의점 위치 표시
-    this.add.text(1400, 580, '🏪 CU', {
+    // BU 편의점 위치 표시
+    this.add.text(1400, 580, '🏪 BU', {
       fontSize: `${Math.round(7 * s)}px`, color: '#9370DB'
     }).setOrigin(0.5).setDepth(2);
 

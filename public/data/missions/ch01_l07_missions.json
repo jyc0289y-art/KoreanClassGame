@@ -58,13 +58,13 @@
     "id": "m_pron_ch01_l07_001",
     "type": "pronunciation_check",
     "rule": "표준 발음", "rule_ja": "標準発音",
-    "word": "별마당",
-    "question_ko": "'별마당'의 실제 발음은?",
-    "question_ja": "「별마당」の実際の発音は？",
-    "choices": ["[별마당]", "[벼마당]", "[별마단]", "[벼르마당]"],
+    "word": "달마당",
+    "question_ko": "'달마당'의 실제 발음은?",
+    "question_ja": "「달마당」の実際の発音は？",
+    "choices": ["[달마당]", "[벼마당]", "[별마단]", "[벼르마당]"],
     "correct": 0,
-    "explanation_ko": "'별마당'은 받침 ㄹ 다음에 ㅁ이 와서 그대로 발음 → [별마당]",
-    "explanation_ja": "「별마당」はパッチムㄹの次にㅁが来てそのまま発音 → [별마당]",
+    "explanation_ko": "'달마당'은 받침 ㄹ 다음에 ㅁ이 와서 그대로 발음 → [달마당]",
+    "explanation_ja": "「달마당」はパッチムㄹの次にㅁが来てそのまま発音 → [달마당]",
     "xp": 15, "coin": 3
   },
   {
@@ -72,10 +72,10 @@
     "type": "multiple_choice",
     "question_ko": "한국 친구에게 SNS 연락처를 물어보는 표현은?",
     "question_ja": "韓国の友達にSNSの連絡先を聞く表現は？",
-    "choices": ["인스타 아이디가 뭐예요?", "전화번호가 뭐예요?", "이메일이 뭐예요?", "주소가 어디예요?"],
+    "choices": ["SNS 아이디가 뭐예요?", "전화번호가 뭐예요?", "이메일이 뭐예요?", "주소가 어디예요?"],
     "correct": 0,
-    "explanation_ko": "한국에서는 인스타그램 아이디를 물어보는 것이 자연스러운 연락처 교환 방법입니다.",
-    "explanation_ja": "韓国ではインスタグラムのIDを聞くのが自然な連絡先交換の方法です。",
+    "explanation_ko": "한국에서는 SNS그램 아이디를 물어보는 것이 자연스러운 연락처 교환 방법입니다.",
+    "explanation_ja": "韓国ではSNSグラムのIDを聞くのが自然な連絡先交換の方法です。",
     "xp": 10, "coin": 2
   },
   {
@@ -84,10 +84,10 @@
     "question_ko": "한국 친구와 인증샷 대화를 순서대로 배열하세요!",
     "question_ja": "韓国の友達との認証ショットの会話を順番に並べてください！",
     "lines": [
-      { "speaker": "yuko", "text_ko": "여기 K-Star ROAD다! 인증샷 찍자!", "text_ja": "ここK-Star ROADだ！認証ショット撮ろう！" },
+      { "speaker": "yuko", "text_ko": "여기 K-Idol ROAD다! 인증샷 찍자!", "text_ja": "ここK-Idol ROADだ！認証ショット撮ろう！" },
       { "speaker": "ami", "text_ko": "같이 찍을까요? 셀카 모드로!", "text_ja": "一緒に撮りましょうか？セルフィーモードで！" },
       { "speaker": "rui", "text_ko": "잘 나왔다! SNS에 올려도 돼요?", "text_ja": "よく撮れた！SNSにアップしてもいいですか？" },
-      { "speaker": "yuko", "text_ko": "인스타 아이디 교환하자!", "text_ja": "インスタのID交換しよう！" }
+      { "speaker": "yuko", "text_ko": "SNS 아이디 교환하자!", "text_ja": "SNSのID交換しよう！" }
     ],
     "xp": 20, "coin": 4
   }

@@ -1,9 +1,9 @@
 import BasePlaceScene from '../BasePlaceScene.js';
 
 // ============================================================
-// HiKRGroundScene — 하이커그라운드 (1000×900)
+// HiKOGroundScene — 하이코그라운드 (1000×900)
 //
-//  실제 배치 참조: HiKR Ground (종각역 부근, 5층)
+//  실제 배치 참조: HiKO Ground (종각역 부근, 5층)
 //  ─ 1F (하단): 로비 + 대형 LED 월 (디지털 아트)
 //  ─ 2F: K-POP 세트 6개 (아이돌 무대 재현)
 //  ─ 3F: 한국 거리 풍경 재현 (포토존)
@@ -13,8 +13,8 @@ import BasePlaceScene from '../BasePlaceScene.js';
 //  게임에서는 단일 맵에 5개 존을 상하 구분으로 표현
 // ============================================================
 
-export default class HiKRGroundScene extends BasePlaceScene {
-  constructor() { super('HiKRGroundScene'); }
+export default class HiKOGroundScene extends BasePlaceScene {
+  constructor() { super('HiKOGroundScene'); }
 
   create() {
     this.createPlace({
@@ -22,12 +22,12 @@ export default class HiKRGroundScene extends BasePlaceScene {
       startX: 500, startY: 830,
       tiles: 'floor_tile',
       returnScene: 'SeoulMyeongdongScene',
-      title_ko: '하이커그라운드', title_ja: 'HiKR Ground',
+      title_ko: '하이코그라운드', title_ja: 'HiKO Ground',
       subtitle: 'K-Culture 체험 센터 (5F)',
       npcs: [
-        { x: 300, y: 800, texture: 'mission_npc', name_ko: '하이커 직원', name_ja: 'HiKRスタッフ', hasMission: true,
-          greeting_ko: '하이커그라운드에 오신 걸 환영해요!\nK-POP과 한류 문화를 체험해 보세요!\n5층까지 다양한 체험존이 있어요.',
-          greeting_ja: 'HiKR Groundへようこそ！\nK-POPと韓流文化を体験してください！\n5階まで様々な体験ゾーンがあります。' },
+        { x: 300, y: 800, texture: 'mission_npc', name_ko: '하이코 직원', name_ja: 'HiKOスタッフ', hasMission: true,
+          greeting_ko: '하이코그라운드에 오신 걸 환영해요!\nK-POP과 한류 문화를 체험해 보세요!\n5층까지 다양한 체험존이 있어요.',
+          greeting_ja: 'HiKO Groundへようこそ！\nK-POPと韓流文化を体験してください！\n5階まで様々な体験ゾーンがあります。' },
         { x: 700, y: 430, texture: 'shop', name_ko: '포토존 안내', name_ja: 'フォトゾーン案内',
           greeting_ko: '여기서 사진 찍으면 예쁘게 나와요!\n한복 체험도 가능합니다~\nSNS에 올리면 인기 만점!',
           greeting_ja: 'ここで写真を撮ると綺麗に撮れますよ！\n韓服体験もできます～\nSNSに上げたら人気間違いなし！' },
@@ -38,10 +38,10 @@ export default class HiKRGroundScene extends BasePlaceScene {
       buildings: []
     });
 
-    this.addHiKRDecor();
+    this.addHiKODecor();
   }
 
-  addHiKRDecor() {
+  addHiKODecor() {
     const g = this.add.graphics().setDepth(1);
 
     // 층 구분선 + 라벨

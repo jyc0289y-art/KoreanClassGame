@@ -1,10 +1,10 @@
 {
-  "scene_title_ko": "하이커 그라운드 관람",
-  "scene_title_ja": "ハイカーグラウンド観覧",
+  "scene_title_ko": "하이코 그라운드 관람",
+  "scene_title_ja": "ハイコグラウンド観覧",
   "lines": [
     { "speaker": "yuko", "emotion": "curious", "text_ko": "저기요, 입장료가 얼마예요?", "text_ja": "すみません、入場料はいくらですか？", "pronunciation": "[저기요, 입짱뇨가 얼마예요?]" },
     { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "무료예요! 편하게 관람하세요.", "text_ja": "無料です！ゆっくりご覧ください。", "pronunciation": "[무료예요! 편하게 괄람하세요]" },
-    { "speaker": "ami", "emotion": "excited", "text_ko": "대박! BTS 홀로그램이다! 엄청 멋있어!", "text_ja": "すごい！BTSのホログラムだ！めちゃくちゃかっこいい！", "pronunciation": "[대박! 비티에스 홀로그래미다! 엄청 머시써!]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "대박! BTX 홀로그램이다! 엄청 멋있어!", "text_ja": "すごい！BTXのホログラムだ！めちゃくちゃかっこいい！", "pronunciation": "[대박! 비티엑스 홀로그래미다! 엄청 머시써!]" },
     { "speaker": "yuko", "emotion": "happy", "text_ko": "사진 찍어도 돼요?", "text_ja": "写真を撮ってもいいですか？", "pronunciation": "[사진 찌거도 돼요?]" },
     { "speaker": "hyunjeong", "emotion": "friendly", "text_ko": "물론이죠! 포토존도 있어요.", "text_ja": "もちろんです！フォトゾーンもありますよ。", "pronunciation": "[물로니죠! 포토존도 이써요]" },
     { "speaker": "rui", "emotion": "calm", "text_ko": "저기요, 사진 찍어 주실 수 있어요?", "text_ja": "すみません、写真を撮っていただけますか？", "pronunciation": "[저기요, 사진 찌거 주실 수 이써요?]" },

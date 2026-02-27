@@ -3,7 +3,7 @@ import { gameState } from '../../systems/GameState.js';
 
 // ============================================================
 // SeoulMyeongdongScene — 명동 지역맵 (1600×1200)
-//  명동길 직선 도로 중심, 올리브영, 쇼핑거리
+//  명동길 직선 도로 중심, 올리브숲, 쇼핑거리
 // ============================================================
 
 export default class SeoulMyeongdongScene extends BaseWorldScene {
@@ -41,14 +41,14 @@ export default class SeoulMyeongdongScene extends BaseWorldScene {
       buildings: []
     });
 
-    // 올리브영 (진입 가능)
+    // 올리브숲 (진입 가능)
     this.createEnterableBuilding(800, 450, 'OliveYoungScene', {
-      texture: 'building_oliveyoung', name_ko: '올리브영', name_ja: 'OLIVE YOUNG'
+      texture: 'building_oliveyoung', name_ko: '올리브숲', name_ja: 'OLIVE BLOOM'
     });
 
-    // 하이커 그라운드 (진입 가능)
+    // 하이코 그라운드 (진입 가능)
     this.createEnterableBuilding(600, 300, 'HiKRGroundScene', {
-      texture: 'building_shop', name_ko: '하이커그라운드', name_ja: 'HiKR Ground'
+      texture: 'building_shop', name_ko: '하이코그라운드', name_ja: 'HiKO Ground'
     });
 
     // 게스트하우스 (진입 가능)
@@ -61,7 +61,7 @@ export default class SeoulMyeongdongScene extends BaseWorldScene {
       { x: 300, y: 300, texture: 'building_shop', name_ko: '화장품 가게 / コスメ' },
       { x: 1200, y: 300, texture: 'building_shop', name_ko: '의류 매장 / アパレル' },
       { x: 400, y: 700, texture: 'building_shop', name_ko: '기념품 가게 / お土産' },
-      { x: 1100, y: 800, texture: 'building_shop', name_ko: 'CU 편의점' }
+      { x: 1100, y: 800, texture: 'building_shop', name_ko: 'BU 편의점' }
     ]);
 
     // 명동역

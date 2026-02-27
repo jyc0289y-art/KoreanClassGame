@@ -2,10 +2,10 @@
   "scene_title_ko": "후쿠오카에서 한글 공부 시작!",
   "scene_title_ja": "福岡でハングル勉強スタート！",
   "lines": [
-    { "speaker": "ami", "emotion": "excited", "text_ko": "유코야! BTS 새 앨범 가사 봤어?", "text_ja": "ユコ！BTSの新アルバムの歌詞見た？", "pronunciation": "[유코야! 비티에스 새 앨범 가사 봤어?]" },
+    { "speaker": "ami", "emotion": "excited", "text_ko": "유코야! BTX 새 앨범 가사 봤어?", "text_ja": "ユコ！BTXの新アルバムの歌詞見た？", "pronunciation": "[유코야! 비티엑스 새 앨범 가사 봤어?]" },
     { "speaker": "yuko", "emotion": "sad", "text_ko": "봤는데... 한글을 못 읽어서 슬퍼...", "text_ja": "見たけど...ハングル読めなくて悲しい...", "pronunciation": "[봔는데 한그를 몯 일거서 슬퍼]" },
     { "speaker": "rui", "emotion": "calm", "text_ko": "그러면 한국어 공부 시작하자! 서점에 교재 사러 가자.", "text_ja": "じゃあ韓国語の勉強始めよう！本屋にテキスト買いに行こう。", "pronunciation": "[그러면 한구거 공부 시작하자 서저메 교재 사러 가자]" },
-    { "speaker": "yuko", "emotion": "happy", "text_ko": "좋아! 나도 BTS 가사 읽고 싶어!", "text_ja": "いいね！私もBTSの歌詞読みたい！", "pronunciation": "[조아 나도 비티에스 가사 일꼬 시퍼]" },
+    { "speaker": "yuko", "emotion": "happy", "text_ko": "좋아! 나도 BTX 가사 읽고 싶어!", "text_ja": "いいね！私もBTXの歌詞読みたい！", "pronunciation": "[조아 나도 비티엑스 가사 일꼬 시퍼]" },
     { "speaker": "ami", "emotion": "excited", "text_ko": "나는 한국 드라마 자막 없이 보고 싶어!", "text_ja": "私は韓国ドラマ字幕なしで見たい！", "pronunciation": "[나는 한국 드라마 자막 업씨 보고 시퍼]" },
     { "speaker": "rui", "emotion": "happy", "text_ko": "나는 한국 맛집 블로그를 읽고 싶어. 먼저 한글부터!", "text_ja": "僕は韓国グルメブログ読みたい。まずハングルから！", "pronunciation": "[나는 한국 맏찝 블로그를 일꼬 시퍼 먼저 한글부터]" }
   ]

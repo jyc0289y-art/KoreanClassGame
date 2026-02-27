@@ -5,8 +5,8 @@
 // 캐릭터 데이터 (모든 씬에서 참조, 크기 작음)
 export const CHARACTERS = {
   yuko: { name_ko: '유코', name_ja: 'ユコ', color: '#ff69b4', age: 28, from: '후쿠오카', from_ja: '福岡', job_ko: '패션잡지 기자', job_ja: 'ファッション誌記者', hobby_ko: 'K-POP·K-드라마 마니아', hobby_ja: 'K-POP・K-ドラマ好き', story_branch: 'business' },
-  ami: { name_ko: '아미', name_ja: 'アミ', color: '#da70d6', age: 27, from: '후쿠오카', from_ja: '福岡', job_ko: '미용사', job_ja: '美容師', hobby_ko: 'K-뷰티·BTS 팬', hobby_ja: 'K-ビューティー・BTSファン', story_branch: 'fandom' },
-  rui: { name_ko: '루이', name_ja: 'ルイ', color: '#00ced1', age: 26, from: '후쿠오카', from_ja: '福岡', job_ko: '유튜버/먹방 크리에이터', job_ja: 'YouTuber/モッパンクリエイター', hobby_ko: '올리브영 탐험가', hobby_ja: 'オリーブヤング探検家', story_branch: 'media' }
+  ami: { name_ko: '아미', name_ja: 'アミ', color: '#da70d6', age: 27, from: '후쿠오카', from_ja: '福岡', job_ko: '미용사', job_ja: '美容師', hobby_ko: 'K-뷰티·BTX 팬', hobby_ja: 'K-ビューティー・BTXファン', story_branch: 'fandom' },
+  rui: { name_ko: '루이', name_ja: 'ルイ', color: '#00ced1', age: 26, from: '후쿠오카', from_ja: '福岡', job_ko: '먹방 크리에이터', job_ja: 'モッパンクリエイター', hobby_ko: '올리브숲 탐험가', hobby_ja: 'オリーブブルーム探検家', story_branch: 'media' }
 };
 
 // NPC 데이터
@@ -39,8 +39,8 @@ export const MAP_SIZES = {
 // 장소맵 크기 (실내)
 export const PLACE_SIZES = {
   SMALL:  { w: 800,  h: 600 },   // 집, 식당 등
-  MEDIUM: { w: 1000, h: 600 },   // 서점, 올리브영 등
-  LARGE:  { w: 1000, h: 800 },   // 학원, 하이커그라운드 등
+  MEDIUM: { w: 1000, h: 600 },   // 서점, 올리브숲 등
+  LARGE:  { w: 1000, h: 800 },   // 학원, 하이코그라운드 등
 };
 
 // 지역 상수
@@ -63,7 +63,7 @@ export const BUILDING_COLORS = {
   hospital:    0xFFFFFF,  // 병원
   police:      0x4169E1,  // 경찰서
   cinema:      0x8B0000,  // 영화관
-  oliveyoung:  0x00A651,  // 올리브영
+  oliveyoung:  0x00A651,  // 올리브숲
   tower:       0xFF4500,  // N서울타워
   departure:   0x4682B4,  // 국제선 탑승구
   house:       0xCD853F,  // 일반 집
