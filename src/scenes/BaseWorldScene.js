@@ -29,6 +29,11 @@ export default class BaseWorldScene extends Phaser.Scene {
 
     // UI references for resize
     this._uiElements = {};
+
+    // Interact button state
+    this._interactBtnVisible = false;
+    this._npcHighlight = null;
+    this._npcGraceTime = null;
   }
 
   // ── Helper: UI scale factor ──────────────────────────
@@ -122,7 +127,8 @@ export default class BaseWorldScene extends Phaser.Scene {
       npc.setDepth(5);
       npc.npcData = npcConfig;
 
-      const zone = this.add.zone(npcConfig.x, npcConfig.y, 60, 60);
+      // Larger overlap zone for easier proximity detection (especially with joystick)
+      const zone = this.add.zone(npcConfig.x, npcConfig.y, 100, 100);
       this.physics.add.existing(zone, true);
 
       this.add.text(npcConfig.x, npcConfig.y - 24, npcConfig.name_ko, {
@@ -137,6 +143,21 @@ export default class BaseWorldScene extends Phaser.Scene {
 
       this.physics.add.overlap(this.player, zone, () => {
         this.interactableNPC = npc;
+      });
+
+      // Direct tap-on-NPC interaction (mobile-friendly)
+      npc.setInteractive({ useHandCursor: true });
+      npc.on('pointerdown', () => {
+        this.interactableNPC = npc;
+        this.handleInteraction();
+      });
+
+      // Larger invisible tap zone around NPC (matches portal tap pattern)
+      const tapZone = this.add.zone(npcConfig.x, npcConfig.y, 80, 80)
+        .setInteractive({ useHandCursor: true }).setDepth(6);
+      tapZone.on('pointerdown', () => {
+        this.interactableNPC = npc;
+        this.handleInteraction();
       });
 
       this.tweens.add({
@@ -211,15 +232,63 @@ export default class BaseWorldScene extends Phaser.Scene {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
     const s = this.uiScale;
-    const r = Math.round(24 * s);
+    const r = Math.max(30, Math.round(30 * s)); // Minimum 30px for mobile tap target
 
     this.interactBtn = this.add.container(w - 50 * s, h * 0.78);
     const bg = this.add.circle(0, 0, r, 0xff69b4, 0.8);
-    const text = this.add.text(0, 0, '💬', { fontSize: `${Math.round(18 * s)}px` }).setOrigin(0.5);
+    const text = this.add.text(0, 0, '💬', { fontSize: `${Math.round(24 * s)}px` }).setOrigin(0.5);
     this.interactBtn.add([bg, text]);
-    this.interactBtn.setScrollFactor(0).setDepth(100).setAlpha(0).setSize(r * 2, r * 2);
+    this.interactBtn.setScrollFactor(0).setDepth(100).setAlpha(0).setSize(r * 2.5, r * 2.5);
+
+    // Make entire container interactive with expanded hit area
+    this.interactBtn.setInteractive(
+      new Phaser.Geom.Circle(0, 0, r * 1.25),
+      Phaser.Geom.Circle.Contains
+    );
+    this.interactBtn.on('pointerdown', () => this.handleInteraction());
     bg.setInteractive({ useHandCursor: true });
     bg.on('pointerdown', () => this.handleInteraction());
+  }
+
+  // ── Interact Button Show/Hide with Animation ──────────
+  showInteractButton() {
+    if (this._interactBtnVisible) return;
+    this._interactBtnVisible = true;
+
+    // Stop any existing hide tween
+    if (this._interactBtnTween) this._interactBtnTween.stop();
+
+    // Fade in
+    this.tweens.add({
+      targets: this.interactBtn, alpha: 1,
+      duration: 200, ease: 'Quad.easeOut'
+    });
+
+    // Start pulsing
+    this._interactPulseTween = this.tweens.add({
+      targets: this.interactBtn,
+      scaleX: { from: 1.0, to: 1.15 },
+      scaleY: { from: 1.0, to: 1.15 },
+      duration: 600, yoyo: true, repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+  }
+
+  hideInteractButton() {
+    if (!this._interactBtnVisible) return;
+    this._interactBtnVisible = false;
+
+    // Stop pulsing
+    if (this._interactPulseTween) {
+      this._interactPulseTween.stop();
+      this.interactBtn.setScale(1);
+    }
+
+    // Fade out
+    this._interactBtnTween = this.tweens.add({
+      targets: this.interactBtn, alpha: 0,
+      duration: 150, ease: 'Quad.easeIn'
+    });
   }
 
   // ── Controls (Keyboard + Joystick) ──────────────────
@@ -714,20 +783,58 @@ export default class BaseWorldScene extends Phaser.Scene {
       this.player.body.velocity.normalize().scale(speed);
     }
 
-    // NPC interaction check
+    // NPC interaction check (with highlight ring + grace period)
     if (this.interactableNPC) {
       const dist = Phaser.Math.Distance.Between(
         this.player.x, this.player.y,
         this.interactableNPC.x, this.interactableNPC.y
       );
-      if (dist < 50) {
-        this.interactBtn.setAlpha(1);
+      if (dist < 80) {
+        this._npcGraceTime = null; // Reset grace timer
+        this.showInteractButton();
+
+        // NPC highlight ring
+        if (!this._npcHighlight) {
+          this._npcHighlight = this.add.circle(
+            this.interactableNPC.x, this.interactableNPC.y,
+            22, 0xff69b4, 0
+          ).setStrokeStyle(2, 0xff69b4, 0.7).setDepth(4);
+          this.tweens.add({
+            targets: this._npcHighlight,
+            scaleX: { from: 0.8, to: 1.3 }, scaleY: { from: 0.8, to: 1.3 },
+            alpha: { from: 0.5, to: 0 },
+            duration: 800, yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+          });
+        }
+        // Follow NPC bob animation
+        if (this._npcHighlight) {
+          this._npcHighlight.setPosition(this.interactableNPC.x, this.interactableNPC.y);
+        }
+
+        // Keyboard interaction (desktop)
         if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
           this.handleInteraction();
         }
       } else {
-        this.interactBtn.setAlpha(0);
-        this.interactableNPC = null;
+        // Grace period: keep NPC reference for 300ms after leaving range
+        if (!this._npcGraceTime) {
+          this._npcGraceTime = this.time.now;
+        }
+        if (this.time.now - this._npcGraceTime > 300) {
+          this.hideInteractButton();
+          this.interactableNPC = null;
+          this._npcGraceTime = null;
+          if (this._npcHighlight) {
+            this._npcHighlight.destroy();
+            this._npcHighlight = null;
+          }
+        }
+      }
+    } else {
+      // Clean up if NPC reference was lost
+      if (this._npcHighlight) {
+        this._npcHighlight.destroy();
+        this._npcHighlight = null;
       }
     }
 
