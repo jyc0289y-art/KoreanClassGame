@@ -29,11 +29,10 @@ export const DEFAULT_WORLD_HEIGHT = 1200;
 
 // 지역맵 크기 (워커블 월드)
 export const MAP_SIZES = {
-  YAKUIN:        { w: 2400, h: 1800 },  // 후쿠오카 야쿠인 (확장)
   AIRPORT:       { w: 1600, h: 1200 },  // 공항 맵
   INCHEON:       { w: 2000, h: 1200 },  // 인천공항
-  SEOUL_DEFAULT: { w: 1600, h: 1200 },  // 서울 기본 지역맵
-  SEOUL_LARGE:   { w: 2400, h: 1800 },  // 서울 대형 지역맵
+  SEOUL_UNIFIED:   { w: 9600, h: 7200 },  // 서울 통합맵 (홍대+명동+성수+강남)
+  FUKUOKA_UNIFIED: { w: 6400, h: 4800 },  // 후쿠오카 통합맵 (텐진+하카타+야쿠인)
 };
 
 // 장소맵 크기 (실내)

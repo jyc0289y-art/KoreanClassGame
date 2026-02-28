@@ -69,7 +69,10 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.input.topOnly = false;
 
     this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight);
-    this.createTilemap(config.tiles || 'grass');
+    // 대형 통합맵은 createTerrainGraphics()를 별도 호출 — tilemap 스킵
+    if (config.tiles !== '__terrain__') {
+      this.createTilemap(config.tiles || 'grass');
+    }
 
     // ── 맵 방문 기록 ──
     gameState.visitMap(this.scene.key);
@@ -133,7 +136,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     });
   }
 
-  // ── Tilemap ──────────────────────────────────────────
+  // ── Tilemap (소형 씬용 — 공항, 인천 등) ──────────────
   createTilemap(type) {
     const tileSize = 32;
     const cols = Math.ceil(this.worldWidth / tileSize);
@@ -151,6 +154,92 @@ export default class BaseWorldScene extends Phaser.Scene {
         this.add.image(x * tileSize + 16, y * tileSize + 16, tile).setDepth(0);
       }
     }
+  }
+
+  // ── TerrainGraphics (대형 통합맵용 — 단일 Graphics 객체) ──
+  createTerrainGraphics(config) {
+    const g = this.add.graphics().setDepth(0);
+
+    // 기본 지면
+    g.fillStyle(config.baseColor || 0x2d5a1e, 1.0);
+    g.fillRect(0, 0, this.worldWidth, this.worldHeight);
+
+    // 구역별 틴트
+    if (config.zones) {
+      config.zones.forEach(z => {
+        g.fillStyle(z.color, z.alpha || 0.1);
+        if (z.shape === 'polygon' && z.points) {
+          g.beginPath();
+          g.moveTo(z.points[0][0], z.points[0][1]);
+          for (let i = 1; i < z.points.length; i++) {
+            g.lineTo(z.points[i][0], z.points[i][1]);
+          }
+          g.closePath();
+          g.fillPath();
+        } else {
+          if (z.radius) {
+            g.fillRoundedRect(z.x, z.y, z.w, z.h, z.radius);
+          } else {
+            g.fillRect(z.x, z.y, z.w, z.h);
+          }
+        }
+      });
+    }
+
+    // 수역 (한강, 하카타만 등)
+    if (config.water) {
+      config.water.forEach(w => {
+        g.fillStyle(w.color || 0x1a3a6a, w.alpha || 1.0);
+        if (w.points) {
+          g.beginPath();
+          g.moveTo(w.points[0][0], w.points[0][1]);
+          for (let i = 1; i < w.points.length; i++) {
+            g.lineTo(w.points[i][0], w.points[i][1]);
+          }
+          g.closePath();
+          g.fillPath();
+        } else {
+          g.fillRect(w.x, w.y, w.w, w.h);
+        }
+      });
+    }
+
+    // 주요도로
+    if (config.roads) {
+      config.roads.forEach(r => {
+        g.fillStyle(r.color || 0x555555, r.alpha || 0.7);
+        g.fillRect(r.x, r.y, r.w, r.h);
+        // 도로 가장자리 (인도)
+        if (r.sidewalk !== false) {
+          g.fillStyle(0xAAAAAA, 0.25);
+          if (r.w > r.h) {
+            // 수평 도로 → 위아래 인도
+            g.fillRect(r.x, r.y - 8, r.w, 8);
+            g.fillRect(r.x, r.y + r.h, r.w, 8);
+          } else {
+            // 수직 도로 → 좌우 인도
+            g.fillRect(r.x - 8, r.y, 8, r.h);
+            g.fillRect(r.x + r.w, r.y, 8, r.h);
+          }
+        }
+      });
+    }
+
+    // 도로 위 그리드 패턴 (시각적 질감)
+    const gridG = this.add.graphics().setDepth(0.1);
+    gridG.lineStyle(1, 0x000000, 0.03);
+    const gridSize = 64;
+    for (let x = 0; x < this.worldWidth; x += gridSize) {
+      gridG.moveTo(x, 0);
+      gridG.lineTo(x, this.worldHeight);
+    }
+    for (let y = 0; y < this.worldHeight; y += gridSize) {
+      gridG.moveTo(0, y);
+      gridG.lineTo(this.worldWidth, y);
+    }
+    gridG.strokePath();
+
+    return g;
   }
 
   // ── NPCs ─────────────────────────────────────────────

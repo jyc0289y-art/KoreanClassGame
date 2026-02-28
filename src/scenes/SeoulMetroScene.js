@@ -105,7 +105,7 @@ export default class SeoulMetroScene extends BaseMapUIScene {
         // 2호선/AREX 환승
         { id: 'hongdae', name_ko: '홍대입구', name_ja: 'ホンデイック',
           x: 0.30, y: 0.38, color: '#33A23D', unlockLevel: 4,
-          targetScene: 'SeoulHongdaeScene', isTransfer: true },
+          targetScene: 'SeoulUnifiedScene', isTransfer: true },
 
         // 2호선
         { id: 'sinchon', name_ko: '신촌', name_ja: 'シンチョン',
@@ -118,17 +118,17 @@ export default class SeoulMetroScene extends BaseMapUIScene {
 
         { id: 'myeongdong', name_ko: '명동', name_ja: 'ミョンドン',
           x: 0.50, y: 0.38, color: '#3DB7CC', unlockLevel: 4,
-          targetScene: 'SeoulMyeongdongScene' },
+          targetScene: 'SeoulUnifiedScene' },
 
         // 2호선
         { id: 'seongsu', name_ko: '성수', name_ja: 'ソンス',
           x: 0.72, y: 0.38, color: '#33A23D', unlockLevel: 6,
-          targetScene: 'SeoulSeongsuScene' },
+          targetScene: 'SeoulUnifiedScene' },
 
         // 2호선 (강남)
         { id: 'gangnam', name_ko: '강남', name_ja: 'カンナム',
           x: 0.60, y: 0.72, color: '#33A23D', unlockLevel: 5,
-          targetScene: 'SeoulGangnamScene' },
+          targetScene: 'SeoulUnifiedScene' },
 
         // 6호선
         { id: 'mangwon', name_ko: '망원', name_ja: 'マンウォン',
@@ -149,10 +149,10 @@ export default class SeoulMetroScene extends BaseMapUIScene {
     const lastStation = gameState.lastStation;
     const stationSceneMap = {
       incheon_airport: 'IncheonAirportScene',
-      hongdae: 'SeoulHongdaeScene',
-      myeongdong: 'SeoulMyeongdongScene',
-      gangnam: 'SeoulGangnamScene',
-      seongsu: 'SeoulSeongsuScene'
+      hongdae: 'SeoulUnifiedScene',
+      myeongdong: 'SeoulUnifiedScene',
+      gangnam: 'SeoulUnifiedScene',
+      seongsu: 'SeoulUnifiedScene'
     };
     const targetScene = stationSceneMap[lastStation] || 'IncheonAirportScene';
 

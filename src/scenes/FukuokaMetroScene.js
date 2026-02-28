@@ -91,12 +91,14 @@ export default class FukuokaMetroScene extends BaseMapUIScene {
           x: 0.08, y: 0.45, color: '#FF8C00', unlockLevel: 99, lineId: 'airport' },
         { id: 'tenjin', name_ko: '텐진', name_ja: '天神',
           x: 0.48, y: 0.42, color: '#FF8C00', unlockLevel: 2,
+          targetScene: 'FukuokaUnifiedScene',
           isTransfer: true, lineId: 'airport' },
         { id: 'nakasu', name_ko: '나카스카와바타', name_ja: '中洲川端',
           x: 0.55, y: 0.43, color: '#FF8C00', unlockLevel: 99,
           isTransfer: true, lineId: 'airport' },
         { id: 'hakata', name_ko: '하카타', name_ja: '博多',
           x: 0.67, y: 0.43, color: '#FF8C00', unlockLevel: 2,
+          targetScene: 'FukuokaUnifiedScene',
           isTransfer: true, lineId: 'airport' },
         { id: 'fukuoka_airport', name_ko: '후쿠오카공항', name_ja: '福岡空港',
           x: 0.88, y: 0.48, color: '#FF8C00', unlockLevel: 1,
@@ -105,7 +107,7 @@ export default class FukuokaMetroScene extends BaseMapUIScene {
         // ── 나나쿠마선 주요역 ──
         { id: 'yakuin', name_ko: '야쿠인', name_ja: '薬院',
           x: 0.45, y: 0.52, color: '#2E8B57', unlockLevel: 0,
-          targetScene: 'FukuokaYakuinScene', lineId: 'nanakuma',
+          targetScene: 'FukuokaUnifiedScene', lineId: 'nanakuma',
           isCurrent: fromStation === 'yakuin' },
         { id: 'tenjin_minami', name_ko: '텐진미나미', name_ja: '天神南',
           x: 0.48, y: 0.44, color: '#2E8B57', unlockLevel: 99,
@@ -118,10 +120,13 @@ export default class FukuokaMetroScene extends BaseMapUIScene {
     // 마지막 지역맵으로 복귀
     const lastStation = gameState.lastStation || 'yakuin';
     const stationSceneMap = {
-      yakuin: 'FukuokaYakuinScene',
+      yakuin: 'FukuokaUnifiedScene',
+      tenjin: 'FukuokaUnifiedScene',
+      hakata: 'FukuokaUnifiedScene',
+      tenjin_minami: 'FukuokaUnifiedScene',
       fukuoka_airport: 'FukuokaAirportScene'
     };
-    const targetScene = stationSceneMap[lastStation] || 'FukuokaYakuinScene';
+    const targetScene = stationSceneMap[lastStation] || 'FukuokaUnifiedScene';
 
     this._isTransitioning = true;
     this.cameras.main.fadeOut(300, 0, 0, 0);

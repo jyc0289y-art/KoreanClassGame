@@ -17,18 +17,13 @@ import InternationalMapScene from './scenes/InternationalMapScene.js';
 import FukuokaMetroScene from './scenes/FukuokaMetroScene.js';
 import SeoulMetroScene from './scenes/SeoulMetroScene.js';
 
-// ── Layer 3a: 후쿠오카 지역맵 ──
-import FukuokaYakuinScene from './scenes/fukuoka/FukuokaYakuinScene.js';
+// ── Layer 3a: 통합 지역맵 ──
+import FukuokaUnifiedScene from './scenes/fukuoka/FukuokaUnifiedScene.js';
+import SeoulUnifiedScene from './scenes/seoul/SeoulUnifiedScene.js';
+
+// ── Layer 3a: 공항맵 (독립) ──
 import FukuokaAirportScene from './scenes/fukuoka/FukuokaAirportScene.js';
-
-// ── Layer 3a: 인천 지역맵 ──
 import IncheonAirportScene from './scenes/incheon/IncheonAirportScene.js';
-
-// ── Layer 3a: 서울 지역맵 ──
-import SeoulMyeongdongScene from './scenes/seoul/SeoulMyeongdongScene.js';
-import SeoulGangnamScene from './scenes/seoul/SeoulGangnamScene.js';
-import SeoulHongdaeScene from './scenes/seoul/SeoulHongdaeScene.js';
-import SeoulSeongsuScene from './scenes/seoul/SeoulSeongsuScene.js';
 
 // ── Layer 3b: 후쿠오카 장소맵 ──
 import YukoHouseScene from './scenes/fukuoka/YukoHouseScene.js';
@@ -80,18 +75,13 @@ const config = {
     FukuokaMetroScene,
     SeoulMetroScene,
 
-    // ── Layer 3a: 지역맵 (후쿠오카) ──
-    FukuokaYakuinScene,
+    // ── Layer 3a: 통합 지역맵 ──
+    FukuokaUnifiedScene,
+    SeoulUnifiedScene,
+
+    // ── Layer 3a: 공항맵 (독립) ──
     FukuokaAirportScene,
-
-    // ── Layer 3a: 지역맵 (인천) ──
     IncheonAirportScene,
-
-    // ── Layer 3a: 지역맵 (서울) ──
-    SeoulMyeongdongScene,
-    SeoulGangnamScene,
-    SeoulHongdaeScene,
-    SeoulSeongsuScene,
 
     // ── Layer 3b: 장소맵 (후쿠오카) ──
     YukoHouseScene,
