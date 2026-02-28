@@ -31,10 +31,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
 
     // ── 스폰 포인트 ──
     this.stationSpawnPoints = {
-      hongdae:    { x: 1600, y: 3000 },
-      myeongdong: { x: 4800, y: 2800 },
-      seongsu:    { x: 8000, y: 2800 },
-      gangnam:    { x: 4800, y: 5800 },
+      hongdae:    { x: 1600, y: 3080 },
+      myeongdong: { x: 4800, y: 2880 },
+      seongsu:    { x: 8000, y: 2880 },
+      gangnam:    { x: 4800, y: 5880 },
       incheon_airport: { x: 4800, y: 2800 }
     };
 

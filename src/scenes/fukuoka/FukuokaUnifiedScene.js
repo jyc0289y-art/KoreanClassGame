@@ -29,10 +29,10 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
 
     // ── 스폰 포인트 ──
     this.stationSpawnPoints = {
-      yakuin:          { x: 2400, y: 3700 },
-      tenjin:          { x: 2200, y: 1700 },
-      tenjin_minami:   { x: 2200, y: 2200 },
-      hakata:          { x: 4600, y: 1900 },
+      yakuin:          { x: 2400, y: 3780 },
+      tenjin:          { x: 2200, y: 1780 },
+      tenjin_minami:   { x: 2200, y: 2280 },
+      hakata:          { x: 4600, y: 1980 },
       fukuoka_airport: { x: 4600, y: 1900 }
     };
 

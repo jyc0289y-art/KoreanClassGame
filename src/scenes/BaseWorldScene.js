@@ -86,6 +86,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     if (fromStation && this.stationSpawnPoints?.[fromStation]) {
       spawnX = this.stationSpawnPoints[fromStation].x;
       spawnY = this.stationSpawnPoints[fromStation].y;
+      this._subwayExitImmunityUntil = Date.now() + 500; // 500ms 재진입 방지
     }
 
     // 장소맵에서 나왔을 때 → 해당 건물 근처에 스폰 + 재진입 방지 면역
@@ -879,6 +880,8 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.physics.add.existing(zone, true);
     this.physics.add.overlap(this.player, zone, () => {
       if (!this.isTransitioning) {
+        // 지하철에서 방금 나온 경우 500ms 면역 (즉시 재진입 방지)
+        if (this._subwayExitImmunityUntil && Date.now() < this._subwayExitImmunityUntil) return;
         this.enterSubway(metroSceneKey, stationId);
       }
     });
