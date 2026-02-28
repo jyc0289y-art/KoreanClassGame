@@ -2,12 +2,29 @@
 // 안녕, 서울 — 게임 상수 및 정적 데이터
 // ============================================================
 
+// ── HOBIS 디자인 토큰 ──
+export const HOBIS = {
+  GREEN: '#00ff33',    GREEN_HEX: 0x00ff33,
+  CYAN: '#00f7ff',     CYAN_HEX: 0x00f7ff,
+  BG: '#0a0a0c',       BG_HEX: 0x0a0a0c,
+  PANEL: '#111418',    PANEL_HEX: 0x111418,
+  BORDER: '#2a3b47',   BORDER_HEX: 0x2a3b47,
+  ALERT: '#ff3300',    ALERT_HEX: 0xff3300,
+  WARN: '#ffcc00',     WARN_HEX: 0xffcc00,
+  INPUT: '#0f1215',    INPUT_HEX: 0x0f1215,
+  MUTED: '#5f7481',
+  FONT_HEADER: '"Orbitron", sans-serif',
+  FONT_MONO: '"Share Tech Mono", monospace',
+  FONT_KR: '"Noto Sans KR", sans-serif',
+  FONT_JP: '"Noto Sans JP", sans-serif',
+};
+
 // 캐릭터 데이터 (모든 씬에서 참조, 크기 작음)
 export const CHARACTERS = {
-  yuko: { name_ko: '유코', name_ja: 'ユコ', color: '#ff69b4', age: 28, from: '후쿠오카', from_ja: '福岡', job_ko: '패션잡지 기자', job_ja: 'ファッション誌記者', hobby_ko: 'K-POP·K-드라마 마니아', hobby_ja: 'K-POP・K-ドラマ好き', story_branch: 'business' },
-  ami: { name_ko: '아미', name_ja: 'アミ', color: '#da70d6', age: 27, from: '후쿠오카', from_ja: '福岡', job_ko: '미용사', job_ja: '美容師', hobby_ko: 'K-뷰티·BTX 팬', hobby_ja: 'K-ビューティー・BTXファン', story_branch: 'fandom' },
-  rui: { name_ko: '루이', name_ja: 'ルイ', color: '#00ced1', age: 26, from: '후쿠오카', from_ja: '福岡', job_ko: '먹방 크리에이터', job_ja: 'モッパンクリエイター', hobby_ko: '올리브숲 탐험가', hobby_ja: 'オリーブブルーム探検家', story_branch: 'media' },
-  tester: { name_ko: '테스터', name_ja: 'テスター', color: '#ffd700', age: 99, from: '개발실', from_ja: '開発室', job_ko: 'QA 테스터', job_ja: 'QAテスター', hobby_ko: '모든 곳 탐험', hobby_ja: '全マップ探検', story_branch: 'business', isTest: true }
+  yuko: { name_ko: '유코', name_ja: 'ユコ', color: '#ff3366', age: 28, from: '후쿠오카', from_ja: '福岡', job_ko: '패션잡지 기자', job_ja: 'ファッション誌記者', hobby_ko: 'K-POP·K-드라마 마니아', hobby_ja: 'K-POP・K-ドラマ好き', story_branch: 'business' },
+  ami: { name_ko: '아미', name_ja: 'アミ', color: '#cc44ff', age: 27, from: '후쿠오카', from_ja: '福岡', job_ko: '미용사', job_ja: '美容師', hobby_ko: 'K-뷰티·BTX 팬', hobby_ja: 'K-ビューティー・BTXファン', story_branch: 'fandom' },
+  rui: { name_ko: '루이', name_ja: 'ルイ', color: '#00ffcc', age: 26, from: '후쿠오카', from_ja: '福岡', job_ko: '먹방 크리에이터', job_ja: 'モッパンクリエイター', hobby_ko: '올리브숲 탐험가', hobby_ja: 'オリーブブルーム探検家', story_branch: 'media' },
+  tester: { name_ko: '테스터', name_ja: 'テスター', color: '#ffcc00', age: 99, from: '개발실', from_ja: '開発室', job_ko: 'QA 테스터', job_ja: 'QAテスター', hobby_ko: '모든 곳 탐험', hobby_ja: '全マップ探検', story_branch: 'business', isTest: true }
 };
 
 // NPC 데이터

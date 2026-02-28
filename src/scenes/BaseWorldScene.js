@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { gameState } from '../systems/GameState.js';
 import { dataLoader } from '../systems/DataLoader.js';
-import { CHARACTERS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES, UNIFIED_MAP_ZOOM } from '../constants.js';
+import { CHARACTERS, HOBIS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES, UNIFIED_MAP_ZOOM } from '../constants.js';
 
 export default class BaseWorldScene extends Phaser.Scene {
   constructor(key) {
@@ -596,40 +596,46 @@ export default class BaseWorldScene extends Phaser.Scene {
     const s = this.uiScale;
     const fs = (px) => `${Math.round(px * s)}px`;
 
-    const hudBg = this.add.rectangle(w / 2, 0, w, hh, 0x000000, 0.7)
+    // HOBIS dark HUD with bottom border
+    const hudBg = this.add.rectangle(w / 2, 0, w, hh, HOBIS.BG_HEX, 0.85)
       .setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
+    const hudBorder = this.add.rectangle(w / 2, hh, w, 1, HOBIS.BORDER_HEX, 0.6)
+      .setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(100);
 
     const charInfo = CHARACTERS[gameState.currentCharacter];
-    const charLabel = this.add.text(10 * s, 4, `${charInfo.name_ko} Lv.${gameState.current.level}`, {
-      fontSize: fs(12), color: charInfo.color, fontStyle: 'bold'
+    const charLabel = this.add.text(10 * s, 4, `${charInfo.name_ko.toUpperCase()} Lv.${gameState.current.level}`, {
+      fontSize: fs(12), fontFamily: HOBIS.FONT_MONO, color: HOBIS.CYAN, fontStyle: 'bold'
     }).setScrollFactor(0).setDepth(101);
 
     const barW = Math.min(120 * s, w * 0.3);
-    const expBarBg = this.add.rectangle(10 * s, hh * 0.52, barW, 7 * s, 0x333355)
+    const expBarBorder = this.add.rectangle(10 * s, hh * 0.52, barW, 7 * s, HOBIS.BORDER_HEX)
       .setOrigin(0, 0.5).setScrollFactor(0).setDepth(101);
-    this.expBar = this.add.rectangle(10 * s, hh * 0.52, barW * gameState.expProgress, 7 * s, 0x00ff88)
+    const expBarBg = this.add.rectangle(10 * s + 1, hh * 0.52, barW - 2, 5 * s, 0x1a2a3a)
+      .setOrigin(0, 0.5).setScrollFactor(0).setDepth(101);
+    this.expBar = this.add.rectangle(10 * s + 1, hh * 0.52, (barW - 2) * gameState.expProgress, 5 * s, HOBIS.GREEN_HEX)
       .setOrigin(0, 0.5).setScrollFactor(0).setDepth(101);
     this.expText = this.add.text(10 * s, hh * 0.78, `EXP ${gameState.current.exp}/${gameState.expToNextLevel}`, {
-      fontSize: fs(8), color: '#88cc88'
+      fontSize: fs(8), fontFamily: HOBIS.FONT_MONO, color: HOBIS.GREEN
     }).setScrollFactor(0).setDepth(101);
 
-    this.coinText = this.add.text(w - 10, 6, `💰 ${gameState.current.coins}`, {
-      fontSize: fs(12), color: '#ffd700'
+    this.coinText = this.add.text(w - 10, 6, `⬡ ${gameState.current.coins}`, {
+      fontSize: fs(12), fontFamily: HOBIS.FONT_MONO, color: HOBIS.WARN
     }).setOrigin(1, 0).setScrollFactor(0).setDepth(101);
 
     const chapters = dataLoader.cache.chapters || [];
     const chapter = chapters.find(c => c.id === gameState.currentChapter);
     const chapterLabel = chapter ? this.add.text(w - 10, hh * 0.6, `${chapter.name} | ${chapter.cefr}`, {
-      fontSize: fs(8), color: '#8888aa'
+      fontSize: fs(8), fontFamily: HOBIS.FONT_MONO, color: HOBIS.CYAN
     }).setOrigin(1, 0).setScrollFactor(0).setDepth(101) : null;
 
-    const menuBtn = this.add.text(w / 2, 6, '☰ 메뉴', {
-      fontSize: fs(11), color: '#aaaacc', backgroundColor: '#ffffff11', padding: { x: 8, y: 2 }
+    const menuBtn = this.add.text(w / 2, 6, '☰ OPS', {
+      fontSize: fs(11), fontFamily: HOBIS.FONT_MONO, color: HOBIS.CYAN,
+      backgroundColor: HOBIS.PANEL + '66', padding: { x: 8, y: 2 }
     }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(101).setInteractive({ useHandCursor: true });
     menuBtn.on('pointerdown', () => this.showMenu());
 
     // Store for resize
-    this._uiElements.hud = { hudBg, charLabel, expBarBg, barW, chapterLabel, menuBtn };
+    this._uiElements.hud = { hudBg, hudBorder, charLabel, expBarBg, expBarBorder, barW, chapterLabel, menuBtn };
   }
 
   // ── Interact Button (💬) ─────────────────────────────
@@ -640,8 +646,11 @@ export default class BaseWorldScene extends Phaser.Scene {
     const r = Math.max(30, Math.round(30 * s)); // Minimum 30px for mobile tap target
 
     this.interactBtn = this.add.container(w - 50 * s, h * 0.78);
-    const bg = this.add.circle(0, 0, r, 0xff69b4, 0.8);
-    const text = this.add.text(0, 0, '💬', { fontSize: `${Math.round(24 * s)}px` }).setOrigin(0.5);
+    const bg = this.add.circle(0, 0, r, HOBIS.CYAN_HEX, 0.3);
+    bg.setStrokeStyle(2, HOBIS.CYAN_HEX, 0.8);
+    const text = this.add.text(0, 0, 'COMM', {
+      fontSize: `${Math.round(10 * s)}px`, fontFamily: HOBIS.FONT_MONO, color: HOBIS.CYAN
+    }).setOrigin(0.5);
     this.interactBtn.add([bg, text]);
     this.interactBtn.setScrollFactor(0).setDepth(100).setAlpha(0).setSize(r * 2.5, r * 2.5);
 
@@ -777,7 +786,7 @@ export default class BaseWorldScene extends Phaser.Scene {
       { text: '◀', x: jx - dd, y: jy },
       { text: '▶', x: jx + dd, y: jy }
     ].map(d => this.add.text(d.x, d.y, d.text, {
-      fontSize: `${Math.round(12 * s)}px`, color: '#ff69b4'
+      fontSize: `${Math.round(12 * s)}px`, color: HOBIS.CYAN
     }).setOrigin(0.5).setScrollFactor(0).setDepth(99).setAlpha(0.2));
   }
 
@@ -1138,26 +1147,26 @@ export default class BaseWorldScene extends Phaser.Scene {
 
     this.minimapContainer = this.add.container(mmX, mmY).setScrollFactor(0).setDepth(150);
 
-    // Background
-    const bg = this.add.rectangle(0, 0, mmWidth, mmHeight, 0x0a0a2e, 0.85)
-      .setOrigin(0, 0).setStrokeStyle(1, 0xff69b4, 0.4);
+    // Background — HOBIS dark + cyan border
+    const bg = this.add.rectangle(0, 0, mmWidth, mmHeight, HOBIS.BG_HEX, 0.90)
+      .setOrigin(0, 0).setStrokeStyle(1, HOBIS.CYAN_HEX, 0.5);
     this.minimapContainer.add(bg);
 
-    // Label
-    this.minimapContainer.add(this.add.text(2, 1, 'MAP', {
-      fontSize: `${Math.round(6 * s)}px`, color: '#ff69b4', fontStyle: 'bold'
+    // Label — HOBIS tactical style
+    this.minimapContainer.add(this.add.text(2, 1, 'TACTICAL', {
+      fontSize: `${Math.round(6 * s)}px`, fontFamily: HOBIS.FONT_HEADER, color: HOBIS.CYAN
     }));
 
-    // Buildings
+    // Buildings — green dots
     this.buildingPositions.forEach(b => {
       this.minimapContainer.add(this.add.rectangle(
-        b.x * this.minimapScale, b.y * this.minimapScale, 4, 3, 0x888888, 0.7
+        b.x * this.minimapScale, b.y * this.minimapScale, 4, 3, HOBIS.GREEN_HEX, 0.5
       ).setOrigin(0.5));
     });
 
-    // Portals
+    // Portals — cyan (unlocked) / alert red (locked)
     this.portals.forEach(p => {
-      const color = p.locked ? 0xff4444 : 0x00ff88;
+      const color = p.locked ? HOBIS.ALERT_HEX : HOBIS.CYAN_HEX;
       const dot = this.add.circle(p.x * this.minimapScale, p.y * this.minimapScale, 3, color, 0.9);
       this.minimapContainer.add(dot);
       this.tweens.add({
@@ -1166,22 +1175,21 @@ export default class BaseWorldScene extends Phaser.Scene {
       });
     });
 
-    // NPC dots
+    // NPC dots — warn yellow
     this.minimapNpcDots = [];
     this.npcs.forEach(npc => {
-      const dot = this.add.circle(npc.x * this.minimapScale, npc.y * this.minimapScale, 2, 0xffa500, 0.8);
+      const dot = this.add.circle(npc.x * this.minimapScale, npc.y * this.minimapScale, 2, HOBIS.WARN_HEX, 0.8);
       this.minimapContainer.add(dot);
       this.minimapNpcDots.push({ dot, npc });
     });
 
-    // Camera viewport rect
-    this.minimapViewport = this.add.rectangle(0, 0, 20, 15, 0xffffff, 0.08)
-      .setStrokeStyle(1, 0xffffff, 0.35).setOrigin(0.5);
+    // Camera viewport rect — cyan
+    this.minimapViewport = this.add.rectangle(0, 0, 20, 15, HOBIS.CYAN_HEX, 0.08)
+      .setStrokeStyle(1, HOBIS.CYAN_HEX, 0.35).setOrigin(0.5);
     this.minimapContainer.add(this.minimapViewport);
 
-    // Player dot
-    const playerColor = Phaser.Display.Color.HexStringToColor(CHARACTERS[gameState.currentCharacter].color).color;
-    this.minimapPlayerDot = this.add.circle(0, 0, 3, playerColor, 1);
+    // Player dot — green
+    this.minimapPlayerDot = this.add.circle(0, 0, 3, HOBIS.GREEN_HEX, 1);
     this.tweens.add({
       targets: this.minimapPlayerDot,
       scaleX: { from: 1, to: 1.5 }, scaleY: { from: 1, to: 1.5 },

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { CHARACTERS } from '../constants.js';
+import { CHARACTERS, HOBIS } from '../constants.js';
 import { gameState } from '../systems/GameState.js';
 
 export default class TitleScene extends Phaser.Scene {
@@ -9,27 +9,34 @@ export default class TitleScene extends Phaser.Scene {
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
 
-    // Background gradient
-    this.add.rectangle(w / 2, h / 2, w, h, 0x0a0a2e);
+    // ── HOBIS dark background ──
+    this.add.rectangle(w / 2, h / 2, w, h, HOBIS.BG_HEX);
 
-    // Animated particles (stars)
+    // Scanline grid pattern
+    const grid = this.add.graphics();
+    grid.lineStyle(1, HOBIS.BORDER_HEX, 0.08);
+    for (let y = 0; y < h; y += 30) grid.lineBetween(0, y, w, y);
+    for (let x = 0; x < w; x += 30) grid.lineBetween(x, 0, x, h);
+
+    // ── Animated particles (cyan/green alternating) ──
     for (let i = 0; i < 40; i++) {
+      const isCyan = i % 2 === 0;
       const star = this.add.circle(
         Phaser.Math.Between(0, w),
         Phaser.Math.Between(0, h),
-        Phaser.Math.Between(1, 3),
-        0xffffff,
-        Phaser.Math.FloatBetween(0.2, 0.8)
+        Phaser.Math.Between(1, 2),
+        isCyan ? HOBIS.CYAN_HEX : HOBIS.GREEN_HEX,
+        Phaser.Math.FloatBetween(0.15, 0.5)
       );
       this.tweens.add({
-        targets: star, alpha: { from: star.alpha, to: 0.1 },
+        targets: star, alpha: { from: star.alpha, to: 0.05 },
         duration: Phaser.Math.Between(1000, 3000), yoyo: true, repeat: -1
       });
     }
 
-    // Seoul skyline silhouette
+    // ── Seoul skyline silhouette (HOBIS panel color) ──
     const skyline = this.add.graphics();
-    skyline.fillStyle(0x1a1a3e, 0.6);
+    skyline.fillStyle(HOBIS.PANEL_HEX, 0.5);
     // N Seoul Tower
     skyline.fillRect(w * 0.45, h * 0.35, 8, 80);
     skyline.fillTriangle(w * 0.45 + 4, h * 0.3, w * 0.45 - 8, h * 0.38, w * 0.45 + 16, h * 0.38);
@@ -39,27 +46,45 @@ export default class TitleScene extends Phaser.Scene {
     bx.forEach((x, i) => {
       skyline.fillRect(w * x, h * 0.65 - bh[i], 30 + i * 3, bh[i] + h * 0.35);
     });
+    // Neon edge highlights on skyline
+    const skylineEdge = this.add.graphics();
+    skylineEdge.lineStyle(1, HOBIS.CYAN_HEX, 0.1);
+    bx.forEach((x, i) => {
+      const bw = 30 + i * 3;
+      const by = h * 0.65 - bh[i];
+      skylineEdge.lineBetween(w * x, by, w * x + bw, by);
+    });
 
-    // Title
+    // ── Title ──
     const titleY = h * 0.18;
     this.add.text(w / 2, titleY, '안녕, 서울', {
-      fontSize: '42px', fontFamily: '"Noto Sans KR", sans-serif',
-      color: '#ff69b4', fontStyle: 'bold',
-      shadow: { offsetX: 2, offsetY: 2, color: '#ff69b466', blur: 8, fill: true }
+      fontSize: '42px', fontFamily: HOBIS.FONT_KR,
+      color: HOBIS.CYAN, fontStyle: 'bold',
+      shadow: { offsetX: 0, offsetY: 0, color: '#00f7ff44', blur: 12, fill: true }
     }).setOrigin(0.5);
 
-    this.add.text(w / 2, titleY + 48, 'アンニョン、ソウル', {
-      fontSize: '20px', fontFamily: '"Noto Sans JP", sans-serif', color: '#da70d6'
+    this.add.text(w / 2, titleY + 48, 'ANNYEONG, SEOUL', {
+      fontSize: '16px', fontFamily: HOBIS.FONT_HEADER, color: HOBIS.GREEN,
+      shadow: { offsetX: 0, offsetY: 0, color: '#00ff3344', blur: 8, fill: true }
     }).setOrigin(0.5);
 
-    this.add.text(w / 2, titleY + 76, '두근두근 서울 | ドキドキ・ソウル', {
-      fontSize: '13px', fontFamily: '"Noto Sans KR", sans-serif', color: '#8888bb'
+    // Tagline with dashed separator
+    const tagY = titleY + 76;
+    const tagLine = this.add.graphics();
+    tagLine.lineStyle(1, HOBIS.BORDER_HEX, 0.4);
+    tagLine.lineBetween(w * 0.2, tagY - 6, w * 0.8, tagY - 6);
+    this.add.text(w / 2, tagY + 2, '두근두근 서울 | ドキドキ・ソウル', {
+      fontSize: '12px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.MUTED
     }).setOrigin(0.5);
 
-    // Character selection
-    const charY = h * 0.52;
-    this.add.text(w / 2, charY - 45, '캐릭터를 선택하세요 / キャラクターを選んでください', {
-      fontSize: '13px', color: '#aaaacc'
+    // ── Character selection ──
+    const charY = h * 0.50;
+    this.add.text(w / 2, charY - 50, '── OPERATOR SELECT ──', {
+      fontSize: '11px', fontFamily: HOBIS.FONT_HEADER, color: HOBIS.CYAN,
+      shadow: { offsetX: 0, offsetY: 0, color: '#00f7ff22', blur: 6, fill: true }
+    }).setOrigin(0.5);
+    this.add.text(w / 2, charY - 35, 'オペレーター選択', {
+      fontSize: '10px', fontFamily: HOBIS.FONT_JP, color: HOBIS.MUTED
     }).setOrigin(0.5);
 
     const chars = ['yuko', 'ami', 'rui', 'tester'];
@@ -71,60 +96,76 @@ export default class TitleScene extends Phaser.Scene {
       const cx = startX + i * spacing;
       const cd = charData[name];
       const isSelected = gameState.currentCharacter === name;
+      const charColor = Phaser.Display.Color.HexStringToColor(cd.color).color;
 
-      // Selection ring
-      const ring = this.add.circle(cx, charY, 30, Phaser.Display.Color.HexStringToColor(cd.color).color, isSelected ? 0.4 : 0.1);
-      const border = this.add.circle(cx, charY, 30).setStrokeStyle(2, Phaser.Display.Color.HexStringToColor(cd.color).color, isSelected ? 1 : 0.3);
+      // Selection ring — cyan glow when selected, muted when not
+      const ring = this.add.circle(cx, charY, 30,
+        isSelected ? HOBIS.CYAN_HEX : HOBIS.PANEL_HEX,
+        isSelected ? 0.25 : 0.15
+      );
+      const border = this.add.circle(cx, charY, 30).setStrokeStyle(
+        isSelected ? 2 : 1,
+        isSelected ? HOBIS.CYAN_HEX : HOBIS.BORDER_HEX,
+        isSelected ? 0.8 : 0.3
+      );
 
       // Character sprite
       const sprite = this.add.image(cx, charY, name).setScale(1.5);
 
-      // Name
+      // Character name — neon colored
       this.add.text(cx, charY + 38, cd.name_ko, {
-        fontSize: '14px', fontFamily: '"Noto Sans KR", sans-serif', color: cd.color, fontStyle: 'bold'
+        fontSize: '14px', fontFamily: HOBIS.FONT_KR, color: cd.color, fontStyle: 'bold'
       }).setOrigin(0.5);
       this.add.text(cx, charY + 54, cd.name_ja, {
-        fontSize: '11px', fontFamily: '"Noto Sans JP", sans-serif', color: '#8888aa'
+        fontSize: '10px', fontFamily: HOBIS.FONT_JP, color: HOBIS.MUTED
       }).setOrigin(0.5);
 
-      // Make interactive
+      // Interactive hit area
       const hitArea = this.add.rectangle(cx, charY, 80, 100, 0xffffff, 0).setInteractive({ useHandCursor: true });
-      hitArea.on('pointerover', () => { ring.setAlpha(0.3); border.setAlpha(0.8); sprite.setScale(1.7); });
+      hitArea.on('pointerover', () => {
+        ring.setAlpha(0.3);
+        ring.setFillStyle(HOBIS.CYAN_HEX, 0.3);
+        border.setStrokeStyle(2, HOBIS.CYAN_HEX, 0.8);
+        sprite.setScale(1.7);
+      });
       hitArea.on('pointerout', () => {
-        ring.setAlpha(isSelected ? 0.4 : 0.1);
-        border.setAlpha(isSelected ? 1 : 0.3);
+        ring.setAlpha(isSelected ? 0.25 : 0.15);
+        ring.setFillStyle(isSelected ? HOBIS.CYAN_HEX : HOBIS.PANEL_HEX, isSelected ? 0.25 : 0.15);
+        border.setStrokeStyle(isSelected ? 2 : 1, isSelected ? HOBIS.CYAN_HEX : HOBIS.BORDER_HEX, isSelected ? 0.8 : 0.3);
         sprite.setScale(1.5);
       });
       hitArea.on('pointerdown', () => {
         gameState.currentCharacter = name;
-        this.cameras.main.flash(200, 255, 105, 180, true);
+        this.cameras.main.flash(200, 0, 247, 255, true);
         setTimeout(() => this.scene.restart(), 300);
       });
     });
 
-    // Character info
-    const infoY = charY + 78;
+    // ── Character info ──
+    const infoY = charY + 76;
     const cc = charData[gameState.currentCharacter];
-    const infoStyle = { fontSize: '11px', color: '#aaaacc', lineSpacing: 4 };
-    this.add.text(w / 2, infoY, `${cc.from} 출신 / ${cc.from_ja}出身 | ${cc.job_ko} / ${cc.job_ja}`, infoStyle).setOrigin(0.5);
-
-    // Stats
-    const statsY = infoY + 25;
-    const cs = gameState.current;
-    this.add.text(w / 2, statsY, `Lv.${cs.level}  EXP: ${cs.exp}/${gameState.expToNextLevel}  💰 ${cs.coins}`, {
-      fontSize: '12px', color: '#ffd700'
+    this.add.text(w / 2, infoY - 5, '── OPERATOR INTEL ──', {
+      fontSize: '9px', fontFamily: HOBIS.FONT_HEADER, color: HOBIS.CYAN
+    }).setOrigin(0.5);
+    this.add.text(w / 2, infoY + 12, `${cc.from} 출신 / ${cc.from_ja}出身 | ${cc.job_ko} / ${cc.job_ja}`, {
+      fontSize: '10px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.MUTED, lineSpacing: 4
     }).setOrigin(0.5);
 
-    // Buttons
+    // ── Stats (green) ──
+    const statsY = infoY + 32;
+    const cs = gameState.current;
+    this.add.text(w / 2, statsY, `Lv.${cs.level}  EXP: ${cs.exp}/${gameState.expToNextLevel}  ⬡ ${cs.coins}`, {
+      fontSize: '12px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.GREEN,
+      shadow: { offsetX: 0, offsetY: 0, color: '#00ff3322', blur: 4, fill: true }
+    }).setOrigin(0.5);
+
+    // ── Buttons ──
     const btnY = h * 0.82;
-    this.createButton(w / 2, btnY, '게임 시작 / ゲームスタート', '#ff69b4', () => {
+    this.createButton(w / 2, btnY, '▶ DEPLOY / ゲームスタート', HOBIS.GREEN, () => {
       this.cameras.main.fadeOut(500);
       const lvl = gameState.current.level;
 
-      // ── 3계층 맵 시스템: 현재 맵 기반 진입 ──
       let targetScene = gameState.currentMap || 'FukuokaYakuinScene';
-
-      // 레벨에 따른 기본 시작 맵 (최초 플레이 시)
       if (!gameState.visitedMaps || gameState.visitedMaps.length <= 1) {
         if (lvl >= 4) {
           targetScene = 'IncheonAirportScene';
@@ -140,31 +181,59 @@ export default class TitleScene extends Phaser.Scene {
       setTimeout(() => this.scene.start(targetScene), 500);
     });
 
-    this.createButton(w / 2, btnY + 50, '챕터 선택 / チャプター選択', '#da70d6', () => {
+    this.createButton(w / 2, btnY + 50, '◆ CHAPTER SELECT / チャプター選択', HOBIS.CYAN, () => {
       this.scene.start('ChapterSelectScene');
     });
 
-    // Version info
+    // ── Version info ──
     this.add.text(w / 2, h - 20, 'SeouLink | SL Corporation | v3.0 Prototype', {
-      fontSize: '9px', color: '#444466'
+      fontSize: '9px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.BORDER
     }).setOrigin(0.5);
+
+    // ── Corner brackets (HOBIS signature) ──
+    this.drawCornerBrackets(10, 10, w - 20, h - 20, HOBIS.CYAN_HEX, 0.15);
 
     // Fade in
     this.cameras.main.fadeIn(800);
   }
 
   createButton(x, y, text, color, callback) {
+    const colorHex = Phaser.Display.Color.HexStringToColor(color).color;
     const btn = this.add.container(x, y);
-    const bg = this.add.rectangle(0, 0, 260, 38, Phaser.Display.Color.HexStringToColor(color).color, 0.15)
-      .setStrokeStyle(1, Phaser.Display.Color.HexStringToColor(color).color, 0.5);
+    const bg = this.add.rectangle(0, 0, 270, 38, colorHex, 0.08)
+      .setStrokeStyle(1, colorHex, 0.5);
     const label = this.add.text(0, 0, text, {
-      fontSize: '14px', fontFamily: '"Noto Sans KR", sans-serif', color: color
+      fontSize: '13px', fontFamily: HOBIS.FONT_MONO, color: color
     }).setOrigin(0.5);
     btn.add([bg, label]);
     bg.setInteractive({ useHandCursor: true });
-    bg.on('pointerover', () => { bg.setFillStyle(Phaser.Display.Color.HexStringToColor(color).color, 0.3); });
-    bg.on('pointerout', () => { bg.setFillStyle(Phaser.Display.Color.HexStringToColor(color).color, 0.15); });
+    bg.on('pointerover', () => {
+      bg.setFillStyle(colorHex, 0.2);
+      bg.setStrokeStyle(1, colorHex, 0.9);
+    });
+    bg.on('pointerout', () => {
+      bg.setFillStyle(colorHex, 0.08);
+      bg.setStrokeStyle(1, colorHex, 0.5);
+    });
     bg.on('pointerdown', callback);
     return btn;
+  }
+
+  drawCornerBrackets(x, y, w, h, color, alpha) {
+    const g = this.add.graphics();
+    const len = 12;
+    g.lineStyle(1, color, alpha);
+    // Top-left
+    g.lineBetween(x, y, x + len, y);
+    g.lineBetween(x, y, x, y + len);
+    // Top-right
+    g.lineBetween(x + w, y, x + w - len, y);
+    g.lineBetween(x + w, y, x + w, y + len);
+    // Bottom-left
+    g.lineBetween(x, y + h, x + len, y + h);
+    g.lineBetween(x, y + h, x, y + h - len);
+    // Bottom-right
+    g.lineBetween(x + w, y + h, x + w - len, y + h);
+    g.lineBetween(x + w, y + h, x + w, y + h - len);
   }
 }

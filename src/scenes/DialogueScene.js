@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { CHARACTERS, NPCS } from '../constants.js';
+import { CHARACTERS, NPCS, HOBIS } from '../constants.js';
 
 export default class DialogueScene extends Phaser.Scene {
   constructor() { super({ key: 'DialogueScene' }); }
@@ -17,45 +17,62 @@ export default class DialogueScene extends Phaser.Scene {
     // Semi-transparent overlay
     this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.6);
 
-    // Scene title
+    // Scene title — HOBIS cyan
     if (this.dialogueData.scene_title_ko) {
-      this.add.text(w / 2, 30, `${this.dialogueData.scene_title_ko} / ${this.dialogueData.scene_title_ja}`, {
-        fontSize: '14px', color: '#ff69b4', fontStyle: 'bold'
+      this.add.text(w / 2, 24, '── COMM LINK ──', {
+        fontSize: '9px', fontFamily: HOBIS.FONT_HEADER, color: HOBIS.CYAN
+      }).setOrigin(0.5);
+      this.add.text(w / 2, 40, `${this.dialogueData.scene_title_ko} / ${this.dialogueData.scene_title_ja}`, {
+        fontSize: '13px', fontFamily: HOBIS.FONT_KR, color: HOBIS.CYAN, fontStyle: 'bold',
+        shadow: { offsetX: 0, offsetY: 0, color: '#00f7ff33', blur: 6, fill: true }
       }).setOrigin(0.5);
     }
 
-    // Dialogue box
-    this.dialogBox = this.add.rectangle(w / 2, h - 90, w - 20, 150, 0x0d0d2b, 0.95)
-      .setStrokeStyle(1, 0xff69b4, 0.5);
+    // Dialogue box — HOBIS panel style
+    const boxY = h - 90;
+    const boxW = w - 20;
+    const boxH = 150;
+    this.dialogBox = this.add.rectangle(w / 2, boxY, boxW, boxH, HOBIS.PANEL_HEX, 0.95)
+      .setStrokeStyle(1, HOBIS.CYAN_HEX, 0.6);
 
-    // Speaker portrait area
-    this.portrait = this.add.circle(50, h - 140, 20, 0xff69b4);
+    // Corner brackets on dialogue box
+    this.drawCornerBrackets(w / 2 - boxW / 2, boxY - boxH / 2, boxW, boxH, HOBIS.CYAN_HEX, 0.4);
+
+    // Speaker portrait area — cyan ring
+    this.portrait = this.add.circle(50, h - 140, 20, HOBIS.PANEL_HEX);
+    this.portrait.setStrokeStyle(2, HOBIS.CYAN_HEX, 0.6);
+
+    // Speaker names
     this.speakerName = this.add.text(80, h - 155, '', {
-      fontSize: '13px', color: '#ff69b4', fontStyle: 'bold'
+      fontSize: '13px', fontFamily: HOBIS.FONT_KR, color: HOBIS.CYAN, fontStyle: 'bold'
     });
     this.speakerNameJa = this.add.text(80, h - 138, '', {
-      fontSize: '10px', color: '#aaaacc'
+      fontSize: '10px', fontFamily: HOBIS.FONT_JP, color: HOBIS.MUTED
     });
 
-    // Dialogue text
+    // Dialogue text — green Korean, muted Japanese
     this.textKo = this.add.text(25, h - 115, '', {
-      fontSize: '15px', color: '#ffffff', wordWrap: { width: w - 50 }, lineSpacing: 3
+      fontSize: '15px', fontFamily: HOBIS.FONT_KR, color: HOBIS.GREEN,
+      wordWrap: { width: w - 50 }, lineSpacing: 3
     });
     this.textJa = this.add.text(25, h - 75, '', {
-      fontSize: '12px', color: '#bbbbdd', wordWrap: { width: w - 50 }, lineSpacing: 2
+      fontSize: '12px', fontFamily: HOBIS.FONT_JP, color: '#aac0c0',
+      wordWrap: { width: w - 50 }, lineSpacing: 2
     });
     this.textPron = this.add.text(25, h - 48, '', {
-      fontSize: '10px', color: '#88aa88', wordWrap: { width: w - 50 }
+      fontSize: '10px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.BORDER,
+      wordWrap: { width: w - 50 }
     });
 
-    // Progress indicator
+    // Progress indicator — cyan mono
     this.progressText = this.add.text(w - 25, h - 25, '', {
-      fontSize: '10px', color: '#666688'
+      fontSize: '10px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.CYAN
     }).setOrigin(1, 0.5);
 
-    // Next indicator
-    this.nextHint = this.add.text(w / 2, h - 20, '▼ 탭하여 계속 / タップで続く', {
-      fontSize: '10px', color: '#888888'
+    // Next indicator — green pulsing
+    this.nextHint = this.add.text(w / 2, h - 20, '▼ NEXT', {
+      fontSize: '10px', fontFamily: HOBIS.FONT_MONO, color: HOBIS.GREEN,
+      shadow: { offsetX: 0, offsetY: 0, color: '#00ff3322', blur: 4, fill: true }
     }).setOrigin(0.5);
     this.tweens.add({ targets: this.nextHint, alpha: 0.3, duration: 800, yoyo: true, repeat: -1 });
 
@@ -67,6 +84,24 @@ export default class DialogueScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-SPACE', () => this.nextLine());
   }
 
+  drawCornerBrackets(x, y, w, h, color, alpha) {
+    const g = this.add.graphics();
+    const len = 10;
+    g.lineStyle(1, color, alpha);
+    // Top-left
+    g.lineBetween(x, y, x + len, y);
+    g.lineBetween(x, y, x, y + len);
+    // Top-right
+    g.lineBetween(x + w, y, x + w - len, y);
+    g.lineBetween(x + w, y, x + w, y + len);
+    // Bottom-left
+    g.lineBetween(x, y + h, x + len, y + h);
+    g.lineBetween(x, y + h, x, y + h - len);
+    // Bottom-right
+    g.lineBetween(x + w, y + h, x + w - len, y + h);
+    g.lineBetween(x + w, y + h, x + w, y + h - len);
+  }
+
   showLine() {
     const lines = this.dialogueData.lines;
     if (this.lineIndex >= lines.length) {
@@ -76,10 +111,12 @@ export default class DialogueScene extends Phaser.Scene {
 
     const line = lines[this.lineIndex];
     const chars = { ...CHARACTERS, ...NPCS };
-    const charData = chars[line.speaker] || { name_ko: line.speaker, name_ja: '', color: '#ffffff' };
+    const charData = chars[line.speaker] || { name_ko: line.speaker, name_ja: '', color: HOBIS.CYAN };
 
-    // Update portrait color
-    this.portrait.setFillStyle(Phaser.Display.Color.HexStringToColor(charData.color || '#ffffff').color);
+    // Update portrait — character color ring
+    const charColor = Phaser.Display.Color.HexStringToColor(charData.color || HOBIS.CYAN).color;
+    this.portrait.setFillStyle(HOBIS.PANEL_HEX);
+    this.portrait.setStrokeStyle(2, charColor, 0.8);
 
     // Update texts with typewriter effect
     this.speakerName.setText(charData.name_ko || line.speaker);
