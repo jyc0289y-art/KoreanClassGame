@@ -101,13 +101,13 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(10);
 
-    // Camera zoom: 통합맵은 1.8x (위성뷰 스타일), 소형 씬은 1.0x
+    // Camera zoom: 대형 통합맵은 1.8x (위성뷰 스타일), 소형 씬은 1.0x
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
-    const isUnifiedMap = config.tiles === '__terrain__';
-    this.currentZoom = isUnifiedMap ? UNIFIED_MAP_ZOOM : 1.0;
-    this.minCameraZoom = isUnifiedMap ? 0.3 : 0.5;
-    this.maxCameraZoom = isUnifiedMap ? 3.0 : 2.5;
+    const isLargeTerrainMap = config.tiles === '__terrain__' && (this.worldWidth > 2000 || this.worldHeight > 2000);
+    this.currentZoom = config.zoom || (isLargeTerrainMap ? UNIFIED_MAP_ZOOM : 1.0);
+    this.minCameraZoom = isLargeTerrainMap ? 0.3 : 0.5;
+    this.maxCameraZoom = isLargeTerrainMap ? 3.0 : 2.5;
 
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
     this.cameras.main.setBounds(0, 0, this.worldWidth, this.worldHeight);

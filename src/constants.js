@@ -6,7 +6,8 @@
 export const CHARACTERS = {
   yuko: { name_ko: '유코', name_ja: 'ユコ', color: '#ff69b4', age: 28, from: '후쿠오카', from_ja: '福岡', job_ko: '패션잡지 기자', job_ja: 'ファッション誌記者', hobby_ko: 'K-POP·K-드라마 마니아', hobby_ja: 'K-POP・K-ドラマ好き', story_branch: 'business' },
   ami: { name_ko: '아미', name_ja: 'アミ', color: '#da70d6', age: 27, from: '후쿠오카', from_ja: '福岡', job_ko: '미용사', job_ja: '美容師', hobby_ko: 'K-뷰티·BTX 팬', hobby_ja: 'K-ビューティー・BTXファン', story_branch: 'fandom' },
-  rui: { name_ko: '루이', name_ja: 'ルイ', color: '#00ced1', age: 26, from: '후쿠오카', from_ja: '福岡', job_ko: '먹방 크리에이터', job_ja: 'モッパンクリエイター', hobby_ko: '올리브숲 탐험가', hobby_ja: 'オリーブブルーム探検家', story_branch: 'media' }
+  rui: { name_ko: '루이', name_ja: 'ルイ', color: '#00ced1', age: 26, from: '후쿠오카', from_ja: '福岡', job_ko: '먹방 크리에이터', job_ja: 'モッパンクリエイター', hobby_ko: '올리브숲 탐험가', hobby_ja: 'オリーブブルーム探検家', story_branch: 'media' },
+  tester: { name_ko: '테스터', name_ja: 'テスター', color: '#ffd700', age: 99, from: '개발실', from_ja: '開発室', job_ko: 'QA 테스터', job_ja: 'QAテスター', hobby_ko: '모든 곳 탐험', hobby_ja: '全マップ探検', story_branch: 'business', isTest: true }
 };
 
 // NPC 데이터

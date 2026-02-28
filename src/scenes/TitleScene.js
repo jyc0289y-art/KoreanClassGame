@@ -62,10 +62,10 @@ export default class TitleScene extends Phaser.Scene {
       fontSize: '13px', color: '#aaaacc'
     }).setOrigin(0.5);
 
-    const chars = ['yuko', 'ami', 'rui'];
+    const chars = ['yuko', 'ami', 'rui', 'tester'];
     const charData = CHARACTERS;
-    const spacing = 110;
-    const startX = w / 2 - spacing;
+    const spacing = 85;
+    const startX = w / 2 - spacing * 1.5;
 
     chars.forEach((name, i) => {
       const cx = startX + i * spacing;

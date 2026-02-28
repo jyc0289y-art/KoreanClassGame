@@ -47,6 +47,22 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture(name, 32, 32);
     });
 
+    // Tester character (gold star sprite)
+    g.clear();
+    g.fillStyle(0xffd700, 1);
+    g.fillCircle(16, 16, 14);
+    g.lineStyle(2, 0xff8c00, 1);
+    g.strokeCircle(16, 16, 14);
+    g.fillStyle(0xffffff, 1);
+    g.fillCircle(16, 10, 4);
+    g.fillStyle(0x333333, 1);
+    g.fillCircle(14, 9, 1.5);
+    g.fillCircle(18, 9, 1.5);
+    // Star mouth for tester
+    g.fillStyle(0xff8c00, 1);
+    g.fillTriangle(16, 11, 13, 16, 19, 16);
+    g.generateTexture('tester', 32, 32);
+
     // NPC sprites
     const npcColors = { hyunjeong: 0xffa500, yuseok: 0x4169e1, cheoiseok: 0x32cd32, shop: 0xffd700, academy: 0x9370db, mission_npc: 0xff6347, ami: 0xda70d6, rui: 0x00ced1 };
     Object.entries(npcColors).forEach(([name, color]) => {

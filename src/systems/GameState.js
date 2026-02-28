@@ -8,7 +8,9 @@ export class GameState {
     this.characters = {
       yuko: { level: 1, exp: 0, coins: 50, x: 400, y: 400, map: 'fukuoka', completedMissions: [], unlockedChapters: ['ch00', 'ch01'] },
       ami: { level: 1, exp: 0, coins: 50, x: 400, y: 400, map: 'fukuoka', completedMissions: [], unlockedChapters: ['ch00', 'ch01'] },
-      rui: { level: 1, exp: 0, coins: 50, x: 400, y: 400, map: 'fukuoka', completedMissions: [], unlockedChapters: ['ch00', 'ch01'] }
+      rui: { level: 1, exp: 0, coins: 50, x: 400, y: 400, map: 'fukuoka', completedMissions: [], unlockedChapters: ['ch00', 'ch01'] },
+      tester: { level: 99, exp: 0, coins: 99999, x: 400, y: 400, map: 'fukuoka', completedMissions: [],
+        unlockedChapters: ['ch00', 'ch01', 'ch02', 'ch03', 'ch04', 'ch05', 'ch06', 'ch07', 'ch08', 'ch09', 'ch10'] }
     };
     this.currentChapter = 'ch00';
     this.currentLesson = 'l01';
@@ -73,7 +75,17 @@ export class GameState {
   load() {
     try {
       const data = JSON.parse(localStorage.getItem('seoulink_save'));
-      if (data) Object.assign(this, data);
+      if (data) {
+        // 기존 캐릭터 기본값 보존 (새로 추가된 캐릭터가 세이브에 없을 경우 대비)
+        const defaults = { ...this.characters };
+        Object.assign(this, data);
+        // 세이브에 없는 캐릭터를 기본값으로 복원
+        Object.keys(defaults).forEach(key => {
+          if (!this.characters[key]) {
+            this.characters[key] = defaults[key];
+          }
+        });
+      }
     } catch (e) { /* ignore */ }
   }
 }

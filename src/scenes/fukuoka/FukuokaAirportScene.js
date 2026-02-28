@@ -29,9 +29,65 @@ export default class FukuokaAirportScene extends BaseWorldScene {
       fukuoka_airport: { x: 800, y: 1050 }
     };
 
+    // ── 위성뷰 스타일 지형 렌더링 ──
+    this.createTerrainGraphics({
+      baseColor: 0x4a8a3a,   // 공항 외부: 잔디/녹지
+      landUse: [
+        // 활주로 방향 (북쪽 상단)
+        { x: 0, y: 0, w: 1600, h: 80, color: 0x3a3a3a },
+        // 에이프런 (항공기 주기장)
+        { x: 200, y: 80, w: 1200, h: 40, color: 0x505050 },
+        // 터미널 건물 외벽 (전체)
+        { x: 80, y: 120, w: 1440, h: 900, color: 0xd4cec6, radius: 10 },
+        // 입국심사 구역 (상단)
+        { x: 160, y: 140, w: 1280, h: 170, color: 0xc0c8d4 },
+        // 도착 로비 (중앙)
+        { x: 160, y: 320, w: 1280, h: 280, color: 0xe4e0dc },
+        // Access Hall (상업 구역, 따뜻한 톤)
+        { x: 130, y: 610, w: 1340, h: 300, color: 0xe8dcc8, radius: 8 },
+        // 버스 플랫폼 (하단)
+        { x: 160, y: 920, w: 1280, h: 90, color: 0xb8c8b8 },
+        // 외부 도로/주차장 (남쪽)
+        { x: 0, y: 1020, w: 1600, h: 180, color: 0x555555 },
+        // 국내선 셔틀 (동쪽)
+        { x: 1360, y: 380, w: 140, h: 220, color: 0xc0d0e0, radius: 6 },
+      ],
+      roads: [
+        // 중앙 대형 통로 (남북)
+        { x: 720, y: 310, w: 160, h: 600, color: 0xc0bab0, sidewalk: false },
+        // 1F 동서 연결 통로
+        { x: 160, y: 310, w: 1280, h: 20, color: 0xc0bab0, sidewalk: false },
+        { x: 160, y: 600, w: 1280, h: 16, color: 0xc0bab0, sidewalk: false },
+        // 외부 도로 (공항진입로)
+        { x: 0, y: 1080, w: 1600, h: 80, color: 0x555555, type: 'major', sidewalkWidth: 10 },
+        // 외부 도로 (중앙 진입)
+        { x: 720, y: 1010, w: 160, h: 190, color: 0x555555, sidewalk: false },
+      ],
+      blocks: [
+        // Access Hall 내 상점 구획 (Lawson, Tully's 등)
+        { x: 180, y: 660, w: 250, h: 200, density: 'medium',
+          palette: [0x0068B7, 0x4088c7, 0x6098d7, 0x3078b7], shadow: false },
+        { x: 550, y: 700, w: 300, h: 180, density: 'medium',
+          palette: [0xFF6600, 0xe87730, 0xd06020, 0xc85010], shadow: false },
+        { x: 950, y: 640, w: 350, h: 220, density: 'medium',
+          palette: [0x8B4513, 0x9B5523, 0x7B3503, 0xa06533], shadow: false },
+      ],
+      vegetation: [
+        // 터미널 외부 녹지 (좌측)
+        { type: 'park', x: 0, y: 120, w: 70, h: 900, density: 0.12, radiusRange: [5, 12] },
+        // 터미널 외부 녹지 (우측)
+        { type: 'park', x: 1530, y: 120, w: 70, h: 900, density: 0.12, radiusRange: [5, 12] },
+        // 외부 가로수 (남쪽)
+        { type: 'streetTrees', x: 80, y: 1020, dir: 'h', length: 1440, spacing: 55, radius: 7 },
+        // 실내 관엽식물 (도착 로비)
+        { type: 'streetTrees', x: 250, y: 480, dir: 'h', length: 400, spacing: 120, radius: 4 },
+        { type: 'streetTrees', x: 950, y: 480, dir: 'h', length: 400, spacing: 120, radius: 4 },
+      ]
+    });
+
     this.createWorld({
       startX: 800, startY: 500,
-      tiles: 'airport',
+      tiles: '__terrain__',
       npcs: [
         // ── 도착 로비 안내소 ──
         { x: 800, y: 350, texture: 'shop', name_ko: '안내소', name_ja: '案内所',
@@ -93,109 +149,104 @@ export default class FukuokaAirportScene extends BaseWorldScene {
   }
 
   addAirportOverlay() {
-    const g = this.add.graphics().setDepth(0.5);
+    const g = this.add.graphics().setDepth(1.8);
     const s = this.uiScale;
 
-    // ── 터미널 건물 외곽 ──
-    g.fillStyle(0xD4D4D4, 0.12);
-    g.fillRoundedRect(100, 130, 1400, 950, 15);
-    g.lineStyle(2, 0x4682B4, 0.25);
-    g.strokeRoundedRect(100, 130, 1400, 950, 15);
+    // ── 터미널 외곽선 ──
+    g.lineStyle(3, 0x4682B4, 0.5);
+    g.strokeRoundedRect(80, 120, 1440, 900, 10);
 
-    // ── 입국심사/도착 게이트 구역 (상단) ──
-    g.fillStyle(0x4682B4, 0.08);
-    g.fillRoundedRect(200, 150, 1200, 150, 8);
+    // ── 입국심사 구역 경계 ──
+    g.lineStyle(1, 0x4682B4, 0.3);
+    g.strokeRect(160, 140, 1280, 170);
 
-    // ── 도착 로비 (중앙 개방 공간) ──
-    g.fillStyle(0xFFFFFF, 0.05);
-    g.fillRoundedRect(200, 320, 1200, 250, 8);
-
-    // ── Access Hall (남쪽, 큰 상업 구역) ──
-    g.fillStyle(0xFFD700, 0.06);
-    g.fillRoundedRect(150, 620, 1300, 280, 12);
-    g.lineStyle(1, 0xFFD700, 0.2);
-    g.strokeRoundedRect(150, 620, 1300, 280, 12);
+    // ── Access Hall 경계 ──
+    g.lineStyle(2, 0xFFD700, 0.35);
+    g.strokeRoundedRect(130, 610, 1340, 300, 8);
 
     // Access Hall 내부 구획
     // 로손 (좌측)
-    g.fillStyle(0x0068B7, 0.12);
+    g.fillStyle(0x0068B7, 0.2);
     g.fillRoundedRect(200, 700, 180, 80, 6);
+    g.lineStyle(1, 0x0068B7, 0.4);
+    g.strokeRoundedRect(200, 700, 180, 80, 6);
     // Tully's (우측)
-    g.fillStyle(0x8B4513, 0.12);
+    g.fillStyle(0x8B4513, 0.2);
     g.fillRoundedRect(1000, 650, 250, 90, 6);
+    g.lineStyle(1, 0x8B4513, 0.4);
+    g.strokeRoundedRect(1000, 650, 250, 90, 6);
     // 요시노야 (중앙)
-    g.fillStyle(0xFF6600, 0.10);
+    g.fillStyle(0xFF6600, 0.18);
     g.fillRoundedRect(600, 760, 200, 70, 6);
-    // 환전소 (중앙좌측)
-    g.fillStyle(0xFFD700, 0.15);
+    g.lineStyle(1, 0xFF6600, 0.4);
+    g.strokeRoundedRect(600, 760, 200, 70, 6);
+    // 환전소
+    g.fillStyle(0xFFD700, 0.25);
     g.fillRoundedRect(440, 680, 120, 50, 4);
+    g.lineStyle(1, 0xFFD700, 0.5);
+    g.strokeRoundedRect(440, 680, 120, 50, 4);
 
-    // ── 버스 플랫폼 (남쪽 하단) ──
-    g.fillStyle(0x2E8B57, 0.08);
-    g.fillRoundedRect(200, 920, 1200, 80, 6);
-    // 버스 정류장 표시
+    // ── 버스 정류장 ──
     for (let i = 0; i < 4; i++) {
-      g.fillStyle(0x2E8B57, 0.2);
-      g.fillRoundedRect(280 + i * 280, 940, 120, 40, 4);
+      g.fillStyle(0x2E8B57, 0.3);
+      g.fillRoundedRect(280 + i * 280, 938, 120, 40, 4);
+      g.lineStyle(1, 0x2E8B57, 0.5);
+      g.strokeRoundedRect(280 + i * 280, 938, 120, 40, 4);
     }
 
-    // ── 국내선 셔틀 (동쪽) ──
-    g.fillStyle(0x4169E1, 0.1);
-    g.fillRoundedRect(1350, 420, 120, 180, 8);
-
-    // ── 중앙 통로 ──
-    g.fillStyle(0xBBBBBB, 0.08);
-    g.fillRect(720, 300, 160, 600);
+    // ── 국내선 셔틀 구역 경계 ──
+    g.lineStyle(1, 0x4169E1, 0.4);
+    g.strokeRoundedRect(1360, 380, 140, 220, 6);
 
     // ── 라벨 텍스트 ──
     const labelStyle = (color) => ({
-      fontSize: `${Math.round(8 * s)}px`, color,
-      backgroundColor: '#00000044', padding: { x: 4, y: 2 }
+      fontSize: `${Math.round(9 * s)}px`, color,
+      backgroundColor: '#00000066', padding: { x: 5, y: 2 }
     });
 
     this.add.text(800, 220, '입국심사 / 入国審査', labelStyle('#4682B4')).setOrigin(0.5).setDepth(2);
     this.add.text(800, 420, '도착 로비 / 到着ロビー', {
-      fontSize: `${Math.round(10 * s)}px`, color: '#ffffff',
-      backgroundColor: '#00000044', padding: { x: 6, y: 3 }
+      fontSize: `${Math.round(11 * s)}px`, color: '#ffffff',
+      backgroundColor: '#00000066', padding: { x: 8, y: 4 }
     }).setOrigin(0.5).setDepth(2);
 
     // Access Hall 라벨
-    this.add.text(800, 635, '── Access Hall (4,000㎡) ──', {
-      fontSize: `${Math.round(9 * s)}px`, color: '#FFD700',
-      backgroundColor: '#00000055', padding: { x: 8, y: 3 }
+    this.add.text(800, 625, '── Access Hall (4,000㎡) ──', {
+      fontSize: `${Math.round(10 * s)}px`, color: '#FFD700',
+      backgroundColor: '#00000077', padding: { x: 10, y: 4 }
     }).setOrigin(0.5).setDepth(2);
 
     // 매장 라벨
     this.add.text(290, 690, '🏪 Lawson', {
-      fontSize: `${Math.round(7 * s)}px`, color: '#0068B7'
+      fontSize: `${Math.round(8 * s)}px`, color: '#4088c7'
     }).setOrigin(0.5).setDepth(2);
     this.add.text(1125, 640, '☕ Tully\'s Coffee', {
-      fontSize: `${Math.round(7 * s)}px`, color: '#8B4513'
+      fontSize: `${Math.round(8 * s)}px`, color: '#a06533'
     }).setOrigin(0.5).setDepth(2);
     this.add.text(700, 750, '🍚 吉野家', {
-      fontSize: `${Math.round(7 * s)}px`, color: '#FF6600'
+      fontSize: `${Math.round(8 * s)}px`, color: '#FF6600'
     }).setOrigin(0.5).setDepth(2);
     this.add.text(500, 670, '💱 両替', {
-      fontSize: `${Math.round(7 * s)}px`, color: '#FFD700'
+      fontSize: `${Math.round(8 * s)}px`, color: '#FFD700'
     }).setOrigin(0.5).setDepth(2);
 
     // 버스정류장
-    this.add.text(800, 925, '🚌 버스 플랫폼 / バスプラットフォーム', labelStyle('#2E8B57')).setOrigin(0.5).setDepth(2);
+    this.add.text(800, 925, '🚌 バスプラットフォーム', labelStyle('#2E8B57')).setOrigin(0.5).setDepth(2);
 
     // 셔틀버스
-    this.add.text(1410, 410, '🚌 국내선\nシャトル', {
-      fontSize: `${Math.round(7 * s)}px`, color: '#4169E1', align: 'center'
+    this.add.text(1430, 410, '🚌 국내선\nシャトル', {
+      fontSize: `${Math.round(8 * s)}px`, color: '#4169E1', align: 'center'
     }).setOrigin(0.5).setDepth(2);
 
     // 3F / B2F 안내
-    this.add.text(800, 80, '↑ 3F 출발층 (면세점 6,000㎡ / YAGURA) / 出発階', {
-      fontSize: `${Math.round(9 * s)}px`, color: '#4682B4',
-      backgroundColor: '#00000066', padding: { x: 8, y: 3 }
-    }).setOrigin(0.5).setDepth(1);
+    this.add.text(800, 60, '↑ 3F 출발층 (면세점 6,000㎡ / YAGURA) / 出発階', {
+      fontSize: `${Math.round(10 * s)}px`, color: '#4682B4',
+      backgroundColor: '#00000088', padding: { x: 10, y: 4 }
+    }).setOrigin(0.5).setDepth(2);
 
     this.add.text(800, 1060, '↓ B2F 지하철 (福岡空港駅) / 地下鉄', {
-      fontSize: `${Math.round(9 * s)}px`, color: '#2E8B57',
-      backgroundColor: '#00000066', padding: { x: 8, y: 3 }
-    }).setOrigin(0.5).setDepth(1);
+      fontSize: `${Math.round(10 * s)}px`, color: '#2E8B57',
+      backgroundColor: '#00000088', padding: { x: 10, y: 4 }
+    }).setOrigin(0.5).setDepth(2);
   }
 }

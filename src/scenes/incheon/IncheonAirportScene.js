@@ -32,9 +32,68 @@ export default class IncheonAirportScene extends BaseWorldScene {
       incheon_airport: { x: 1000, y: 1050 }
     };
 
+    // ── 위성뷰 스타일 지형 렌더링 ──
+    this.createTerrainGraphics({
+      baseColor: 0x4a8a3a,   // 공항 외부: 잔디/녹지
+      landUse: [
+        // 공항 외부 도로/주차장 영역 (남쪽)
+        { x: 0, y: 1050, w: 2000, h: 150, color: 0x555555 },
+        // 활주로 방향 (북쪽 상단)
+        { x: 0, y: 0, w: 2000, h: 80, color: 0x3a3a3a },
+        // 터미널 건물 외벽 (전체)
+        { x: 60, y: 80, w: 1880, h: 960, color: 0xd8d0c8, radius: 12 },
+        // 입국심사 구역 (상단 — 밝은 회색)
+        { x: 120, y: 100, w: 1760, h: 230, color: 0xc8d0d8 },
+        // 수하물 수취 (입국심사 아래)
+        { x: 200, y: 350, w: 1600, h: 120, color: 0xc0c0c0 },
+        // 세관 통과 (띠 형태)
+        { x: 250, y: 480, w: 1500, h: 50, color: 0xb8d0b8 },
+        // 도착 로비 (밝은 개방 공간)
+        { x: 120, y: 540, w: 1760, h: 380, color: 0xe8e4e0 },
+        // B1F 교통센터 (하단 오렌지 틴트)
+        { x: 600, y: 940, w: 800, h: 120, color: 0xe0d0b0, radius: 8 },
+        // 외부 버스정류장 (좌)
+        { x: 80, y: 1060, w: 300, h: 80, color: 0x6a8a6a },
+        // 외부 택시승강장 (우)
+        { x: 1620, y: 1060, w: 300, h: 80, color: 0x7a7a6a },
+      ],
+      roads: [
+        // 중앙 대형 통로 (남북)
+        { x: 920, y: 330, w: 160, h: 650, color: 0xbcb8b0, sidewalk: false },
+        // 1F 동서 연결 통로 (상)
+        { x: 120, y: 330, w: 1760, h: 30, color: 0xc0bab0, sidewalk: false },
+        // 1F 동서 연결 통로 (하)
+        { x: 120, y: 530, w: 1760, h: 20, color: 0xc0bab0, sidewalk: false },
+        // 외부 도로 (공항진입로)
+        { x: 0, y: 1100, w: 2000, h: 80, color: 0x555555, type: 'major', sidewalkWidth: 12 },
+        // 외부 도로 (중앙 진입)
+        { x: 920, y: 1040, w: 160, h: 160, color: 0x555555, sidewalk: false },
+      ],
+      blocks: [
+        // 면세점 구역 시뮬레이션 (게이트 뒤 작은 상점 블록)
+        { x: 150, y: 120, w: 300, h: 180, density: 'high',
+          palette: [0xb0b8c8, 0xa0a8b8, 0xc0c8d8, 0x98a0b0], shadow: false },
+        { x: 800, y: 120, w: 400, h: 180, density: 'high',
+          palette: [0xb0b8c8, 0xa0a8b8, 0xc0c8d8, 0x98a0b0], shadow: false },
+        { x: 1550, y: 120, w: 300, h: 180, density: 'high',
+          palette: [0xb0b8c8, 0xa0a8b8, 0xc0c8d8, 0x98a0b0], shadow: false },
+      ],
+      vegetation: [
+        // 터미널 외부 녹지 (좌측)
+        { type: 'park', x: 0, y: 80, w: 50, h: 960, density: 0.15, radiusRange: [6, 14] },
+        // 터미널 외부 녹지 (우측)
+        { type: 'park', x: 1950, y: 80, w: 50, h: 960, density: 0.15, radiusRange: [6, 14] },
+        // 외부 녹지대 (남쪽)
+        { type: 'streetTrees', x: 100, y: 1050, dir: 'h', length: 1800, spacing: 60, radius: 8 },
+        // 실내 화분/식물 (도착 로비)
+        { type: 'streetTrees', x: 200, y: 700, dir: 'h', length: 600, spacing: 150, radius: 5 },
+        { type: 'streetTrees', x: 1200, y: 700, dir: 'h', length: 600, spacing: 150, radius: 5 },
+      ]
+    });
+
     this.createWorld({
       startX: 1000, startY: 800,
-      tiles: 'airport',
+      tiles: '__terrain__',
       npcs: [
         // ── Gate D 부근: 이현정 (입국 안내) ──
         { x: 900, y: 450, texture: 'hyunjeong', name_ko: '이현정', name_ja: 'ヒョンジョン', hasMission: true,
@@ -105,66 +164,51 @@ export default class IncheonAirportScene extends BaseWorldScene {
   }
 
   addAirportOverlay() {
-    const g = this.add.graphics().setDepth(0.5);
+    const g = this.add.graphics().setDepth(1.8);
+    const s = this.uiScale;
 
-    // ── 터미널 외곽 (둥근 사각형) ──
-    g.fillStyle(0xD4D4D4, 0.15);
-    g.fillRoundedRect(80, 130, 1840, 980, 20);
-    g.lineStyle(2, 0x4682B4, 0.3);
-    g.strokeRoundedRect(80, 130, 1840, 980, 20);
+    // ── 터미널 외곽선 ──
+    g.lineStyle(3, 0x4682B4, 0.5);
+    g.strokeRoundedRect(60, 80, 1880, 960, 12);
 
-    // ── 입국심사 구역 (상단 게이트 뒤) ──
-    g.fillStyle(0x4682B4, 0.08);
-    g.fillRect(150, 150, 1700, 200);
-    g.lineStyle(1, 0x4682B4, 0.2);
-    g.strokeRect(150, 150, 1700, 200);
+    // ── 입국심사 구역 경계 ──
+    g.lineStyle(1, 0x4682B4, 0.3);
+    g.strokeRect(120, 100, 1760, 230);
 
-    // ── 수하물 수취대 (게이트 아래) ──
-    g.fillStyle(0x888888, 0.1);
-    g.fillRoundedRect(250, 370, 1500, 100, 8);
-
-    // 수하물 컨베이어 벨트 표현
+    // ── 수하물 컨베이어 벨트 ──
     for (let i = 0; i < 5; i++) {
       const bx = 320 + i * 290;
-      g.fillStyle(0x666666, 0.3);
-      g.fillRoundedRect(bx, 385, 200, 60, 20);
-      g.lineStyle(1, 0x888888, 0.4);
-      g.strokeRoundedRect(bx, 385, 200, 60, 20);
+      g.fillStyle(0x666666, 0.4);
+      g.fillRoundedRect(bx, 385, 200, 55, 20);
+      g.lineStyle(1, 0x888888, 0.5);
+      g.strokeRoundedRect(bx, 385, 200, 55, 20);
     }
 
-    // ── 세관 통과 구역 ──
-    g.fillStyle(0x2E8B57, 0.08);
-    g.fillRect(300, 490, 1400, 40);
+    // ── 세관 통과 라인 ──
+    g.lineStyle(2, 0x2E8B57, 0.4);
+    g.lineBetween(250, 505, 1750, 505);
+    g.lineBetween(250, 530, 1750, 530);
 
-    // ── 도착 로비 (중앙~하단 개방 공간) ──
-    g.fillStyle(0xFFFFFF, 0.05);
-    g.fillRoundedRect(150, 550, 1700, 350, 10);
-
-    // ── 중앙 대형 통로 (남북) ──
-    g.fillStyle(0xBBBBBB, 0.1);
-    g.fillRect(930, 350, 140, 600);
-
-    // ── 환전소 표시 (출구 4번, 6번, 9번, 11번) ──
+    // ── 환전소 부스 ──
     const exchangePositions = [
-      { x: 1050, y: 620, label: '환전 Exchange (Exit 4)' },
-      { x: 600, y: 620, label: '환전 Exchange (Exit 9)' }
+      { x: 1050, y: 620 },
+      { x: 600, y: 620 }
     ];
     exchangePositions.forEach(pos => {
-      g.fillStyle(0xFFD700, 0.15);
-      g.fillRoundedRect(pos.x - 40, pos.y - 15, 80, 30, 4);
+      g.fillStyle(0xFFD700, 0.25);
+      g.fillRoundedRect(pos.x - 35, pos.y - 12, 70, 24, 4);
+      g.lineStyle(1, 0xFFD700, 0.5);
+      g.strokeRoundedRect(pos.x - 35, pos.y - 12, 70, 24, 4);
     });
 
-    // ── B1F 교통센터 영역 표시 ──
-    g.fillStyle(0xFF8C00, 0.08);
-    g.fillRoundedRect(700, 950, 600, 100, 8);
-    g.lineStyle(1, 0xFF8C00, 0.3);
-    g.strokeRoundedRect(700, 950, 600, 100, 8);
+    // ── B1F 교통센터 경계 ──
+    g.lineStyle(2, 0xFF8C00, 0.4);
+    g.strokeRoundedRect(600, 940, 800, 120, 8);
 
     // ── 라벨 텍스트들 ──
-    const s = this.uiScale;
     const labelStyle = (color) => ({
-      fontSize: `${Math.round(8 * s)}px`, color: color,
-      backgroundColor: '#00000044', padding: { x: 4, y: 2 }
+      fontSize: `${Math.round(9 * s)}px`, color: color,
+      backgroundColor: '#00000066', padding: { x: 5, y: 2 }
     });
 
     // 게이트 라벨 (동→서)
@@ -175,19 +219,20 @@ export default class IncheonAirportScene extends BaseWorldScene {
     ];
     gates.forEach(gate => {
       this.add.text(gate.x, 160, gate.label, {
-        fontSize: `${Math.round(9 * s)}px`, color: '#4682B4', fontStyle: 'bold'
+        fontSize: `${Math.round(10 * s)}px`, color: '#4682B4', fontStyle: 'bold',
+        backgroundColor: '#00000044', padding: { x: 4, y: 2 }
       }).setOrigin(0.5).setDepth(2);
     });
 
     // 구역 라벨
     this.add.text(1000, 300, '입국심사 / 入国審査', labelStyle('#4682B4')).setOrigin(0.5).setDepth(2);
     this.add.text(1000, 410, '수하물 수취 / 手荷物受取', labelStyle('#888888')).setOrigin(0.5).setDepth(2);
-    this.add.text(1000, 505, '세관 / 税関', labelStyle('#2E8B57')).setOrigin(0.5).setDepth(2);
+    this.add.text(1000, 508, '세관 / 税関', labelStyle('#2E8B57')).setOrigin(0.5).setDepth(2);
 
     // 도착로비
     this.add.text(1000, 570, '── 도착 로비 / 到着ロビー ──', {
-      fontSize: `${Math.round(10 * s)}px`, color: '#ffffff',
-      backgroundColor: '#00000044', padding: { x: 8, y: 3 }
+      fontSize: `${Math.round(11 * s)}px`, color: '#ffffff',
+      backgroundColor: '#00000066', padding: { x: 10, y: 4 }
     }).setOrigin(0.5).setDepth(2);
 
     // 출구 번호 표시
@@ -198,34 +243,34 @@ export default class IncheonAirportScene extends BaseWorldScene {
     ];
     exits.forEach(exit => {
       this.add.text(exit.x, exit.y, `🚪 ${exit.num}`, {
-        fontSize: `${Math.round(8 * s)}px`, color: '#aaaaaa'
+        fontSize: `${Math.round(9 * s)}px`, color: '#cccccc'
       }).setOrigin(0.5).setDepth(2);
     });
 
     // 3F / B1F 안내
-    this.add.text(1000, 80, '↑ 3F 출발층 (체크인/면세) / 出発階', {
-      fontSize: `${Math.round(10 * s)}px`, color: '#4682B4',
-      backgroundColor: '#00000066', padding: { x: 8, y: 3 }
-    }).setOrigin(0.5).setDepth(1);
+    this.add.text(1000, 60, '↑ 3F 출발층 (체크인/면세) / 出発階', {
+      fontSize: `${Math.round(11 * s)}px`, color: '#4682B4',
+      backgroundColor: '#00000088', padding: { x: 10, y: 4 }
+    }).setOrigin(0.5).setDepth(2);
 
     this.add.text(1000, 1150, '↓ B1F 교통센터 (AREX 공항철도) / 交通センター', {
-      fontSize: `${Math.round(10 * s)}px`, color: '#FF8C00',
-      backgroundColor: '#00000066', padding: { x: 8, y: 3 }
-    }).setOrigin(0.5).setDepth(1);
+      fontSize: `${Math.round(11 * s)}px`, color: '#FF8C00',
+      backgroundColor: '#00000088', padding: { x: 10, y: 4 }
+    }).setOrigin(0.5).setDepth(2);
 
     // 택시/버스 정류장 (외부)
-    this.add.text(200, 950, '🚌 버스정류장', labelStyle('#00A651')).setOrigin(0.5).setDepth(2);
-    this.add.text(1700, 950, '🚕 택시승강장', labelStyle('#FFD700')).setOrigin(0.5).setDepth(2);
+    this.add.text(200, 1080, '🚌 버스정류장', labelStyle('#00ff88')).setOrigin(0.5).setDepth(2);
+    this.add.text(1770, 1080, '🚕 택시승강장', labelStyle('#FFD700')).setOrigin(0.5).setDepth(2);
 
-    // BU 편의점 위치 표시
+    // BU 편의점
     this.add.text(1400, 580, '🏪 BU', {
-      fontSize: `${Math.round(7 * s)}px`, color: '#9370DB'
+      fontSize: `${Math.round(8 * s)}px`, color: '#9370DB'
     }).setOrigin(0.5).setDepth(2);
 
     // 환전소 표시
     exchangePositions.forEach(pos => {
-      this.add.text(pos.x, pos.y - 25, '💱', {
-        fontSize: `${Math.round(10 * s)}px`
+      this.add.text(pos.x, pos.y - 22, '💱', {
+        fontSize: `${Math.round(11 * s)}px`
       }).setOrigin(0.5).setDepth(2);
     });
   }
