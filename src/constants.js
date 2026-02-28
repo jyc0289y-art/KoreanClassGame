@@ -54,6 +54,11 @@ export const METRO_SCENES = {
   seoul: 'SeoulMetroScene'
 };
 
+// ── 통합맵 비주얼 설정 ──
+export const UNIFIED_MAP_ZOOM = 1.8;       // 통합맵 기본 카메라 줌
+export const ROAD_WIDTH = { major: 160, medium: 100, minor: 60 };
+export const SIDEWALK_WIDTH = 24;
+
 // 건물 색상 테마
 export const BUILDING_COLORS = {
   subway:      0x2E8B57,  // 지하철역 입구

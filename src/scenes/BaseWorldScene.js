@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { gameState } from '../systems/GameState.js';
 import { dataLoader } from '../systems/DataLoader.js';
-import { CHARACTERS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES } from '../constants.js';
+import { CHARACTERS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES, UNIFIED_MAP_ZOOM } from '../constants.js';
 
 export default class BaseWorldScene extends Phaser.Scene {
   constructor(key) {
@@ -101,11 +101,13 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(10);
 
-    // Camera: zoom=1.0 by default so scrollFactor=0 UI is pixel-perfect in RESIZE mode
-    // Users can still pinch/scroll to zoom in/out
+    // Camera zoom: 통합맵은 1.8x (위성뷰 스타일), 소형 씬은 1.0x
     const w = this.cameras.main.width;
     const h = this.cameras.main.height;
-    this.currentZoom = 1.0;
+    const isUnifiedMap = config.tiles === '__terrain__';
+    this.currentZoom = isUnifiedMap ? UNIFIED_MAP_ZOOM : 1.0;
+    this.minCameraZoom = isUnifiedMap ? 0.3 : 0.5;
+    this.maxCameraZoom = isUnifiedMap ? 3.0 : 2.5;
 
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
     this.cameras.main.setBounds(0, 0, this.worldWidth, this.worldHeight);
@@ -156,90 +158,369 @@ export default class BaseWorldScene extends Phaser.Scene {
     }
   }
 
-  // ── TerrainGraphics (대형 통합맵용 — 단일 Graphics 객체) ──
+  // ══════════════════════════════════════════════════════════
+  // TerrainGraphics v2 — 위성사진 스타일 다층 도시 렌더링
+  // ══════════════════════════════════════════════════════════
   createTerrainGraphics(config) {
+    const terrainLayers = []; // 베이킹용 레이어 수집
+    const W = this.worldWidth, H = this.worldHeight;
+
+    // ── Layer 0.0: 기본 지면 + 토지용도 + 수역 ──
     const g = this.add.graphics().setDepth(0);
+    g.fillStyle(config.baseColor || 0x7a9a6a, 1.0);
+    g.fillRect(0, 0, W, H);
 
-    // 기본 지면
-    g.fillStyle(config.baseColor || 0x2d5a1e, 1.0);
-    g.fillRect(0, 0, this.worldWidth, this.worldHeight);
-
-    // 구역별 틴트
-    if (config.zones) {
-      config.zones.forEach(z => {
-        g.fillStyle(z.color, z.alpha || 0.1);
+    if (config.landUse) {
+      config.landUse.forEach(z => {
+        g.fillStyle(z.color, z.alpha || 1.0);
         if (z.shape === 'polygon' && z.points) {
-          g.beginPath();
-          g.moveTo(z.points[0][0], z.points[0][1]);
-          for (let i = 1; i < z.points.length; i++) {
-            g.lineTo(z.points[i][0], z.points[i][1]);
-          }
-          g.closePath();
-          g.fillPath();
+          this._fillPolygon(g, z.points);
+        } else if (z.radius) {
+          g.fillRoundedRect(z.x, z.y, z.w, z.h, z.radius);
         } else {
-          if (z.radius) {
-            g.fillRoundedRect(z.x, z.y, z.w, z.h, z.radius);
-          } else {
-            g.fillRect(z.x, z.y, z.w, z.h);
-          }
+          g.fillRect(z.x, z.y, z.w, z.h);
+        }
+        if (z.border !== false && z.shape !== 'polygon') {
+          g.lineStyle(1, 0x000000, 0.08);
+          g.strokeRect(z.x, z.y, z.w, z.h);
         }
       });
     }
 
-    // 수역 (한강, 하카타만 등)
     if (config.water) {
       config.water.forEach(w => {
+        if (w.bank) {
+          g.fillStyle(w.bank.color || 0x8a7a5a, w.bank.alpha || 0.7);
+          if (w.points) {
+            const expanded = this._expandPolygon(w.points, w.bank.width || 20);
+            this._fillPolygon(g, expanded);
+          }
+        }
         g.fillStyle(w.color || 0x1a3a6a, w.alpha || 1.0);
         if (w.points) {
-          g.beginPath();
-          g.moveTo(w.points[0][0], w.points[0][1]);
-          for (let i = 1; i < w.points.length; i++) {
-            g.lineTo(w.points[i][0], w.points[i][1]);
-          }
-          g.closePath();
-          g.fillPath();
+          this._fillPolygon(g, w.points);
         } else {
           g.fillRect(w.x, w.y, w.w, w.h);
         }
       });
     }
+    terrainLayers.push(g);
 
-    // 주요도로
+    // ── Layer 0.1: 미세 그리드 ──
+    const gridG = this.add.graphics().setDepth(0.1);
+    gridG.lineStyle(1, 0x000000, 0.04);
+    const gridSize = 100;
+    for (let x = 0; x < W; x += gridSize) {
+      gridG.moveTo(x, 0); gridG.lineTo(x, H);
+    }
+    for (let y = 0; y < H; y += gridSize) {
+      gridG.moveTo(0, y); gridG.lineTo(W, y);
+    }
+    gridG.strokePath();
+    terrainLayers.push(gridG);
+
+    // ── Layer 0.2: 도로 네트워크 ──
+    const roadG = this.add.graphics().setDepth(0.2);
     if (config.roads) {
       config.roads.forEach(r => {
-        g.fillStyle(r.color || 0x555555, r.alpha || 0.7);
-        g.fillRect(r.x, r.y, r.w, r.h);
-        // 도로 가장자리 (인도)
-        if (r.sidewalk !== false) {
-          g.fillStyle(0xAAAAAA, 0.25);
-          if (r.w > r.h) {
-            // 수평 도로 → 위아래 인도
-            g.fillRect(r.x, r.y - 8, r.w, 8);
-            g.fillRect(r.x, r.y + r.h, r.w, 8);
+        const rw = r.width || r.w || 100;
+        const isH = (r.dir === 'h') || (!r.dir && (r.w > r.h || r.length && r.dir !== 'v'));
+        let rx, ry, rW, rH;
+
+        if (r.length) {
+          if (isH) { rx = r.x; ry = r.y - rw / 2; rW = r.length; rH = rw; }
+          else { rx = r.x - rw / 2; ry = r.y; rW = rw; rH = r.length; }
+        } else {
+          rx = r.x; ry = r.y; rW = r.w; rH = r.h;
+        }
+
+        const sw = r.sidewalk !== false ? (r.sidewalkWidth || 24) : 0;
+        if (sw > 0) {
+          roadG.fillStyle(0xc0b8a8, 0.9);
+          if (rW > rH) {
+            roadG.fillRect(rx, ry - sw, rW, sw);
+            roadG.fillRect(rx, ry + rH, rW, sw);
           } else {
-            // 수직 도로 → 좌우 인도
-            g.fillRect(r.x - 8, r.y, 8, r.h);
-            g.fillRect(r.x + r.w, r.y, 8, r.h);
+            roadG.fillRect(rx - sw, ry, sw, rH);
+            roadG.fillRect(rx + rW, ry, sw, rH);
+          }
+        }
+
+        roadG.fillStyle(r.color || 0x555555, r.alpha || 0.85);
+        roadG.fillRect(rx, ry, rW, rH);
+
+        roadG.lineStyle(1, 0x333333, 0.3);
+        if (rW > rH) {
+          roadG.lineBetween(rx, ry, rx + rW, ry);
+          roadG.lineBetween(rx, ry + rH, rx + rW, ry + rH);
+        } else {
+          roadG.lineBetween(rx, ry, rx, ry + rH);
+          roadG.lineBetween(rx + rW, ry, rx + rW, ry + rH);
+        }
+
+        if (r.type === 'major' || rw >= 120) {
+          roadG.lineStyle(2, 0xffffff, 0.2);
+          if (rW > rH) {
+            const cy = ry + rH / 2;
+            for (let dx = rx; dx < rx + rW; dx += 40) {
+              roadG.lineBetween(dx, cy, Math.min(dx + 20, rx + rW), cy);
+            }
+          } else {
+            const cx = rx + rW / 2;
+            for (let dy = ry; dy < ry + rH; dy += 40) {
+              roadG.lineBetween(cx, dy, cx, Math.min(dy + 20, ry + rH));
+            }
           }
         }
       });
+
+      if (config.crosswalks) {
+        config.crosswalks.forEach(cw => {
+          roadG.fillStyle(0xffffff, 0.25);
+          const stripeW = 8, gap = 6, count = 5;
+          if (cw.dir === 'h') {
+            for (let i = 0; i < count; i++) {
+              roadG.fillRect(cw.x, cw.y + i * (stripeW + gap), cw.w || 80, stripeW);
+            }
+          } else {
+            for (let i = 0; i < count; i++) {
+              roadG.fillRect(cw.x + i * (stripeW + gap), cw.y, stripeW, cw.h || 80);
+            }
+          }
+        });
+      }
+    }
+    terrainLayers.push(roadG);
+
+    // ── Layer 0.5: 시가지 블록 (필러 건물) ──
+    if (config.blocks) {
+      const blockG = this.add.graphics().setDepth(0.5);
+      this._drawFillerBuildings(blockG, config.blocks);
+      terrainLayers.push(blockG);
     }
 
-    // 도로 위 그리드 패턴 (시각적 질감)
-    const gridG = this.add.graphics().setDepth(0.1);
-    gridG.lineStyle(1, 0x000000, 0.03);
-    const gridSize = 64;
-    for (let x = 0; x < this.worldWidth; x += gridSize) {
-      gridG.moveTo(x, 0);
-      gridG.lineTo(x, this.worldHeight);
+    // ── Layer 1.0: 식생 (나무/공원) ──
+    if (config.vegetation) {
+      const vegG = this.add.graphics().setDepth(1.0);
+      this._drawVegetation(vegG, config.vegetation);
+      terrainLayers.push(vegG);
     }
-    for (let y = 0; y < this.worldHeight; y += gridSize) {
-      gridG.moveTo(0, y);
-      gridG.lineTo(this.worldWidth, y);
+
+    // ── 대형 맵: Graphics → RenderTexture 청크로 베이킹 (성능 최적화) ──
+    if (W > 2000 || H > 2000) {
+      // depth 순으로 정렬하여 올바른 레이어 순서 보장
+      terrainLayers.sort((a, b) => a.depth - b.depth);
+      this._bakeTerrainToChunks(terrainLayers);
     }
-    gridG.strokePath();
 
     return g;
+  }
+
+  // ── Graphics → RenderTexture 청크 베이킹 (성능 핵심 최적화) ──
+  // 수만 개의 draw command를 정적 텍스처로 변환하여 GPU 부하 극감
+  _bakeTerrainToChunks(layers) {
+    const CHUNK = 2400; // 청크 크기 (GPU 텍스처 한도 내)
+    const W = this.worldWidth;
+    const H = this.worldHeight;
+
+    for (let cy = 0; cy < H; cy += CHUNK) {
+      for (let cx = 0; cx < W; cx += CHUNK) {
+        const cw = Math.min(CHUNK, W - cx);
+        const ch = Math.min(CHUNK, H - cy);
+
+        const rt = this.add.renderTexture(cx, cy, cw, ch);
+        rt.setOrigin(0);
+        rt.setDepth(1.5); // 지형 최상위 (인터랙티브 건물 depth 2 아래)
+
+        // 모든 레이어를 depth 순서대로 청크에 그림
+        layers.forEach(g => {
+          rt.draw(g, -cx, -cy);
+        });
+      }
+    }
+
+    // 원본 Graphics 오브젝트 제거 (더 이상 렌더링 불필요)
+    layers.forEach(g => g.destroy());
+  }
+
+  // ── 필러 건물 렌더링 (시가지 블록) ──
+  _drawFillerBuildings(g, blocks) {
+    // 시드 기반 의사난수 (같은 맵이면 같은 배치)
+    const seededRandom = (seed) => {
+      let s = seed;
+      return () => { s = (s * 16807 + 0) % 2147483647; return (s & 0x7fffffff) / 2147483647; };
+    };
+
+    blocks.forEach(block => {
+      const rng = seededRandom(block.x * 7 + block.y * 13 + (block.w || 0));
+      const density = block.density || 'medium';
+      const palette = block.palette || [0x888888, 0x999999, 0xaaaaaa, 0x777777];
+      const shadowOffset = block.shadow !== false ? 4 : 0;
+
+      // 블록 영역을 건물로 채우기
+      const spacing = density === 'high' ? 30 : density === 'low' ? 70 : 50;
+      const bw = block.w || 200, bh = block.h || 200;
+
+      for (let dy = 10; dy < bh - 10; dy += spacing) {
+        for (let dx = 10; dx < bw - 10; dx += spacing) {
+          if (rng() > (density === 'high' ? 0.85 : density === 'low' ? 0.5 : 0.7)) continue;
+
+          const w = 15 + Math.floor(rng() * (density === 'high' ? 25 : 18));
+          const h = 12 + Math.floor(rng() * (density === 'high' ? 20 : 15));
+          const bx = block.x + dx + Math.floor(rng() * 15) - 7;
+          const by = block.y + dy + Math.floor(rng() * 15) - 7;
+          const color = palette[Math.floor(rng() * palette.length)];
+
+          // 그림자
+          if (shadowOffset > 0) {
+            g.fillStyle(0x000000, 0.12);
+            g.fillRect(bx + shadowOffset, by + shadowOffset, w, h);
+          }
+
+          // 건물 본체
+          const brightness = 0.85 + rng() * 0.3;
+          const c = Phaser.Display.Color.IntegerToColor(color);
+          const adjusted = Phaser.Display.Color.GetColor(
+            Math.min(255, Math.floor(c.red * brightness)),
+            Math.min(255, Math.floor(c.green * brightness)),
+            Math.min(255, Math.floor(c.blue * brightness))
+          );
+          g.fillStyle(adjusted, 0.9);
+          g.fillRect(bx, by, w, h);
+
+          // 지붕선 (밝은 윗변)
+          g.lineStyle(1, 0xffffff, 0.15);
+          g.lineBetween(bx, by, bx + w, by);
+        }
+      }
+    });
+  }
+
+  // ── 식생 렌더링 (나무/공원) ──
+  _drawVegetation(g, vegetation) {
+    const seededRandom = (seed) => {
+      let s = seed;
+      return () => { s = (s * 16807 + 0) % 2147483647; return (s & 0x7fffffff) / 2147483647; };
+    };
+
+    vegetation.forEach(v => {
+      if (v.type === 'streetTrees') {
+        // 가로수: 직선 따라 일정 간격
+        const spacing = v.spacing || 80;
+        const r = v.radius || 10;
+        const count = Math.floor((v.length || 1000) / spacing);
+        const rng = seededRandom(v.x * 11 + v.y * 17);
+
+        for (let i = 0; i < count; i++) {
+          const tx = v.dir === 'v' ? v.x + (rng() - 0.5) * 6 : v.x + i * spacing;
+          const ty = v.dir === 'v' ? v.y + i * spacing : v.y + (rng() - 0.5) * 6;
+          const tr = r + (rng() - 0.5) * 4;
+
+          // 그림자
+          g.fillStyle(0x000000, 0.08);
+          g.fillCircle(tx + 3, ty + 3, tr);
+          // 나무
+          const green = 0x2a7a2a + Math.floor(rng() * 0x003000);
+          g.fillStyle(green, 0.85);
+          g.fillCircle(tx, ty, tr);
+          // 하이라이트
+          g.fillStyle(0xffffff, 0.08);
+          g.fillCircle(tx - 2, ty - 2, tr * 0.5);
+        }
+      } else if (v.type === 'park') {
+        // 공원: 영역 내 무작위 나무 군집
+        const rng = seededRandom(v.x * 23 + v.y * 31);
+        const density = v.density || 0.3;
+        const [minR, maxR] = v.radiusRange || [12, 28];
+        const area = (v.w || 200) * (v.h || 200);
+        const count = Math.floor(area * density / 500);
+
+        for (let i = 0; i < count; i++) {
+          const tx = v.x + rng() * (v.w || 200);
+          const ty = v.y + rng() * (v.h || 200);
+          const tr = minR + rng() * (maxR - minR);
+
+          g.fillStyle(0x000000, 0.06);
+          g.fillCircle(tx + 3, ty + 3, tr);
+          const green = 0x3a8a3a + Math.floor(rng() * 0x002800);
+          g.fillStyle(green, 0.8);
+          g.fillCircle(tx, ty, tr);
+          g.fillStyle(0x88ff88, 0.06);
+          g.fillCircle(tx - tr * 0.2, ty - tr * 0.2, tr * 0.4);
+        }
+      } else if (v.type === 'riverbank') {
+        // 강변 녹지
+        const rng = seededRandom(v.x * 37 + v.y * 43);
+        const count = Math.floor((v.length || 500) / 30);
+        for (let i = 0; i < count; i++) {
+          const tx = v.dir === 'h' ? v.x + i * 30 + rng() * 10 : v.x + (rng() - 0.5) * 20;
+          const ty = v.dir === 'h' ? v.y + (rng() - 0.5) * 20 : v.y + i * 30 + rng() * 10;
+          g.fillStyle(0x4a9a4a, 0.5);
+          g.fillCircle(tx, ty, 6 + rng() * 8);
+        }
+      }
+    });
+  }
+
+  // ── 구역 전환 알림 시스템 ──
+  showDistrictWelcome(districtName, subName, color) {
+    if (this._lastWelcomeDistrict === districtName) return;
+    this._lastWelcomeDistrict = districtName;
+
+    const w = this.cameras.main.width;
+    const s = this.uiScale;
+
+    const container = this.add.container(w / 2, 60 * s)
+      .setScrollFactor(0).setDepth(200).setAlpha(0);
+
+    const bg = this.add.rectangle(0, 0, 300 * s, 50 * s, 0x000000, 0.7)
+      .setStrokeStyle(1, Phaser.Display.Color.HexStringToColor(color).color, 0.6);
+    const mainText = this.add.text(0, -8 * s, districtName, {
+      fontSize: `${Math.round(16 * s)}px`, color, fontStyle: 'bold'
+    }).setOrigin(0.5);
+    const sub = this.add.text(0, 12 * s, subName, {
+      fontSize: `${Math.round(9 * s)}px`, color: '#cccccc'
+    }).setOrigin(0.5);
+
+    container.add([bg, mainText, sub]);
+
+    this.tweens.add({
+      targets: container, alpha: 1, duration: 400, ease: 'Quad.easeOut',
+      onComplete: () => {
+        this.time.delayedCall(2000, () => {
+          this.tweens.add({
+            targets: container, alpha: 0, duration: 600,
+            onComplete: () => container.destroy()
+          });
+        });
+      }
+    });
+  }
+
+  // ── Helper: 폴리곤 채우기 ──
+  _fillPolygon(g, points) {
+    if (!points || points.length < 3) return;
+    g.beginPath();
+    g.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length; i++) {
+      g.lineTo(points[i][0], points[i][1]);
+    }
+    g.closePath();
+    g.fillPath();
+  }
+
+  // ── Helper: 폴리곤 확장 (제방용) ──
+  _expandPolygon(points, offset) {
+    // 간단한 확장: 폴리곤 중심에서 각 점을 offset만큼 바깥으로 이동
+    if (!points || points.length < 3) return points;
+    let cx = 0, cy = 0;
+    points.forEach(p => { cx += p[0]; cy += p[1]; });
+    cx /= points.length; cy /= points.length;
+    return points.map(p => {
+      const dx = p[0] - cx, dy = p[1] - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      return [p[0] + (dx / dist) * offset, p[1] + (dy / dist) * offset];
+    });
   }
 
   // ── NPCs ─────────────────────────────────────────────
