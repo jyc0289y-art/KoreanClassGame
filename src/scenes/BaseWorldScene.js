@@ -164,6 +164,7 @@ export default class BaseWorldScene extends Phaser.Scene {
   // TerrainGraphics v2 — 위성사진 스타일 다층 도시 렌더링
   // ══════════════════════════════════════════════════════════
   createTerrainGraphics(config) {
+   try {
     const terrainLayers = []; // 베이킹용 레이어 수집
     const W = this.worldWidth, H = this.worldHeight;
 
@@ -298,6 +299,13 @@ export default class BaseWorldScene extends Phaser.Scene {
     this._terrainRoads = config.roads || [];
     this._terrainWater = config.water || [];
 
+    // ── Layer 0.15: 공원 (도로 아래에 그려져 도로가 공원 위를 지남) ──
+    if (config.vegetation) {
+      const parkG = this.add.graphics().setDepth(0.15);
+      this._drawParks(parkG, config.vegetation);
+      terrainLayers.push(parkG);
+    }
+
     // ── Layer 0.5: 시가지 블록 (필러 건물) ──
     if (config.blocks) {
       const blockG = this.add.graphics().setDepth(0.5);
@@ -305,7 +313,7 @@ export default class BaseWorldScene extends Phaser.Scene {
       terrainLayers.push(blockG);
     }
 
-    // ── Layer 1.0: 식생 (나무/공원) ──
+    // ── Layer 1.0: 식생 (가로수/강변 — 공원 제외) ──
     if (config.vegetation) {
       const vegG = this.add.graphics().setDepth(1.0);
       this._drawVegetation(vegG, config.vegetation);
@@ -320,33 +328,45 @@ export default class BaseWorldScene extends Phaser.Scene {
     }
 
     return g;
+   } catch (e) {
+    console.error('Terrain graphics error:', e);
+    const fallbackG = this.add.graphics().setDepth(0);
+    fallbackG.fillStyle(config.baseColor || 0x7a9a6a, 1);
+    fallbackG.fillRect(0, 0, this.worldWidth, this.worldHeight);
+    return fallbackG;
+   }
   }
 
   // ── Graphics → RenderTexture 청크 베이킹 (성능 핵심 최적화) ──
   // 수만 개의 draw command를 정적 텍스처로 변환하여 GPU 부하 극감
   _bakeTerrainToChunks(layers) {
-    const CHUNK = 2400; // 청크 크기 (GPU 텍스처 한도 내)
-    const W = this.worldWidth;
-    const H = this.worldHeight;
+    try {
+      const CHUNK = 2400; // 청크 크기 (GPU 텍스처 한도 내)
+      const W = this.worldWidth;
+      const H = this.worldHeight;
 
-    for (let cy = 0; cy < H; cy += CHUNK) {
-      for (let cx = 0; cx < W; cx += CHUNK) {
-        const cw = Math.min(CHUNK, W - cx);
-        const ch = Math.min(CHUNK, H - cy);
+      for (let cy = 0; cy < H; cy += CHUNK) {
+        for (let cx = 0; cx < W; cx += CHUNK) {
+          const cw = Math.min(CHUNK, W - cx);
+          const ch = Math.min(CHUNK, H - cy);
 
-        const rt = this.add.renderTexture(cx, cy, cw, ch);
-        rt.setOrigin(0);
-        rt.setDepth(1.5); // 지형 최상위 (인터랙티브 건물 depth 2 아래)
+          const rt = this.add.renderTexture(cx, cy, cw, ch);
+          rt.setOrigin(0);
+          rt.setDepth(1.5); // 지형 최상위 (인터랙티브 건물 depth 2 아래)
 
-        // 모든 레이어를 depth 순서대로 청크에 그림
-        layers.forEach(g => {
-          rt.draw(g, -cx, -cy);
-        });
+          // 모든 레이어를 depth 순서대로 청크에 그림
+          layers.forEach(g => {
+            rt.draw(g, -cx, -cy);
+          });
+        }
       }
-    }
 
-    // 원본 Graphics 오브젝트 제거 (더 이상 렌더링 불필요)
-    layers.forEach(g => g.destroy());
+      // 원본 Graphics 오브젝트 제거 (더 이상 렌더링 불필요)
+      layers.forEach(g => g.destroy());
+    } catch (e) {
+      console.error('Terrain bake error:', e);
+      // 베이킹 실패 시 원본 Graphics 레이어 유지 (성능↓ but 표시됨)
+    }
   }
 
   // ── 필러 건물 렌더링 (시가지 블록) ──
@@ -446,7 +466,24 @@ export default class BaseWorldScene extends Phaser.Scene {
     return inside;
   }
 
-  // ── 식생 렌더링 (나무/공원) ──
+  // ── 공원 렌더링 (깔끔한 초록 풀밭, depth 0.15에서 도로 아래) ──
+  _drawParks(g, vegetation) {
+    vegetation.forEach(v => {
+      if (v.type !== 'park') return;
+      const pw = v.w || 200, ph = v.h || 200;
+      // 풀밭 베이스
+      g.fillStyle(0x5a9a4a, 0.75);
+      g.fillRect(v.x, v.y, pw, ph);
+      // 밝은 내부 (약간 안쪽)
+      g.fillStyle(0x6aaa5a, 0.3);
+      g.fillRect(v.x + 8, v.y + 8, pw - 16, ph - 16);
+      // 테두리
+      g.lineStyle(2, 0x3a7a3a, 0.4);
+      g.strokeRect(v.x, v.y, pw, ph);
+    });
+  }
+
+  // ── 식생 렌더링 (가로수/강변 — 공원은 _drawParks에서 처리) ──
   _drawVegetation(g, vegetation) {
     const seededRandom = (seed) => {
       let s = seed;
@@ -466,6 +503,9 @@ export default class BaseWorldScene extends Phaser.Scene {
           const ty = v.dir === 'v' ? v.y + i * spacing : v.y + (rng() - 0.5) * 6;
           const tr = r + (rng() - 0.5) * 4;
 
+          // 도로/수역 위 나무 스킵
+          if (this._isOnRoad(tx - tr, ty - tr, tr * 2, tr * 2) || this._isOnWater(tx, ty)) continue;
+
           // 그림자
           g.fillStyle(0x000000, 0.08);
           g.fillCircle(tx + 3, ty + 3, tr);
@@ -478,26 +518,8 @@ export default class BaseWorldScene extends Phaser.Scene {
           g.fillCircle(tx - 2, ty - 2, tr * 0.5);
         }
       } else if (v.type === 'park') {
-        // 공원: 영역 내 무작위 나무 군집
-        const rng = seededRandom(v.x * 23 + v.y * 31);
-        const density = v.density || 0.3;
-        const [minR, maxR] = v.radiusRange || [12, 28];
-        const area = (v.w || 200) * (v.h || 200);
-        const count = Math.floor(area * density / 500);
-
-        for (let i = 0; i < count; i++) {
-          const tx = v.x + rng() * (v.w || 200);
-          const ty = v.y + rng() * (v.h || 200);
-          const tr = minR + rng() * (maxR - minR);
-
-          g.fillStyle(0x000000, 0.06);
-          g.fillCircle(tx + 3, ty + 3, tr);
-          const green = 0x3a8a3a + Math.floor(rng() * 0x002800);
-          g.fillStyle(green, 0.8);
-          g.fillCircle(tx, ty, tr);
-          g.fillStyle(0x88ff88, 0.06);
-          g.fillCircle(tx - tr * 0.2, ty - tr * 0.2, tr * 0.4);
-        }
+        // 공원은 _drawParks()에서 별도 레이어로 처리 — 여기서는 스킵
+        return;
       } else if (v.type === 'riverbank') {
         // 강변 녹지
         const rng = seededRandom(v.x * 37 + v.y * 43);
@@ -505,6 +527,8 @@ export default class BaseWorldScene extends Phaser.Scene {
         for (let i = 0; i < count; i++) {
           const tx = v.dir === 'h' ? v.x + i * 30 + rng() * 10 : v.x + (rng() - 0.5) * 20;
           const ty = v.dir === 'h' ? v.y + (rng() - 0.5) * 20 : v.y + i * 30 + rng() * 10;
+          // 도로 위 녹지 스킵
+          if (this._isOnRoad(tx - 7, ty - 7, 14, 14)) continue;
           g.fillStyle(0x4a9a4a, 0.5);
           g.fillCircle(tx, ty, 6 + rng() * 8);
         }

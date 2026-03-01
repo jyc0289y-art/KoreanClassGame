@@ -28,7 +28,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { id: 'itaewon', name: '이태원/용산 梨泰院', sub: 'イテウォン · Itaewon', color: '#FF8C00',
         x: 5200, y: 4200, w: 2300, h: 800 },
       { id: 'yeouido', name: '여의도 汝矣島', sub: 'ヨイド · Yeouido', color: '#4169E1',
-        x: 2600, y: 5000, w: 1600, h: 700 },
+        x: 2600, y: 5050, w: 1600, h: 600 },
       { id: 'gangnam', name: '강남/서초 江南', sub: 'カンナム · Gangnam', color: '#00CED1',
         x: 5500, y: 5800, w: 4000, h: 2700 },
       { id: 'seongsu', name: '성수/뚝섬 聖水', sub: 'ソンス · Seongsu', color: '#32CD32',
@@ -47,7 +47,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       gangnam:    { x: 7000, y: 6800 },
       seongsu:    { x: 9500, y: 3500 },
       jamsil:     { x: 10800, y: 7000 },
-      yeouido:    { x: 3400, y: 5400 },
+      yeouido:    { x: 3400, y: 5300 },
       incheon_airport: { x: 6000, y: 2800 }
     };
 
@@ -104,6 +104,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
   // 지형 렌더링 v3 — 실제 지리 기반
   // ══════════════════════════════════════════════════════
   drawTerrain() {
+   try {
     this.createTerrainGraphics({
       baseColor: 0x7a9a6a,
 
@@ -111,7 +112,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         // ── 산악 지형 ──
         { x: 3500, y: 0, w: 4500, h: 1200, color: 0x1a4a1a, alpha: 1.0, border: false },
         { x: 4500, y: 900, w: 2300, h: 1300, color: 0x2a5a2a, alpha: 0.9, border: false },
-        { x: 6200, y: 3400, w: 1400, h: 1200, color: 0x2a6a2a, alpha: 0.85, border: false },
+        // 남산 외곽 (넓은 범위)
+        { x: 6000, y: 3300, w: 1800, h: 1400, color: 0x2a6a2a, alpha: 0.85, border: false },
+        // 남산 정상 (더 진한 녹색)
+        { x: 6500, y: 3600, w: 800, h: 700, color: 0x1a5a1a, alpha: 0.9, border: false },
         { x: 12500, y: 1800, w: 1900, h: 3000, color: 0x1a4a1a, alpha: 0.9, border: false },
         { x: 4000, y: 9000, w: 2000, h: 1800, color: 0x1a4a1a, alpha: 0.9, border: false },
         { x: 0, y: 0, w: 3500, h: 800, color: 0x2a5a2a, alpha: 0.8, border: false },
@@ -133,7 +137,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 4500, y: 1500, w: 4000, h: 1700, color: 0xc0b8a8, alpha: 1.0 },
         { x: 5800, y: 3200, w: 2200, h: 1600, color: 0xc0b0b0, alpha: 1.0 },
         { x: 5200, y: 4200, w: 2300, h: 800, color: 0xb8a898, alpha: 1.0 },
-        { x: 2600, y: 5050, w: 1600, h: 650, color: 0xb0b0a8, alpha: 1.0 },
+        { x: 2600, y: 5060, w: 1600, h: 580, color: 0xb0b0a8, alpha: 1.0 },
         { x: 5500, y: 5800, w: 4000, h: 2700, color: 0xb0b0a8, alpha: 1.0 },
         { x: 8500, y: 2500, w: 3000, h: 1800, color: 0xa09890, alpha: 1.0 },
         { x: 8500, y: 4300, w: 3000, h: 700, color: 0xb0a088, alpha: 0.9 },
@@ -171,11 +175,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
             [14400,5420],[9600,5670],[6400,5080],[3200,5430],[0,5230]
           ], color: 0x4a8aba, alpha: 0.25 },
 
-        // ── 여의도 북수로 ──
+        // ── 여의도 북수로 (200px 폭 — 섬 형태 명확히) ──
         { points: [
-            [2400,5050],[2600,5020],[3200,5000],[3800,5010],[4200,5050],
-            [4200,5100],[3800,5060],[3200,5050],[2600,5070],[2400,5100]
-          ], color: 0x2a5a8a, alpha: 0.9 },
+            [2200,4850],[2600,4830],[3200,4810],[3800,4820],[4400,4850],
+            [4400,5050],[3800,5030],[3200,5010],[2600,5040],[2200,5050]
+          ], color: 0x2a5a8a, alpha: 0.9,
+          bank: { width: 12, color: 0x8a7a5a, alpha: 0.5 } },
 
         // ── 탄천 ──
         { points: [
@@ -204,12 +209,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
           ], color: 0x3a6a9a, alpha: 0.9,
           bank: { width: 8, color: 0x7a8a5a, alpha: 0.4 } },
 
-        // ── 청계천 ──
+        // ── 청계천 (실제 ~11km, x:5800~9200) ──
         { points: [
             [5800,2700],[6400,2720],[7000,2740],[7600,2760],
-            [8200,2790],[8800,2820],[9400,2860],[10000,2900],[10500,2950],
-            [10500,2990],[10000,2940],[9400,2900],[8800,2860],
-            [8200,2830],[7600,2800],[7000,2780],[6400,2760],[5800,2740]
+            [8200,2790],[8800,2820],[9200,2850],
+            [9200,2890],[8800,2860],[8200,2830],
+            [7600,2800],[7000,2780],[6400,2760],[5800,2740]
           ], color: 0x4a7aaa, alpha: 0.8,
           bank: { width: 6, color: 0x8a9a6a, alpha: 0.4 } },
 
@@ -319,14 +324,15 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       ],
 
       vegetation: [
-        { type: 'park', x: 3500, y: 0, w: 4500, h: 1100, density: 0.5, radiusRange: [15, 35] },
-        { type: 'park', x: 4600, y: 1000, w: 2200, h: 1100, density: 0.35, radiusRange: [12, 28] },
-        { type: 'park', x: 6300, y: 3500, w: 1200, h: 1000, density: 0.4, radiusRange: [14, 30] },
-        { type: 'park', x: 12600, y: 1900, w: 1700, h: 2800, density: 0.4, radiusRange: [15, 32] },
-        { type: 'park', x: 4100, y: 9100, w: 1800, h: 1600, density: 0.4, radiusRange: [15, 32] },
-        { type: 'park', x: 9000, y: 3600, w: 600, h: 500, density: 0.35, radiusRange: [12, 25] },
-        { type: 'park', x: 11800, y: 7600, w: 800, h: 700, density: 0.3, radiusRange: [12, 25] },
-        { type: 'park', x: 3100, y: 5150, w: 500, h: 300, density: 0.3, radiusRange: [10, 20] },
+        { type: 'park', x: 3500, y: 0, w: 4500, h: 1100 },
+        { type: 'park', x: 4600, y: 1000, w: 2200, h: 1100 },
+        { type: 'park', x: 6100, y: 3400, w: 1600, h: 1200 },
+        { type: 'park', x: 12600, y: 1900, w: 1700, h: 2800 },
+        { type: 'park', x: 4100, y: 9100, w: 1800, h: 1600 },
+        { type: 'park', x: 9000, y: 3600, w: 600, h: 500 },
+        { type: 'park', x: 11800, y: 7600, w: 800, h: 700 },
+        { type: 'park', x: 2600, y: 5060, w: 1600, h: 100 },
+        { type: 'park', x: 3100, y: 5200, w: 500, h: 300 },
         { type: 'streetTrees', x: 4550, y: 2700, dir: 'h', length: 5400, spacing: 120, radius: 8 },
         { type: 'streetTrees', x: 4550, y: 2900, dir: 'h', length: 5400, spacing: 120, radius: 8 },
         { type: 'streetTrees', x: 5700, y: 2050, dir: 'v', length: 2400, spacing: 100, radius: 9 },
@@ -343,6 +349,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { type: 'riverbank', x: 9350, y: 5950, dir: 'v', length: 4800 },
       ],
     });
+   } catch (e) {
+    console.error('Seoul terrain error:', e);
+   }
   }
 
   // ══════════════════════════════════════════════════════
