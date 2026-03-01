@@ -21,7 +21,7 @@ export default class RestaurantScene extends BasePlaceScene {
       worldWidth: 900, worldHeight: 700,
       startX: 450, startY: 630,
       tiles: 'floor_tile',
-      returnScene: 'SeoulGangnamScene',
+      returnScene: 'SeoulUnifiedScene',
       title_ko: '삼겹살 식당', title_ja: 'サムギョプサル食堂',
       subtitle: '강남 고기 맛집 🥩',
       npcs: [

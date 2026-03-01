@@ -19,7 +19,7 @@ export default class RuiHouseScene extends BasePlaceScene {
       worldWidth: 800, worldHeight: 600,
       startX: 400, startY: 540,
       tiles: 'floor_wood',
-      returnScene: 'FukuokaYakuinScene',
+      returnScene: 'FukuokaUnifiedScene',
       title_ko: '루이의 방', title_ja: 'ルイの部屋',
       subtitle: '크리에이터 Studio & K-Food ファン',
       npcs: [],

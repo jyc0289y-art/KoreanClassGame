@@ -20,7 +20,7 @@ export default class OliveYoungScene extends BasePlaceScene {
       worldWidth: 1000, worldHeight: 800,
       startX: 500, startY: 730,
       tiles: 'floor_tile',
-      returnScene: 'SeoulMyeongdongScene',
+      returnScene: 'SeoulUnifiedScene',
       title_ko: '올리브숲', title_ja: 'OLIVE BLOOM',
       subtitle: '명동 플래그십 스토어',
       npcs: [

@@ -19,7 +19,7 @@ export default class AmiHouseScene extends BasePlaceScene {
       worldWidth: 800, worldHeight: 600,
       startX: 400, startY: 540,
       tiles: 'floor_wood',
-      returnScene: 'FukuokaYakuinScene',
+      returnScene: 'FukuokaUnifiedScene',
       title_ko: '아미의 방', title_ja: 'アミの部屋',
       subtitle: 'K-Beauty & BTX Collection',
       npcs: [],

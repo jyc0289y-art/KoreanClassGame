@@ -18,10 +18,10 @@ export class GameState {
 
     // ── 3계층 맵 시스템 상태 ──
     this.currentRegion = 'fukuoka';          // 'fukuoka' | 'seoul'
-    this.currentMap = 'FukuokaYakuinScene';  // 현재 위치 씬 키
+    this.currentMap = 'FukuokaUnifiedScene';  // 현재 위치 씬 키
     this.lastStation = 'yakuin';             // 마지막 이용 역 (광역맵 복귀 시 표시)
     this.lastAirport = 'fukuoka_airport';    // 마지막 이용 공항 (국제맵 복귀 시 표시)
-    this.visitedMaps = ['FukuokaYakuinScene']; // 방문한 맵 목록
+    this.visitedMaps = ['FukuokaUnifiedScene']; // 방문한 맵 목록
     this.unlockedStations = ['yakuin', 'fukuoka_airport']; // 해금된 역 목록
 
     // ── 차량 시스템 상태 ──

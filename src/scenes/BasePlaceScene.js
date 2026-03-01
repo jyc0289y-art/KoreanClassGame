@@ -33,7 +33,7 @@ export default class BasePlaceScene extends BaseWorldScene {
         tiles: 'floor_wood' | 'floor_tile' | 'airport_floor',
         npcs: [...],
         buildings: [...] (optional — internal objects),
-        returnScene: 'FukuokaYakuinScene',
+        returnScene: 'FukuokaUnifiedScene',
         title_ko, title_ja, subtitle,
         exitX, exitY
       }

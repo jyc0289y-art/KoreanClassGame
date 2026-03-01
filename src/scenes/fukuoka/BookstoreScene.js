@@ -21,7 +21,7 @@ export default class BookstoreScene extends BasePlaceScene {
       worldWidth: 1000, worldHeight: 700,
       startX: 500, startY: 620,
       tiles: 'floor_tile',
-      returnScene: 'FukuokaYakuinScene',
+      returnScene: 'FukuokaUnifiedScene',
       title_ko: '키노마루 서점', title_ja: '紀野丸書店 博多店',
       subtitle: 'JR博多シティ 6F',
       npcs: [

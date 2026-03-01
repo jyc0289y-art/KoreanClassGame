@@ -20,7 +20,7 @@ export default class KoreanAcademyScene extends BasePlaceScene {
       worldWidth: 1000, worldHeight: 800,
       startX: 500, startY: 730,
       tiles: 'floor_tile',
-      returnScene: 'FukuokaYakuinScene',
+      returnScene: 'FukuokaUnifiedScene',
       title_ko: '한국어 학원', title_ja: 'K Campus 天神校',
       subtitle: '8F 한국어 교실',
       npcs: [

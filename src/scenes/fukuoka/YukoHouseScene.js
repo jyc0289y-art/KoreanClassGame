@@ -21,7 +21,7 @@ export default class YukoHouseScene extends BasePlaceScene {
       worldWidth: 800, worldHeight: 600,
       startX: 400, startY: 540,
       tiles: 'floor_wood',
-      returnScene: 'FukuokaYakuinScene',
+      returnScene: 'FukuokaUnifiedScene',
       title_ko: '유코의 방', title_ja: 'ユコの部屋',
       subtitle: '야쿠인 1K 아파트',
       npcs: [],

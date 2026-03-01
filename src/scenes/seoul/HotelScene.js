@@ -20,7 +20,7 @@ export default class HotelScene extends BasePlaceScene {
       worldWidth: 800, worldHeight: 700,
       startX: 400, startY: 640,
       tiles: 'floor_tile',
-      returnScene: 'SeoulMyeongdongScene',
+      returnScene: 'SeoulUnifiedScene',
       title_ko: '게스트하우스', title_ja: 'ゲストハウス',
       subtitle: '명동 숙소',
       npcs: [

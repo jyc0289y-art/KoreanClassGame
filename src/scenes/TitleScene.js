@@ -165,13 +165,13 @@ export default class TitleScene extends Phaser.Scene {
       this.cameras.main.fadeOut(500);
       const lvl = gameState.current.level;
 
-      let targetScene = gameState.currentMap || 'FukuokaYakuinScene';
+      let targetScene = gameState.currentMap || 'FukuokaUnifiedScene';
       if (!gameState.visitedMaps || gameState.visitedMaps.length <= 1) {
         if (lvl >= 4) {
           targetScene = 'IncheonAirportScene';
           gameState.currentChapter = 'ch01';
         } else {
-          targetScene = 'FukuokaYakuinScene';
+          targetScene = 'FukuokaUnifiedScene';
           gameState.currentChapter = 'ch00';
         }
       }

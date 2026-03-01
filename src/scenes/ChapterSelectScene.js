@@ -51,12 +51,12 @@ export default class ChapterSelectScene extends Phaser.Scene {
           this.cameras.main.fadeOut(300);
           // 3계층 맵 시스템: 챕터별 시작 씬 매핑
           const chapterSceneMap = {
-            'ch00': 'FukuokaYakuinScene',
+            'ch00': 'FukuokaUnifiedScene',
             'ch01': 'IncheonAirportScene',
-            'ch02': 'SeoulMyeongdongScene', // 미래 확장
-            'ch03': 'SeoulMyeongdongScene'  // 미래 확장
+            'ch02': 'SeoulUnifiedScene',
+            'ch03': 'SeoulUnifiedScene'
           };
-          const targetScene = chapterSceneMap[ch.id] || ch.scene || 'FukuokaYakuinScene';
+          const targetScene = chapterSceneMap[ch.id] || ch.scene || 'FukuokaUnifiedScene';
           setTimeout(() => this.scene.start(targetScene), 300);
         });
       }

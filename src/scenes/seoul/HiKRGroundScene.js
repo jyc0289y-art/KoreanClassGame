@@ -21,7 +21,7 @@ export default class HiKOGroundScene extends BasePlaceScene {
       worldWidth: 1000, worldHeight: 900,
       startX: 500, startY: 830,
       tiles: 'floor_tile',
-      returnScene: 'SeoulMyeongdongScene',
+      returnScene: 'SeoulUnifiedScene',
       title_ko: '하이코그라운드', title_ja: 'HiKO Ground',
       subtitle: 'K-Culture 체험 센터 (5F)',
       npcs: [
