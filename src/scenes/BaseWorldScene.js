@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { gameState } from '../systems/GameState.js';
 import { dataLoader } from '../systems/DataLoader.js';
-import { CHARACTERS, HOBIS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES, UNIFIED_MAP_ZOOM } from '../constants.js';
+import { CHARACTERS, HOBIS, PLAYER_SPEED, REF_WIDTH, METRO_SCENES, UNIFIED_MAP_ZOOM, VEHICLE } from '../constants.js';
 
 export default class BaseWorldScene extends Phaser.Scene {
   constructor(key) {
@@ -120,6 +120,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     this.createUI();
     this.setupControls();
     this.createInteractButton();
+    this.createVehicleButton();
     this.createCharacterSwitchButton();
     this.createMinimap();
     this.setupPinchZoom();
@@ -293,6 +294,10 @@ export default class BaseWorldScene extends Phaser.Scene {
     }
     terrainLayers.push(roadG);
 
+    // ── 도로/수역 데이터 저장 (필러 건물 충돌 방지용) ──
+    this._terrainRoads = config.roads || [];
+    this._terrainWater = config.water || [];
+
     // ── Layer 0.5: 시가지 블록 (필러 건물) ──
     if (config.blocks) {
       const blockG = this.add.graphics().setDepth(0.5);
@@ -372,6 +377,9 @@ export default class BaseWorldScene extends Phaser.Scene {
           const by = block.y + dy + Math.floor(rng() * 15) - 7;
           const color = palette[Math.floor(rng() * palette.length)];
 
+          // 도로/수역 위 건물 스킵
+          if (this._isOnRoad(bx, by, w, h) || this._isOnWater(bx + w / 2, by + h / 2)) continue;
+
           // 그림자
           if (shadowOffset > 0) {
             g.fillStyle(0x000000, 0.12);
@@ -395,6 +403,47 @@ export default class BaseWorldScene extends Phaser.Scene {
         }
       }
     });
+  }
+
+  // ── 도로 위 건물 충돌 체크 (AABB overlap) ──
+  _isOnRoad(bx, by, bw, bh) {
+    if (!this._terrainRoads) return false;
+    const margin = 5; // 도로 가장자리 약간 여유
+    for (const r of this._terrainRoads) {
+      const rx = r.x + margin;
+      const ry = r.y + margin;
+      const rw = (r.w || 60) - margin * 2;
+      const rh = (r.h || 60) - margin * 2;
+      if (bx < rx + rw && bx + bw > rx && by < ry + rh && by + bh > ry) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // ── 수역 위 건물 충돌 체크 (point-in-polygon) ──
+  _isOnWater(px, py) {
+    if (!this._terrainWater) return false;
+    for (const w of this._terrainWater) {
+      if (!w.points || w.points.length < 3) continue;
+      // 수면 하이라이트(alpha<0.5) 등은 건물 체크에서 제외
+      if ((w.alpha || 1) < 0.5) continue;
+      if (this._pointInPolygon(px, py, w.points)) return true;
+    }
+    return false;
+  }
+
+  // ── Point-in-polygon (ray casting) ──
+  _pointInPolygon(px, py, polygon) {
+    let inside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      const xi = polygon[i][0], yi = polygon[i][1];
+      const xj = polygon[j][0], yj = polygon[j][1];
+      if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) {
+        inside = !inside;
+      }
+    }
+    return inside;
   }
 
   // ── 식생 렌더링 (나무/공원) ──
@@ -1378,6 +1427,11 @@ export default class BaseWorldScene extends Phaser.Scene {
       this.interactBtn.setPosition(newW - 50 * s, newH * 0.78);
     }
 
+    // ── Vehicle button ──
+    if (this._vehicleBtn) {
+      this._vehicleBtn.setPosition(newW - 50 * s, newH * 0.62);
+    }
+
     // ── Joystick ──
     if (this.joystickBase) {
       const jx = Math.max(60, newW * 0.12);
@@ -1579,6 +1633,248 @@ export default class BaseWorldScene extends Phaser.Scene {
     if (this.expBar) this.expBar.width = barW * gameState.expProgress;
     if (this.expText) this.expText.setText(`EXP ${gameState.current.exp}/${gameState.expToNextLevel}`);
     if (this.coinText) this.coinText.setText(`💰 ${gameState.current.coins}`);
+  }
+
+  // ══════════════════════════════════════════════════════════
+  // 차량 이동 시스템 (Vehicle System)
+  // ══════════════════════════════════════════════════════════
+
+  createVehicleButton() {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+    const s = this.uiScale;
+    const r = Math.max(26, Math.round(26 * s));
+
+    // 대형 통합맵에서만 표시
+    const isLargeMap = this.worldWidth > 2000 || this.worldHeight > 2000;
+    if (!isLargeMap) return;
+
+    const canDrive = gameState.canSelfDrive();
+    const canChauffeur = gameState.canChauffeur();
+    const btnColor = canChauffeur ? HOBIS.GREEN_HEX : (canDrive ? HOBIS.CYAN_HEX : HOBIS.BORDER_HEX);
+    const btnAlpha = canDrive ? 0.4 : 0.15;
+    const label = canChauffeur ? 'RIDE+' : 'RIDE';
+    const labelColor = canChauffeur ? HOBIS.GREEN : (canDrive ? HOBIS.CYAN : HOBIS.MUTED);
+
+    this._vehicleBtn = this.add.container(w - 50 * s, h * 0.62);
+    const bg = this.add.circle(0, 0, r, btnColor, btnAlpha);
+    bg.setStrokeStyle(2, btnColor, canDrive ? 0.8 : 0.3);
+    const text = this.add.text(0, -2, canDrive ? '🚗' : '🔒', {
+      fontSize: `${Math.round(12 * s)}px`
+    }).setOrigin(0.5);
+    const labelText = this.add.text(0, r * 0.65, label, {
+      fontSize: `${Math.round(8 * s)}px`, fontFamily: HOBIS.FONT_MONO, color: labelColor
+    }).setOrigin(0.5);
+    this._vehicleBtn.add([bg, text, labelText]);
+    this._vehicleBtn.setScrollFactor(0).setDepth(100).setSize(r * 2.5, r * 2.5);
+
+    this._vehicleBtn.setInteractive(
+      new Phaser.Geom.Circle(0, 0, r * 1.25),
+      Phaser.Geom.Circle.Contains
+    );
+    this._vehicleBtn.on('pointerdown', () => this._onVehicleButtonTap());
+    bg.setInteractive({ useHandCursor: true });
+    bg.on('pointerdown', () => this._onVehicleButtonTap());
+  }
+
+  _onVehicleButtonTap() {
+    if (!gameState.canSelfDrive()) {
+      // 레벨 미달 메시지
+      this._showVehicleMessage(
+        `Lv.${VEHICLE.SELF_DRIVE_LEVEL}에 해금됩니다`,
+        `Lv.${VEHICLE.SELF_DRIVE_LEVEL}で解禁されます`,
+        HOBIS.WARN
+      );
+      return;
+    }
+
+    // 쇼퍼 vs 셀프 대사
+    const region = gameState.currentRegion;
+    if (gameState.canChauffeur()) {
+      if (region === 'seoul') {
+        this._showVehicleMessage(
+          '유석: 어디 가? 태워다 줄게!',
+          'ユソク: どこ行く？乗せてあげるよ！',
+          HOBIS.GREEN
+        );
+      } else {
+        this._showVehicleMessage(
+          '아빠: 어디 가니? 태워다줄게~',
+          'パパ: どこ行くの？送ってあげるよ～',
+          HOBIS.GREEN
+        );
+      }
+    } else {
+      if (region === 'seoul') {
+        this._showVehicleMessage(
+          '유석이 차 키를 빌렸다!',
+          'ユソクの車を借りた！',
+          HOBIS.CYAN
+        );
+      } else {
+        this._showVehicleMessage(
+          '아빠 차를 빌렸다!',
+          'パパの車を借りた！',
+          HOBIS.CYAN
+        );
+      }
+    }
+
+    // 짧은 딜레이 후 드라이브맵 표시
+    this.time.delayedCall(800, () => this.showDriveMap());
+  }
+
+  _showVehicleMessage(textKo, textJa, color) {
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+    const s = this.uiScale;
+
+    const bg = this.add.rectangle(w / 2, h * 0.35, w * 0.85, 60 * s, HOBIS.PANEL_HEX, 0.95)
+      .setStrokeStyle(1, Phaser.Display.Color.HexStringToColor(color).color, 0.6)
+      .setScrollFactor(0).setDepth(200);
+    const ko = this.add.text(w / 2, h * 0.35 - 8 * s, textKo, {
+      fontSize: `${Math.round(13 * s)}px`, fontFamily: HOBIS.FONT_KR, color,
+      fontStyle: 'bold'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(201);
+    const ja = this.add.text(w / 2, h * 0.35 + 12 * s, textJa, {
+      fontSize: `${Math.round(10 * s)}px`, fontFamily: HOBIS.FONT_JP, color: HOBIS.MUTED
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(201);
+
+    this.tweens.add({
+      targets: [bg, ko, ja], alpha: 0, delay: 1500, duration: 500,
+      onComplete: () => { bg.destroy(); ko.destroy(); ja.destroy(); }
+    });
+  }
+
+  showDriveMap() {
+    if (this._driveMapActive) return;
+    this._driveMapActive = true;
+
+    // 물리 정지 + 조이스틱 비활성화
+    this.player.body.setVelocity(0, 0);
+    this.physics.world.pause();
+
+    const w = this.cameras.main.width;
+    const h = this.cameras.main.height;
+    const s = this.uiScale;
+
+    // 줌아웃 — 전체 맵이 보이는 수준
+    const zoomX = w / this.worldWidth;
+    const zoomY = h / this.worldHeight;
+    const targetZoom = Math.max(zoomX, zoomY) * 0.9;
+    this._savedZoom = this.currentZoom;
+    this.currentZoom = targetZoom;
+    this.cameras.main.stopFollow();
+    this.cameras.main.pan(this.worldWidth / 2, this.worldHeight / 2, 400, 'Sine.easeInOut');
+    this.cameras.main.zoomTo(targetZoom, 400, 'Sine.easeInOut');
+
+    // 오버레이 UI
+    const overlay = this.add.rectangle(w / 2, h / 2, w, h, 0x000000, 0.4)
+      .setScrollFactor(0).setDepth(190);
+
+    // "DRIVING MAP" 헤더
+    const header = this.add.text(w / 2, 30 * s, '── DRIVE MAP ──', {
+      fontSize: `${Math.round(12 * s)}px`, fontFamily: HOBIS.FONT_HEADER, color: HOBIS.CYAN
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(201);
+
+    const hint = this.add.text(w / 2, 50 * s, '목적지를 터치하세요 / タップで目的地選択', {
+      fontSize: `${Math.round(10 * s)}px`, fontFamily: HOBIS.FONT_KR, color: '#aac0c0'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(201);
+
+    // 현재 위치 마커 (녹색 점)
+    const marker = this.add.circle(this.player.x, this.player.y, 12, HOBIS.GREEN_HEX, 0.8)
+      .setStrokeStyle(3, 0xffffff, 0.9).setDepth(195);
+    this.tweens.add({
+      targets: marker, scaleX: { from: 0.8, to: 1.4 }, scaleY: { from: 0.8, to: 1.4 },
+      alpha: { from: 1, to: 0.3 }, duration: 600, yoyo: true, repeat: -1
+    });
+
+    // 닫기 버튼
+    const closeBtn = this.add.text(w - 20 * s, 20 * s, '✕', {
+      fontSize: `${Math.round(18 * s)}px`, color: HOBIS.ALERT,
+      backgroundColor: '#00000088', padding: { x: 8, y: 4 }
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(201).setInteractive({ useHandCursor: true });
+
+    // 맵 클릭/터치 영역 (전체 월드)
+    const clickZone = this.add.rectangle(
+      this.worldWidth / 2, this.worldHeight / 2,
+      this.worldWidth, this.worldHeight, 0xffffff, 0
+    ).setDepth(194).setInteractive();
+
+    const driveElements = [overlay, header, hint, marker, closeBtn, clickZone];
+
+    const closeDriveMap = () => {
+      this._driveMapActive = false;
+      driveElements.forEach(e => e.destroy());
+      // 줌 복귀 + 카메라 팔로우 재시작
+      this.currentZoom = this._savedZoom;
+      this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
+      this.cameras.main.zoomTo(this._savedZoom, 300, 'Sine.easeInOut');
+      this.physics.world.resume();
+    };
+
+    closeBtn.on('pointerdown', closeDriveMap);
+
+    clickZone.on('pointerdown', (pointer) => {
+      // 스크린 좌표 → 월드 좌표 변환
+      const worldPoint = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
+      const destX = Phaser.Math.Clamp(worldPoint.x, 50, this.worldWidth - 50);
+      const destY = Phaser.Math.Clamp(worldPoint.y, 50, this.worldHeight - 50);
+
+      // 목적지 마커 표시
+      const destMarker = this.add.circle(destX, destY, 10, HOBIS.CYAN_HEX, 0.8)
+        .setStrokeStyle(2, 0xffffff, 0.7).setDepth(195);
+      driveElements.push(destMarker);
+
+      // 짧은 딜레이 후 드라이브 실행
+      this.time.delayedCall(300, () => {
+        closeDriveMap();
+        this.executeDrive(destX, destY);
+      });
+    });
+  }
+
+  executeDrive(destX, destY) {
+    this._isDriving = true;
+    this.player.body.setVelocity(0, 0);
+    this.physics.world.pause();
+
+    const w = this.cameras.main.width;
+    const s = this.uiScale;
+
+    // "DRIVING..." 표시
+    const drivingLabel = this.add.text(w / 2, 60 * s, '🚗 DRIVING...', {
+      fontSize: `${Math.round(14 * s)}px`, fontFamily: HOBIS.FONT_MONO, color: HOBIS.GREEN,
+      backgroundColor: '#000000aa', padding: { x: 12, y: 6 }
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(200);
+    this.tweens.add({
+      targets: drivingLabel, alpha: 0.4, duration: 500, yoyo: true, repeat: -1
+    });
+
+    // 이동 거리 계산 → 소요 시간
+    const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, destX, destY);
+    const duration = Math.max(500, Math.min(3000, (dist / VEHICLE.SPEED) * 1000));
+
+    // 카메라 줌: 이동 중 살짝 줌아웃
+    const midZoom = Math.max(this.minCameraZoom, this.currentZoom * 0.6);
+    this.cameras.main.zoomTo(midZoom, duration * 0.3, 'Sine.easeInOut');
+
+    // 트윈으로 캐릭터 이동
+    this.tweens.add({
+      targets: this.player,
+      x: destX, y: destY,
+      duration,
+      ease: 'Sine.easeInOut',
+      onComplete: () => {
+        this._isDriving = false;
+        drivingLabel.destroy();
+        gameState.recordVehicleTrip();
+
+        // 줌 복귀
+        this.cameras.main.zoomTo(this.currentZoom, 400, 'Sine.easeInOut');
+        this.physics.world.resume();
+      }
+    });
   }
 
   // ── Scene Title Overlay ─────────────────────────────

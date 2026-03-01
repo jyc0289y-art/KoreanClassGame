@@ -49,8 +49,8 @@ export const DEFAULT_WORLD_HEIGHT = 1200;
 export const MAP_SIZES = {
   AIRPORT:       { w: 1600, h: 1200 },  // 공항 맵
   INCHEON:       { w: 2000, h: 1200 },  // 인천공항
-  SEOUL_UNIFIED:   { w: 9600, h: 7200 },  // 서울 통합맵 (홍대+명동+성수+강남)
-  FUKUOKA_UNIFIED: { w: 6400, h: 4800 },  // 후쿠오카 통합맵 (텐진+하카타+야쿠인)
+  SEOUL_UNIFIED:   { w: 14400, h: 10800 },  // 서울 통합맵 (실제 지리 기반, 8개 구역)
+  FUKUOKA_UNIFIED: { w: 9600, h: 7200 },   // 후쿠오카 통합맵 (실제 지리 기반, 5개 구역)
 };
 
 // 장소맵 크기 (실내)
@@ -76,6 +76,15 @@ export const METRO_SCENES = {
 export const UNIFIED_MAP_ZOOM = 1.8;       // 통합맵 기본 카메라 줌
 export const ROAD_WIDTH = { major: 160, medium: 100, minor: 60 };
 export const SIDEWALK_WIDTH = 24;
+
+// ── 차량 이동 시스템 ──
+export const VEHICLE = {
+  SELF_DRIVE_LEVEL: 6,      // 친구 차 빌려타기 (셀프 드라이브)
+  CHAUFFEUR_LEVEL: 10,      // 친구가 운전해줌 (쇼퍼)
+  SPEED: 1200,              // 이동 속도 (px/s, 일반 200의 6배)
+  FRIEND_SEOUL: 'yuseok',   // 서울: 김유석
+  FRIEND_FUKUOKA: 'dad',    // 후쿠오카: 아빠
+};
 
 // 건물 색상 테마
 export const BUILDING_COLORS = {

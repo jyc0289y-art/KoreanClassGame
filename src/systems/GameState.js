@@ -23,6 +23,10 @@ export class GameState {
     this.lastAirport = 'fukuoka_airport';    // 마지막 이용 공항 (국제맵 복귀 시 표시)
     this.visitedMaps = ['FukuokaYakuinScene']; // 방문한 맵 목록
     this.unlockedStations = ['yakuin', 'fukuoka_airport']; // 해금된 역 목록
+
+    // ── 차량 시스템 상태 ──
+    this.vehicleUsed = false;       // 차량 사용 이력
+    this.vehicleTripCount = 0;      // 탑승 횟수 (업적용)
   }
 
   get current() { return this.characters[this.currentCharacter]; }
@@ -66,6 +70,20 @@ export class GameState {
 
   setRegion(region) {
     this.currentRegion = region;
+  }
+
+  // ── 차량 시스템 ──
+  canSelfDrive() {
+    return this.current.level >= 6; // VEHICLE.SELF_DRIVE_LEVEL
+  }
+
+  canChauffeur() {
+    return this.current.level >= 10; // VEHICLE.CHAUFFEUR_LEVEL
+  }
+
+  recordVehicleTrip() {
+    this.vehicleUsed = true;
+    this.vehicleTripCount++;
   }
 
   save() {
