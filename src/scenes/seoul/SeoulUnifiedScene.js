@@ -34,7 +34,15 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { id: 'seongsu', name: '성수/뚝섬 聖水', sub: 'ソンス · Seongsu', color: '#32CD32',
         x: 8500, y: 2500, w: 3000, h: 2500 },
       { id: 'jamsil', name: '잠실/송파 蠶室', sub: 'チャムシル · Jamsil', color: '#FF4500',
-        x: 9500, y: 5800, w: 3000, h: 3200 }
+        x: 9500, y: 5800, w: 3000, h: 3200 },
+      { id: 'yeongdeungpo', name: '영등포 永登浦', sub: 'ヨンドゥンポ · Yeongdeungpo', color: '#8B4513',
+        x: 2000, y: 6000, w: 2000, h: 2000 },
+      { id: 'songpa', name: '송파/강동 松坡', sub: 'ソンパ · Songpa', color: '#6B8E23',
+        x: 11000, y: 6000, w: 3000, h: 3000 },
+      { id: 'gwanak', name: '관악/동작 冠岳', sub: 'クァナク · Gwanak', color: '#708090',
+        x: 3000, y: 7500, w: 3000, h: 2500 },
+      { id: 'seongbuk', name: '성북/노원 城北', sub: 'ソンブク · Seongbuk', color: '#9370DB',
+        x: 9000, y: 0, w: 4000, h: 2500 }
     ];
     this._lastWelcomeDistrict = null;
 
@@ -80,6 +88,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.setupGangnamDistrict();
     this.setupSeongsuDistrict();
     this.setupJamsilDistrict();
+    this.setupYeongdeungpoDistrict();
+    this.setupSongpaDistrict();
+    this.setupGwanakDistrict();
+    this.setupSeongbukDistrict();
 
     // ── 외곽 랜드마크 (구역 외) ──
     this.setupOuterLandmarks();
@@ -163,6 +175,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 8500, y: 2500, w: 3000, h: 1800, color: 0xa09890, alpha: 1.0 },
         { x: 8500, y: 4300, w: 3000, h: 700, color: 0xb0a088, alpha: 0.9 },
         { x: 9500, y: 5800, w: 3000, h: 3200, color: 0xb0a8a0, alpha: 1.0 },
+
+        // ── 신규 구역 토지용도 ──
+        { x: 2000, y: 6000, w: 2000, h: 2000, color: 0xa09888, alpha: 0.9 },
+        { x: 11000, y: 6000, w: 3000, h: 3000, color: 0x8a9a80, alpha: 0.8, border: false },
+        { x: 3000, y: 7500, w: 3000, h: 2500, color: 0x8a9880, alpha: 0.8, border: false },
+        { x: 9000, y: 200, w: 4000, h: 2300, color: 0x90a090, alpha: 0.7, border: false },
 
         // ── 강북/강남 일반 도시 ──
         { x: 1200, y: 1200, w: 3300, h: 1200, color: 0x8a9a7a, alpha: 0.7, border: false },
@@ -318,13 +336,55 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 200, y: 5000, w: 2600, h: 120, color: 0x505050, type: 'major' },
         // 공항 내부 도로
         { x: 200, y: 4800, w: 600, h: 80, color: 0x686868, type: 'medium' },
+        // 강변북로 (한강 북쪽 고속화도로)
+        { x: 1200, y: 4750, w: 13200, h: 80, color: 0x505050, type: 'major' },
+        // 올림픽대로 (한강 남쪽 고속화도로)
+        { x: 2000, y: 5900, w: 10000, h: 80, color: 0x505050, type: 'major' },
       ],
 
       crosswalks: [
+        // 기존
         { x: 5720, y: 2710, w: 160, dir: 'v' },
         { x: 6920, y: 6710, w: 160, dir: 'v' },
         { x: 2720, y: 2710, w: 100, dir: 'v' },
         { x: 6420, y: 3110, w: 100, dir: 'v' },
+        // 종로/광화문
+        { x: 5720, y: 2500, w: 160, dir: 'h' },
+        { x: 6800, y: 2710, w: 100, dir: 'v' },
+        { x: 6800, y: 2500, w: 100, dir: 'h' },
+        { x: 8200, y: 2710, w: 100, dir: 'v' },
+        { x: 8200, y: 2500, w: 100, dir: 'h' },
+        { x: 7800, y: 2710, w: 60, dir: 'v' },
+        // 홍대
+        { x: 2720, y: 3200, w: 60, dir: 'h' },
+        { x: 2720, y: 3800, w: 60, dir: 'h' },
+        { x: 1800, y: 2710, w: 60, dir: 'v' },
+        { x: 3200, y: 2710, w: 60, dir: 'v' },
+        // 명동/남산
+        { x: 6420, y: 3600, w: 100, dir: 'h' },
+        { x: 6800, y: 3110, w: 100, dir: 'h' },
+        { x: 5520, y: 3810, w: 100, dir: 'v' },
+        { x: 5720, y: 4120, w: 160, dir: 'h' },
+        // 강남
+        { x: 6920, y: 6400, w: 160, dir: 'h' },
+        { x: 7000, y: 6710, w: 60, dir: 'h' },
+        { x: 6920, y: 6200, w: 60, dir: 'h' },
+        { x: 6920, y: 6910, w: 60, dir: 'h' },
+        { x: 8800, y: 6710, w: 60, dir: 'v' },
+        { x: 8200, y: 6710, w: 60, dir: 'v' },
+        { x: 6200, y: 6710, w: 60, dir: 'v' },
+        { x: 6200, y: 7610, w: 60, dir: 'h' },
+        // 이태원/용산
+        { x: 6420, y: 4120, w: 100, dir: 'h' },
+        { x: 5520, y: 4410, w: 100, dir: 'v' },
+        { x: 5000, y: 4120, w: 100, dir: 'h' },
+        // 여의도
+        { x: 2720, y: 5210, w: 60, dir: 'h' },
+        { x: 3200, y: 5060, w: 60, dir: 'v' },
+        { x: 3400, y: 5060, w: 60, dir: 'v' },
+        // 성수/잠실
+        { x: 9800, y: 3210, w: 60, dir: 'v' },
+        { x: 9500, y: 6810, w: 60, dir: 'h' },
       ],
 
       blocks: [
@@ -347,12 +407,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 5820, y: 3880, w: 2160, h: 900, density: 'medium', palette: [0xb8a8a0, 0xa89890, 0xc0b0a8] },
         // 강남 (한국 최고 밀도 상업지구)
         { x: 5520, y: 5820, w: 680, h: 880, density: 'medium', palette: [0xb0b0b0, 0xc0c0c0, 0xa8a8a8] },
-        { x: 6280, y: 5820, w: 620, h: 880, density: 'high', palette: [0xb0b0b0, 0xc0c0c0, 0xa8a8a8, 0xb8b8b0] },
-        { x: 7100, y: 5820, w: 600, h: 880, density: 'high', palette: [0xb0b0b0, 0xa8a8a8, 0xc8c8c0] },
-        { x: 7760, y: 5820, w: 420, h: 880, density: 'high', palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
-        { x: 8260, y: 5820, w: 520, h: 880, density: 'high', palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
+        { x: 6280, y: 5820, w: 620, h: 880, density: 'high', tallBuildings: true, palette: [0xb0b0b0, 0xc0c0c0, 0xa8a8a8, 0xb8b8b0] },
+        { x: 7100, y: 5820, w: 600, h: 880, density: 'high', tallBuildings: true, palette: [0xb0b0b0, 0xa8a8a8, 0xc8c8c0] },
+        { x: 7760, y: 5820, w: 420, h: 880, density: 'high', tallBuildings: true, palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
+        { x: 8260, y: 5820, w: 520, h: 880, density: 'high', tallBuildings: true, palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
         { x: 8860, y: 5820, w: 620, h: 880, density: 'medium', palette: [0xb0b0a8, 0xa8a8a0] },
-        { x: 5520, y: 6900, w: 3960, h: 780, density: 'high', palette: [0xb0b0a8, 0xa8a8a0, 0xb8b8b0, 0xc0c0b8] },
+        { x: 5520, y: 6900, w: 3960, h: 780, density: 'high', tallBuildings: true, palette: [0xb0b0a8, 0xa8a8a0, 0xb8b8b0, 0xc0c0b8] },
         { x: 5520, y: 7680, w: 3960, h: 800, density: 'medium', palette: [0x98a890, 0x90a088, 0xa0a898] },
         // 성수
         { x: 8520, y: 2520, w: 1260, h: 660, density: 'medium', palette: [0x908880, 0xa09890, 0x989088] },
@@ -365,6 +425,34 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 11240, y: 5820, w: 1240, h: 960, density: 'low', palette: [0xa09890, 0xb0a8a0] },
         { x: 9520, y: 6880, w: 2960, h: 880, density: 'medium', palette: [0xa89898, 0xb0a0a0, 0xa8a0a0] },
         { x: 9520, y: 7880, w: 2960, h: 1100, density: 'low', palette: [0x989088, 0xa09890] },
+        // 여의도 (금융 중심)
+        { x: 2620, y: 5080, w: 760, h: 540, density: 'high', tallBuildings: true,
+          palette: [0xb0b8c0, 0xa8b0b8, 0xc0c8d0, 0x98a0a8] },
+        { x: 3420, y: 5080, w: 760, h: 540, density: 'high', tallBuildings: true,
+          palette: [0xb0b8c0, 0xa8b0b8, 0xc0c8d0] },
+        // 종로 DDP 인근
+        { x: 7840, y: 2280, w: 640, h: 400, density: 'high', tallBuildings: true,
+          palette: [0xb0a888, 0xa89880, 0xc0b8a0] },
+        // 영등포
+        { x: 2020, y: 6020, w: 960, h: 960, density: 'medium',
+          palette: [0xa09080, 0xb0a090, 0x989078] },
+        { x: 3020, y: 6020, w: 960, h: 960, density: 'medium',
+          palette: [0xa09080, 0xb0a090] },
+        // 송파/강동
+        { x: 11020, y: 6020, w: 1460, h: 1460, density: 'low',
+          palette: [0x98a090, 0xa0a898, 0x90a088] },
+        { x: 12520, y: 6020, w: 1460, h: 1460, density: 'low',
+          palette: [0x98a090, 0xa0a898] },
+        // 관악/동작
+        { x: 3020, y: 7520, w: 1460, h: 1200, density: 'low',
+          palette: [0x889880, 0x809078, 0x98a090] },
+        { x: 4520, y: 7520, w: 1460, h: 1200, density: 'low',
+          palette: [0x889880, 0x809078] },
+        // 성북/노원
+        { x: 9020, y: 200, w: 1960, h: 1100, density: 'low',
+          palette: [0x909898, 0xa0a8a8, 0x889090] },
+        { x: 11020, y: 200, w: 1960, h: 1100, density: 'low',
+          palette: [0x909898, 0xa0a8a8] },
       ],
 
       vegetation: [
@@ -529,6 +617,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 2600, y: 2800, texture: 'shop', name_ko: '연남동 카페 직원', name_ja: '延南洞カフェ店員',
         greeting_ko: '연남동 경의선숲길 산책하셨어요?\n커피 한 잔 하세요~',
         greeting_ja: '延南洞キョンウィソンスプキル散歩しましたか？\nコーヒーいかがですか～' },
+      { x: 2400, y: 3200, texture: 'shop', name_ko: '타투이스트', name_ja: 'タトゥーアーティスト',
+        greeting_ko: '홍대 타투샵이에요!\n한글 타투도 할 수 있어요~',
+        greeting_ja: 'ホンデのタトゥーショップです！\nハングルタトゥーもできますよ～' },
     ]);
     this.createBuildings([
       { x: 2800, y: 3200, texture: 'building_shop', name_ko: '홍대 거리 / ホンデ通り' },
@@ -591,8 +682,13 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         name_ko: '광장시장 상인', name_ja: '広蔵市場の商人',
         greeting_ko: '광장시장에 오세요!\n빈대떡, 마약김밥 맛보세요~',
         greeting_ja: '広蔵市場へどうぞ！\nビンデトック、麻薬キンパ召し上がれ～' },
+      { x: 6200, y: 1700, texture: 'shop',
+        name_ko: '북촌 한복 대여점 사장님', name_ja: '北村韓服レンタル店主',
+        greeting_ko: '한복 입고 북촌 산책하세요!\n예쁜 사진 찍어드릴게요~',
+        greeting_ja: '韓服を着て北村散策しませんか！\n素敵な写真撮りますよ～' },
     ]);
     this.createSubwayEntrance(6000, 2600, 'SeoulMetroScene', 'jongno', '종로/광화문역 🚇', '鍾路/光化門駅');
+    this.createSubwayEntrance(7800, 2600, 'SeoulMetroScene', 'dongdaemun', '동대문역 🚇', '東大門駅');
   }
 
   setupMyeongdongDistrict() {
@@ -603,6 +699,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 6800, y: 3800, texture: 'mission_npc', name_ko: 'N서울타워 안내원', name_ja: 'Nソウルタワー案内員', hasMission: true,
         greeting_ko: 'N서울타워에서 서울 전경을 볼 수 있어요!',
         greeting_ja: 'Nソウルタワーからソウルの全景が見られます！' },
+      { x: 6200, y: 3600, texture: 'shop', name_ko: '떡볶이 아주머니', name_ja: 'トッポッキおばさん',
+        greeting_ko: '명동 떡볶이 맛보세요!\n매콤달콤해요~',
+        greeting_ja: '明洞トッポッキいかがですか！\n甘辛ですよ～' },
+      { x: 5800, y: 3800, texture: 'shop', name_ko: '남산돈까스 사장님', name_ja: '南山トンカツ店主',
+        greeting_ko: '남산돈까스 드세요!\n60년 전통 맛집이에요~',
+        greeting_ja: '南山トンカツいかがですか！\n60年伝統の名店です～' },
     ]);
     this.createEnterableBuilding(6600, 3500, 'OliveYoungScene', { texture: 'building_oliveyoung', name_ko: '올리브숲', name_ja: 'OLIVE BLOOM' });
     this.createEnterableBuilding(6200, 3300, 'HiKRGroundScene', { texture: 'building_shop', name_ko: '하이코그라운드', name_ja: 'HiKO Ground' });
@@ -615,6 +717,8 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 5600, y: 4000, texture: 'building_station', name_ko: '서울역 / ソウル駅' },
     ]);
     this.createSubwayEntrance(6600, 3800, 'SeoulMetroScene', 'myeongdong', '명동역 🚇', '明洞駅');
+    this.createSubwayEntrance(5600, 4000, 'SeoulMetroScene', 'seoulstation', '서울역 🚇', 'ソウル駅');
+    this.createSubwayEntrance(5800, 3100, 'SeoulMetroScene', 'city_hall', '시청역 🚇', '市庁駅');
   }
 
   setupItaewonDistrict() {
@@ -622,6 +726,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 6400, y: 4400, texture: 'mission_npc', name_ko: '이태원 안내원', name_ja: 'イテウォンガイド', hasMission: true,
         greeting_ko: '이태원에 오신 걸 환영해요!',
         greeting_ja: 'イテウォンへようこそ！' },
+      { x: 5800, y: 4500, texture: 'shop', name_ko: '외국인 요리사', name_ja: '外国人シェフ',
+        greeting_ko: '이태원에서 세계 각국 요리를 즐기세요!',
+        greeting_ja: 'イテウォンで世界各国の料理を楽しんで！' },
     ]);
     this.createBuildings([
       { x: 6400, y: 4400, texture: 'building_shop', name_ko: '이태원 거리 / 梨泰院' },
@@ -640,6 +747,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 3400, y: 5300, texture: 'shop', name_ko: 'IFC 안내원', name_ja: 'IFC案内員',
         greeting_ko: '여의도 IFC몰에 오신 걸 환영해요!',
         greeting_ja: '汝矣島IFCモールへようこそ！' },
+      { x: 3600, y: 5200, texture: 'shop', name_ko: '증권맨', name_ja: '証券マン',
+        greeting_ko: '여의도 증권가에 오셨군요!\n주식 시장은 항상 열려 있어요~',
+        greeting_ja: '汝矣島の証券街ですね！\n株式市場はいつも開いていますよ～' },
     ]);
     this.createBuildings([
       { x: 2900, y: 5200, texture: 'building_shop', name_ko: '국회의사당 / 国会' },
@@ -687,6 +797,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         name_ko: '봉은사 스님', name_ja: '奉恩寺の僧侶',
         greeting_ko: '봉은사에 오신 걸 환영합니다.\n도심 속 고즈넉한 사찰이에요.',
         greeting_ja: '奉恩寺へようこそ。\n都心の中の静かなお寺です。' },
+      { x: 7000, y: 6200, texture: 'shop',
+        name_ko: '강남 성형외과 상담사', name_ja: 'カンナム美容外科カウンセラー',
+        greeting_ko: '강남 뷰티 상담 받으러 오셨어요?\n한국 미용은 세계 최고예요!',
+        greeting_ja: 'カンナムビューティー相談ですか？\n韓国美容は世界一です！' },
     ]);
     this.createSubwayEntrance(8000, 7700, 'SeoulMetroScene', 'sinsa', '신사역 🚇', '新沙駅');
     this.createSubwayEntrance(7000, 6800, 'SeoulMetroScene', 'gangnam', '강남역 🚇', 'カンナム駅');
@@ -701,6 +815,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         name_ko: '카페 바리스타', name_ja: 'カフェバリスタ',
         greeting_ko: '성수동 카페에 오신 걸 환영해요!\n핸드드립 커피 한 잔 하세요~',
         greeting_ja: '聖水洞カフェへようこそ！\nハンドドリップコーヒーいかがですか～' },
+      { x: 9800, y: 3500, texture: 'shop', name_ko: '빈티지숍 사장님', name_ja: 'ヴィンテージショップオーナー',
+        greeting_ko: '성수동 빈티지숍이에요!\n유니크한 아이템 찾아보세요~',
+        greeting_ja: '聖水洞ヴィンテージショップです！\nユニークなアイテム探してみて～' },
     ]);
     this.createBuildings([
       { x: 9500, y: 3500, texture: 'building_shop', name_ko: '성수동 카페거리 / 聖水カフェ' },
@@ -722,6 +839,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 10800, y: 6800, texture: 'mission_npc', name_ko: '롯데월드 안내원', name_ja: 'ロッテワールド案内員', hasMission: true,
         greeting_ko: '롯데월드에 오신 걸 환영해요!',
         greeting_ja: 'ロッテワールドへようこそ！' },
+      { x: 10500, y: 7600, texture: 'shop', name_ko: '석촌호수 사진사', name_ja: '石村湖カメラマン',
+        greeting_ko: '석촌호수에서 벚꽃 사진 찍으세요!\n봄이 제일 예뻐요~',
+        greeting_ja: '石村湖で桜の写真撮りませんか！\n春が一番綺麗ですよ～' },
     ]);
     this.createBuildings([
       { x: 10800, y: 6800, texture: 'building_tower', name_ko: '롯데월드타워 / ロッテタワー' },
@@ -754,6 +874,89 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
   }
 
   // ══════════════════════════════════════════════════════
+  // 영등포 구역 (SW: X:2000-4000, Y:6000-8000)
+  // ══════════════════════════════════════════════════════
+  setupYeongdeungpoDistrict() {
+    this.createNPCs([
+      { x: 2800, y: 6400, texture: 'shop',
+        name_ko: '영등포시장 상인', name_ja: '永登浦市場の商人',
+        greeting_ko: '영등포시장에 오세요!\n신선한 과일이 많아요~',
+        greeting_ja: '永登浦市場へどうぞ！\n新鮮なフルーツがたくさんありますよ～' },
+      { x: 3200, y: 6200, texture: 'shop',
+        name_ko: '타임스퀘어 안내원', name_ja: 'タイムズスクエア案内員',
+        greeting_ko: '타임스퀘어에 오신 걸 환영해요!\n영화도 보고 쇼핑도 하세요~',
+        greeting_ja: 'タイムズスクエアへようこそ！\n映画もショッピングもどうぞ～' },
+    ]);
+    this.createBuildings([
+      { x: 3200, y: 6200, texture: 'building_shop', name_ko: '타임스퀘어 / タイムズスクエア' },
+      { x: 2800, y: 6400, texture: 'building_shop', name_ko: '영등포시장 / 永登浦市場' },
+      { x: 2400, y: 6800, texture: 'building_station', name_ko: '신도림역 / 新道林駅' },
+      { x: 3400, y: 6600, texture: 'building_shop', name_ko: '디큐브시티 / D-CUBE' },
+      { x: 2600, y: 6200, texture: 'building_shop', name_ko: '영등포구청 / 永登浦区庁' },
+    ]);
+    this.createSubwayEntrance(2800, 6400, 'SeoulMetroScene', 'yeongdeungpo', '영등포역 🚇', '永登浦駅');
+    this.createSubwayEntrance(2400, 6800, 'SeoulMetroScene', 'sindorim', '신도림역 🚇', '新道林駅');
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 송파/강동 구역 (SE: X:11000-14000, Y:6000-9000)
+  // ══════════════════════════════════════════════════════
+  setupSongpaDistrict() {
+    this.createNPCs([
+      { x: 11500, y: 6800, texture: 'shop',
+        name_ko: '방이동 사장님', name_ja: '方荑洞の店主',
+        greeting_ko: '방이동 먹자골목에 오세요!\n맛집이 가득해요~',
+        greeting_ja: '方荑洞グルメ通りへどうぞ！\n美味しいお店がたくさん～' },
+    ]);
+    this.createBuildings([
+      { x: 11500, y: 6800, texture: 'building_shop', name_ko: '방이동 먹자골목 / 方荑洞' },
+      { x: 12000, y: 7200, texture: 'building_shop', name_ko: '풍납토성 / 風納土城' },
+      { x: 13000, y: 7000, texture: 'building_shop', name_ko: '암사동 선사주거지' },
+      { x: 12500, y: 6400, texture: 'building_station', name_ko: '고덕역 / 高德駅' },
+      { x: 12000, y: 5600, texture: 'building_station', name_ko: '천호역 / 千戸駅' },
+    ]);
+    this.createSubwayEntrance(12000, 5600, 'SeoulMetroScene', 'cheonho', '천호역 🚇', '千戸駅');
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 관악/동작 구역 (S: X:3000-6000, Y:7500-10000)
+  // ══════════════════════════════════════════════════════
+  setupGwanakDistrict() {
+    this.createNPCs([
+      { x: 4500, y: 8800, texture: 'shop',
+        name_ko: '관악산 등산객', name_ja: '冠岳山ハイカー',
+        greeting_ko: '관악산 등산 오셨어요?\n정상에서 서울 전경이 보여요!',
+        greeting_ja: '冠岳山登山ですか？\n頂上からソウルの全景が見えますよ！' },
+    ]);
+    this.createBuildings([
+      { x: 4000, y: 8000, texture: 'building_station', name_ko: '동작역 / 銅雀駅' },
+      { x: 5000, y: 8200, texture: 'building_station', name_ko: '사당역 / 舍堂駅' },
+      { x: 3500, y: 8400, texture: 'building_shop', name_ko: '관악구청 / 冠岳区庁' },
+      { x: 4200, y: 8600, texture: 'building_station', name_ko: '서울대입구역 / ソウル大入口駅' },
+    ]);
+    this.createSubwayEntrance(5000, 8200, 'SeoulMetroScene', 'sadang', '사당역 🚇', '舍堂駅');
+    this.createSubwayEntrance(4200, 8600, 'SeoulMetroScene', 'snustation', '서울대입구역 🚇', 'ソウル大入口駅');
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 성북/노원 구역 (NE: X:9000-13000, Y:0-2500)
+  // ══════════════════════════════════════════════════════
+  setupSeongbukDistrict() {
+    this.createNPCs([
+      { x: 10000, y: 1200, texture: 'shop',
+        name_ko: '성북동 카페 주인', name_ja: '城北洞カフェオーナー',
+        greeting_ko: '성북동 카페에 오셨어요?\n한옥 카페에서 커피 한 잔 하세요~',
+        greeting_ja: '城北洞のカフェですか？\n韓屋カフェでコーヒーいかがですか～' },
+    ]);
+    this.createBuildings([
+      { x: 10200, y: 800, texture: 'building_shop', name_ko: '북서울꿈의숲 / 北ソウルの森' },
+      { x: 10800, y: 1400, texture: 'building_shop', name_ko: '🎓 경희대학교 / 慶煕大学' },
+      { x: 10000, y: 1000, texture: 'building_shop', name_ko: '성북동 한옥거리 / 城北洞' },
+      { x: 12000, y: 1200, texture: 'building_shop', name_ko: '태릉 / 泰陵' },
+    ]);
+  }
+
+  // ══════════════════════════════════════════════════════
   // 라벨 시스템
   // ══════════════════════════════════════════════════════
   addDistrictLabels() {
@@ -763,7 +966,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     const st = { fontSize: `${Math.round(9*s)}px`, color: '#ffffff', backgroundColor: '#2255aa', padding: { x: 6, y: 3 } };
 
     // 구역
-    [[2600,2450,0],[6500,1550,1],[6900,3250,2],[6400,4250,3],[3400,5060,4],[7500,5850,5],[10000,2550,6],[11000,5850,7]]
+    [[2600,2450,0],[6500,1550,1],[6900,3250,2],[6400,4250,3],[3400,5060,4],[7500,5850,5],[10000,2550,6],[11000,5850,7],[3000,6050,8],[12000,6050,9],[4500,7550,10],[10500,250,11]]
     .forEach(([x,y,i]) => {
       const d = this._districts[i];
       this.add.text(x, y, d.name, ds(d.color)).setOrigin(0.5).setDepth(3);
@@ -819,7 +1022,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
      [7500,6710,'테헤란로 Teheran-ro →'],[6200,3110,'을지로 Euljiro →'],[6200,3510,'퇴계로 Toegyero →'],
      [2850,3000,'↑ 홍대거리'],[6550,3300,'↑ 명동길'],[6200,4110,'이태원로 →'],[12000,3110,'천호대로 →'],
      [9500,7110,'올림픽로 →'],[10000,8410,'위례성대로 →'],
-     [6050,6400,'↑ 서초대로 Seocho-daero'],[7900,6200,'↑ 논현로 Nonhyeon-ro']].forEach(([x,y,t]) => {
+     [6050,6400,'↑ 서초대로 Seocho-daero'],[7900,6200,'↑ 논현로 Nonhyeon-ro'],
+     [3000,4740,'← 강변북로 Gangbyeonbukro'],[10000,4740,'강변북로 →'],
+     [4000,5890,'← 올림픽대로 Olympic-daero'],[9000,5890,'올림픽대로 →']].forEach(([x,y,t]) => {
       this.add.text(x, y, t, st).setOrigin(0.5).setDepth(15);
     });
   }

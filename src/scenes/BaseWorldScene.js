@@ -335,19 +335,19 @@ export default class BaseWorldScene extends Phaser.Scene {
           if (rW > rH) {
             for (let lx = rx + 40; lx < rx + rW - 40; lx += lampSpacing) {
               // 위쪽 가로등
-              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(lx, ry - 4, 1, 6);
+              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(lx, ry - 4, 2, 6);
               roadG.fillStyle(0xffdd88, 0.5); roadG.fillRect(lx - 1, ry - 6, 3, 2);
               // 아래쪽 가로등
-              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(lx, ry + rH - 2, 1, 6);
+              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(lx, ry + rH - 2, 2, 6);
               roadG.fillStyle(0xffdd88, 0.5); roadG.fillRect(lx - 1, ry + rH + 4, 3, 2);
             }
           } else {
             for (let ly = ry + 40; ly < ry + rH - 40; ly += lampSpacing) {
               // 왼쪽 가로등
-              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(rx - 4, ly, 6, 1);
+              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(rx - 4, ly, 6, 2);
               roadG.fillStyle(0xffdd88, 0.5); roadG.fillRect(rx - 6, ly - 1, 2, 3);
               // 오른쪽 가로등
-              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(rx + rW - 2, ly, 6, 1);
+              roadG.fillStyle(0x555555, 0.6); roadG.fillRect(rx + rW - 2, ly, 6, 2);
               roadG.fillStyle(0xffdd88, 0.5); roadG.fillRect(rx + rW + 4, ly - 1, 2, 3);
             }
           }
@@ -470,7 +470,7 @@ export default class BaseWorldScene extends Phaser.Scene {
         0xc8c0a8, 0xb8b098, 0xd0c8b0,            // 베이지 (아파트)
         0x8899aa, 0x7788aa                        // 청회색 (유리)
       ];
-      const shadowOffset = block.shadow !== false ? 4 : 0;
+      const shadowOffset = block.shadow !== false ? (block.tallBuildings ? 6 : 4) : 0;
 
       // 블록 영역을 건물로 채우기
       const spacing = density === 'high' ? 30 : density === 'low' ? 70 : 50;
@@ -480,8 +480,11 @@ export default class BaseWorldScene extends Phaser.Scene {
         for (let dx = 10; dx < bw - 10; dx += spacing) {
           if (rng() > (density === 'high' ? 0.85 : density === 'low' ? 0.5 : 0.7)) continue;
 
-          const w = 15 + Math.floor(rng() * (density === 'high' ? 25 : 18));
-          const h = 12 + Math.floor(rng() * (density === 'high' ? 20 : 15));
+          const baseW = density === 'high' ? 25 : 18;
+          const baseH = density === 'high' ? 20 : 15;
+          const heightMult = (block.tallBuildings && rng() > 0.4) ? 1.3 + rng() * 0.7 : 1.0;
+          const w = 15 + Math.floor(rng() * baseW);
+          const h = Math.floor((12 + Math.floor(rng() * baseH)) * heightMult);
           const bx = block.x + dx + Math.floor(rng() * 15) - 7;
           const by = block.y + dy + Math.floor(rng() * 15) - 7;
           const color = palette[Math.floor(rng() * palette.length)];
@@ -694,7 +697,7 @@ export default class BaseWorldScene extends Phaser.Scene {
         } else if (treeType < 0.7) {
           g.fillTriangle(tx, ty - tr * 1.3, tx - tr * 0.8, ty + tr * 0.5, tx + tr * 0.8, ty + tr * 0.5); // 침엽수
         } else {
-          g.fillEllipse(tx, ty, tr * 1.4, tr * 0.9);                                      // 넓은 수관
+          g.fillRoundedRect(tx - tr * 0.7, ty - tr * 0.45, tr * 1.4, tr * 0.9, tr * 0.3);   // 넓은 수관
         }
       }
 
@@ -948,7 +951,7 @@ export default class BaseWorldScene extends Phaser.Scene {
           } else if (streetTreeType < 0.7) {
             g.fillTriangle(tx, ty - tr * 1.3, tx - tr * 0.8, ty + tr * 0.5, tx + tr * 0.8, ty + tr * 0.5); // 침엽수
           } else {
-            g.fillEllipse(tx, ty, tr * 1.4, tr * 0.9);                                      // 넓은 수관
+            g.fillRoundedRect(tx - tr * 0.7, ty - tr * 0.45, tr * 1.4, tr * 0.9, tr * 0.3);   // 넓은 수관
           }
           // 하이라이트
           g.fillStyle(0xffffff, 0.08);

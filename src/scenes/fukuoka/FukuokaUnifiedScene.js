@@ -28,7 +28,9 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { id: 'nakasu', name: '나카스 中洲', sub: 'ナカス · Nakasu', color: '#DA70D6',
         x: 4450, y: 2000, w: 350, h: 2200 },
       { id: 'seaside', name: '시사이드 모모치', sub: 'シーサイド · Seaside Momochi', color: '#4169E1',
-        x: 1000, y: 1200, w: 1600, h: 1800 }
+        x: 1000, y: 1200, w: 1600, h: 1800 },
+      { id: 'hakata_port', name: '하카타항 博多港', sub: 'ハカタ港 · Hakata Port', color: '#4682B4',
+        x: 5800, y: 600, w: 1400, h: 800 }
     ];
     this._lastWelcomeDistrict = null;
 
@@ -70,6 +72,7 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
     this.setupNakasuDistrict();
     this.setupHakataDistrict();
     this.setupYakuinDistrict();
+    this.setupHakataPortDistrict();
 
     // ── 지역 라벨 ──
     this.addDistrictLabels();
@@ -101,6 +104,8 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       landUse: [
         // ── 해안 녹지 ──
         { x: 0, y: 1050, w: 9600, h: 200, color: 0x9aaa8a, alpha: 0.6, border: false },
+        // ── 하카타항 항만 ──
+        { x: 5800, y: 800, w: 1400, h: 600, color: 0x999999, alpha: 0.6, border: false },
         // ── 노코노시마 (바다 위 섬, 실제 3.95km²) ──
         { x: 400, y: 100, w: 1600, h: 1150, color: 0x4a8a4a, alpha: 0.9, border: false },
         // ── 모모치 해변 모래사장 ──
@@ -322,10 +327,29 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       ],
 
       crosswalks: [
+        // 기존
         { x: 3320, y: 2910, w: 160, dir: 'v' },
         { x: 6120, y: 2910, w: 160, dir: 'v' },
         { x: 3320, y: 2310, w: 160, dir: 'v' },
         { x: 5700, y: 2310, w: 100, dir: 'v' },
+        // 텐진
+        { x: 3320, y: 2510, w: 160, dir: 'h' },
+        { x: 3320, y: 2710, w: 60, dir: 'h' },
+        { x: 3800, y: 2910, w: 60, dir: 'v' },
+        { x: 3600, y: 2510, w: 60, dir: 'v' },
+        // 하카타
+        { x: 6120, y: 2710, w: 160, dir: 'h' },
+        { x: 6120, y: 2510, w: 60, dir: 'h' },
+        { x: 5400, y: 3510, w: 100, dir: 'v' },
+        { x: 5700, y: 2510, w: 100, dir: 'h' },
+        // 나카스
+        { x: 4460, y: 2510, w: 60, dir: 'h' },
+        { x: 4460, y: 3910, w: 60, dir: 'h' },
+        // 야쿠인
+        { x: 3320, y: 4710, w: 100, dir: 'h' },
+        { x: 3320, y: 5210, w: 60, dir: 'h' },
+        { x: 3320, y: 4210, w: 60, dir: 'h' },
+        { x: 7720, y: 2510, w: 160, dir: 'h' },
       ],
 
       blocks: [
@@ -339,13 +363,13 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
 
         // 텐진
         { x: 2620, y: 1820, w: 260, h: 360, density: 'high',
-          palette: [0xb8a890, 0xc0b0a0, 0xa8a090, 0xb0a898] },
+          palette: [0xb8a890, 0xc0b0a0, 0xa8a090, 0xb0a898], tallBuildings: true },
         { x: 2920, y: 1820, w: 860, h: 360, density: 'high',
-          palette: [0xb8a890, 0xc0b0a0, 0xa8a090] },
+          palette: [0xb8a890, 0xc0b0a0, 0xa8a090], tallBuildings: true },
         { x: 3820, y: 1820, w: 560, h: 360, density: 'high',
-          palette: [0xb8a890, 0xc0b0a0] },
+          palette: [0xb8a890, 0xc0b0a0], tallBuildings: true },
         { x: 2620, y: 2280, w: 1560, h: 400, density: 'high',
-          palette: [0xb0a088, 0xa89880, 0xb8a890] },
+          palette: [0xb0a088, 0xa89880, 0xb8a890], tallBuildings: true },
         { x: 2620, y: 2760, w: 680, h: 440, density: 'high',
           palette: [0xc0b8a8, 0xb8b0a0, 0xc8c0b0, 0xd0c8b8] },
         { x: 3360, y: 2760, w: 1020, h: 440, density: 'high',
@@ -361,15 +385,15 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
 
         // 하카타
         { x: 5420, y: 1820, w: 360, h: 680, density: 'high',
-          palette: [0xa8a0a0, 0xb0a8a0, 0xb8b0a8, 0xa0a098] },
+          palette: [0xa8a0a0, 0xb0a8a0, 0xb8b0a8, 0xa0a098], tallBuildings: true },
         { x: 5820, y: 1820, w: 560, h: 680, density: 'high',
-          palette: [0xa8a0a0, 0xb0a8a0, 0xb8b0a8] },
+          palette: [0xa8a0a0, 0xb0a8a0, 0xb8b0a8], tallBuildings: true },
         { x: 6440, y: 1820, w: 240, h: 680, density: 'high',
           palette: [0xa8a0a0, 0xb0a8a0] },
         { x: 6720, y: 1820, w: 460, h: 680, density: 'medium',
           palette: [0xa8a0a0, 0xb0a8a0] },
         { x: 5420, y: 2640, w: 2360, h: 560, density: 'high',
-          palette: [0xa89898, 0xb0a0a0, 0xa8a0a0, 0xb8b0a8] },
+          palette: [0xa89898, 0xb0a0a0, 0xa8a0a0, 0xb8b0a8], tallBuildings: true },
         { x: 5420, y: 3260, w: 2360, h: 680, density: 'high',
           palette: [0xa89898, 0xb0a0a0, 0xb8b0a8] },
         { x: 5420, y: 4000, w: 2360, h: 400, density: 'low',
@@ -596,6 +620,14 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         name_ko: '백화점 직원', name_ja: 'デパート店員', hasMission: true,
         greeting_ko: '백화점에 오셨어요?\n한국 화장품도 있어요!',
         greeting_ja: 'デパートへようこそ！\n韓国コスメもありますよ！' },
+      { x: 3200, y: 2200, texture: 'shop',
+        name_ko: '택시 기사', name_ja: 'タクシー運転手',
+        greeting_ko: '텐진에서 택시 타실래요?\n어디든 모셔다 드릴게요!',
+        greeting_ja: '天神からタクシーですか？\nどこでもお連れしますよ！' },
+      { x: 3800, y: 2600, texture: 'shop',
+        name_ko: '쇼핑 가이드', name_ja: 'ショッピングガイド',
+        greeting_ko: '텐진 쇼핑 가이드예요!\n텐진 지하가가 유명해요~',
+        greeting_ja: '天神ショッピングガイドです！\n天神地下街が有名ですよ～' },
     ]);
     this.createBuildings([
       { x: 3200, y: 2600, texture: 'building_shop', name_ko: '텐진 지하가 / 天神地下街' },
@@ -663,6 +695,10 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         name_ko: '하카타역 안내원', name_ja: '博多駅案内員', hasMission: true,
         greeting_ko: '하카타역에 오신 걸 환영합니다!\n쇼핑몰과 먹거리가 많아요.',
         greeting_ja: '博多駅へようこそ！\nショッピングモールとグルメがたくさんあります。' },
+      { x: 6400, y: 3200, texture: 'shop',
+        name_ko: '역무원', name_ja: '駅員',
+        greeting_ko: '하카타역에 오신 걸 환영해요!\n하카타-텐진은 지하철로 5분!',
+        greeting_ja: '博多駅へようこそ！\n博多-天神は地下鉄で5分！' },
     ]);
     this.createBuildings([
       { x: 6400, y: 2800, texture: 'building_station', name_ko: '하카타역 / 博多駅' },
@@ -746,6 +782,28 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
   }
 
   // ══════════════════════════════════════════════════════
+  // 하카타항 구역 (N: X:5800-7200, Y:600-1400)
+  // ══════════════════════════════════════════════════════
+  setupHakataPortDistrict() {
+    this.createNPCs([
+      { x: 6600, y: 900, texture: 'shop',
+        name_ko: '페리 직원', name_ja: 'フェリー係員',
+        greeting_ko: '부산행 카멜리아호 타실 건가요?\n3시간이면 부산이에요!',
+        greeting_ja: '釜山行きカメリア号にお乗りですか？\n3時間で釜山です！' },
+      { x: 6000, y: 1100, texture: 'shop',
+        name_ko: '항만 안내원', name_ja: '港案内員',
+        greeting_ko: '하카타항에 오신 걸 환영해요!\n국제터미널은 이쪽이에요~',
+        greeting_ja: '博多港へようこそ！\n国際ターミナルはこちらです～' },
+    ]);
+    this.createBuildings([
+      { x: 6200, y: 1000, texture: 'building_station', name_ko: '하카타항 국제터미널 / 博多港国際ターミナル' },
+      { x: 6600, y: 800, texture: 'building_shop', name_ko: '부산행 페리터미널 / 釜山行きフェリー' },
+      { x: 5900, y: 1200, texture: 'building_shop', name_ko: '크루즈선 터미널 / クルーズターミナル' },
+      { x: 6000, y: 1000, texture: 'building_shop', name_ko: '베이사이드 플레이스 / ベイサイドプレイス' },
+    ]);
+  }
+
+  // ══════════════════════════════════════════════════════
   // 라벨 시스템 — 구역, 수역, 도로 표지판
   // ══════════════════════════════════════════════════════
   addDistrictLabels() {
@@ -755,7 +813,7 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
     const st = { fontSize: `${Math.round(9*s)}px`, color: '#ffffff', backgroundColor: '#2255aa', padding: { x: 6, y: 3 } };
 
     // 구역 라벨
-    [[1800,1160,4],[3500,1860,0],[4570,2060,3],[6600,1860,1],[3500,4060,2]]
+    [[1800,1160,4],[3500,1860,0],[4570,2060,3],[6600,1860,1],[3500,4060,2],[6400,660,5]]
     .forEach(([x,y,i]) => {
       const d = this._districts[i];
       this.add.text(x, y, d.name, ds(d.color)).setOrigin(0.5).setDepth(3);
@@ -766,6 +824,12 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
     this.add.text(4800, 400, '── 하카타만 · 博多湾 · Hakata Bay ──', {
       fontSize: `${Math.round(12*s)}px`, color: '#5588bb',
       fontStyle: 'italic', backgroundColor: '#00000066', padding: { x: 10, y: 4 }
+    }).setOrigin(0.5).setDepth(3);
+
+    // 하카타항 라벨
+    this.add.text(6400, 900, '⚓ 博多港 · 하카타항 · Hakata Port', {
+      fontSize: `${Math.round(10*s)}px`, color: '#4682B4',
+      fontStyle: 'bold', backgroundColor: '#00000088', padding: { x: 6, y: 3 }
     }).setOrigin(0.5).setDepth(3);
 
     // 노코노시마 라벨
