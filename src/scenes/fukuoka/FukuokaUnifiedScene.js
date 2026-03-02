@@ -73,6 +73,16 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
     this.setupHakataDistrict();
     this.setupYakuinDistrict();
     this.setupHakataPortDistrict();
+    this.setupNokonoshimaDistrict();
+    this.setupMinamiArea();
+
+    // Phase 6C: 공항 안내원
+    this.createNPCs([
+      { x: 7300, y: 5200, texture: 'shop',
+        name_ko: '공항 안내원', name_ja: '空港案内員',
+        greeting_ko: '후쿠오카 공항에 오신 걸 환영합니다!\n지하철로 하카타역까지 5분이에요!',
+        greeting_ja: '福岡空港へようこそ！\n地下鉄で博多駅まで5分です！' },
+    ]);
 
     // ── 지역 라벨 ──
     this.addDistrictLabels();
@@ -106,6 +116,8 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         { x: 0, y: 1050, w: 9600, h: 200, color: 0x9aaa8a, alpha: 0.6, border: false },
         // ── 하카타항 항만 ──
         { x: 5800, y: 800, w: 1400, h: 600, color: 0x999999, alpha: 0.6, border: false },
+        // ── 하카타항 화물 구역 ──
+        { x: 6800, y: 700, w: 800, h: 500, color: 0x888888, alpha: 0.5, border: false },
         // ── 노코노시마 (바다 위 섬, 실제 3.95km²) ──
         { x: 400, y: 100, w: 1600, h: 1150, color: 0x4a8a4a, alpha: 0.9, border: false },
         // ── 모모치 해변 모래사장 ──
@@ -324,6 +336,8 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         { x: 7720, y: 4200, w: 160, h: 1200, color: 0x606060, type: 'medium' },
         // 공항 터미널 앞 도로 (E-W)
         { x: 7050, y: 5400, w: 800, h: 80, color: 0x686868, type: 'medium' },
+        // Phase 6C: 화물터미널 연결 도로
+        { x: 6300, y: 4200, w: 60, h: 1200, color: 0x686868 },
       ],
 
       crosswalks: [
@@ -379,9 +393,9 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
 
         // 나카스 (섬)
         { x: 4460, y: 2100, w: 320, h: 1000, density: 'high',
-          palette: [0xb098b0, 0xa890a0, 0xc0a8b8, 0xb8a0a8] },
+          palette: [0xb098b0, 0xa890a0, 0xc0a8b8, 0xb8a0a8], tallBuildings: true },
         { x: 4460, y: 3200, w: 320, h: 800, density: 'medium',
-          palette: [0xa890a0, 0xb098b0, 0xb8a0a8] },
+          palette: [0xa890a0, 0xb098b0, 0xb8a0a8], tallBuildings: true },
 
         // 하카타
         { x: 5420, y: 1820, w: 360, h: 680, density: 'high',
@@ -412,6 +426,15 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
           palette: [0x88a078, 0x80a070] },
         { x: 2620, y: 5880, w: 1760, h: 300, density: 'low',
           palette: [0x85a075, 0x7a9868] },
+
+        // ── 남부 주거 블록 ──
+        { x: 3600, y: 5800, w: 800, h: 600, density: 'low', style: 'residential',
+          palette: [0x88a078, 0x80a070] },
+        { x: 4800, y: 6000, w: 700, h: 500, density: 'low', style: 'residential',
+          palette: [0x88a078, 0x80a070] },
+        // ── 서부 블록 ──
+        { x: 300, y: 2600, w: 500, h: 600, density: 'low', style: 'residential',
+          palette: [0x88a078, 0x80a070] },
       ],
 
       vegetation: [
@@ -476,11 +499,13 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         ],
         terminals: [
           { x: 7100, y: 5050, w: 450, h: 180, gates: 'east', name: '国内線\n국내선' },
-          { x: 7100, y: 5600, w: 380, h: 150, gates: 'east', name: '国際線\n국제선' }
+          { x: 7100, y: 5600, w: 380, h: 150, gates: 'east', name: '国際線\n국제선' },
+          { x: 7900, y: 5800, w: 300, h: 120, gates: 'west', name: '貨物\n화물' }
         ],
         apron: [
           { x: 7550, y: 5000, w: 220, h: 300 },
-          { x: 7550, y: 5550, w: 220, h: 220 }
+          { x: 7550, y: 5550, w: 220, h: 220 },
+          { x: 7800, y: 5600, w: 180, h: 200 }
         ],
         tower: { x: 7500, y: 5400 },
         parking: { x: 7050, y: 5280, w: 200, h: 280 }
@@ -605,6 +630,13 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { x: 2000, y: 2400, texture: 'building_shop', name_ko: '후쿠오카시 박물관 / 福岡市博物館' },
       { x: 1600, y: 1400, texture: 'building_shop', name_ko: '모모치 해변 / ももちビーチ' },
     ]);
+    // Phase 6C: 추가 NPC
+    this.createNPCs([
+      { x: 2000, y: 2000, texture: 'shop',
+        name_ko: '해양과학관 직원', name_ja: 'マリンワールド職員',
+        greeting_ko: '마린월드에 오신 걸 환영해요!\n돌고래 쇼가 3시에 시작해요!',
+        greeting_ja: 'マリンワールドへようこそ！\nイルカショーが3時に始まります！' },
+    ]);
   }
 
   // ══════════════════════════════════════════════════════
@@ -646,6 +678,13 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { x: 2800, y: 2000, texture: 'building_shop', name_ko: '후쿠오카성터 / 福岡城跡' },
       // 오호리 보트장
       { x: 2200, y: 3100, texture: 'building_shop', name_ko: '오호리 보트장 / 大濠ボートハウス' },
+    ]);
+    // Phase 6C: 추가 NPC
+    this.createNPCs([
+      { x: 3600, y: 2400, texture: 'shop',
+        name_ko: '텐진 미용사', name_ja: '天神の美容師',
+        greeting_ko: '헤어 스타일 바꿔보실래요? (ヘアスタイル変えてみませんか？)\n텐진 지하상가 구경하셨어요?',
+        greeting_ja: 'ヘアスタイル変えてみませんか？\n天神地下街見ましたか？' },
     ]);
     this.createSubwayEntrance(3400, 2600, 'FukuokaMetroScene', 'tenjin',
       '텐진역 🚇', '天神駅');
@@ -721,6 +760,13 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         greeting_ko: '이치란 라멘에 오신 걸 환영해요!\n주문은 칸막이 자리에서 해주세요~',
         greeting_ja: '一蘭ラーメンへようこそ！\nご注文は味集中カウンターでどうぞ～' },
     ]);
+    // Phase 6C: 추가 NPC
+    this.createNPCs([
+      { x: 6600, y: 3000, texture: 'shop',
+        name_ko: '호텔 컨시어지', name_ja: 'ホテルコンシェルジュ',
+        greeting_ko: '하카타역에서 가까운 호텔이에요 (博多駅に近いホテルです)\n하카타 라멘 맛집 추천해 드릴까요?',
+        greeting_ja: '博多駅に近いホテルです\n博多ラーメンの名店おすすめしましょうか？' },
+    ]);
     this.createSubwayEntrance(6400, 3000, 'FukuokaMetroScene', 'hakata',
       '하카타역 🚇', '博多駅');
   }
@@ -777,6 +823,13 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { x: 3800, y: 5600, texture: 'building_shop', name_ko: '이온몰 / イオンモール' },
     ]);
 
+    // Phase 6C: 추가 NPC
+    this.createNPCs([
+      { x: 3600, y: 4800, texture: 'shop',
+        name_ko: '카페 마스터', name_ja: 'カフェマスター',
+        greeting_ko: '오늘의 스페셜 커피 드셔보세요! (今日のスペシャルコーヒーどうぞ！)\n야쿠인은 카페 거리로 유명해요',
+        greeting_ja: '今日のスペシャルコーヒーどうぞ！\n薬院はカフェ通りで有名です' },
+    ]);
     this.createSubwayEntrance(3400, 5200, 'FukuokaMetroScene', 'yakuin',
       '야쿠인역 🚇', '薬院駅');
   }
@@ -800,6 +853,85 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { x: 6600, y: 800, texture: 'building_shop', name_ko: '부산행 페리터미널 / 釜山行きフェリー' },
       { x: 5900, y: 1200, texture: 'building_shop', name_ko: '크루즈선 터미널 / クルーズターミナル' },
       { x: 6000, y: 1000, texture: 'building_shop', name_ko: '베이사이드 플레이스 / ベイサイドプレイス' },
+    ]);
+
+    // ── Phase 6C: 하카타항 확장 ──
+    this.createNPCs([
+      { x: 6400, y: 1100, texture: 'shop',
+        name_ko: '항구 경비원', name_ja: '港警備員',
+        greeting_ko: '하카타항에 오신 걸 환영합니다! (博多港へようこそ！)\n이 항구는 부산행 페리가 출발해요 (この港から釜山行きフェリーが出ます)',
+        greeting_ja: '博多港へようこそ！\nこの港から釜山行きフェリーが出ます。税関申告しましたか？' },
+      { x: 5900, y: 1000, texture: 'shop',
+        name_ko: '수산시장 아저씨', name_ja: '魚市場のおじさん',
+        greeting_ko: '오늘 아침 잡은 신선한 생선이에요! (今朝獲れた新鮮な魚です！)\n참치회 드셔보세요! (マグロの刺身食べてみてください！)',
+        greeting_ja: '今朝獲れた新鮮な魚です！\nマグロの刺身食べてみてください！' },
+      { x: 6800, y: 1000, texture: 'shop',
+        name_ko: '관광버스 가이드', name_ja: '観光バスガイド',
+        greeting_ko: '하카타항 크루즈 투어 어떠세요? (博多港クルーズツアーいかがですか？)\n노코노시마 행 페리가 곧 출발해요!',
+        greeting_ja: '博多港クルーズツアーいかがですか？\n能古島行きフェリーがまもなく出発します！' },
+    ]);
+    this.createBuildings([
+      { x: 5800, y: 900, texture: 'building_shop', name_ko: '수산시장 / 魚市場' },
+      { x: 6200, y: 800, texture: 'building_shop', name_ko: '세관 / 税関' },
+      { x: 6800, y: 800, texture: 'building_shop', name_ko: '화물터미널 / 貨物ターミナル' },
+      { x: 6400, y: 1200, texture: 'building_shop', name_ko: '해양박물관 / 海洋博物館' },
+    ]);
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 노코노시마 콘텐츠
+  // ══════════════════════════════════════════════════════
+  setupNokonoshimaDistrict() {
+    this.createNPCs([
+      { x: 1100, y: 600, texture: 'shop',
+        name_ko: '노코노시마 농부', name_ja: '能古島の農夫',
+        greeting_ko: '꽃공원에 오셨어요? 계절마다 다른 꽃이 피어요!\n노코노시마는 후쿠오카에서 페리로 10분이에요',
+        greeting_ja: '花公園にいらしたんですか？季節ごとに違う花が咲きますよ！\n能古島は福岡からフェリーで10分です' },
+    ]);
+    this.createBuildings([
+      { x: 800, y: 400, texture: 'building_shop', name_ko: '노코노시마 꽃공원 / 能古島花公園' },
+      { x: 1400, y: 500, texture: 'building_shop', name_ko: '능고신사 / 能古神社' },
+      { x: 1200, y: 800, texture: 'building_shop', name_ko: '전망대 / 展望台' },
+    ]);
+
+    // 페리 라벨
+    this.add.text(3000, 500, '🚢 페리 10분 / フェリー10分', {
+      fontSize: '14px', fontFamily: 'monospace',
+      color: '#4488cc', backgroundColor: '#00000066',
+      padding: { x: 6, y: 3 }
+    }).setDepth(5).setOrigin(0.5);
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 남부/서부 구역 보강
+  // ══════════════════════════════════════════════════════
+  setupMinamiArea() {
+    // 남부 NPC
+    this.createNPCs([
+      { x: 4000, y: 6200, texture: 'shop',
+        name_ko: '미나미 주민', name_ja: '南区の住民',
+        greeting_ko: '이 동네는 조용하고 살기 좋아요 (この街は静かで住みやすいです)\n근처에 좋은 라멘집이 있어요!',
+        greeting_ja: 'この街は静かで住みやすいです\n近くにいいラーメン屋がありますよ' },
+      { x: 5000, y: 6500, texture: 'shop',
+        name_ko: '학생', name_ja: '学生',
+        greeting_ko: '학교 끝나고 놀러 왔어요! (学校終わって遊びに来ました)\n이 공원에서 자주 놀아요',
+        greeting_ja: '学校終わって遊びに来ました！\nこの公園でよく遊びます' },
+    ]);
+    // 서부 NPC
+    this.createNPCs([
+      { x: 600, y: 3000, texture: 'shop',
+        name_ko: '니시 어부', name_ja: '西の漁師',
+        greeting_ko: '무로미강에서 낚시해요 (室見川で釣りしてます)\n서쪽 해안은 석양이 예뻐요',
+        greeting_ja: '室見川で釣りしてます\n西の海岸は夕日がきれいです' },
+    ]);
+    // 남부 건물
+    this.createBuildings([
+      { x: 3800, y: 6000, texture: 'building_shop', name_ko: '편의점 / コンビニ' },
+      { x: 5200, y: 6300, texture: 'building_shop', name_ko: '남부초등학교 / 南部小学校' },
+    ]);
+    // 서부 건물
+    this.createBuildings([
+      { x: 500, y: 2800, texture: 'building_shop', name_ko: '해산물가게 / 海鮮物店' },
     ]);
   }
 

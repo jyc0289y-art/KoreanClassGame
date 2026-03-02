@@ -330,6 +330,41 @@ export default class BaseWorldScene extends Phaser.Scene {
             }
           }
 
+          // ── 차선 구분선 (major 도로) ──
+          if (rw >= 160 || (rW > rH ? rH >= 160 : rW >= 160)) {
+            // 넓은 도로: 3개 차선 구분선 (1/4, 1/2, 3/4)
+            roadG.lineStyle(1, 0xffffff, 0.15);
+            if (rW > rH) {
+              const lanes = [ry + rH * 0.25, ry + rH * 0.5, ry + rH * 0.75];
+              lanes.forEach(ly => {
+                for (let dx = rx; dx < rx + rW; dx += 40) {
+                  roadG.lineBetween(dx, ly, Math.min(dx + 20, rx + rW), ly);
+                }
+              });
+            } else {
+              const lanes = [rx + rW * 0.25, rx + rW * 0.5, rx + rW * 0.75];
+              lanes.forEach(lx => {
+                for (let dy = ry; dy < ry + rH; dy += 40) {
+                  roadG.lineBetween(lx, dy, lx, Math.min(dy + 20, ry + rH));
+                }
+              });
+            }
+          } else if (rw >= 100 || (rW > rH ? rH >= 100 : rW >= 100)) {
+            // 중간 도로: 1개 중앙선 (기존 대시보다 연한)
+            roadG.lineStyle(1, 0xffffff, 0.12);
+            if (rW > rH) {
+              const cy2 = ry + rH / 2;
+              for (let dx = rx; dx < rx + rW; dx += 40) {
+                roadG.lineBetween(dx, cy2, Math.min(dx + 20, rx + rW), cy2);
+              }
+            } else {
+              const cx2 = rx + rW / 2;
+              for (let dy = ry; dy < ry + rH; dy += 40) {
+                roadG.lineBetween(cx2, dy, cx2, Math.min(dy + 20, ry + rH));
+              }
+            }
+          }
+
           // ── 가로등 (주요 도로 양쪽, 120px 간격) ──
           const lampSpacing = 120;
           if (rW > rH) {
@@ -369,6 +404,26 @@ export default class BaseWorldScene extends Phaser.Scene {
           }
         });
       }
+
+      // ── 교통 신호등 (횡단보도 위치 자동 배치) ──
+      if (config.crosswalks) {
+        config.crosswalks.forEach(cw => {
+          if (cw.noSignal) return;
+          // 신호등 기둥 (4×12 어두운 사각형)
+          const sx = cw.dir === 'h' ? cw.x - 8 : cw.x + (cw.w || 80) + 4;
+          const sy = cw.dir === 'h' ? cw.y + ((cw.w || 80) / 2) - 6 : cw.y - 8;
+          roadG.fillStyle(0x333333, 0.7);
+          roadG.fillRect(sx, sy, 4, 12);
+          // 3색 신호등
+          const lightX = sx + 2;
+          roadG.fillStyle(0xff2222, 0.6);
+          roadG.fillCircle(lightX, sy + 2, 1.5);
+          roadG.fillStyle(0xffaa00, 0.6);
+          roadG.fillCircle(lightX, sy + 6, 1.5);
+          roadG.fillStyle(0x22cc22, 0.6);
+          roadG.fillCircle(lightX, sy + 10, 1.5);
+        });
+      }
     }
     terrainLayers.push(roadG);
 
@@ -395,6 +450,31 @@ export default class BaseWorldScene extends Phaser.Scene {
       const blockG = this.add.graphics().setDepth(0.5);
       this._drawFillerBuildings(blockG, config.blocks);
       terrainLayers.push(blockG);
+    }
+
+    // ── Layer 0.5: 주차장 ──
+    if (config.parkingLots) {
+      const parkLotG = this.add.graphics().setDepth(0.5);
+      config.parkingLots.forEach(pl => {
+        // 회색 바닥
+        parkLotG.fillStyle(0x888888, 0.7);
+        parkLotG.fillRect(pl.x, pl.y, pl.w, pl.h);
+        // 백색 주차선 (18px 간격)
+        parkLotG.lineStyle(1, 0xffffff, 0.4);
+        if (pl.w > pl.h) {
+          for (let dx = 18; dx < pl.w; dx += 18) {
+            parkLotG.lineBetween(pl.x + dx, pl.y + 3, pl.x + dx, pl.y + pl.h - 3);
+          }
+        } else {
+          for (let dy = 18; dy < pl.h; dy += 18) {
+            parkLotG.lineBetween(pl.x + 3, pl.y + dy, pl.x + pl.w - 3, pl.y + dy);
+          }
+        }
+        // 테두리
+        parkLotG.lineStyle(1, 0x666666, 0.5);
+        parkLotG.strokeRect(pl.x, pl.y, pl.w, pl.h);
+      });
+      terrainLayers.push(parkLotG);
     }
 
     // ── Layer 1.0: 식생 (가로수/강변 — 공원 제외) ──
@@ -500,44 +580,170 @@ export default class BaseWorldScene extends Phaser.Scene {
 
           // 건물 본체
           const brightness = 0.85 + rng() * 0.3;
-          const c = Phaser.Display.Color.IntegerToColor(color);
-          const adjusted = Phaser.Display.Color.GetColor(
-            Math.min(255, Math.floor(c.red * brightness)),
-            Math.min(255, Math.floor(c.green * brightness)),
-            Math.min(255, Math.floor(c.blue * brightness))
-          );
-          g.fillStyle(adjusted, 0.9);
-          g.fillRect(bx, by, w, h);
 
-          // 지붕 스트립 (어두운 상단)
-          g.fillStyle(0x000000, 0.15);
-          g.fillRect(bx, by, w, Math.min(3, h * 0.15));
+          // 건물 스타일 분기
+          const style = block.style || 'default';
 
-          // 우측 면 그림자 (3D 느낌)
-          g.fillStyle(0x000000, 0.12);
-          g.fillRect(bx + w - Math.min(3, w * 0.15), by, Math.min(3, w * 0.15), h);
-
-          // 창문 (건물 크기 > 20px일 때)
-          if (w > 20 && h > 16) {
-            const winSize = 3;
-            const winGap = 6;
-            const winColor = rng() > 0.5 ? 0xffffcc : 0x88aacc;
-            const winAlpha = rng() > 0.5 ? 0.3 : 0.2;
-            g.fillStyle(winColor, winAlpha);
-            for (let wy = by + 5; wy < by + h - 8; wy += winGap) {
-              for (let wx = bx + 4; wx < bx + w - 4; wx += winGap) {
-                g.fillRect(wx, wy, winSize, winSize);
+          if (style === 'residential') {
+            // 주거: 넓고 낮은 건물, 삼각형 지붕, 따뜻한 톤
+            const resColors = [0xc8b898, 0xd0c0a0, 0xb8a888, 0xc0b090, 0xd8c8a8];
+            const rc = resColors[Math.floor(rng() * resColors.length)];
+            const rcObj = Phaser.Display.Color.IntegerToColor(rc);
+            const rcAdj = Phaser.Display.Color.GetColor(
+              Math.min(255, Math.floor(rcObj.red * brightness)),
+              Math.min(255, Math.floor(rcObj.green * brightness)),
+              Math.min(255, Math.floor(rcObj.blue * brightness))
+            );
+            g.fillStyle(rcAdj, 0.9);
+            g.fillRect(bx, by, w, h);
+            // 삼각형 지붕
+            g.fillStyle(0x8B6B4A, 0.6);
+            g.fillTriangle(bx - 2, by, bx + w + 2, by, bx + w / 2, by - Math.min(6, h * 0.2));
+            // 아파트형 2×2 창문
+            if (w > 18 && h > 14) {
+              g.fillStyle(0xffffcc, 0.25);
+              const cols = Math.min(3, Math.floor((w - 6) / 8));
+              const rows = Math.min(4, Math.floor((h - 8) / 7));
+              for (let ry2 = 0; ry2 < rows; ry2++) {
+                for (let cx = 0; cx < cols; cx++) {
+                  g.fillRect(bx + 4 + cx * 8, by + 5 + ry2 * 7, 4, 4);
+                }
               }
+            }
+            // 넓은 문
+            if (w > 14 && h > 10) {
+              g.fillStyle(0x664422, 0.6);
+              g.fillRect(bx + Math.floor(w / 2) - 3, by + h - 6, 6, 6);
+            }
+            // 발코니 수평선
+            if (h > 20) {
+              g.lineStyle(1, 0x888888, 0.2);
+              g.lineBetween(bx + 2, by + Math.floor(h * 0.5), bx + w - 2, by + Math.floor(h * 0.5));
+            }
+          } else if (style === 'commercial') {
+            // 상업: 유리 파사드, 파란 틴트
+            const comColors = [0x88bbcc, 0x7aaabb, 0x99ccdd, 0x6699aa, 0x8ab0c0];
+            const cc = comColors[Math.floor(rng() * comColors.length)];
+            const ccObj = Phaser.Display.Color.IntegerToColor(cc);
+            const ccAdj = Phaser.Display.Color.GetColor(
+              Math.min(255, Math.floor(ccObj.red * brightness)),
+              Math.min(255, Math.floor(ccObj.green * brightness)),
+              Math.min(255, Math.floor(ccObj.blue * brightness))
+            );
+            g.fillStyle(ccAdj, 0.92);
+            g.fillRect(bx, by, w, h);
+            // 유리 파사드 — 큰 창문 밀집
+            if (w > 16 && h > 14) {
+              g.fillStyle(0xaaddee, 0.2);
+              for (let wy = by + 4; wy < by + h - 6; wy += 5) {
+                g.fillRect(bx + 2, wy, w - 4, 3);
+              }
+            }
+            // 옥상 에어컨 박스
+            if (w > 18 && h > 16) {
+              g.fillStyle(0x555555, 0.5);
+              g.fillRect(bx + w - 7, by + 1, 5, 4);
+            }
+            // 간판 스트립 (1층)
+            g.fillStyle(0xff8844, 0.25);
+            g.fillRect(bx, by + h - 4, w, 3);
+            // 지붕 스트립
+            g.fillStyle(0x000000, 0.18);
+            g.fillRect(bx, by, w, 2);
+          } else if (style === 'traditional') {
+            // 전통 (한옥/사찰): 넓고 낮은, 기와 지붕
+            const tradColors = [0xc0a070, 0xb89860, 0xd0b080, 0xa88850];
+            const tc = tradColors[Math.floor(rng() * tradColors.length)];
+            const tcObj = Phaser.Display.Color.IntegerToColor(tc);
+            const tcAdj = Phaser.Display.Color.GetColor(
+              Math.min(255, Math.floor(tcObj.red * brightness)),
+              Math.min(255, Math.floor(tcObj.green * brightness)),
+              Math.min(255, Math.floor(tcObj.blue * brightness))
+            );
+            g.fillStyle(tcAdj, 0.9);
+            g.fillRect(bx, by, w, h);
+            // 두꺼운 어두운 기와 지붕 + 양끝 삼각형
+            g.fillStyle(0x3a3a3a, 0.7);
+            g.fillRect(bx - 3, by - 2, w + 6, 4);
+            g.fillTriangle(bx - 3, by - 2, bx - 3, by + 2, bx - 7, by + 2);
+            g.fillTriangle(bx + w + 3, by - 2, bx + w + 3, by + 2, bx + w + 7, by + 2);
+            // 수평 격자 패턴 (창문 대신)
+            if (w > 16 && h > 12) {
+              g.lineStyle(1, 0x8B7355, 0.3);
+              for (let gy = by + 6; gy < by + h - 4; gy += 5) {
+                g.lineBetween(bx + 3, gy, bx + w - 3, gy);
+              }
+              // 세로 격자
+              for (let gx = bx + 6; gx < bx + w - 4; gx += 8) {
+                g.lineBetween(gx, by + 5, gx, by + h - 4);
+              }
+            }
+            // 문 (중앙, 슬라이딩 도어 스타일)
+            if (w > 14 && h > 10) {
+              g.fillStyle(0x5a4a2a, 0.5);
+              g.fillRect(bx + Math.floor(w / 2) - 4, by + h - 6, 8, 6);
+              g.lineStyle(1, 0x3a3a2a, 0.4);
+              g.lineBetween(bx + Math.floor(w / 2), by + h - 6, bx + Math.floor(w / 2), by + h);
+            }
+          } else {
+            // default (기존 코드와 동일)
+            const c = Phaser.Display.Color.IntegerToColor(color);
+            const adjusted = Phaser.Display.Color.GetColor(
+              Math.min(255, Math.floor(c.red * brightness)),
+              Math.min(255, Math.floor(c.green * brightness)),
+              Math.min(255, Math.floor(c.blue * brightness))
+            );
+            g.fillStyle(adjusted, 0.9);
+            g.fillRect(bx, by, w, h);
+            // 지붕 스트립
+            g.fillStyle(0x000000, 0.15);
+            g.fillRect(bx, by, w, Math.min(3, h * 0.15));
+            // 우측 면 그림자
+            g.fillStyle(0x000000, 0.12);
+            g.fillRect(bx + w - Math.min(3, w * 0.15), by, Math.min(3, w * 0.15), h);
+            // 창문
+            if (w > 20 && h > 16) {
+              const winSize = 3;
+              const winGap = 6;
+              const winColor = rng() > 0.5 ? 0xffffcc : 0x88aacc;
+              const winAlpha = rng() > 0.5 ? 0.3 : 0.2;
+              g.fillStyle(winColor, winAlpha);
+              for (let wy = by + 5; wy < by + h - 8; wy += winGap) {
+                for (let wx = bx + 4; wx < bx + w - 4; wx += winGap) {
+                  g.fillRect(wx, wy, winSize, winSize);
+                }
+              }
+            }
+            // 문
+            if (w > 15 && h > 12) {
+              g.fillStyle(0x664422, 0.7);
+              g.fillRect(bx + Math.floor(w / 2) - 2, by + h - 5, 4, 5);
             }
           }
 
-          // 문 (건물 하단 중앙)
-          if (w > 15 && h > 12) {
-            g.fillStyle(0x664422, 0.7);
-            g.fillRect(bx + Math.floor(w / 2) - 2, by + h - 5, 4, 5);
+          // 지붕 변형 (확률적)
+          const roofRoll = rng();
+          if (style !== 'traditional') {  // 전통 스타일은 이미 기와 지붕
+            if (roofRoll < 0.3) {
+              // 뾰족 지붕 (삼각형)
+              const roofH = 2 + Math.floor(rng() * 3);
+              g.fillStyle(0x000000, 0.18);
+              g.fillTriangle(bx, by, bx + w, by, bx + w / 2, by - roofH);
+            } else if (roofRoll < 0.6) {
+              // 셋백 지붕 (옥탑 느낌)
+              const inset = 3;
+              const topH = 3 + Math.floor(rng() * 3);
+              g.fillStyle(0x000000, 0.12);
+              g.fillRect(bx + inset, by - topH, w - inset * 2, topH);
+            }
+            // tallBuildings: 50% 확률 옥상 기계실
+            if (block.tallBuildings && rng() > 0.5) {
+              g.fillStyle(0x555555, 0.4);
+              g.fillRect(bx + w - 8, by + 1, 5, 5);
+            }
           }
 
-          // 지붕선 (밝은 윗변 하이라이트)
+          // 지붕선 하이라이트 (모든 스타일 공통)
           g.lineStyle(1, 0xffffff, 0.15);
           g.lineBetween(bx, by, bx + w, by);
         }
