@@ -191,6 +191,7 @@ export default class BaseWorldScene extends Phaser.Scene {
     }
 
     if (config.water) {
+      const waterRng = (() => { let s = 12345; return () => { s = (s * 16807) % 2147483647; return (s & 0x7fffffff) / 2147483647; }; })();
       config.water.forEach(w => {
         if (w.bank) {
           g.fillStyle(w.bank.color || 0x8a7a5a, w.bank.alpha || 0.7);
@@ -199,11 +200,48 @@ export default class BaseWorldScene extends Phaser.Scene {
             this._fillPolygon(g, expanded);
           }
         }
+        // 베이스 수면
         g.fillStyle(w.color || 0x1a3a6a, w.alpha || 1.0);
         if (w.points) {
           this._fillPolygon(g, w.points);
+          // 깊이감: 축소된 내부 polygon을 더 어두운 색으로
+          if ((w.alpha || 1) >= 0.5) {
+            const inner = this._expandPolygon(w.points, -15);
+            if (inner && inner.length >= 3) {
+              g.fillStyle(0x0a2a5a, 0.2);
+              this._fillPolygon(g, inner);
+            }
+            // 잔물결 (밝은 짧은 선)
+            const bounds = this._getPolygonBounds(w.points);
+            if (bounds) {
+              g.lineStyle(1, 0x5a8aba, 0.12);
+              const ripCount = Math.min(25, Math.floor((bounds.w * bounds.h) / 40000));
+              for (let i = 0; i < ripCount; i++) {
+                const rx = bounds.x + waterRng() * bounds.w;
+                const ry = bounds.y + waterRng() * bounds.h;
+                if (this._pointInPolygon(rx, ry, w.points)) {
+                  const rl = 10 + waterRng() * 25;
+                  g.lineBetween(rx, ry, rx + rl, ry + (waterRng() - 0.5) * 3);
+                }
+              }
+            }
+          }
         } else {
           g.fillRect(w.x, w.y, w.w, w.h);
+          // rect 수면 깊이감
+          if ((w.alpha || 1) >= 0.5 && w.w > 50 && w.h > 50) {
+            g.fillStyle(0x0a2a5a, 0.2);
+            g.fillRect(w.x + 15, w.y + 15, w.w - 30, w.h - 30);
+            // 잔물결
+            g.lineStyle(1, 0x5a8aba, 0.12);
+            const ripCount = Math.min(15, Math.floor((w.w * w.h) / 40000));
+            for (let i = 0; i < ripCount; i++) {
+              const rx = w.x + 10 + waterRng() * (w.w - 20);
+              const ry = w.y + 10 + waterRng() * (w.h - 20);
+              const rl = 10 + waterRng() * 20;
+              g.lineBetween(rx, ry, rx + rl, ry);
+            }
+          }
         }
       });
     }
@@ -261,8 +299,8 @@ export default class BaseWorldScene extends Phaser.Scene {
           roadG.lineBetween(rx + rW, ry, rx + rW, ry + rH);
         }
 
-        if (r.type === 'major' || rw >= 120) {
-          roadG.lineStyle(2, 0xffffff, 0.2);
+        if (r.type === 'major' || rw >= 80) {
+          roadG.lineStyle(2, 0xffffff, 0.35);
           if (rW > rH) {
             const cy = ry + rH / 2;
             for (let dx = rx; dx < rx + rW; dx += 40) {
@@ -279,7 +317,7 @@ export default class BaseWorldScene extends Phaser.Scene {
 
       if (config.crosswalks) {
         config.crosswalks.forEach(cw => {
-          roadG.fillStyle(0xffffff, 0.25);
+          roadG.fillStyle(0xffffff, 0.45);
           const stripeW = 8, gap = 6, count = 5;
           if (cw.dir === 'h') {
             for (let i = 0; i < count; i++) {
@@ -304,6 +342,13 @@ export default class BaseWorldScene extends Phaser.Scene {
       const parkG = this.add.graphics().setDepth(0.15);
       this._drawParks(parkG, config.vegetation);
       terrainLayers.push(parkG);
+    }
+
+    // ── Layer 0.18: 공항 (도로 위, 블록 아래) ──
+    if (config.airport) {
+      const airportG = this.add.graphics().setDepth(0.18);
+      this._drawAirport(airportG, config.airport);
+      terrainLayers.push(airportG);
     }
 
     // ── Layer 0.5: 시가지 블록 (필러 건물) ──
@@ -417,6 +462,20 @@ export default class BaseWorldScene extends Phaser.Scene {
           g.fillStyle(adjusted, 0.9);
           g.fillRect(bx, by, w, h);
 
+          // 창문 (건물 크기 > 20px일 때)
+          if (w > 20 && h > 16) {
+            const winSize = 3;
+            const winGap = 6;
+            const winColor = rng() > 0.5 ? 0xffffcc : 0x88aacc;
+            const winAlpha = rng() > 0.5 ? 0.3 : 0.2;
+            g.fillStyle(winColor, winAlpha);
+            for (let wy = by + 5; wy < by + h - 4; wy += winGap) {
+              for (let wx = bx + 4; wx < bx + w - 4; wx += winGap) {
+                g.fillRect(wx, wy, winSize, winSize);
+              }
+            }
+          }
+
           // 지붕선 (밝은 윗변)
           g.lineStyle(1, 0xffffff, 0.15);
           g.lineBetween(bx, by, bx + w, by);
@@ -466,21 +525,290 @@ export default class BaseWorldScene extends Phaser.Scene {
     return inside;
   }
 
-  // ── 공원 렌더링 (깔끔한 초록 풀밭, depth 0.15에서 도로 아래) ──
+  // ── 폴리곤 바운딩 박스 ──
+  _getPolygonBounds(points) {
+    if (!points || points.length < 2) return null;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    points.forEach(p => {
+      if (p[0] < minX) minX = p[0];
+      if (p[1] < minY) minY = p[1];
+      if (p[0] > maxX) maxX = p[0];
+      if (p[1] > maxY) maxY = p[1];
+    });
+    return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
+  }
+
+  // ── 공원 렌더링 (잔디 + 산책로 + 나무 + 밝은패치, depth 0.15) ──
   _drawParks(g, vegetation) {
+    const seededRandom = (seed) => {
+      let s = seed;
+      return () => { s = (s * 16807 + 0) % 2147483647; return (s & 0x7fffffff) / 2147483647; };
+    };
+
     vegetation.forEach(v => {
       if (v.type !== 'park') return;
       const pw = v.w || 200, ph = v.h || 200;
+      const rng = seededRandom(v.x * 31 + v.y * 47);
+
       // 풀밭 베이스
       g.fillStyle(0x5a9a4a, 0.75);
       g.fillRect(v.x, v.y, pw, ph);
-      // 밝은 내부 (약간 안쪽)
-      g.fillStyle(0x6aaa5a, 0.3);
-      g.fillRect(v.x + 8, v.y + 8, pw - 16, ph - 16);
+
+      // 밝은 잔디 패치 (2~3개)
+      const patchCount = 2 + Math.floor(rng() * 2);
+      for (let i = 0; i < patchCount; i++) {
+        const px = v.x + 20 + rng() * (pw - 60);
+        const py = v.y + 20 + rng() * (ph - 60);
+        const prw = 20 + rng() * 40, prh = 15 + rng() * 30;
+        g.fillStyle(0x6aaa5a, 0.25);
+        g.fillRect(px, py, prw, prh);
+      }
+
+      // 산책로 (공원이 일정 크기 이상일 때)
+      if (pw > 100 && ph > 100) {
+        g.lineStyle(4, 0xc0b090, 0.5);
+        // 가로 산책로
+        const pathY = v.y + ph * (0.35 + rng() * 0.3);
+        g.lineBetween(v.x + 10, pathY, v.x + pw - 10, pathY);
+        // 세로 산책로 (큰 공원만)
+        if (pw > 200 && ph > 200) {
+          const pathX = v.x + pw * (0.35 + rng() * 0.3);
+          g.lineBetween(pathX, v.y + 10, pathX, v.y + ph - 10);
+        }
+      }
+
+      // 나무 점 (가장자리를 따라)
+      const treeCount = Math.max(4, Math.floor((pw + ph) / 50));
+      for (let i = 0; i < treeCount; i++) {
+        let tx, ty;
+        const side = Math.floor(rng() * 4);
+        const margin = 12;
+        if (side === 0) { tx = v.x + margin + rng() * (pw - margin * 2); ty = v.y + margin + rng() * 15; }
+        else if (side === 1) { tx = v.x + margin + rng() * (pw - margin * 2); ty = v.y + ph - margin - rng() * 15; }
+        else if (side === 2) { tx = v.x + margin + rng() * 15; ty = v.y + margin + rng() * (ph - margin * 2); }
+        else { tx = v.x + pw - margin - rng() * 15; ty = v.y + margin + rng() * (ph - margin * 2); }
+        const tr = 5 + rng() * 6;
+        // 그림자
+        g.fillStyle(0x000000, 0.06);
+        g.fillCircle(tx + 2, ty + 2, tr);
+        // 나무
+        g.fillStyle(0x3a7a3a, 0.7);
+        g.fillCircle(tx, ty, tr);
+      }
+
       // 테두리
       g.lineStyle(2, 0x3a7a3a, 0.4);
       g.strokeRect(v.x, v.y, pw, ph);
     });
+  }
+
+  // ── 공항 렌더링 (활주로/유도로/터미널/에이프런/관제탑) ──
+  _drawAirport(g, airport) {
+    const ap = airport;
+
+    // 1) 공항 전체 잔디 영역
+    g.fillStyle(0x6a9a5a, 0.5);
+    g.fillRect(ap.x, ap.y, ap.w, ap.h);
+
+    // 2) 에이프런 (주기장 — 밝은 콘크리트)
+    if (ap.apron) {
+      ap.apron.forEach(a => {
+        g.fillStyle(0x999999, 0.8);
+        g.fillRect(a.x, a.y, a.w, a.h);
+        g.lineStyle(1, 0x777777, 0.4);
+        g.strokeRect(a.x, a.y, a.w, a.h);
+        // 주기장 라인 (비행기 주차 구획)
+        const spacing = 80;
+        g.lineStyle(1, 0xcccc00, 0.3);
+        if (a.w > a.h) {
+          for (let dx = spacing; dx < a.w; dx += spacing) {
+            g.lineBetween(a.x + dx, a.y + 5, a.x + dx, a.y + a.h - 5);
+          }
+        } else {
+          for (let dy = spacing; dy < a.h; dy += spacing) {
+            g.lineBetween(a.x + 5, a.y + dy, a.x + a.w - 5, a.y + dy);
+          }
+        }
+      });
+    }
+
+    // 3) 유도로 (taxiway)
+    if (ap.taxiways) {
+      ap.taxiways.forEach(tw => {
+        const twW = tw.width || 30;
+        g.fillStyle(0x555555, 0.85);
+        if (tw.points && tw.points.length >= 2) {
+          for (let i = 0; i < tw.points.length - 1; i++) {
+            const [x1, y1] = tw.points[i];
+            const [x2, y2] = tw.points[i + 1];
+            const dx = x2 - x1, dy = y2 - y1;
+            if (Math.abs(dx) > Math.abs(dy)) {
+              g.fillRect(Math.min(x1, x2), y1 - twW / 2, Math.abs(dx), twW);
+            } else {
+              g.fillRect(x1 - twW / 2, Math.min(y1, y2), twW, Math.abs(dy));
+            }
+          }
+        } else if (tw.x !== undefined) {
+          g.fillRect(tw.x, tw.y, tw.w || twW, tw.h || twW);
+        }
+        // 유도로 센터라인 (노란색)
+        g.lineStyle(2, 0xcccc00, 0.5);
+        if (tw.points && tw.points.length >= 2) {
+          for (let i = 0; i < tw.points.length - 1; i++) {
+            g.lineBetween(tw.points[i][0], tw.points[i][1], tw.points[i + 1][0], tw.points[i + 1][1]);
+          }
+        }
+      });
+    }
+
+    // 4) 활주로 (runway)
+    if (ap.runways) {
+      ap.runways.forEach(rw => {
+        const rwW = rw.width || 60;
+        const rwL = rw.length || 1000;
+        const isNS = rw.heading === 'ns' || rw.heading === 'sn';
+        const rx = isNS ? rw.x - rwW / 2 : rw.x;
+        const ry = isNS ? rw.y : rw.y - rwW / 2;
+        const rW = isNS ? rwW : rwL;
+        const rH = isNS ? rwL : rwW;
+
+        // 활주로 표면 (진한 아스팔트)
+        g.fillStyle(0x2a2a2a, 0.95);
+        g.fillRect(rx, ry, rW, rH);
+
+        // 활주로 가장자리 (흰색 실선)
+        g.lineStyle(2, 0xffffff, 0.6);
+        g.strokeRect(rx + 3, ry + 3, rW - 6, rH - 6);
+
+        // 센터라인 (흰색 대시)
+        g.lineStyle(3, 0xffffff, 0.7);
+        if (isNS) {
+          const cx = rx + rW / 2;
+          for (let dy = ry + 30; dy < ry + rH - 30; dy += 50) {
+            g.lineBetween(cx, dy, cx, Math.min(dy + 25, ry + rH - 30));
+          }
+        } else {
+          const cy = ry + rH / 2;
+          for (let dx = rx + 30; dx < rx + rW - 30; dx += 50) {
+            g.lineBetween(dx, cy, Math.min(dx + 25, rx + rW - 30), cy);
+          }
+        }
+
+        // 활주로 끝 착지대 마킹 (터치다운 존)
+        g.fillStyle(0xffffff, 0.5);
+        if (isNS) {
+          const cx = rx + rW / 2;
+          // 상단 터치다운
+          for (let i = -2; i <= 2; i++) {
+            if (i === 0) continue;
+            g.fillRect(cx + i * 8 - 2, ry + 40, 4, 30);
+          }
+          // 하단 터치다운
+          for (let i = -2; i <= 2; i++) {
+            if (i === 0) continue;
+            g.fillRect(cx + i * 8 - 2, ry + rH - 70, 4, 30);
+          }
+        } else {
+          const cy = ry + rH / 2;
+          for (let i = -2; i <= 2; i++) {
+            if (i === 0) continue;
+            g.fillRect(rx + 40, cy + i * 8 - 2, 30, 4);
+          }
+          for (let i = -2; i <= 2; i++) {
+            if (i === 0) continue;
+            g.fillRect(rx + rW - 70, cy + i * 8 - 2, 30, 4);
+          }
+        }
+
+        // 활주로 번호 (양끝)
+        if (rw.numbers && rw.numbers.length >= 2) {
+          const style = { fontSize: '16px', color: '#ffffff', fontStyle: 'bold', align: 'center' };
+          if (isNS) {
+            const cx = rx + rW / 2;
+            this.add.text(cx, ry + 12, rw.numbers[0], style).setOrigin(0.5, 0).setDepth(0.19);
+            this.add.text(cx, ry + rH - 12, rw.numbers[1], style).setOrigin(0.5, 1).setDepth(0.19);
+          } else {
+            const cy = ry + rH / 2;
+            this.add.text(rx + 12, cy, rw.numbers[0], style).setOrigin(0, 0.5).setDepth(0.19);
+            this.add.text(rx + rW - 12, cy, rw.numbers[1], style).setOrigin(1, 0.5).setDepth(0.19);
+          }
+        }
+      });
+    }
+
+    // 5) 터미널 건물
+    if (ap.terminals) {
+      ap.terminals.forEach(t => {
+        // 터미널 본체
+        g.fillStyle(0xcccccc, 0.95);
+        g.fillRect(t.x, t.y, t.w, t.h);
+        // 지붕 하이라이트 (상단 1/4)
+        g.fillStyle(0xdddddd, 0.6);
+        g.fillRect(t.x, t.y, t.w, t.h * 0.25);
+        // 테두리
+        g.lineStyle(2, 0x888888, 0.7);
+        g.strokeRect(t.x, t.y, t.w, t.h);
+
+        // 게이트 돌출부 (탑승교)
+        const gateCount = Math.floor(Math.max(t.w, t.h) / 100);
+        const gateLen = 40, gateW = 12;
+        g.fillStyle(0xaaaaaa, 0.85);
+        for (let i = 0; i < gateCount; i++) {
+          if (t.gates === 'north' || t.gates === 'south') {
+            const gx = t.x + 40 + i * ((t.w - 80) / Math.max(gateCount - 1, 1));
+            const gy = t.gates === 'north' ? t.y - gateLen : t.y + t.h;
+            g.fillRect(gx - gateW / 2, gy, gateW, gateLen);
+          } else {
+            const gy = t.y + 30 + i * ((t.h - 60) / Math.max(gateCount - 1, 1));
+            const gx = t.gates === 'east' ? t.x + t.w : t.x - gateLen;
+            g.fillRect(gx, gy - gateW / 2, gateLen, gateW);
+          }
+        }
+
+        // 터미널 이름 라벨
+        if (t.name) {
+          this.add.text(t.x + t.w / 2, t.y + t.h / 2, t.name, {
+            fontSize: '11px', color: '#333333', fontStyle: 'bold', align: 'center',
+            backgroundColor: '#ffffffaa', padding: { x: 4, y: 2 }
+          }).setOrigin(0.5).setDepth(0.19);
+        }
+      });
+    }
+
+    // 6) 관제탑
+    if (ap.tower) {
+      // 그림자
+      g.fillStyle(0x000000, 0.15);
+      g.fillCircle(ap.tower.x + 6, ap.tower.y + 6, 14);
+      // 탑 베이스
+      g.fillStyle(0x666666, 0.95);
+      g.fillCircle(ap.tower.x, ap.tower.y, 12);
+      // 탑 상부 (밝은색)
+      g.fillStyle(0xeeeeee, 0.9);
+      g.fillCircle(ap.tower.x, ap.tower.y, 7);
+      // 안테나
+      g.lineStyle(2, 0x444444, 0.8);
+      g.lineBetween(ap.tower.x, ap.tower.y - 7, ap.tower.x, ap.tower.y - 18);
+    }
+
+    // 7) 주차장/교통센터
+    if (ap.parking) {
+      const pk = ap.parking;
+      g.fillStyle(0x888888, 0.7);
+      g.fillRect(pk.x, pk.y, pk.w, pk.h);
+      // 주차 라인
+      g.lineStyle(1, 0xffffff, 0.2);
+      const ps = 20;
+      if (pk.w > pk.h) {
+        for (let dx = ps; dx < pk.w; dx += ps) {
+          g.lineBetween(pk.x + dx, pk.y + 3, pk.x + dx, pk.y + pk.h - 3);
+        }
+      } else {
+        for (let dy = ps; dy < pk.h; dy += ps) {
+          g.lineBetween(pk.x + 3, pk.y + dy, pk.x + pk.w - 3, pk.y + dy);
+        }
+      }
+    }
   }
 
   // ── 식생 렌더링 (가로수/강변 — 공원은 _drawParks에서 처리) ──

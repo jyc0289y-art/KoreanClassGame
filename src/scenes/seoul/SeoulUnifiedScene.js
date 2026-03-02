@@ -42,13 +42,13 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.stationSpawnPoints = {
       hongdae:    { x: 2800, y: 3800 },
       jongno:     { x: 6000, y: 2600 },
-      myeongdong: { x: 6600, y: 3800 },
+      myeongdong: { x: 6600, y: 3200 },
       itaewon:    { x: 6400, y: 4500 },
       gangnam:    { x: 7000, y: 6800 },
       seongsu:    { x: 9500, y: 3500 },
       jamsil:     { x: 10800, y: 7000 },
       yeouido:    { x: 3400, y: 5300 },
-      incheon_airport: { x: 6000, y: 2800 }
+      incheon_airport: { x: 800, y: 5000 }
     };
 
     this.placeSpawnPoints = {
@@ -109,6 +109,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       baseColor: 0x7a9a6a,
 
       landUse: [
+        // ── 영종도 (인천공항 섬) ──
+        { x: 50, y: 3600, w: 1700, h: 3200, color: 0x9aaa8a, alpha: 0.8, border: false },
+
         // ── 산악 지형 ──
         { x: 3500, y: 0, w: 4500, h: 1200, color: 0x1a4a1a, alpha: 1.0, border: false },
         { x: 4500, y: 900, w: 2300, h: 1300, color: 0x2a5a2a, alpha: 0.9, border: false },
@@ -121,7 +124,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 0, y: 0, w: 3500, h: 800, color: 0x2a5a2a, alpha: 0.8, border: false },
         { x: 8000, y: 0, w: 4500, h: 1000, color: 0x2a5a2a, alpha: 0.8, border: false },
         { x: 12500, y: 0, w: 1900, h: 1800, color: 0x2a5a2a, alpha: 0.8, border: false },
-        { x: 0, y: 800, w: 1200, h: 4000, color: 0x3a6a3a, alpha: 0.6, border: false },
+        { x: 0, y: 800, w: 1200, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false },
         { x: 0, y: 7000, w: 2000, h: 3800, color: 0x3a6a3a, alpha: 0.7, border: false },
         { x: 12000, y: 8000, w: 2400, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false },
         { x: 0, y: 9500, w: 4000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false },
@@ -232,6 +235,25 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
             [10300,7400],[10500,7350],[10700,7400],[10800,7500],
             [10700,7700],[10500,7800],[10300,7700],[10200,7500]
           ], color: 0x3a6a9a, alpha: 0.9 },
+
+        // ── 서해 (인천공항 영종도 주변 바다) ──
+        { points: [
+            [0,3400],[50,3600],[100,3800],[80,4200],[60,4600],
+            [50,5000],[60,5400],[80,5800],[100,6200],[50,6600],[0,6800],
+            [0,3400]
+          ], color: 0x1a4a7a, alpha: 0.9 },
+        // 영종도 북쪽 수로
+        { points: [
+            [50,3600],[400,3550],[900,3500],[1400,3520],[1800,3580],
+            [1800,3700],[1400,3650],[900,3630],[400,3660],[50,3700]
+          ], color: 0x2a5a8a, alpha: 0.85,
+          bank: { width: 8, color: 0x8a7a5a, alpha: 0.4 } },
+        // 영종도 남쪽 수로
+        { points: [
+            [50,6600],[400,6650],[900,6700],[1400,6720],[1800,6750],
+            [1800,6850],[1400,6830],[900,6810],[400,6760],[50,6700]
+          ], color: 0x2a5a8a, alpha: 0.85,
+          bank: { width: 8, color: 0x8a7a5a, alpha: 0.4 } },
       ],
 
       roads: [
@@ -274,6 +296,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 9500, y: 6800, w: 3000, h: 60, color: 0x707070 },
         { x: 9500, y: 7800, w: 3000, h: 60, color: 0x707070 },
         { x: 11200, y: 5800, w: 60, h: 3200, color: 0x707070 },
+        // 공항고속도로 (인천공항→홍대 방면)
+        { x: 200, y: 5000, w: 2600, h: 120, color: 0x505050, type: 'major' },
+        // 공항 내부 도로
+        { x: 200, y: 4800, w: 600, h: 80, color: 0x686868, type: 'medium' },
       ],
 
       crosswalks: [
@@ -347,7 +373,39 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { type: 'riverbank', x: 0, y: 5650, dir: 'h', length: 14400 },
         { type: 'riverbank', x: 5800, y: 2680, dir: 'h', length: 4700 },
         { type: 'riverbank', x: 9350, y: 5950, dir: 'v', length: 4800 },
+        // 인천공항 주변 녹지
+        { type: 'park', x: 100, y: 3750, w: 300, h: 400 },
+        { type: 'park', x: 1400, y: 6000, w: 300, h: 400 },
       ],
+
+      // ── 인천국제공항 (영종도, 남북 2개 활주로, T1+T2) ──
+      airport: {
+        x: 100, y: 3800, w: 1600, h: 2800,
+        runways: [
+          { x: 400, y: 4000, length: 1500, width: 55, heading: 'ns', numbers: ['33L', '15R'] },
+          { x: 1200, y: 4200, length: 1300, width: 55, heading: 'ns', numbers: ['33R', '15L'] }
+        ],
+        taxiways: [
+          // 활주로1→T1 연결
+          { points: [[428, 5200], [600, 5200]], width: 25 },
+          { points: [[428, 5400], [600, 5400]], width: 25 },
+          // 활주로2→T2 연결
+          { points: [[1173, 4600], [1000, 4600]], width: 25 },
+          { points: [[1173, 4800], [1000, 4800]], width: 25 },
+          // 활주로 간 유도로
+          { points: [[428, 4800], [1173, 4800]], width: 20 },
+        ],
+        terminals: [
+          { x: 400, y: 5100, w: 700, h: 220, gates: 'north', name: 'T1 제1터미널' },
+          { x: 500, y: 4350, w: 550, h: 180, gates: 'south', name: 'T2 제2터미널' }
+        ],
+        apron: [
+          { x: 400, y: 4850, w: 500, h: 250 },
+          { x: 500, y: 4150, w: 400, h: 200 }
+        ],
+        tower: { x: 800, y: 4700 },
+        parking: { x: 200, y: 5400, w: 350, h: 250 }
+      },
     });
    } catch (e) {
     console.error('Seoul terrain error:', e);
@@ -609,6 +667,18 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     [[8200,2750,'청계천 · 清渓川'],[9350,7200,'탄천 · 炭川'],[10700,3000,'중랑천 · 中浪川'],[2350,7500,'안양천 · 安養川'],[8000,8000,'양재천 · 良才川']].forEach(([x,y,t]) => {
       this.add.text(x, y, t, { fontSize: `${Math.round(9*s)}px`, color: '#5588bb', fontStyle: 'italic', backgroundColor: '#00000066', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(3);
     });
+
+    // 인천공항
+    this.add.text(800, 3900, '✈ 인천국제공항 · 仁川空港 · Incheon Airport', {
+      fontSize: `${Math.round(12*s)}px`, color: '#4a6a8a',
+      fontStyle: 'bold', backgroundColor: '#ffffffcc', padding: { x: 8, y: 4 }
+    }).setOrigin(0.5).setDepth(3);
+
+    // 서해
+    this.add.text(30, 5100, '서해\n西海', {
+      fontSize: `${Math.round(10*s)}px`, color: '#5588bb', fontStyle: 'italic',
+      backgroundColor: '#00000066', padding: { x: 4, y: 2 }
+    }).setOrigin(0, 0.5).setDepth(3);
 
     // 거리표지판
     [[6000,2710,'종로 Jongno-ro →'],[8500,2710,'← 종로 Jongno-ro'],[5850,2500,'↑ 세종대로'],[7050,6400,'↑ 강남대로'],
