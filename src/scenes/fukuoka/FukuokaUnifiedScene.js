@@ -346,10 +346,10 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
           palette: [0xb8a890, 0xc0b0a0] },
         { x: 2620, y: 2280, w: 1560, h: 400, density: 'high',
           palette: [0xb0a088, 0xa89880, 0xb8a890] },
-        { x: 2620, y: 2760, w: 680, h: 440, density: 'medium',
-          palette: [0xb0a088, 0xa89880] },
-        { x: 3360, y: 2760, w: 1020, h: 440, density: 'medium',
-          palette: [0xb0a088, 0xb8a890] },
+        { x: 2620, y: 2760, w: 680, h: 440, density: 'high',
+          palette: [0xc0b8a8, 0xb8b0a0, 0xc8c0b0, 0xd0c8b8] },
+        { x: 3360, y: 2760, w: 1020, h: 440, density: 'high',
+          palette: [0xc0b8a8, 0xb8b0a0, 0xc8c0b0] },
         { x: 2620, y: 3280, w: 1760, h: 260, density: 'medium',
           palette: [0xa89880, 0xb0a088] },
 
@@ -368,10 +368,10 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
           palette: [0xa8a0a0, 0xb0a8a0] },
         { x: 6720, y: 1820, w: 460, h: 680, density: 'medium',
           palette: [0xa8a0a0, 0xb0a8a0] },
-        { x: 5420, y: 2640, w: 2360, h: 560, density: 'medium',
-          palette: [0xa89898, 0xb0a0a0, 0xa8a0a0] },
-        { x: 5420, y: 3260, w: 2360, h: 680, density: 'medium',
-          palette: [0xa89898, 0xb0a0a0] },
+        { x: 5420, y: 2640, w: 2360, h: 560, density: 'high',
+          palette: [0xa89898, 0xb0a0a0, 0xa8a0a0, 0xb8b0a8] },
+        { x: 5420, y: 3260, w: 2360, h: 680, density: 'high',
+          palette: [0xa89898, 0xb0a0a0, 0xb8b0a8] },
         { x: 5420, y: 4000, w: 2360, h: 400, density: 'low',
           palette: [0xa09890, 0x989088] },
 
@@ -427,6 +427,8 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         { type: 'park', x: 500, y: 200, w: 1400, h: 950 },
         // 시사이드 모모치 해변 공원
         { type: 'park', x: 1100, y: 1000, w: 1000, h: 300 },
+        // 마이즈루 공원 (오호리 동쪽, 후쿠오카성터)
+        { type: 'park', x: 2400, y: 2000, w: 600, h: 500 },
         // 공항 주변 녹지
         { type: 'park', x: 7050, y: 4900, w: 300, h: 250 },
         { type: 'park', x: 8200, y: 5000, w: 350, h: 300 },
@@ -516,6 +518,17 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       g.fillStyle(0x999999, 0.6);
       g.fillRect(lX, y - h/2, rX - lX, 4);
       g.fillRect(lX, y + h/2 - 4, rX - lX, 4);
+      // 난간 (다리 양쪽)
+      g.lineStyle(2, 0x555555, 0.5);
+      g.lineBetween(lX, y - h/2, rX, y - h/2);
+      g.lineBetween(lX, y + h/2, rX, y + h/2);
+      // 기둥 (40px 간격)
+      for (let px = lX; px < rX; px += 40) {
+        g.fillStyle(0x666666, 0.6);
+        g.fillRect(px, y - h/2 - 2, 3, 4);
+        g.fillRect(px, y + h/2 - 2, 3, 4);
+      }
+      // 중앙선
       g.lineStyle(2, 0xffffff, 0.2);
       for (let dx = lX; dx < rX; dx += 25) {
         g.lineBetween(dx, y, Math.min(dx + 12, rX), y);
@@ -591,6 +604,16 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { x: 3600, y: 2200, texture: 'building_shop', name_ko: '케고공원 / 警固公園' },
       { x: 3800, y: 3000, texture: 'building_shop', name_ko: '텐진중앙공원 / 天神中央公園' },
       { x: 2400, y: 2900, texture: 'building_shop', name_ko: '오호리공원 / 大濠公園' },
+      // 추가 랜드마크
+      { x: 3600, y: 2300, texture: 'building_shop', name_ko: '솔라리아 / ソラリアプラザ' },
+      { x: 3000, y: 2400, texture: 'building_shop', name_ko: '다이마루 / 大丸百貨店' },
+      { x: 3200, y: 2200, texture: 'building_shop', name_ko: '미츠코시 / 三越' },
+      { x: 2300, y: 2800, texture: 'building_shop', name_ko: '후쿠오카 미술관 / 福岡市美術館' },
+      // 마이즈루 공원 + 후쿠오카 성터
+      { x: 2600, y: 2200, texture: 'building_shop', name_ko: '마이즈루공원 / 舞鶴公園' },
+      { x: 2800, y: 2000, texture: 'building_shop', name_ko: '후쿠오카성터 / 福岡城跡' },
+      // 오호리 보트장
+      { x: 2200, y: 3100, texture: 'building_shop', name_ko: '오호리 보트장 / 大濠ボートハウス' },
     ]);
     this.createSubwayEntrance(3400, 2600, 'FukuokaMetroScene', 'tenjin',
       '텐진역 🚇', '天神駅');
@@ -650,6 +673,17 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       { x: 5400, y: 3000, texture: 'building_shop', name_ko: '하카타 마치야 / 博多町家' },
       { x: 6500, y: 1400, texture: 'building_shop', name_ko: '마린메세 후쿠오카 / マリンメッセ' },
       { x: 6800, y: 1600, texture: 'building_tower', name_ko: '하카타 포트타워 / 博多ポートタワー' },
+      // 추가 랜드마크
+      { x: 6000, y: 4200, texture: 'building_shop', name_ko: '⛩ 스미요시신사 / 住吉神社' },
+      { x: 5800, y: 2400, texture: 'building_shop', name_ko: '⛩ 토초지 / 東長寺' },
+      { x: 4800, y: 3200, texture: 'building_restaurant', name_ko: '🍜 이치란 본점 / 一蘭本店' },
+    ]);
+    this.createNPCs([
+      ...[], // (기존 NPC 유지)
+      { x: 4800, y: 3300, texture: 'shop',
+        name_ko: '이치란 점원', name_ja: '一蘭店員',
+        greeting_ko: '이치란 라멘에 오신 걸 환영해요!\n주문은 칸막이 자리에서 해주세요~',
+        greeting_ja: '一蘭ラーメンへようこそ！\nご注文は味集中カウンターでどうぞ～' },
     ]);
     this.createSubwayEntrance(6400, 3000, 'FukuokaMetroScene', 'hakata',
       '하카타역 🚇', '博多駅');
@@ -702,6 +736,9 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
 
     this.createBuildings([
       { x: 3400, y: 4700, texture: 'building_shop', name_ko: '편의점 / コンビニ' },
+      // 추가 랜드마크
+      { x: 3400, y: 5000, texture: 'building_shop', name_ko: '야쿠인역 플라자 / 薬院駅ビル' },
+      { x: 3800, y: 5600, texture: 'building_shop', name_ko: '이온몰 / イオンモール' },
     ]);
 
     this.createSubwayEntrance(3400, 5200, 'FukuokaMetroScene', 'yakuin',

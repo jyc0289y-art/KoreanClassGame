@@ -81,6 +81,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.setupSeongsuDistrict();
     this.setupJamsilDistrict();
 
+    // ── 외곽 랜드마크 (구역 외) ──
+    this.setupOuterLandmarks();
+
     // ── 지역 라벨 ──
     this.addDistrictLabels();
 
@@ -112,29 +115,38 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         // ── 영종도 (인천공항 섬) ──
         { x: 50, y: 3600, w: 1700, h: 3200, color: 0x9aaa8a, alpha: 0.8, border: false },
 
-        // ── 산악 지형 ──
-        { x: 3500, y: 0, w: 4500, h: 1200, color: 0x1a4a1a, alpha: 1.0, border: false },
-        { x: 4500, y: 900, w: 2300, h: 1300, color: 0x2a5a2a, alpha: 0.9, border: false },
+        // ── 산악 지형 (terrain:'mountain'으로 등고선 효과 적용) ──
+        // 북한산 대형 블록 (서울 스카이라인의 핵심)
+        { x: 3500, y: 0, w: 4500, h: 1200, color: 0x1a4a1a, alpha: 1.0, border: false, terrain: 'mountain' },
+        { x: 4500, y: 900, w: 2300, h: 1300, color: 0x2a5a2a, alpha: 0.9, border: false, terrain: 'mountain' },
+        // 인왕산 (서북쪽, 경복궁 서쪽 — 서울 도심 배경의 산)
+        { x: 3800, y: 1500, w: 1200, h: 1500, color: 0x2d5d2d, alpha: 0.65, border: false, terrain: 'mountain' },
         // 남산 외곽 (넓은 범위)
-        { x: 6000, y: 3300, w: 1800, h: 1400, color: 0x2a6a2a, alpha: 0.85, border: false },
+        { x: 6000, y: 3300, w: 1800, h: 1400, color: 0x2a6a2a, alpha: 0.85, border: false, terrain: 'mountain' },
         // 남산 정상 (더 진한 녹색)
-        { x: 6500, y: 3600, w: 800, h: 700, color: 0x1a5a1a, alpha: 0.9, border: false },
+        { x: 6500, y: 3600, w: 800, h: 700, color: 0x1a5a1a, alpha: 0.9, border: false, terrain: 'mountain' },
         // 아차산/용마산 (동쪽 산)
-        { x: 11200, y: 2500, w: 1300, h: 2000, color: 0x2a5a2a, alpha: 0.7, border: false },
-        { x: 12500, y: 1800, w: 1900, h: 3000, color: 0x1a4a1a, alpha: 0.9, border: false },
-        { x: 4000, y: 9000, w: 2000, h: 1800, color: 0x1a4a1a, alpha: 0.9, border: false },
-        { x: 0, y: 0, w: 3500, h: 800, color: 0x2a5a2a, alpha: 0.8, border: false },
-        { x: 8000, y: 0, w: 4500, h: 1000, color: 0x2a5a2a, alpha: 0.8, border: false },
-        { x: 12500, y: 0, w: 1900, h: 1800, color: 0x2a5a2a, alpha: 0.8, border: false },
-        { x: 0, y: 800, w: 1200, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false },
-        { x: 0, y: 7000, w: 2000, h: 3800, color: 0x3a6a3a, alpha: 0.7, border: false },
-        { x: 12000, y: 8000, w: 2400, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false },
-        { x: 0, y: 9500, w: 4000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false },
-        { x: 6000, y: 9500, w: 6000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false },
+        { x: 11200, y: 2500, w: 1300, h: 2000, color: 0x2a5a2a, alpha: 0.7, border: false, terrain: 'mountain' },
+        { x: 12500, y: 1800, w: 1900, h: 3000, color: 0x1a4a1a, alpha: 0.9, border: false, terrain: 'mountain' },
+        // 관악산 (남쪽 — 서울대 캠퍼스 뒷산)
+        { x: 4000, y: 9000, w: 2000, h: 1800, color: 0x1a4a1a, alpha: 0.9, border: false, terrain: 'mountain' },
+        // 북서/동북 외곽 산
+        { x: 0, y: 0, w: 3500, h: 800, color: 0x2a5a2a, alpha: 0.8, border: false, terrain: 'mountain' },
+        { x: 8000, y: 0, w: 4500, h: 1000, color: 0x2a5a2a, alpha: 0.8, border: false, terrain: 'mountain' },
+        { x: 12500, y: 0, w: 1900, h: 1800, color: 0x2a5a2a, alpha: 0.8, border: false, terrain: 'mountain' },
+        { x: 0, y: 800, w: 1200, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false, terrain: 'mountain' },
+        { x: 0, y: 7000, w: 2000, h: 3800, color: 0x3a6a3a, alpha: 0.7, border: false, terrain: 'mountain' },
+        { x: 12000, y: 8000, w: 2400, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false, terrain: 'mountain' },
+        { x: 0, y: 9500, w: 4000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false, terrain: 'mountain' },
+        { x: 6000, y: 9500, w: 6000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false, terrain: 'mountain' },
         // 관악산 남쪽 확장
-        { x: 3500, y: 10000, w: 2500, h: 800, color: 0x2a5a2a, alpha: 0.6, border: false },
+        { x: 3500, y: 10000, w: 2500, h: 800, color: 0x2a5a2a, alpha: 0.6, border: false, terrain: 'mountain' },
         // 북촌한옥마을 (갈색 전통가옥 구역)
         { x: 6100, y: 1700, w: 400, h: 300, color: 0xc0a070, alpha: 0.6, border: false },
+        // 한강 섬 — 밤섬 (생태 보호구역)
+        { x: 2000, y: 5150, w: 200, h: 100, color: 0x3a7a3a, alpha: 0.9, border: false },
+        // 한강 섬 — 노들섬
+        { x: 5000, y: 5050, w: 300, h: 150, color: 0x4a8a4a, alpha: 0.85, border: false },
 
         // ── 한강 둔치 ──
         { x: 0, y: 4750, w: 14400, h: 250, color: 0x6aaa5a, alpha: 0.7, border: false },
@@ -381,6 +393,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { type: 'riverbank', x: 9350, y: 5950, dir: 'v', length: 4800 },
         // 반포한강공원
         { type: 'park', x: 6100, y: 5700, w: 800, h: 200 },
+        // 여의도공원
+        { type: 'park', x: 2800, y: 5200, w: 800, h: 300 },
+        // 인왕산 녹지
+        { type: 'park', x: 3900, y: 1600, w: 1000, h: 1300 },
+        // 서울대 캠퍼스 녹지
+        { type: 'park', x: 4000, y: 9200, w: 800, h: 600 },
         // 인천공항 주변 녹지
         { type: 'park', x: 100, y: 3750, w: 300, h: 400 },
         { type: 'park', x: 1400, y: 6000, w: 300, h: 400 },
@@ -475,6 +493,17 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       g.fillStyle(0x999999, 0.6);
       g.fillRect(b.x - w/2, tY, 6, bY - tY);
       g.fillRect(b.x + w/2 - 6, tY, 6, bY - tY);
+      // 난간 (다리 양쪽 가장자리)
+      g.lineStyle(2, 0x555555, 0.5);
+      g.lineBetween(b.x - w/2, tY, b.x - w/2, bY);
+      g.lineBetween(b.x + w/2, tY, b.x + w/2, bY);
+      // 기둥 (60px 간격)
+      for (let py = tY; py < bY; py += 60) {
+        g.fillStyle(0x666666, 0.6);
+        g.fillRect(b.x - w/2 - 2, py, 4, 4);
+        g.fillRect(b.x + w/2 - 2, py, 4, 4);
+      }
+      // 중앙선
       g.lineStyle(2, 0xffffff, 0.2);
       for (let dy = tY; dy < bY; dy += 40) {
         g.lineBetween(b.x, dy, b.x, Math.min(dy+20, bY));
@@ -506,6 +535,16 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 2600, y: 2600, texture: 'building_cafe', name_ko: '연남동 숲길 / 延南洞' },
       { x: 1800, y: 2800, texture: 'building_shop', name_ko: '월드컵경기장 / W杯' },
       { x: 3400, y: 3000, texture: 'building_shop', name_ko: 'K-POP 굿즈샵' },
+      // 대학교
+      { x: 1800, y: 3000, texture: 'building_shop', name_ko: '🎓 홍익대학교 / 弘益大学' },
+      { x: 1200, y: 2000, texture: 'building_shop', name_ko: '🎓 연세대학교 / 延世大学' },
+    ]);
+    this.createNPCs([
+      ...[], // (기존 NPC 유지를 위한 빈 배열)
+      { x: 1200, y: 2200, texture: 'shop',
+        name_ko: '연세대 유학생', name_ja: '延世大留学生',
+        greeting_ko: '연세대학교에 오신 걸 환영해요!\n신촌 캠퍼스 투어 해볼래요?',
+        greeting_ja: '延世大学へようこそ！\n新村キャンパスツアーはいかがですか？' },
     ]);
     this.createSubwayEntrance(2800, 3800, 'SeoulMetroScene', 'hongdae', '홍대입구역 🚇', 'ホンデイック駅');
   }
@@ -535,6 +574,23 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 8200, y: 2800, texture: 'building_shop', name_ko: 'DDP / 東大門' },
       { x: 6000, y: 1900, texture: 'building_shop', name_ko: '삼청동 / 三清洞' },
       { x: 7200, y: 2200, texture: 'building_shop', name_ko: '이화마을/대학로' },
+      // 대학교
+      { x: 6400, y: 1500, texture: 'building_shop', name_ko: '🎓 성균관대학교 / 成均館大学' },
+      // 사찰
+      { x: 5600, y: 2200, texture: 'building_shop', name_ko: '🛕 조계사 / 曹渓寺' },
+      // 궁궐 추가
+      { x: 4800, y: 2200, texture: 'building_shop', name_ko: '경희궁 / 慶煕宮' },
+    ]);
+    this.createNPCs([
+      ...[], // (기존 NPC 유지)
+      { x: 5600, y: 2100, texture: 'shop',
+        name_ko: '조계사 스님', name_ja: '曹渓寺の僧侶',
+        greeting_ko: '조계사에 오신 걸 환영합니다.\n한국 불교의 총본산이에요.',
+        greeting_ja: '曹渓寺へようこそ。\n韓国仏教の総本山です。' },
+      { x: 7200, y: 2700, texture: 'shop',
+        name_ko: '광장시장 상인', name_ja: '広蔵市場の商人',
+        greeting_ko: '광장시장에 오세요!\n빈대떡, 마약김밥 맛보세요~',
+        greeting_ja: '広蔵市場へどうぞ！\nビンデトック、麻薬キンパ召し上がれ～' },
     ]);
     this.createSubwayEntrance(6000, 2600, 'SeoulMetroScene', 'jongno', '종로/광화문역 🚇', '鍾路/光化門駅');
   }
@@ -572,7 +628,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 5800, y: 4500, texture: 'building_shop', name_ko: '전쟁기념관 / 戦争記念館' },
       { x: 6200, y: 4700, texture: 'building_shop', name_ko: '국립중앙박물관' },
       { x: 5400, y: 4600, texture: 'building_shop', name_ko: '용산전자상가' },
+      // 교통 허브
+      { x: 5000, y: 4400, texture: 'building_station', name_ko: '용산역 / 龍山駅' },
     ]);
+    this.createSubwayEntrance(5000, 4500, 'SeoulMetroScene', 'yongsan', '용산역 🚇', '龍山駅');
     this.createSubwayEntrance(6400, 4500, 'SeoulMetroScene', 'itaewon', '이태원역 🚇', '梨泰院駅');
   }
 
@@ -588,6 +647,8 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 2800, y: 5500, texture: 'building_tower', name_ko: '63빌딩 / 63ビル' },
       { x: 3000, y: 5400, texture: 'building_shop', name_ko: 'KBS 방송국' },
       { x: 3200, y: 5600, texture: 'building_shop', name_ko: '여의도 한강공원' },
+      { x: 2800, y: 5200, texture: 'building_shop', name_ko: '여의도공원 / 汝矣島公園' },
+      { x: 3600, y: 5100, texture: 'building_shop', name_ko: '한국거래소 / KRX' },
     ]);
     this.createSubwayEntrance(3400, 5400, 'SeoulMetroScene', 'yeouido', '여의도역 🚇', '汝矣島駅');
   }
@@ -613,9 +674,21 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 8400, y: 6200, texture: 'building_shop', name_ko: '삼성타운 / Samsung Town' },
       { x: 7800, y: 7000, texture: 'building_shop', name_ko: '교보타워 / 教保タワー' },
       { x: 6800, y: 7200, texture: 'building_shop', name_ko: '서초동 법원단지 / 裁判所' },
-      { x: 8200, y: 7400, texture: 'building_shop', name_ko: '봉은사 / 奉恩寺' },
+      { x: 8200, y: 7400, texture: 'building_shop', name_ko: '🛕 봉은사 / 奉恩寺' },
       { x: 6400, y: 5900, texture: 'building_shop', name_ko: '반포한강공원 / 盤浦漢江公園' },
+      // 추가 랜드마크
+      { x: 8000, y: 7800, texture: 'building_shop', name_ko: '가로수길 / カロスキル' },
+      { x: 6800, y: 7600, texture: 'building_station', name_ko: '고속터미널역 / 高速ターミナル' },
+      { x: 8000, y: 7400, texture: 'building_shop', name_ko: '신사역 / 新沙駅' },
     ]);
+    this.createNPCs([
+      ...[], // (기존 NPC 유지)
+      { x: 8200, y: 7500, texture: 'shop',
+        name_ko: '봉은사 스님', name_ja: '奉恩寺の僧侶',
+        greeting_ko: '봉은사에 오신 걸 환영합니다.\n도심 속 고즈넉한 사찰이에요.',
+        greeting_ja: '奉恩寺へようこそ。\n都心の中の静かなお寺です。' },
+    ]);
+    this.createSubwayEntrance(8000, 7700, 'SeoulMetroScene', 'sinsa', '신사역 🚇', '新沙駅');
     this.createSubwayEntrance(7000, 6800, 'SeoulMetroScene', 'gangnam', '강남역 🚇', 'カンナム駅');
   }
 
@@ -638,6 +711,8 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 9200, y: 3200, texture: 'building_shop', name_ko: '블루보틀 성수 / Blue Bottle' },
       { x: 10000, y: 4000, texture: 'building_shop', name_ko: '서울숲 갤러리아포레' },
       { x: 9700, y: 2800, texture: 'building_shop', name_ko: '성수 수제맥주거리' },
+      // 대학교
+      { x: 9800, y: 1800, texture: 'building_shop', name_ko: '🎓 고려대학교 / 高麗大学' },
     ]);
     this.createSubwayEntrance(9500, 3500, 'SeoulMetroScene', 'seongsu', '성수역 🚇', 'ソンス駅');
   }
@@ -656,6 +731,26 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 10600, y: 7000, texture: 'building_shop', name_ko: '잠실야구장 / 蠶室' },
     ]);
     this.createSubwayEntrance(10800, 7000, 'SeoulMetroScene', 'jamsil', '잠실역 🚇', 'チャムシル駅');
+  }
+
+  // ══════════════════════════════════════════════════════
+  // 외곽 랜드마크 (구역 경계 밖)
+  // ══════════════════════════════════════════════════════
+  setupOuterLandmarks() {
+    // 서울대학교 (관악산 — 남쪽)
+    this.createBuildings([
+      { x: 4200, y: 9200, texture: 'building_shop', name_ko: '🎓 서울대학교 / ソウル大学' },
+    ]);
+    this.createNPCs([
+      { x: 4200, y: 9400, texture: 'shop',
+        name_ko: '서울대 캠퍼스 가이드', name_ja: 'ソウル大キャンパスガイド',
+        greeting_ko: '서울대학교에 오신 걸 환영해요!\n관악캠퍼스는 산 속에 있어요.',
+        greeting_ja: 'ソウル大学へようこそ！\n冠岳キャンパスは山の中にあります。' },
+    ]);
+    // 노들섬 (한강 중앙)
+    this.createBuildings([
+      { x: 5100, y: 5050, texture: 'building_shop', name_ko: '노들섬 / ノドゥル島' },
+    ]);
   }
 
   // ══════════════════════════════════════════════════════
@@ -682,7 +777,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     }).setOrigin(0.5).setDepth(3);
 
     // 산
-    [[5800,400,'🏔️ 북한산 · 北漢山'],[6800,3600,'🏔️ 남산 · 南山'],[11500,3000,'🏔️ 아차산'],[5000,9800,'🏔️ 관악산']].forEach(([x,y,t]) => {
+    [[5800,400,'🏔️ 북한산 · 北漢山 (836m)'],[6800,3600,'🏔️ 남산 · 南山 (262m)'],[11500,3000,'🏔️ 아차산 (287m)'],[5000,9800,'🏔️ 관악산 (632m)'],[4400,2200,'🏔️ 인왕산 · 仁王山 (338m)']].forEach(([x,y,t]) => {
       this.add.text(x, y, t, { fontSize: `${Math.round(11*s)}px`, color: '#3a6a3a', backgroundColor: '#00000044', padding: { x: 6, y: 3 } }).setOrigin(0.5).setDepth(3);
     });
 
@@ -701,6 +796,16 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.add.text(800, 3900, '✈ 인천국제공항 · 仁川空港 · Incheon Airport', {
       fontSize: `${Math.round(12*s)}px`, color: '#4a6a8a',
       fontStyle: 'bold', backgroundColor: '#ffffffcc', padding: { x: 8, y: 4 }
+    }).setOrigin(0.5).setDepth(3);
+
+    // 한강 섬
+    [[2100,5170,'밤섬 · 栗島'],[5100,5090,'노들섬 · ノドゥル島']].forEach(([x,y,t]) => {
+      this.add.text(x, y, t, { fontSize: `${Math.round(7*s)}px`, color: '#3a7a3a', backgroundColor: '#00000066', padding: { x: 3, y: 1 } }).setOrigin(0.5).setDepth(3);
+    });
+
+    // 서울대 라벨
+    this.add.text(4200, 9400, '🎓 서울대학교 · ソウル大学', {
+      fontSize: `${Math.round(9*s)}px`, color: '#4466aa', backgroundColor: '#00000066', padding: { x: 5, y: 2 }
     }).setOrigin(0.5).setDepth(3);
 
     // 서해
