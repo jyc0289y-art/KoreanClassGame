@@ -101,8 +101,10 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       landUse: [
         // ── 해안 녹지 ──
         { x: 0, y: 1050, w: 9600, h: 200, color: 0x9aaa8a, alpha: 0.6, border: false },
-        // ── 노코노시마 (바다 위 섬) ──
-        { x: 900, y: 350, w: 500, h: 350, color: 0x4a8a4a, alpha: 0.9, border: false },
+        // ── 노코노시마 (바다 위 섬, 실제 3.95km²) ──
+        { x: 400, y: 100, w: 1600, h: 1150, color: 0x4a8a4a, alpha: 0.9, border: false },
+        // ── 모모치 해변 모래사장 ──
+        { x: 1100, y: 960, w: 1000, h: 100, color: 0xd4c4a0, alpha: 0.5, border: false },
         // ── 시사이드 모모치 (돌출 반도) ──
         { x: 1000, y: 1100, w: 1600, h: 1900, color: 0xa0b8c0, alpha: 1.0 },
         // ── 오호리공원 주변 녹지 (텐진 서쪽 인접) ──
@@ -124,7 +126,7 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         // ── 동쪽 외곽 (공항 방면) ──
         { x: 7800, y: 1200, w: 1800, h: 6000, color: 0x88a078, alpha: 0.6, border: false },
         // ── 공항 에어리어 ──
-        { x: 7200, y: 4800, w: 1600, h: 1400, color: 0x98a088, alpha: 0.7, border: false },
+        { x: 6800, y: 3800, w: 2200, h: 3400, color: 0x98a088, alpha: 0.7, border: false },
         // ── 서쪽 외곽 ──
         { x: 0, y: 1200, w: 1000, h: 6000, color: 0x88a078, alpha: 0.6, border: false },
       ],
@@ -421,8 +423,10 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         // 해안선 공원
         { type: 'park', x: 1200, y: 1000, w: 800, h: 150 },
         { type: 'park', x: 6000, y: 1100, w: 800, h: 150 },
+        // 노코노시마 녹지
+        { type: 'park', x: 500, y: 200, w: 1400, h: 950 },
         // 시사이드 모모치 해변 공원
-        { type: 'park', x: 1400, y: 1150, w: 600, h: 200 },
+        { type: 'park', x: 1100, y: 1000, w: 1000, h: 300 },
         // 공항 주변 녹지
         { type: 'park', x: 7050, y: 4900, w: 300, h: 250 },
         { type: 'park', x: 8200, y: 5000, w: 350, h: 300 },
@@ -430,9 +434,9 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
 
       // ── 후쿠오카공항 (도심 3km, 단일 활주로 16/34, 국내+국제 터미널) ──
       airport: {
-        x: 7000, y: 4200, w: 1800, h: 3000,
+        x: 6800, y: 3800, w: 2200, h: 3400,
         runways: [{
-          x: 7800, y: 4400, length: 1120, width: 55,
+          x: 7800, y: 3900, length: 1790, width: 55,
           heading: 'ns', numbers: ['16', '34']
         }],
         taxiways: [
@@ -601,12 +605,23 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
         name_ko: '야타이 사장님', name_ja: '屋台の親父', hasMission: true,
         greeting_ko: '나카스 야타이에 오신 걸 환영해요!\n라멘 한 그릇 드세요~',
         greeting_ja: '中洲屋台へようこそ！\nラーメン一杯いかがですか～' },
+      { x: 4580, y: 2500, texture: 'shop',
+        name_ko: '포장마차 아주머니', name_ja: '屋台のおばちゃん',
+        greeting_ko: '어서오세요! 오뎅이랑 소주 있어요~\n야타이에서 즐기세요!',
+        greeting_ja: 'いらっしゃい！おでんとお酒ありますよ～\n屋台で楽しんで！' },
+      { x: 4540, y: 3500, texture: 'mission_npc',
+        name_ko: '바텐더', name_ja: 'バーテンダー', hasMission: true,
+        greeting_ko: '나카스의 밤은 아직 시작이에요!\n뭘 드릴까요?',
+        greeting_ja: '中洲の夜はまだまだこれから！\n何にしますか？' },
     ]);
     this.createBuildings([
       { x: 4560, y: 3000, texture: 'building_restaurant', name_ko: '나카스 야타이 / 中洲屋台' },
       { x: 4560, y: 2400, texture: 'building_shop', name_ko: '하카타좌 / 博多座' },
       { x: 4560, y: 2700, texture: 'building_shop', name_ko: '하카타 리버레인 / リバレイン' },
       { x: 4560, y: 3300, texture: 'building_shop', name_ko: '아시아미술관 / アジア美術館' },
+      { x: 4580, y: 2200, texture: 'building_restaurant', name_ko: '야타이거리(북) / 屋台通り(北)' },
+      { x: 4540, y: 3600, texture: 'building_restaurant', name_ko: '야타이거리(남) / 屋台通り(南)' },
+      { x: 4560, y: 3900, texture: 'building_shop', name_ko: '나카스 클럽거리 / 中洲クラブ通り' },
     ]);
     this.createSubwayEntrance(4560, 3100, 'FukuokaMetroScene', 'nakasu',
       '나카스카와바타역 🚇', '中洲川端駅');
@@ -717,7 +732,7 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
     }).setOrigin(0.5).setDepth(3);
 
     // 노코노시마 라벨
-    this.add.text(1150, 500, '🏝️ 能古島 / 노코노시마', {
+    this.add.text(1200, 650, '🏝️ 能古島 / 노코노시마', {
       fontSize: `${Math.round(9*s)}px`, color: '#3a7a3a',
       backgroundColor: '#00000066', padding: { x: 4, y: 2 }
     }).setOrigin(0.5).setDepth(3);
@@ -730,8 +745,14 @@ export default class FukuokaUnifiedScene extends BaseWorldScene {
       }).setOrigin(0.5).setDepth(3);
     });
 
+    // 모모치 해변 라벨
+    this.add.text(1500, 1050, 'ももちビーチ / 모모치해변', {
+      fontSize: `${Math.round(9*s)}px`, color: '#4a8acc',
+      fontStyle: 'italic', backgroundColor: '#00000066', padding: { x: 4, y: 2 }
+    }).setOrigin(0.5).setDepth(3);
+
     // 공항 라벨
-    this.add.text(7400, 4500, '✈ 福岡空港 · 후쿠오카공항', {
+    this.add.text(7400, 4200, '✈ 福岡空港 · 후쿠오카공항', {
       fontSize: `${Math.round(12*s)}px`, color: '#4a6a8a',
       fontStyle: 'bold', backgroundColor: '#ffffffcc', padding: { x: 8, y: 4 }
     }).setOrigin(0.5).setDepth(3);

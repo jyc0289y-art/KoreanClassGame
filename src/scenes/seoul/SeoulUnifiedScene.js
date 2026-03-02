@@ -119,6 +119,8 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 6000, y: 3300, w: 1800, h: 1400, color: 0x2a6a2a, alpha: 0.85, border: false },
         // 남산 정상 (더 진한 녹색)
         { x: 6500, y: 3600, w: 800, h: 700, color: 0x1a5a1a, alpha: 0.9, border: false },
+        // 아차산/용마산 (동쪽 산)
+        { x: 11200, y: 2500, w: 1300, h: 2000, color: 0x2a5a2a, alpha: 0.7, border: false },
         { x: 12500, y: 1800, w: 1900, h: 3000, color: 0x1a4a1a, alpha: 0.9, border: false },
         { x: 4000, y: 9000, w: 2000, h: 1800, color: 0x1a4a1a, alpha: 0.9, border: false },
         { x: 0, y: 0, w: 3500, h: 800, color: 0x2a5a2a, alpha: 0.8, border: false },
@@ -129,6 +131,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 12000, y: 8000, w: 2400, h: 2800, color: 0x3a6a3a, alpha: 0.6, border: false },
         { x: 0, y: 9500, w: 4000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false },
         { x: 6000, y: 9500, w: 6000, h: 1300, color: 0x3a7a3a, alpha: 0.5, border: false },
+        // 관악산 남쪽 확장
+        { x: 3500, y: 10000, w: 2500, h: 800, color: 0x2a5a2a, alpha: 0.6, border: false },
+        // 북촌한옥마을 (갈색 전통가옥 구역)
+        { x: 6100, y: 1700, w: 400, h: 300, color: 0xc0a070, alpha: 0.6, border: false },
 
         // ── 한강 둔치 ──
         { x: 0, y: 4750, w: 14400, h: 250, color: 0x6aaa5a, alpha: 0.7, border: false },
@@ -327,15 +333,15 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { x: 5820, y: 3240, w: 580, h: 540, density: 'high', palette: [0xc0a8a8, 0xb8a0a0, 0xd0b0b0] },
         { x: 6440, y: 3240, w: 580, h: 540, density: 'high', palette: [0xc0a8a8, 0xb8a0a0, 0xd0b0b0, 0xb8b0a8] },
         { x: 5820, y: 3880, w: 2160, h: 900, density: 'medium', palette: [0xb8a8a0, 0xa89890, 0xc0b0a8] },
-        // 강남
-        { x: 5520, y: 5820, w: 680, h: 880, density: 'low', palette: [0xb0b0b0, 0xc0c0c0, 0xa8a8a8] },
-        { x: 6280, y: 5820, w: 620, h: 880, density: 'low', palette: [0xb0b0b0, 0xc0c0c0] },
-        { x: 7100, y: 5820, w: 600, h: 880, density: 'low', palette: [0xb0b0b0, 0xa8a8a8] },
-        { x: 7760, y: 5820, w: 420, h: 880, density: 'medium', palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
-        { x: 8260, y: 5820, w: 520, h: 880, density: 'medium', palette: [0xb0b0a8, 0xa8a8a0] },
+        // 강남 (한국 최고 밀도 상업지구)
+        { x: 5520, y: 5820, w: 680, h: 880, density: 'medium', palette: [0xb0b0b0, 0xc0c0c0, 0xa8a8a8] },
+        { x: 6280, y: 5820, w: 620, h: 880, density: 'high', palette: [0xb0b0b0, 0xc0c0c0, 0xa8a8a8, 0xb8b8b0] },
+        { x: 7100, y: 5820, w: 600, h: 880, density: 'high', palette: [0xb0b0b0, 0xa8a8a8, 0xc8c8c0] },
+        { x: 7760, y: 5820, w: 420, h: 880, density: 'high', palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
+        { x: 8260, y: 5820, w: 520, h: 880, density: 'high', palette: [0xb0b0a8, 0xa8a8a0, 0xc0c0b8] },
         { x: 8860, y: 5820, w: 620, h: 880, density: 'medium', palette: [0xb0b0a8, 0xa8a8a0] },
-        { x: 5520, y: 6900, w: 3960, h: 780, density: 'medium', palette: [0xb0b0a8, 0xa8a8a0, 0xb8b8b0] },
-        { x: 5520, y: 7680, w: 3960, h: 800, density: 'low', palette: [0x98a890, 0x90a088] },
+        { x: 5520, y: 6900, w: 3960, h: 780, density: 'high', palette: [0xb0b0a8, 0xa8a8a0, 0xb8b8b0, 0xc0c0b8] },
+        { x: 5520, y: 7680, w: 3960, h: 800, density: 'medium', palette: [0x98a890, 0x90a088, 0xa0a898] },
         // 성수
         { x: 8520, y: 2520, w: 1260, h: 660, density: 'medium', palette: [0x908880, 0xa09890, 0x989088] },
         { x: 9840, y: 2520, w: 1640, h: 660, density: 'medium', palette: [0x908880, 0xa09890, 0x887870] },
@@ -373,6 +379,8 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
         { type: 'riverbank', x: 0, y: 5650, dir: 'h', length: 14400 },
         { type: 'riverbank', x: 5800, y: 2680, dir: 'h', length: 4700 },
         { type: 'riverbank', x: 9350, y: 5950, dir: 'v', length: 4800 },
+        // 반포한강공원
+        { type: 'park', x: 6100, y: 5700, w: 800, h: 200 },
         // 인천공항 주변 녹지
         { type: 'park', x: 100, y: 3750, w: 300, h: 400 },
         { type: 'park', x: 1400, y: 6000, w: 300, h: 400 },
@@ -601,6 +609,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 9200, y: 7000, texture: 'building_shop', name_ko: '코엑스 아쿠아리움' },
       { x: 8600, y: 6600, texture: 'building_shop', name_ko: '선릉/정릉 / 宣靖陵' },
       { x: 4800, y: 6000, texture: 'building_shop', name_ko: '노량진 수산시장' },
+      { x: 7000, y: 6400, texture: 'building_tower', name_ko: '강남역 교차로 / カンナム駅前' },
+      { x: 8400, y: 6200, texture: 'building_shop', name_ko: '삼성타운 / Samsung Town' },
+      { x: 7800, y: 7000, texture: 'building_shop', name_ko: '교보타워 / 教保タワー' },
+      { x: 6800, y: 7200, texture: 'building_shop', name_ko: '서초동 법원단지 / 裁判所' },
+      { x: 8200, y: 7400, texture: 'building_shop', name_ko: '봉은사 / 奉恩寺' },
+      { x: 6400, y: 5900, texture: 'building_shop', name_ko: '반포한강공원 / 盤浦漢江公園' },
     ]);
     this.createSubwayEntrance(7000, 6800, 'SeoulMetroScene', 'gangnam', '강남역 🚇', 'カンナム駅');
   }
@@ -610,11 +624,20 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 9500, y: 3500, texture: 'mission_npc', name_ko: '팝업스토어 직원', name_ja: 'ポップアップストア店員', hasMission: true,
         greeting_ko: '성수동 팝업스토어에 오신 걸 환영해요!',
         greeting_ja: '聖水洞ポップアップストアへようこそ！' },
+      { x: 9200, y: 3200, texture: 'shop',
+        name_ko: '카페 바리스타', name_ja: 'カフェバリスタ',
+        greeting_ko: '성수동 카페에 오신 걸 환영해요!\n핸드드립 커피 한 잔 하세요~',
+        greeting_ja: '聖水洞カフェへようこそ！\nハンドドリップコーヒーいかがですか～' },
     ]);
     this.createBuildings([
       { x: 9500, y: 3500, texture: 'building_shop', name_ko: '성수동 카페거리 / 聖水カフェ' },
       { x: 9200, y: 3800, texture: 'building_shop', name_ko: '서울숲 / ソウルの森' },
       { x: 9500, y: 5000, texture: 'building_shop', name_ko: '뚝섬 한강공원' },
+      { x: 9800, y: 3200, texture: 'building_shop', name_ko: '대림창고 갤러리 / 大林倉庫' },
+      { x: 10200, y: 3500, texture: 'building_shop', name_ko: '성수연방 / 聖水連邦' },
+      { x: 9200, y: 3200, texture: 'building_shop', name_ko: '블루보틀 성수 / Blue Bottle' },
+      { x: 10000, y: 4000, texture: 'building_shop', name_ko: '서울숲 갤러리아포레' },
+      { x: 9700, y: 2800, texture: 'building_shop', name_ko: '성수 수제맥주거리' },
     ]);
     this.createSubwayEntrance(9500, 3500, 'SeoulMetroScene', 'seongsu', '성수역 🚇', 'ソンス駅');
   }
@@ -659,7 +682,7 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     }).setOrigin(0.5).setDepth(3);
 
     // 산
-    [[5800,400,'🏔️ 북한산 · 北漢山'],[6800,3600,'🏔️ 남산 · 南山'],[13400,3000,'🏔️ 아차산'],[5000,9800,'🏔️ 관악산']].forEach(([x,y,t]) => {
+    [[5800,400,'🏔️ 북한산 · 北漢山'],[6800,3600,'🏔️ 남산 · 南山'],[11500,3000,'🏔️ 아차산'],[5000,9800,'🏔️ 관악산']].forEach(([x,y,t]) => {
       this.add.text(x, y, t, { fontSize: `${Math.round(11*s)}px`, color: '#3a6a3a', backgroundColor: '#00000044', padding: { x: 6, y: 3 } }).setOrigin(0.5).setDepth(3);
     });
 
@@ -667,6 +690,12 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     [[8200,2750,'청계천 · 清渓川'],[9350,7200,'탄천 · 炭川'],[10700,3000,'중랑천 · 中浪川'],[2350,7500,'안양천 · 安養川'],[8000,8000,'양재천 · 良才川']].forEach(([x,y,t]) => {
       this.add.text(x, y, t, { fontSize: `${Math.round(9*s)}px`, color: '#5588bb', fontStyle: 'italic', backgroundColor: '#00000066', padding: { x: 4, y: 2 } }).setOrigin(0.5).setDepth(3);
     });
+
+    // 롯데월드타워 높이
+    this.add.text(10800, 6600, '555m 🏙️', {
+      fontSize: `${Math.round(8*s)}px`, color: '#ff8844',
+      backgroundColor: '#00000066', padding: { x: 3, y: 1 }
+    }).setOrigin(0.5).setDepth(3);
 
     // 인천공항
     this.add.text(800, 3900, '✈ 인천국제공항 · 仁川空港 · Incheon Airport', {
@@ -684,7 +713,8 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     [[6000,2710,'종로 Jongno-ro →'],[8500,2710,'← 종로 Jongno-ro'],[5850,2500,'↑ 세종대로'],[7050,6400,'↑ 강남대로'],
      [7500,6710,'테헤란로 Teheran-ro →'],[6200,3110,'을지로 Euljiro →'],[6200,3510,'퇴계로 Toegyero →'],
      [2850,3000,'↑ 홍대거리'],[6550,3300,'↑ 명동길'],[6200,4110,'이태원로 →'],[12000,3110,'천호대로 →'],
-     [9500,7110,'올림픽로 →'],[10000,8410,'위례성대로 →']].forEach(([x,y,t]) => {
+     [9500,7110,'올림픽로 →'],[10000,8410,'위례성대로 →'],
+     [6050,6400,'↑ 서초대로 Seocho-daero'],[7900,6200,'↑ 논현로 Nonhyeon-ro']].forEach(([x,y,t]) => {
       this.add.text(x, y, t, st).setOrigin(0.5).setDepth(15);
     });
   }
