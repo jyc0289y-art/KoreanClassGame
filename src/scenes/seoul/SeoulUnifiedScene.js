@@ -730,8 +730,10 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.createSubwayEntrance(5600, 4000, 'SeoulMetroScene', 'seoulstation', '서울역 🚇', 'ソウル駅');
     this.createSubwayEntrance(5800, 3100, 'SeoulMetroScene', 'city_hall', '시청역 🚇', '市庁駅');
     // ── Phase 6B: 명동 보강 ──
-    this.createBuilding(5700, 3900, 'landmark', '숭례문\n崇禮門', { w: 80, h: 80 });
-    this.createBuilding(6500, 3500, 'landmark', '남산케이블카\n南山ケーブルカー', { w: 90, h: 50 });
+    this.createBuildings([
+      { x: 5700, y: 3900, texture: 'building_shop', name_ko: '숭례문 / 崇禮門' },
+      { x: 6500, y: 3500, texture: 'building_shop', name_ko: '남산케이블카 / 南山ケーブルカー' },
+    ]);
   }
 
   setupItaewonDistrict() {
@@ -818,7 +820,9 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.createSubwayEntrance(8000, 7700, 'SeoulMetroScene', 'sinsa', '신사역 🚇', '新沙駅');
     this.createSubwayEntrance(7000, 6800, 'SeoulMetroScene', 'gangnam', '강남역 🚇', 'カンナム駅');
     // ── Phase 6B: 강남 보강 ──
-    this.createBuilding(6500, 5500, 'landmark', '반포무지개분수\n盤浦レインボー噴水', { w: 150, h: 40 });
+    this.createBuildings([
+      { x: 6500, y: 5500, texture: 'building_shop', name_ko: '반포무지개분수 / 盤浦レインボー噴水' },
+    ]);
     this.createSubwayEntrance(8000, 6000, 'SeoulMetroScene', 'apgujeong', '압구정역 🚇', '狎鷗亭駅');
     this.createSubwayEntrance(6800, 7600, 'SeoulMetroScene', 'express_terminal', '고속터미널역 🚇', '高速ターミナル駅');
   }
@@ -914,19 +918,19 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.createSubwayEntrance(2800, 6400, 'SeoulMetroScene', 'yeongdeungpo', '영등포역 🚇', '永登浦駅');
     this.createSubwayEntrance(2400, 6800, 'SeoulMetroScene', 'sindorim', '신도림역 🚇', '新道林駅');
     // ── Phase 6B: 영등포 보강 ──
-    this.createNPC(2400, 6600, '부동산 아저씨', [
-      '영등포는 서울 서남쪽 중심지예요! (ヨンドゥンポはソウル南西の中心地です)',
-      '더현대 백화점 가보셨어요? (ザ現代デパート行きましたか？)',
-      '이 근처 맛집이 많아요! (この近くにおいしい店が多いです)'
+    this.createNPCs([
+      { x: 2400, y: 6600, texture: 'shop', name_ko: '부동산 아저씨', name_ja: '不動産おじさん',
+        greeting_ko: '영등포는 서울 서남쪽 중심지예요!\n더현대 백화점 가보셨어요?\n이 근처 맛집이 많아요!',
+        greeting_ja: 'ヨンドゥンポはソウル南西の中心地です\nザ現代デパート行きましたか？\nこの近くにおいしい店が多いです' },
+      { x: 3000, y: 6800, texture: 'shop', name_ko: '신도림 대학생', name_ja: '新道林の大学生',
+        greeting_ko: '디지털단지에서 일해요!\n영등포 시장은 꼭 가봐야 해요!\n구로디지털단지역이 가까워요',
+        greeting_ja: 'デジタル団地で働いています\nヨンドゥンポ市場は必ず行くべきです\n九老デジタル団地駅が近いです' },
     ]);
-    this.createNPC(3000, 6800, '신도림 대학생', [
-      '디지털단지에서 일해요! (デジタル団地で働いています)',
-      '영등포 시장은 꼭 가봐야 해요! (ヨンドゥンポ市場は必ず行くべきです)',
-      '구로디지털단지역이 가까워요 (九老デジタル団地駅が近いです)'
+    this.createBuildings([
+      { x: 2200, y: 6400, texture: 'building_shop', name_ko: '더현대 / ザ現代' },
+      { x: 2800, y: 7000, texture: 'building_shop', name_ko: '영등포시장 / 永登浦市場' },
+      { x: 3200, y: 6500, texture: 'building_shop', name_ko: '영등포로데오거리 / ロデオ通り' },
     ]);
-    this.createBuilding(2200, 6400, 'department', '더현대\nザ現代', { w: 120, h: 80 });
-    this.createBuilding(2800, 7000, 'market', '영등포시장\n永登浦市場', { w: 100, h: 70 });
-    this.createBuilding(3200, 6500, 'culture', '영등포로데오거리\nロデオ通り', { w: 110, h: 60 });
   }
 
   // ══════════════════════════════════════════════════════
@@ -948,19 +952,19 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     ]);
     this.createSubwayEntrance(12000, 5600, 'SeoulMetroScene', 'cheonho', '천호역 🚇', '千戸駅');
     // ── Phase 6B: 송파 보강 ──
-    this.createNPC(12200, 7400, '올림픽공원 러너', [
-      '올림픽공원에서 매일 달려요! (オリンピック公園で毎日走ります)',
-      '88올림픽 기념 조형물이 멋져요! (88五輪記念造形物が素敵です)',
-      '송파는 살기 좋은 동네예요 (ソンパは住みやすい街です)'
+    this.createNPCs([
+      { x: 12200, y: 7400, texture: 'shop', name_ko: '올림픽공원 러너', name_ja: 'オリンピック公園ランナー',
+        greeting_ko: '올림픽공원에서 매일 달려요!\n88올림픽 기념 조형물이 멋져요!\n송파는 살기 좋은 동네예요',
+        greeting_ja: 'オリンピック公園で毎日走ります\n88五輪記念造形物が素敵です\nソンパは住みやすい街です' },
+      { x: 13000, y: 6800, texture: 'shop', name_ko: '강동 주민', name_ja: 'カンドン住民',
+        greeting_ko: '암사동 선사유적지 아세요?\n강동구는 조용하고 좋아요\n천호동에 쇼핑몰이 많아요',
+        greeting_ja: '岩寺洞先史遺跡知ってますか？\nカンドングは静かで良いです\n千戸洞にショッピングモールが多いです' },
     ]);
-    this.createNPC(13000, 6800, '강동 주민', [
-      '암사동 선사유적지 아세요? (岩寺洞先史遺跡知ってますか？)',
-      '강동구는 조용하고 좋아요 (カンドング は静かで良いです)',
-      '천호동에 쇼핑몰이 많아요 (千戸洞にショッピングモールが多いです)'
+    this.createBuildings([
+      { x: 11800, y: 7200, texture: 'building_shop', name_ko: '올림픽체조경기장 / 五輪体操競技場' },
+      { x: 12600, y: 6600, texture: 'building_shop', name_ko: '강동아트센터 / カンドンアートセンター' },
+      { x: 13200, y: 7600, texture: 'building_station', name_ko: '암사역 / 岩寺駅' },
     ]);
-    this.createBuilding(11800, 7200, 'stadium', '올림픽체조경기장\n五輪体操競技場', { w: 140, h: 100 });
-    this.createBuilding(12600, 6600, 'culture', '강동아트센터\nカンドンアートセンター', { w: 100, h: 70 });
-    this.createBuilding(13200, 7600, 'station', '암사역\n岩寺駅', { w: 80, h: 50 });
   }
 
   // ══════════════════════════════════════════════════════
@@ -982,19 +986,19 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
     this.createSubwayEntrance(5000, 8200, 'SeoulMetroScene', 'sadang', '사당역 🚇', '舍堂駅');
     this.createSubwayEntrance(4200, 8600, 'SeoulMetroScene', 'snustation', '서울대입구역 🚇', 'ソウル大入口駅');
     // ── Phase 6B: 관악 보강 ──
-    this.createNPC(4500, 8400, '서울대 교환학생', [
-      '서울대학교에서 공부하고 있어요! (ソウル大学で勉強しています)',
-      '관악산 등산 같이 가실래요? (冠岳山ハイキング一緒に行きませんか？)',
-      '낙성대역 근처가 맛집 천국이에요 (落星垈駅付近がグルメ天国です)'
+    this.createNPCs([
+      { x: 4500, y: 8400, texture: 'shop', name_ko: '서울대 교환학생', name_ja: 'ソウル大交換留学生',
+        greeting_ko: '서울대학교에서 공부하고 있어요!\n관악산 등산 같이 가실래요?\n낙성대역 근처가 맛집 천국이에요',
+        greeting_ja: 'ソウル大学で勉強しています\n冠岳山ハイキング一緒に行きませんか？\n落星垈駅付近がグルメ天国です' },
+      { x: 5200, y: 8000, texture: 'shop', name_ko: '사당동 떡볶이 아줌마', name_ja: '舎堂洞トッポッキおばさん',
+        greeting_ko: '우리 떡볶이 한번 드셔보세요!\n이수역 앞에 가게가 있어요\n매운 거 좋아하세요?',
+        greeting_ja: 'うちのトッポッキ一度食べてみて！\n梨水駅前にお店があります\n辛いの好きですか？' },
     ]);
-    this.createNPC(5200, 8000, '사당동 떡볶이 아줌마', [
-      '우리 떡볶이 한번 드셔보세요! (うちのトッポッキ一度食べてみて！)',
-      '이수역 앞에 가게가 있어요 (梨水駅前にお店があります)',
-      '매운 거 좋아하세요? (辛いの好きですか？)'
+    this.createBuildings([
+      { x: 4200, y: 8600, texture: 'building_shop', name_ko: '낙성대 / 落星垈' },
+      { x: 5000, y: 7800, texture: 'building_station', name_ko: '이수역 / 梨水駅' },
+      { x: 4600, y: 9000, texture: 'building_shop', name_ko: '서울대정문 / ソウル大正門' },
     ]);
-    this.createBuilding(4200, 8600, 'landmark', '낙성대\n落星垈', { w: 90, h: 60 });
-    this.createBuilding(5000, 7800, 'station', '이수역\n梨水駅', { w: 80, h: 50 });
-    this.createBuilding(4600, 9000, 'university', '서울대정문\nソウル大正門', { w: 120, h: 80 });
   }
 
   // ══════════════════════════════════════════════════════
@@ -1014,19 +1018,19 @@ export default class SeoulUnifiedScene extends BaseWorldScene {
       { x: 12000, y: 1200, texture: 'building_shop', name_ko: '태릉 / 泰陵' },
     ]);
     // ── Phase 6B: 성북 보강 ──
-    this.createNPC(10800, 1200, '경희대 유학생', [
-      '경희대학교 캠퍼스가 정말 예뻐요! (慶熙大キャンパスが本当にきれいです)',
-      '한국어 수업 재미있어요! (韓国語の授業面白いです)',
-      '성북동 카페거리 추천해요! (城北洞カフェ通りおすすめです)'
+    this.createNPCs([
+      { x: 10800, y: 1200, texture: 'shop', name_ko: '경희대 유학생', name_ja: '慶熙大留学生',
+        greeting_ko: '경희대학교 캠퍼스가 정말 예뻐요!\n한국어 수업 재미있어요!\n성북동 카페거리 추천해요!',
+        greeting_ja: '慶熙大キャンパスが本当にきれいです\n韓国語の授業面白いです\n城北洞カフェ通りおすすめです' },
+      { x: 10400, y: 800, texture: 'shop', name_ko: '성북동 문화해설사', name_ja: '城北洞文化解説員',
+        greeting_ko: '길상사는 아름다운 사찰이에요\n간송미술관에 국보가 있어요\n성북동은 문화유산이 많은 동네예요',
+        greeting_ja: '吉祥寺は美しいお寺です\n澗松美術館に国宝があります\n城北洞は文化遺産が多い街です' },
     ]);
-    this.createNPC(10400, 800, '성북동 문화해설사', [
-      '길상사는 아름다운 사찰이에요 (吉祥寺は美しいお寺です)',
-      '간송미술관에 국보가 있어요 (澗松美術館に国宝があります)',
-      '성북동은 문화유산이 많은 동네예요 (城北洞は文化遺産が多い街です)'
+    this.createBuildings([
+      { x: 10200, y: 600, texture: 'building_shop', name_ko: '길상사 / 吉祥寺' },
+      { x: 11000, y: 900, texture: 'building_shop', name_ko: '간송미술관 / 澗松美術館' },
+      { x: 11800, y: 1500, texture: 'building_station', name_ko: '노원역 / ノウォン駅' },
     ]);
-    this.createBuilding(10200, 600, 'temple', '길상사\n吉祥寺', { w: 100, h: 80 });
-    this.createBuilding(11000, 900, 'museum', '간송미술관\n澗松美術館', { w: 100, h: 70 });
-    this.createBuilding(11800, 1500, 'station', '노원역\nノウォン駅', { w: 80, h: 50 });
   }
 
   // ══════════════════════════════════════════════════════
